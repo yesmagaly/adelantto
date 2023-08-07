@@ -24,7 +24,7 @@ const VerificationEmail: React.FC = () => {
           <h1>Código de verificación</h1>
           <span>Paso 3 de 4</span>
           <p>
-            Enviaremos una contraseñaa tu cuenta de correo para que puedas{" "}
+            Enviaremos una contraseña tu cuenta de correo para que puedas{" "}
             <a>iniciar sesión.</a>
           </p>
           <IonButton>Enviar código</IonButton>
