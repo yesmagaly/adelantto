@@ -1,0 +1,7 @@
+{
+  "name": "adelantto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
