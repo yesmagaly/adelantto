@@ -20,11 +20,7 @@ const Register: React.FC = () => {
 
         <div className="content">
           <form className="form">
-            <input
-              type="text"
-              placeholder="Número de Celular"
-              className="placeholder"
-            />
+            <input type="text" placeholder="Número de Celular" />
           </form>
           <p className="help-text mb-4">
             Enviaremos un código de confirmación para iniciar el proceso de

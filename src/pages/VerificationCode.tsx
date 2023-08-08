@@ -25,11 +25,7 @@ const VerificationCode: React.FC = () => {
 
         <div className="content">
           <form className="form">
-            <input
-              type="text"
-              placeholder="Código de verificación"
-              className="placeholder"
-            />
+            <input type="text" placeholder="Código de verificación" />
           </form>
 
           <div className="mb-32">

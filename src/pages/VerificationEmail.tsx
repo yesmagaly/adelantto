@@ -26,7 +26,7 @@ const VerificationEmail: React.FC = () => {
 
         <div className="content">
           <form className="form">
-            <input type="email" placeholder="Email" className="placeholder" />
+            <input type="email" placeholder="Email" />
           </form>
           <div className="mb-32">
             <p className="help-text mb-4">
@@ -37,7 +37,7 @@ const VerificationEmail: React.FC = () => {
 
           <button
             className="button-primary"
-            onClick={() => router.push("/verification-email")}
+            onClick={() => router.push("/advance-immediately")}
           >
             Enviar código
           </button>
