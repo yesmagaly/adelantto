@@ -5,8 +5,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['ui-sans-serif', 'system-ui', 'Rubik'],
-      }
+        sans: ["ui-sans-serif", "system-ui", "Rubik"],
+      },
+
+      colors: {
+        primary: {
+          green: "#5BC79B",
+        },
+      },
     },
   },
   plugins: [],
