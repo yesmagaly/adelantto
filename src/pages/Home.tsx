@@ -1,11 +1,4 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-} from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import "./Home.css";
 
 import logo from "../assets/icons/logo.svg";
