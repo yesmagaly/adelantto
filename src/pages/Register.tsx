@@ -23,6 +23,7 @@ const Register: React.FC = () => {
         <IonContent class="ion-padding">
           <h1>Registra tu número</h1>
           <p>Regálanos tu número para validar tu identidad</p>
+          <a href="">Número de Celular</a>
           <p>
             Enviaremos un código de confirmación para iniciar el proceso de
             validación de tu identidad.

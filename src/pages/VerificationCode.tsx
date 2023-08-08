@@ -22,7 +22,8 @@ const VerificationCode: React.FC = () => {
         </IonHeader>
         <IonContent class="ion-padding">
           <h1>Código de verificación</h1>
-          <span>Paso 2 de 4</span>
+          <span>Paso 2 de 4</span> <br />
+          <a href="">Código de verificación</a>
           <div>03:00</div>
           <p>
             Si no recibiste el código, envíalo nuevamente desde <a>aquí</a>

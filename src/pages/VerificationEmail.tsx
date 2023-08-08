@@ -23,6 +23,8 @@ const VerificationEmail: React.FC = () => {
         <IonContent class="ion-padding">
           <h1>Código de verificación</h1>
           <span>Paso 3 de 4</span>
+          <br />
+          <a href="">email</a>
           <p>
             Enviaremos una contraseña tu cuenta de correo para que puedas{" "}
             <a>iniciar sesión.</a>
