@@ -8,7 +8,7 @@ const Register: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading">
-          <div className="heading__pager">Paso 1 de 4</div>
+          <div className="heading__pager text-right">Paso 1 de 4</div>
           <h1 className="heading__title">
             Registra <br />
             <strong>tu número</strong>
@@ -18,12 +18,12 @@ const Register: React.FC = () => {
           </p>
         </div>
 
-        <div className="p-4 text-center">
-          <form>
+        <div className="content">
+          <form className="form">
             <input
-              className="p-4 mb-4"
               type="text"
               placeholder="Número de Celular"
+              className="placeholder"
             />
           </form>
           <p className="help-text mb-4">

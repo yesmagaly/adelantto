@@ -13,30 +13,40 @@ const VerificationCode: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar></IonToolbar>
-        </IonHeader>
-        <IonContent class="ion-padding">
-          <h1>Código de verificación</h1>
-          <span>Paso 2 de 4</span> <br />
-          <a href="">Código de verificación</a>
-          <div>03:00</div>
-          <p>
-            Si no recibiste el código, envíalo nuevamente desde <a>aquí</a>
-          </p>
+        <div className="heading">
+          <h1 className="heading__title">
+            Código
+            <br />
+            <strong>de verificación</strong>
+          </h1>
+          <div className="heading__pager">Paso 2 de 4</div>
+        </div>
+
+        <div className="content">
+          <form className="form">
+            <input
+              type="text"
+              placeholder="Código de verificación"
+              className="placeholder"
+            />
+          </form>
+
+          <div className="mb-32">
+            <p className="text-primary-green mb-4">03:00</p>
+            <p className="help-text mb-4">
+              Si no recibiste el código, envíalo nuevamente desde{" "}
+              <a className="underline">aquí</a>
+            </p>
+          </div>
+
           <button
             className="button-primary"
             onClick={() => router.push("/verification-email")}
           >
             Enviar código
           </button>
-        </IonContent>
+        </div>
       </IonContent>
     </IonPage>
   );
