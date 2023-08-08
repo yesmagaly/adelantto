@@ -1,9 +1,9 @@
-import { IonContent, IonPage } from "@ionic/react";
-import "./Home.css";
-
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import logo from "../assets/icons/logo.svg";
 
 const Home: React.FC = () => {
+  const router = useIonRouter();
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -13,9 +13,14 @@ const Home: React.FC = () => {
           <p className="w-44 mb-14 leading-5">
             ¿Estás listo para anticipar tus rentas?
           </p>
-          <button className="font-semibold mb-4 bg-primary-green px-7 py-3 rounded text-white">
+
+          <button
+            className="button-primary mb-4"
+            onClick={() => router.push("/register")}
+          >
             Crear cuenta
           </button>
+
           <p>
             <a href="#" className="text-sm">
               Términos y condiciones
