@@ -20,7 +20,7 @@
 }
 
 .heading__title {
-  @apply text-4xl mb-2;
+  @apply text-[44px] mb-2;
 }
 
 .heading__title strong {
@@ -36,15 +36,11 @@
   min-height: calc(100% - 15rem);
 }
 
-.placeholder {
-  @apply opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
-}
-
 .form input[type="text"],
 .form input[type="email"] {
-  @apply p-4 mb-4 text-center;
+  @apply p-4 mb-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
 }
 
 .help-text {
-  @apply max-w-xs font-semibold;
+  @apply max-w-xs font-semibold leading-4;
 }
