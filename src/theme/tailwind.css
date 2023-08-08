@@ -16,7 +16,7 @@
 }
 
 .heading__pager {
-  @apply text-xs text-right mb-2;
+  @apply text-xs mb-2;
 }
 
 .heading__title {
@@ -31,6 +31,20 @@
   @apply font-semibold;
 }
 
+.content {
+  @apply flex p-4 justify-center flex-col items-center text-center;
+  min-height: calc(100% - 15rem);
+}
+
+.placeholder {
+  @apply opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
+}
+
+.form input[type="text"],
+.form input[type="email"] {
+  @apply p-4 mb-4 text-center;
+}
+
 .help-text {
-  @apply font-semibold;
+  @apply max-w-xs font-semibold;
 }
