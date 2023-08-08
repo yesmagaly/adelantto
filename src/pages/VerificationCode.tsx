@@ -4,11 +4,13 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonButton,
+  useIonRouter,
 } from "@ionic/react";
 import "./Home.css";
 
 const VerificationCode: React.FC = () => {
+  const router = useIonRouter();
+
   return (
     <IonPage>
       <IonHeader>
@@ -28,7 +30,12 @@ const VerificationCode: React.FC = () => {
           <p>
             Si no recibiste el código, envíalo nuevamente desde <a>aquí</a>
           </p>
-          <IonButton>Enviar código</IonButton>
+          <button
+            className="button-primary"
+            onClick={() => router.push("/verification-email")}
+          >
+            Enviar código
+          </button>
         </IonContent>
       </IonContent>
     </IonPage>
