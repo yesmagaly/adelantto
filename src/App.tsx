@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import VerificationCode from "./pages/VerificationCode";
 import VerificationEmail from "./pages/VerificationEmail";
+import AdvanceImmediately from "./pages/AdvanceImmediately";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -42,6 +43,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/verification-email">
           <VerificationEmail />
+        </Route>
+        <Route exact path="/advance-immediately">
+          <AdvanceImmediately />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
