@@ -11,25 +11,28 @@ import "./Home.css";
 const Register: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar></IonToolbar>
-        </IonHeader>
-        <IonContent class="ion-padding">
-          <h1>Registra tu número</h1>
-          <p>Regálanos tu número para validar tu identidad</p>
-          <a href="">Número de Celular</a>
+        <div className="heading">
+          <div className="text-xs text-right mb-2">Paso 1 de 4</div>
+          <h1 className="text-4xl mb-2">
+            Registra <br />
+            <strong className="font-semibold">tu número</strong>
+          </h1>
           <p>
+            <strong className="font-semibold">
+              Regálanos tu número para validar tu identidad
+            </strong>
+          </p>
+        </div>
+
+        <div className="p-4 text-center">
+          <p className="help-text mb-4">
             Enviaremos un código de confirmación para iniciar el proceso de
             validación de tu identidad.
           </p>
-          <IonButton>Enviar código</IonButton>
-        </IonContent>
+
+          <button className="button-primary">Enviar código</button>
+        </div>
       </IonContent>
     </IonPage>
   );

@@ -1,7 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /** other custom global styles can go here */
+
+.button-primary {
+  @apply font-semibold bg-primary-green px-7 py-3 rounded text-white;
+}
+
+.heading {
+  @apply bg-cover text-white px-9 py-6;
+  background-image: url("../assets/images/header-bg.png");
+}
+
+.help-text {
+  @apply font-semibold;
+}
