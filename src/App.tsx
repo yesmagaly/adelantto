@@ -7,6 +7,7 @@ import VerificationCode from "./pages/VerificationCode";
 import VerificationEmail from "./pages/VerificationEmail";
 import AdvanceImmediately from "./pages/AdvanceImmediately";
 import CreateProfile from "./pages/CreateProfile";
+import UploadDocuments from "./pages/UploadDocuments";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -28,7 +29,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 /* Tailwind styles */
-import './theme/tailwind.css';
+import "./theme/tailwind.css";
 
 setupIonicReact();
 
@@ -53,6 +54,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/create-profile">
           <CreateProfile />
+        </Route>
+        <Route exact path="/upload-documents">
+          <UploadDocuments />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
