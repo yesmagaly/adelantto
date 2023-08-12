@@ -10,6 +10,7 @@ import CreateProfile from "./pages/CreateProfile";
 import UploadDocuments from "./pages/UploadDocuments";
 import ContractData from "./pages/ContractData";
 import RentAdvance from "./pages/RentAdvance";
+import Passport from "./pages/Passport";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -65,6 +66,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/rent-advance">
           <RentAdvance />
+        </Route>
+        <Route exact path="/passport">
+          <Passport />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
