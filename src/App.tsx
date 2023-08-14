@@ -14,6 +14,7 @@ import Passport from "./pages/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Bug from "./pages/Bug";
 import Welcome from "./pages/Welcome";
+import Search from "./pages/Search";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -81,6 +82,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/welcome">
           <Welcome />
+        </Route>
+        <Route exact path="/search">
+          <Search />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
