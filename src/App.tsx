@@ -11,6 +11,7 @@ import UploadDocuments from "./pages/UploadDocuments";
 import ContractData from "./pages/ContractData";
 import RentAdvance from "./pages/RentAdvance";
 import Passport from "./pages/Passport";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -69,6 +70,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/passport">
           <Passport />
+        </Route>
+        <Route exact path="/terms-and-conditions">
+          <TermsAndConditions />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
