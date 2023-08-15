@@ -9,10 +9,7 @@
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint",
-    "build:css": "postcss tailwind.css -o src/theme/tailwind.css",
-    "watch:css": "postcss tailwind.css -o src/theme/tailwind.css -w",
-    "start:dev": "yarn watch:css & ionic capacitor run ios -l --external"
+    "lint": "eslint"
   },
   "dependencies": {
     "@capacitor/android": "^5.2.2",
@@ -28,6 +25,7 @@
     "ionicons": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-lottie-player": "^1.5.4",
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4"
   },
