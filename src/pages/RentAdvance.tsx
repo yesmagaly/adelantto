@@ -7,7 +7,6 @@ import {
   IonButton,
   IonCheckbox,
 } from "@ionic/react";
-import "./Home.css";
 
 const RentAdvance: React.FC = () => {
   return (
