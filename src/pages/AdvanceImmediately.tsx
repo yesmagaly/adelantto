@@ -7,7 +7,6 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import "./Home.css";
 import { logoIonic, ellipse } from "ionicons/icons";
 
 const AdvanceImmediately: React.FC = () => {

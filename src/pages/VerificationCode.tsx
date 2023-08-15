@@ -1,12 +1,4 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  useIonRouter,
-} from "@ionic/react";
-import "./Home.css";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
 const VerificationCode: React.FC = () => {
   const router = useIonRouter();

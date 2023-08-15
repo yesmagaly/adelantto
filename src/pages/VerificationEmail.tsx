@@ -1,13 +1,4 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  useIonRouter,
-} from "@ionic/react";
-import "./Home.css";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
 const VerificationEmail: React.FC = () => {
   const router = useIonRouter();

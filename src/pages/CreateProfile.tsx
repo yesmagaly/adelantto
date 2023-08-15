@@ -7,7 +7,6 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import "./Home.css";
 import { logoIonic, ellipse } from "ionicons/icons";
 
 const CreateProfile: React.FC = () => {

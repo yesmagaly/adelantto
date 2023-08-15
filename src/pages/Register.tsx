@@ -1,5 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import "./Home.css";
+import Lottie from "react-lottie-player";
+
+import registerAnimation from "../assets/animations/register.json";
 
 const Register: React.FC = () => {
   const router = useIonRouter();
@@ -19,9 +21,17 @@ const Register: React.FC = () => {
         </div>
 
         <div className="content">
+          <Lottie
+            animationData={registerAnimation}
+            style={{ width: 174, height: 262 }}
+            loop
+            play
+          />
+
           <form className="form">
             <input type="text" placeholder="Número de Celular" />
           </form>
+
           <p className="help-text mb-4">
             Enviaremos un código de confirmación para iniciar el proceso de
             validación de tu identidad.
