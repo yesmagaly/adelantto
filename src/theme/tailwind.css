@@ -36,10 +36,18 @@
   @apply font-semibold;
 }
 
+/** Content styles. **/
 .content {
-  @apply flex p-4 justify-center flex-col items-center text-center;
+  @apply flex p-4 flex-col items-center text-center;
   min-height: calc(100% - 15rem);
 }
+
+.content.is-center {
+  @apply justify-center;
+}
+
+
+/** Form Styles **/
 
 .form input[type="text"],
 .form input[type="email"] {
