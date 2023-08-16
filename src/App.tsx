@@ -20,6 +20,7 @@ import BiometricValidation from "./pages/BiometricValidation";
 import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
+import Withdrawals from "./pages/Withdrawals";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -105,6 +106,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/correct-data">
           <CorrectData />
+        </Route>
+        <Route exact path="/withdrawals">
+          <Withdrawals />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
