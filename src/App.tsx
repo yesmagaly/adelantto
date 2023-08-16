@@ -17,6 +17,7 @@ import Welcome from "./pages/Welcome";
 import Search from "./pages/Search";
 import PreOffer from "./pages/PreOffer";
 import BiometricValidation from "./pages/BiometricValidation";
+import DataValidation from "./pages/DataValidation";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -93,6 +94,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/biometric-validation">
           <BiometricValidation />
+        </Route>
+        <Route exact path="/data-validation">
+          <DataValidation />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
