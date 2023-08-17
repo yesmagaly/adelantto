@@ -22,6 +22,7 @@ import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
 import Withdrawals from "./pages/Withdrawals";
 import Signature from "./pages/Signature";
+import Outlay from "./pages/Outlay";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -113,6 +114,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/signature">
           <Signature />
+        </Route>
+        <Route exact path="/outlay">
+          <Outlay />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
