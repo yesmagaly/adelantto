@@ -6,7 +6,7 @@ interface ComponentProp {
 
 const UploadDocuments: React.FC<ComponentProp> = ({ children }) => {
   return (
-    <div className="px-5 py-6">
+    <div className="px-5">
       <div className="flex gap-4">
         <div className="flex justify-center items-center basis-28 border-b border-r border-gray-500 border-solid">
           <div className="flex gap-5">
@@ -14,7 +14,7 @@ const UploadDocuments: React.FC<ComponentProp> = ({ children }) => {
             <img src={uploadIcon} />
           </div>
         </div>
-        <div>{children}</div>
+        <div className="my-4">{children}</div>
       </div>
     </div>
   );
