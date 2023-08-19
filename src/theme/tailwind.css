@@ -15,6 +15,11 @@
   background-image: url("../assets/images/header-bg.png");
 }
 
+.heading-blue {
+  @apply h-60 bg-cover text-white px-9 pt-20;
+  background-image: url("../assets/images/header-blue-bg.png");
+}
+
 .heading__pager {
   @apply text-xs mb-2;
 }
