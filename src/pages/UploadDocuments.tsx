@@ -17,7 +17,7 @@ const UploadDocuments: React.FC = () => {
             para tu propiedad
           </h4>
         </div>
-        <div className="px-5 py-6">
+        <div className="py-6 mb-4">
           <FileInputItem>
             <h5 className="font-bold text-xs leading-3">
               Caratula de tu escritura
@@ -70,11 +70,13 @@ const UploadDocuments: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <p className="text-xs mb-4">
+          <p className="font-semibold text-[10px] leading-3 mb-4">
             Los documentos deberán ser escaneados en alta resolución <br /> y en
             formato PDF, de lo contrario declinaremos el proceso.
           </p>
-          <button className="bg-green-600 py-1 px-8 rounded">Siguiente</button>
+          <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
+            Siguiente
+          </button>
         </div>
       </IonContent>
     </IonPage>
