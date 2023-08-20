@@ -49,3 +49,11 @@
 .help-text {
   @apply max-w-xs font-semibold leading-4;
 }
+
+.terms-label {
+  @apply font-bold leading-4 mb-3 text-xs;
+}
+
+.terms-body {
+  @apply leading-[13px] text-xs mb-4;
+}
