@@ -22,7 +22,7 @@ const Home: React.FC = () => {
           </button>
 
           <p>
-            <a href="#" className="text-sm">
+            <a href="/terms-and-conditions" className="text-sm">
               Términos y condiciones
             </a>
           </p>
