@@ -31,7 +31,7 @@ const TermsAndConditions: React.FC = () => {
             <span>Términos</span>
             <br /> y condiciones
           </h2>
-          <div>
+          <div className="mb-11">
             <h5 className="font-bold leading-4 mb-3 text-sm">
               1. Lorem ipsum dolor sit amet, consectetuer adipicing elit,sed
             </h5>
@@ -71,6 +71,7 @@ const TermsAndConditions: React.FC = () => {
               erat volutpat.
             </p>
           </div>
+          <div className="border-2 borde-b border-[#0D1B3B] w-[138px] my-0 mx-auto"></div>
         </div>
       </IonContent>
     </IonPage>
