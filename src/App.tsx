@@ -23,6 +23,7 @@ import CorrectData from "./pages/CorrectData";
 import Withdrawals from "./pages/Withdrawals";
 import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
+import UploadPictures from "./pages/UploadPictures";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -117,6 +118,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/outlay">
           <Outlay />
+        </Route>
+        <Route exact path="/upload-pictures">
+          <UploadPictures />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
