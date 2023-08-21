@@ -25,6 +25,7 @@ import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
 import UploadPictures from "./pages/UploadPictures";
 import InterbankTerms from "./pages/InterbankTerms";
+import OutlayTerms from "./pages/OutlayTerms";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -125,6 +126,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/interbank-terms">
           <InterbankTerms />
+        </Route>
+        <Route exact path="/outlay-terms">
+          <OutlayTerms />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
