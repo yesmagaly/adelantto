@@ -75,7 +75,7 @@ const TermsAndConditions: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="border-2 borde-b border-primary-blue w-[138px] my-0 mx-auto"></div>
+          <div className="border-bottom" />
         </div>
       </IonContent>
     </IonPage>
