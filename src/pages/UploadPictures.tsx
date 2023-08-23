@@ -12,7 +12,6 @@ import {
   IonItem,
   IonLabel,
 } from "@ionic/react";
-import "./Home.css";
 
 const UploadPictures: React.FC = () => {
   return (

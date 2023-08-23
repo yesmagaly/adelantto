@@ -9,7 +9,6 @@ import {
   IonAvatar,
   IonCheckbox,
 } from "@ionic/react";
-import "./Home.css";
 
 const ValidationError: React.FC = () => {
   return (

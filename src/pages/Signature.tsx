@@ -12,7 +12,6 @@ import {
   IonGrid,
   IonRow,
 } from "@ionic/react";
-import "./Home.css";
 
 const Signature: React.FC = () => {
   return (

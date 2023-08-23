@@ -1,5 +1,4 @@
 import { IonContent, IonPage, IonButton, IonList } from "@ionic/react";
-import "./Home.css";
 
 import FileInputItem from "../components/FileInputItem";
 

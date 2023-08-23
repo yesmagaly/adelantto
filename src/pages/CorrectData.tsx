@@ -9,7 +9,6 @@ import {
   IonAvatar,
   IonCheckbox,
 } from "@ionic/react";
-import "./Home.css";
 
 const CorrectData: React.FC = () => {
   return (

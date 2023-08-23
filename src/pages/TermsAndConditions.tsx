@@ -1,5 +1,4 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import "./Home.css";
 
 import arrowLeft from "../assets/icons/arrow-left.svg";
 import logoBlack from "../assets/icons/logo-black.svg";

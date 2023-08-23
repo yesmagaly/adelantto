@@ -8,7 +8,6 @@ import {
   IonCardTitle,
   IonAvatar,
 } from "@ionic/react";
-import "./Home.css";
 
 const BiometricValidation: React.FC = () => {
   return (

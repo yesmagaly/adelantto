@@ -7,7 +7,6 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import "./Home.css";
 
 const PreOffer: React.FC = () => {
   return (
