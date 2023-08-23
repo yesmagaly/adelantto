@@ -1,4 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player"
+
+import verificationCodeAnimation from "../assets/animations/verification-code.json"
 
 const VerificationCode: React.FC = () => {
   const router = useIonRouter();
@@ -16,11 +19,18 @@ const VerificationCode: React.FC = () => {
         </div>
 
         <div className="content">
+          <Lottie
+            animationData={verificationCodeAnimation}
+            style={{ width: 174, height: 262 }}
+            loop
+            play
+          />
+
           <form className="form">
             <input type="text" placeholder="Código de verificación" />
           </form>
 
-          <div className="mb-32">
+          <div className="mb-24">
             <p className="text-primary-green mb-4">03:00</p>
             <p className="help-text mb-4">
               Si no recibiste el código, envíalo nuevamente desde{" "}
@@ -29,11 +39,13 @@ const VerificationCode: React.FC = () => {
           </div>
 
           <button
-            className="button-primary"
+            className="button-primary mb-16"
             onClick={() => router.push("/verification-email")}
           >
             Enviar código
           </button>
+
+          <div className="border-bottom" />
         </div>
       </IonContent>
     </IonPage>
