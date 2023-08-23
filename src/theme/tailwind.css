@@ -55,7 +55,7 @@
 }
 
 .help-text {
-  @apply max-w-xs font-semibold leading-4;
+  @apply max-w-xs font-semibold leading-5;
 }
 
 .terms-label {
@@ -64,4 +64,8 @@
 
 .terms-body {
   @apply leading-[13px] text-xs mb-4;
+}
+
+.border-bottom {
+  @apply border-[3px] border-b border-primary-blue w-[138px] my-0 mx-auto;
 }
