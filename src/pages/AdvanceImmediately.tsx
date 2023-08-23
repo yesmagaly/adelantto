@@ -1,15 +1,12 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonIcon,
-} from "@ionic/react";
-import { logoIonic, ellipse } from "ionicons/icons";
+import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player";
+
+import homeAnimation from "../assets/animations/home.json"
+import { ellipse } from "ionicons/icons";
 
 const AdvanceImmediately: React.FC = () => {
+  const router = useIonRouter();
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -21,16 +18,30 @@ const AdvanceImmediately: React.FC = () => {
         </div>
 
         <div className="content">
-          <div className="mb-14">
+          <Lottie
+            animationData={homeAnimation}
+            style={{ width: 294, height: 294 }}
+            loop
+            play
+          />
+          <div className="mb-14 mt-10">
             <p className="help-text">
               Recibe un adelanto de tus rentas <br />
               <strong className="text-xl">en tan solo 72 horas.</strong>
             </p>
           </div>
           <div>
-            <IonIcon icon={ellipse}></IonIcon>
-            <IonIcon icon={ellipse}></IonIcon>
-            <IonIcon icon={ellipse}></IonIcon>
+            <button onClick={() => router.push("/advance-immediately")}>
+              <IonIcon icon={ellipse}></IonIcon>
+            </button>
+
+            <button onClick={() => router.push("/create-profile")}>
+              <IonIcon icon={ellipse}></IonIcon>
+            </button>
+
+            <button onClick={() => router.push("")}>
+              <IonIcon icon={ellipse}></IonIcon>
+            </button>
           </div>
         </div>
       </IonContent>
