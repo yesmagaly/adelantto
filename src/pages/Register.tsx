@@ -28,21 +28,23 @@ const Register: React.FC = () => {
             play
           />
 
-          <form className="form">
+          <form className="form mb-7">
             <input type="text" placeholder="Número de Celular" />
           </form>
 
-          <p className="help-text mb-4">
+          <p className="help-text mb-28">
             Enviaremos un código de confirmación para iniciar el proceso de
             validación de tu identidad.
           </p>
 
           <button
-            className="button-primary"
+            className="button-primary mb-16"
             onClick={() => router.push("/verification-code")}
           >
             Enviar código
           </button>
+
+          <div className="border-bottom" />
         </div>
       </IonContent>
     </IonPage>
