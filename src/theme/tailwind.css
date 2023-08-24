@@ -20,6 +20,11 @@
   background-image: url("../assets/images/header-blue-bg.png");
 }
 
+.heading-light-green {
+  @apply h-96 bg-cover px-9 pt-32;
+  background-image: url("../assets/images/light-green-bg.png");
+}
+
 .heading__pager {
   @apply text-xs mb-2;
 }
