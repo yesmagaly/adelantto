@@ -30,6 +30,7 @@ import InterbankTimes from "./pages/InterbankTimes";
 import ConfirmationData from "./pages/ConfirmationData";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
+import Summary from "./pages/Summary";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -145,6 +146,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/full-advance">
           <FullAdvance />
+        </Route>
+        <Route exact path="/summary">
+          <Summary />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
