@@ -28,6 +28,7 @@ import InterbankTerms from "./pages/InterbankTerms";
 import OutlayTerms from "./pages/OutlayTerms";
 import InterbankTimes from "./pages/InterbankTimes";
 import ConfirmationData from "./pages/ConfirmationData";
+import CorrectDeposit from "./pages/CorrectDeposit";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -137,6 +138,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/confirmation-data">
           <ConfirmationData />
+        </Route>
+        <Route exact path="/correct-deposit">
+          <CorrectDeposit />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
