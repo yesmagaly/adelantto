@@ -1,24 +1,27 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonButton,
   IonCard,
   IonCardHeader,
   IonCardTitle,
+  useIonRouter,
 } from "@ionic/react";
 
 const Passport: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
-          <strong>
+        <div className="heading">
+          <h1 className="heading__title">
             Captura tu
-            <br /> INE o Pasaporte
-          </strong>
+            <strong>
+              <br /> INE o Pasaporte
+            </strong>
+          </h1>
+          <h5>Captura una foto de tus identificaciones.</h5>
         </div>
-        <h5>Captura una foto de tus identificaciones.</h5>
+
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>Frente</IonCardTitle>
@@ -29,8 +32,13 @@ const Passport: React.FC = () => {
             <IonCardTitle>Vuelta</IonCardTitle>
           </IonCardHeader>
         </IonCard>
-
-        <IonButton>Siguiente</IonButton>
+        <button
+          className="button-primary mb-16"
+          onClick={() => router.push("")}
+        >
+          Siguiente
+        </button>
+        <div className="border-bottom" />
       </IonContent>
     </IonPage>
   );
