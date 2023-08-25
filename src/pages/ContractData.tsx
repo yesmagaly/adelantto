@@ -1,21 +1,17 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonCheckbox,
-} from "@ionic/react";
+import { IonContent, IonPage, IonCheckbox, useIonRouter } from "@ionic/react";
 
 const ContractData: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
         <div>
-          <strong>
-            Datos de contrato <br /> de arrendamiento
-          </strong>
+          <h1>
+            Datos de contrato{" "}
+            <strong>
+              <br /> de arrendamiento
+            </strong>
+          </h1>
         </div>
         <form>
           <input type="" placeholder="Valor de tu renta mensual" />
@@ -37,11 +33,15 @@ const ContractData: React.FC = () => {
         </form>
         <strong>¿Cómo recibes el pago de tu renta?</strong>
         <div>
-          <IonCheckbox>Efectivo</IonCheckbox>
-          <IonCheckbox>Transferencia</IonCheckbox>
+          <IonCheckbox labelPlacement="end">Efectivo</IonCheckbox>
+          <IonCheckbox labelPlacement="end">Transparencia</IonCheckbox>
         </div>
-
-        <IonButton>Siguiente</IonButton>
+        <button
+          className="button-primary mb-16"
+          onClick={() => router.push("/verification-email")}
+        >
+          Enviar código
+        </button>
       </IonContent>
     </IonPage>
   );
