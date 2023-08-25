@@ -24,9 +24,6 @@ import Withdrawals from "./pages/Withdrawals";
 import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
 import UploadPictures from "./pages/UploadPictures";
-import InterbankTerms from "./pages/InterbankTerms";
-import OutlayTerms from "./pages/OutlayTerms";
-import InterbankTimes from "./pages/InterbankTimes";
 import ConfirmationData from "./pages/ConfirmationData";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
@@ -129,15 +126,6 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/upload-pictures">
           <UploadPictures />
-        </Route>
-        <Route exact path="/interbank-terms">
-          <InterbankTerms />
-        </Route>
-        <Route exact path="/outlay-terms">
-          <OutlayTerms />
-        </Route>
-        <Route exact path="/interbank-times">
-          <InterbankTimes />
         </Route>
         <Route exact path="/confirmation-data">
           <ConfirmationData />
