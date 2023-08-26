@@ -1,10 +1,23 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player"
+import Lottie from "react-lottie-player";
+import { useForm } from "react-hook-form";
 
-import verificationCodeAnimation from "../assets/animations/verification-code.json"
+import verificationCodeAnimation from "../assets/animations/verification-code.json";
 
 const VerificationCode: React.FC = () => {
   const router = useIonRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // router.push("/verification-email")
+
+    console.log(data);
+  };
 
   return (
     <IonPage>
@@ -26,24 +39,23 @@ const VerificationCode: React.FC = () => {
             play
           />
 
-          <form className="form">
-            <input type="text" placeholder="Código de verificación" />
+          <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="text"
+              placeholder="Código de verificación"
+              {...register("verificationCode", { required: true })}
+            />
+
+            <div className="mb-24">
+              <p className="text-primary-green mb-4">03:00</p>
+              <p className="help-text mb-4">
+                Si no recibiste el código, envíalo nuevamente desde{" "}
+                <a className="underline">aquí</a>
+              </p>
+            </div>
+
+            <button className="button-primary">Enviar código</button>
           </form>
-
-          <div className="mb-24">
-            <p className="text-primary-green mb-4">03:00</p>
-            <p className="help-text mb-4">
-              Si no recibiste el código, envíalo nuevamente desde{" "}
-              <a className="underline">aquí</a>
-            </p>
-          </div>
-
-          <button
-            className="button-primary mb-16"
-            onClick={() => router.push("/verification-email")}
-          >
-            Enviar código
-          </button>
 
           <div className="border-bottom" />
         </div>

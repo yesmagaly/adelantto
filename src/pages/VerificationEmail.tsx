@@ -1,10 +1,23 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
+import { useForm } from "react-hook-form";
 
-import emailAnimation from "../assets/animations/email.json"
+import emailAnimation from "../assets/animations/email.json";
 
 const VerificationEmail: React.FC = () => {
   const router = useIonRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // router.push("/advance-immediately")
+
+    console.log(data);
+  };
 
   return (
     <IonPage>
@@ -26,23 +39,22 @@ const VerificationEmail: React.FC = () => {
             play
           />
 
-          <form className="form mb-9">
-            <input type="email" placeholder="Email" />
+          <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email", { required: true })}
+            />
+
+            <div className="mb-24 mt-9">
+              <p className="help-text mb-4">
+                Enviaremos una contraseña tu cuenta de correo para que puedas{" "}
+                <a className="underline">iniciar sesión.</a>
+              </p>
+            </div>
+
+            <button className="button-primary">Enviar código</button>
           </form>
-
-          <div className="mb-24">
-            <p className="help-text mb-4">
-              Enviaremos una contraseña tu cuenta de correo para que puedas{" "}
-              <a className="underline">iniciar sesión.</a>
-            </p>
-          </div>
-
-          <button
-            className="button-primary mb-16"
-            onClick={() => router.push("/advance-immediately")}
-          >
-            Enviar código
-          </button>
 
           <div className="border-bottom" />
         </div>

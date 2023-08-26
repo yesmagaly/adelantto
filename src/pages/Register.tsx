@@ -1,10 +1,23 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
+import { useForm } from "react-hook-form";
 
 import registerAnimation from "../assets/animations/register.json";
 
 const Register: React.FC = () => {
   const router = useIonRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // router.push("/verification-code")
+
+    console.log(data);
+  };
 
   return (
     <IonPage>
@@ -28,21 +41,22 @@ const Register: React.FC = () => {
             play
           />
 
-          <form className="form mb-7">
-            <input type="text" placeholder="Número de Celular" />
+          <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-7">
+              <input
+                type="text"
+                placeholder="Número de Celular"
+                {...register("phone", { required: true })}
+              />
+            </div>
+
+            <p className="help-text mb-28">
+              Enviaremos un código de confirmación para iniciar el proceso de
+              validación de tu identidad.
+            </p>
+
+            <button className="button-primary">Enviar código</button>
           </form>
-
-          <p className="help-text mb-28">
-            Enviaremos un código de confirmación para iniciar el proceso de
-            validación de tu identidad.
-          </p>
-
-          <button
-            className="button-primary mb-16"
-            onClick={() => router.push("/verification-code")}
-          >
-            Enviar código
-          </button>
 
           <div className="border-bottom" />
         </div>
