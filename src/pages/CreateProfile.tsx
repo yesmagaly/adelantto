@@ -1,11 +1,25 @@
 import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
+import { useForm } from "react-hook-form";
 
-import userAnimation from "../assets/animations/user.json"
+import userAnimation from "../assets/animations/user.json";
 import { ellipse } from "ionicons/icons";
 
 const CreateProfile: React.FC = () => {
   const router = useIonRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // router.push("/advance-immediately")
+    // router.push("/create-profile")
+
+    console.log(data);
+  };
 
   return (
     <IonPage>
@@ -31,50 +45,49 @@ const CreateProfile: React.FC = () => {
           </div>
 
           <div className="px-9">
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="text"
-                name="name"
                 id="name"
                 placeholder="Nombre (s)"
                 className="min-w-full"
+                {...register("name", { required: true })}
               />
               <input
                 type="text"
-                name="last_name"
                 id="last_name"
                 placeholder="Apellido"
                 className="min-w-full"
+                {...register("last_name", { required: true })}
               />
+
+              <div className="mb-8">
+                <a
+                  href="#"
+                  className="block border border-gray-400 mb-4 p-4 min-w-full"
+                >
+                  Continuar con Google
+                </a>
+                <a
+                  href="#"
+                  className="block border border-gray-400 mb-4 p-4 min-w-full"
+                >
+                  Continuar con Facebook
+                </a>
+              </div>
+
+              <div className="text-center">
+                <button>
+                  <IonIcon icon={ellipse}></IonIcon>
+                </button>
+                <button>
+                  <IonIcon icon={ellipse}></IonIcon>
+                </button>
+                <button>
+                  <IonIcon icon={ellipse}></IonIcon>
+                </button>
+              </div>
             </form>
-
-            <div className="mb-8">
-              <a
-                href="#"
-                className="block border border-gray-400 mb-4 p-4 min-w-full"
-              >
-                Continuar con Google
-              </a>
-              <a
-                href="#"
-                className="block border border-gray-400 mb-4 p-4 min-w-full"
-              >
-                Continuar con Facebook
-              </a>
-            </div>
-
-            <div className="text-center">
-              <button onClick={() => router.push("/advance-immediately")}>
-                <IonIcon icon={ellipse}></IonIcon>
-              </button>
-              <button onClick={() => router.push("/create-profile")}>
-                <IonIcon icon={ellipse}></IonIcon>
-              </button>
-
-              <button onClick={() => router.push("")}>
-                <IonIcon icon={ellipse}></IonIcon>
-              </button>
-            </div>
           </div>
         </div>
       </IonContent>
