@@ -41,6 +41,11 @@
   @apply font-semibold;
 }
 
+.body__blue-bg {
+  @apply bg-cover px-9 py-16;
+  background-image: url("../assets/images/blue-bg.png");
+}
+
 /** Content styles. **/
 .content {
   @apply flex p-4 flex-col items-center text-center;
@@ -50,7 +55,6 @@
 .content.is-center {
   @apply justify-center;
 }
-
 
 /** Form Styles **/
 
