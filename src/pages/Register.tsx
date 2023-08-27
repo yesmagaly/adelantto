@@ -46,6 +46,16 @@ const Register: React.FC = () => {
 
           <div className="border-bottom" />
         </div>
+
+        <div className=" absolute flex justify-center w-full">
+          <div className="fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-white shadow-md px-8 py-6 rounded-lg">
+            <h3 className="font-semibold text-lg mb-5 text-center">Ups</h3>
+            <p>
+              Por el momento no cumples los requisitos Adelantto, te
+              recomendamos intentarlo en 3 meses nuevamente
+            </p>
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );
