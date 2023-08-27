@@ -1,6 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { PatternFormat } from "react-number-format";
 
 import registerAnimation from "../assets/animations/register.json";
 
@@ -8,7 +9,7 @@ const Register: React.FC = () => {
   const router = useIonRouter();
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: {},
   } = useForm();
@@ -43,10 +44,21 @@ const Register: React.FC = () => {
 
           <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-7">
-              <input
-                type="text"
-                placeholder="Número de Celular"
-                {...register("phone", { required: true })}
+              <Controller
+                control={control}
+                name="phone"
+                render={({ field }) => (
+                  <PatternFormat
+                    className="pattern-format"
+                    {...field}
+                    placeholder="Número de Celular"
+                    type="tel"
+                    format="+52 (###) ###-####"
+                    allowEmptyFormatting
+                    mask="_"
+                    required
+                  />
+                )}
               />
             </div>
 
