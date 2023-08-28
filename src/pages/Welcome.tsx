@@ -1,30 +1,37 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
 const Welcome: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
-        <h1>¡Bienvenido!</h1>
         <div>
-          <strong>
-            Ahora eres parte <br /> de Adelantto
-          </strong>
+          <h1 className="heading__title">¡Bienvenido!</h1>
+          <p className="w-44 mb-14 leading-5">
+            Ahora eres parte <br />
+            <strong> de Adelantto </strong>
+          </p>
         </div>
-        <p>Actualiza tu contraseña</p>
-        <form action="">
-          <input type="text" placeholder="Nueva contraseña" />
-          <input type="text" placeholder="Repite tu nueva contraseña" />
-        </form>
-        <a href="">Validación de password*</a>
-        <IonButton>Cambiar contraseña</IonButton>
+        <div className="content">
+          <p>Actualiza tu contraseña</p>
+          <form className="form mb-7">
+            <input type="text" placeholder="Nueva contraseña" />
+          </form>
+          <form className="form mb-7">
+            <input type="text" placeholder="Repite tu nueva contraseña" />
+          </form>
+          <div>
+            <a className="underline"> Validación de password*</a>
+          </div>
+
+          <button
+            className="button-primary mb-16"
+            onClick={() => router.push("/verification-email")}
+          >
+            Cambiar contraseña
+          </button>
+          <div className="border-bottom" />
+        </div>
       </IonContent>
     </IonPage>
   );
