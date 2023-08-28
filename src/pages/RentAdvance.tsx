@@ -1,22 +1,17 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonCheckbox,
-} from "@ionic/react";
+import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/react";
 
 const RentAdvance: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
         <div>
-          <strong>
-            Selecciona el monto
-            <br /> que te gustaría que <br /> adelentemos de rentas
-          </strong>
+          <h3>
+            Selecciona el monto <br />{" "}
+            <strong>
+              que te gustaría que <br /> adelentemos de rentas
+            </strong>
+          </h3>
         </div>
         <div>
           <button>$ 5,000.00</button>{" "}
@@ -37,7 +32,13 @@ const RentAdvance: React.FC = () => {
           <button>$ 30,000.00</button>{" "}
         </div>
 
-        <IonButton>Siguiente</IonButton>
+        <button
+          className="button-primary mb-16"
+          onClick={() => router.push("/verification-code")}
+        >
+          Siguiente
+        </button>
+        <div className="border-bottom" />
       </IonContent>
     </IonPage>
   );
