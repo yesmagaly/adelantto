@@ -6,31 +6,34 @@ const ContractData: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div>
-          <h1>
+          <h1 className="heading__title">
             Datos de contrato{" "}
             <strong>
               <br /> de arrendamiento
             </strong>
           </h1>
         </div>
-        <form>
-          <input type="" placeholder="Valor de tu renta mensual" />
-        </form>
-        <form>
-          <input
-            type=""
-            placeholder="Fecha de inicio del contrato de arrendamiento"
-          />
-        </form>
-        <form>
-          <input
-            type=""
-            placeholder="Fecha de fin del contrato de arrendamiento"
-          />
-        </form>
-        <form>
-          <input type="" placeholder="Código postal de tu inmueble" />
-        </form>
+        <div>
+          <form className="form mb-7">
+            <input type="text" placeholder="valor de tu renta mensual" />
+          </form>
+          <form className="form mb-7">
+            <input
+              type="text"
+              placeholder="Fecha de inicio del contrato de arrendamiento"
+            />
+          </form>
+          <form className="form mb-7">
+            <input
+              type="text"
+              placeholder="Fecha de fin del contrato de arrendamiento"
+            />
+          </form>
+          <form className="form mb-7">
+            <input type="text" placeholder="Código postal de tu inmueble" />
+          </form>
+        </div>
+
         <strong>¿Cómo recibes el pago de tu renta?</strong>
         <div>
           <IonCheckbox labelPlacement="end">Efectivo</IonCheckbox>
@@ -40,7 +43,7 @@ const ContractData: React.FC = () => {
           className="button-primary mb-16"
           onClick={() => router.push("/verification-email")}
         >
-          Enviar código
+          Siguiente
         </button>
       </IonContent>
     </IonPage>
