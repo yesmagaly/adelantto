@@ -7,17 +7,25 @@ import registerAnimation from "../assets/animations/register.json";
 
 const Register: React.FC = () => {
   const router = useIonRouter();
-
   const {
     control,
     handleSubmit,
-    formState: {},
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async function (data) {
     // router.push("/verification-code")
+    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
+    const response = await fetch('http://adelantto-server.docksal/api/send-verification-code', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({ phone }),
+    });
 
-    console.log(data);
+    const jsonString = await response.json();
+    console.log(data, phone, jsonString, response.status);
   };
 
   return (
@@ -47,16 +55,17 @@ const Register: React.FC = () => {
               <Controller
                 control={control}
                 name="phone"
-                render={({ field }) => (
+                render={({ field: { ref, ...field } }) => (
                   <PatternFormat
-                    className="pattern-format"
                     {...field}
+                    className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format="+52 (###) ###-####"
+                    format="+51 (###) ###-###"
                     allowEmptyFormatting
                     mask="_"
                     required
+                    getInputRef={ref}
                   />
                 )}
               />
