@@ -5,32 +5,33 @@ const Withdrawals: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
+        <div className="content">
           <h3>
             ¿Dónde quieres <br />
             <strong>tu dinero?</strong>
           </h3>
         </div>
-        <div>
-          <form>
+        <div className="content">
+          <form className="form mb-7">
             <input
               type="text"
               placeholder="Subir carátula de tu estado de cuenta"
             />
           </form>
+          <a className="underline">Términos interbancarios</a>
+          <p>
+            A continuación encontrarás el contrato <br /> relacionado a tu
+            solicitud.
+          </p>
+          <button
+            className="button-primary mb-16"
+            onClick={() => router.push("/verification-email")}
+          >
+            Siguiente
+          </button>
+          <div className="border-bottom" />
         </div>
-        <a className="underline">Términos interbancarios</a>
-        <p>
-          A continuación encontrarás el contrato <br /> relacionado a tu
-          solicitud.
-        </p>
-        <button
-          className="button-primary mb-16"
-          onClick={() => router.push("/verification-email")}
-        >
-          Siguiente
-        </button>
-        <div className="border-bottom" />
+
         <div>
           <h2>
             <strong>
