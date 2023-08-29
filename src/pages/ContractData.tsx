@@ -11,38 +11,39 @@ const ContractData: React.FC = () => {
           </h1>
         </div>
 
-        <div>
-          <form className="form mb-7">
-            <input type="text" placeholder="valor de tu renta mensual" />
-          </form>
-          <form className="form mb-7">
-            <input
-              type="text"
-              placeholder="Fecha de inicio del contrato de arrendamiento"
-            />
-          </form>
-          <form className="form mb-7">
-            <input
-              type="text"
-              placeholder="Fecha de fin del contrato de arrendamiento"
-            />
-          </form>
-          <form className="form mb-7">
-            <input type="text" placeholder="Código postal de tu inmueble" />
-          </form>
-        </div>
+        <div className="content">
+          <form className="form">
+            <div className="mb-7">
+              <input type="text" placeholder="valor de tu renta mensual" />
 
-        <strong>¿Cómo recibes el pago de tu renta?</strong>
-        <div>
-          <IonCheckbox labelPlacement="end">Efectivo</IonCheckbox>
-          <IonCheckbox labelPlacement="end">Transparencia</IonCheckbox>
+              <input
+                type="text"
+                placeholder="Fecha de inicio del contrato de arrendamiento"
+              />
+
+              <input
+                type="text"
+                placeholder="Fecha de fin del contrato de arrendamiento"
+              />
+
+              <input type="text" placeholder="Código postal de tu inmueble" />
+            </div>
+
+            <div>
+              <strong>¿Cómo recibes el pago de tu renta?</strong>
+              <div>
+                <IonCheckbox labelPlacement="end">Efectivo</IonCheckbox>
+                <IonCheckbox labelPlacement="end">Transparencia</IonCheckbox>
+              </div>
+              <button
+                className="button-primary mb-16"
+                onClick={() => router.push("/verification-email")}
+              >
+                Siguiente
+              </button>
+            </div>
+          </form>
         </div>
-        <button
-          className="button-primary mb-16"
-          onClick={() => router.push("/verification-email")}
-        >
-          Siguiente
-        </button>
       </IonContent>
     </IonPage>
   );
