@@ -72,7 +72,7 @@ const Register: React.FC = () => {
     const json = await response.json();
 
     if (json.status === "success") {
-      router.push("/verification-code");
+      router.push(`/verification-code/${phone}`);
     } else {
       // Show server errors.
       setError("phone", { message: json.message, type: "server" });
@@ -134,13 +134,13 @@ const Register: React.FC = () => {
           <div className="border-bottom" />
         </div>
 
+        <Loader isOpen={isSubmitting} />
         <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
           <h3 className="font-semibold text-lg mb-5 text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.phone?.message}</p>}
         </Modal>
-        <Loader isOpen={isSubmitting} />
       </IonContent>
     </IonPage>
   );
