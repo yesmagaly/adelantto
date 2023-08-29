@@ -53,7 +53,13 @@
 
 /** Form Styles **/
 
+.form {
+  @apply flex flex-col items-center;
+}
+
 .form input[type="text"],
+.form input[type="numeric"],
+.form input[type="password"],
 .form input[type="email"],
 .form .pattern-format {
   @apply p-4 mb-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
