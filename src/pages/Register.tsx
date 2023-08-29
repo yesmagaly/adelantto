@@ -131,7 +131,7 @@ const Register: React.FC = () => {
             <button className="button-primary">Enviar código</button>
           </form>
 
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
 
         <Loader isOpen={isSubmitting} />

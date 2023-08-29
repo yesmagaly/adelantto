@@ -29,7 +29,7 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
   } = useForm();
 
   const onSubmit = async function (data: FormValues) {
-    const code = data.code; 
+    const code = data.code;
     const phone = match.params.phone;
 
     // Send phone request.
@@ -89,7 +89,11 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
               <p className="text-primary-green mb-4">03:00</p>
               <p className="help-text mb-4">
                 Si no recibiste el código, envíalo nuevamente desde{" "}
-                <a href="#" onClick={() => router.goBack()} className="underline">
+                <a
+                  href="#"
+                  onClick={() => router.goBack()}
+                  className="underline"
+                >
                   aquí
                 </a>
               </p>
@@ -98,7 +102,7 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
             <button className="button-primary">Enviar código</button>
           </form>
 
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
 
         <Loader isOpen={isSubmitting} />
