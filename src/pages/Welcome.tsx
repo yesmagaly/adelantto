@@ -18,14 +18,21 @@ const validate = function (values: FormValues) {
   if (!values.password) {
     errors.password = {
       type: "required",
-      message: "The cellphone number is required.",
+      message: "The password is required.",
     };
-  } else if (
-    !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{3}$/g.test(values.phone)
-  ) {
-    errors.password = {
-      type: "pattern",
-      message: "Invalid cellphone number.",
+  }
+
+  if (!values.password_confirmation) {
+    errors.password_confirmation = {
+      type: "required",
+      message: "The password is required.",
+    };
+  }
+
+  if (values.password !== values.password_confirmation) {
+    errors.password_confirmation = {
+      type: "be_equal",
+      message: "The confirmation password should be equal to your new password.",
     };
   }
 
@@ -46,37 +53,39 @@ const Welcome: React.FC = () => {
 
   const onSubmit = async function (data: FormValues) {
     // Make validaions.
-    // const errors = validate(data);
+    const errors = validate(data);
 
     // Show phone errors.
-    // if (errors.phone) {
-    //   setError("phone", errors.phone);
-    //   setIsOpen(true);
-    //   return;
-    // }
+    if (errors.password) {
+      setError("password", errors.password);
+      setIsOpen(true);
+      return;
+    }
+
+    if (errors.password_confirmation) {
+      setError("password_confirmation", errors.password_confirmation);
+      setIsOpen(true);
+      return;
+    }
 
     const password = data.password;
     const password_confirmation = data.password_confirmation;
 
     // Send phone request.
-    const response = await fetch(
-      "http://adelantto-server.docksal/api/user/update-password",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify({ password, password_confirmation }),
-      }
-    );
+    const response = await fetch("http://adelantto-server.docksal/api/user/update-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${authInfo.user.token}`,
+      },
+      body: JSON.stringify({ password, password_confirmation, email: authInfo.user.email }),
+    });
 
     const json = await response.json();
 
-    if (json.status === "success") {
-      // router.push(`/verification-code/${phone}`);
-      // () => router.push("/verification-email")
+    if (response.status === 200) {
+      router.push(`/advance-immediately`);
     } else {
       // Show server errors.
       setError("password", { message: json.message, type: "server" });
@@ -128,6 +137,7 @@ const Welcome: React.FC = () => {
             Lo sentimos
           </h3>
           {<p>{errors?.password?.message}</p>}
+          {<p>{errors?.password_confirmation?.message}</p>}
         </Modal>
       </IonContent>
     </IonPage>
