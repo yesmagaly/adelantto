@@ -5,6 +5,8 @@ import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
 import { useAuth } from "./auth/authContext";
 
+import logo from "../assets/icons/alternative-logo.svg";
+
 type FormValues = {
   password: string | undefined;
   password_confirmation: string | undefined;
@@ -57,15 +59,18 @@ const Welcome: React.FC = () => {
     const password_confirmation = data.password_confirmation;
 
     // Send phone request.
-    const response = await fetch("http://adelantto-server.docksal/api/user/update-password", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify({ password, password_confirmation }),
-    });
+    const response = await fetch(
+      "http://adelantto-server.docksal/api/user/update-password",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify({ password, password_confirmation }),
+      }
+    );
 
     const json = await response.json();
 
@@ -82,17 +87,18 @@ const Welcome: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="py-6">
-          <div className="flex flex-col items-center">
-            <h1 className="heading__title text-center">¡Bienvenido!</h1>
-            <p className="text-center w-44 mb-14 leading-5">
+        <div className="blue-bg flex items-center flex-col justify-center text-center h-full">
+          <img className="mb-5" src={logo} />
+          <div className="text-white">
+            <h1 className="font-semibold text-4xl mb-5">¡Bienvenido!</h1>
+            <p className="text-xl leading-6 mb-12">
               Ahora eres parte <br />
               <strong> de Adelantto </strong>
             </p>
           </div>
 
-          <div className="content">
-            <p>Actualiza tu contraseña</p>
+          <div>
+            <p className="text-white mb-5">Actualiza tu contraseña</p>
             <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
               <input
                 {...register("password")}
@@ -104,10 +110,15 @@ const Welcome: React.FC = () => {
                 type="password"
                 placeholder="Repite tu nueva contraseña"
               />
-              <p className="mb-4"><a className="underline"> Validación de password*</a></p>
-              <button className="button-primary mb-16">Cambiar contraseña</button>
+              <p className="mb-12 mt-4">
+                <a className="font-semibold text-primary-green text-sm underline mb-10">
+                  {" "}
+                  Validación de password*
+                </a>
+              </p>
+              <button className="button-primary">Cambiar contraseña</button>
             </form>
-            <div className="border-bottom" />
+            <div className="border-bottom border-white" />
           </div>
         </div>
 
