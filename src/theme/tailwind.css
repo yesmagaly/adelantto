@@ -12,12 +12,22 @@
 
 .heading {
   @apply h-60 bg-cover text-white px-9 py-6;
+}
+
+.heading--green {
   background-image: url("../assets/images/header-bg.png");
 }
 
-.heading-blue {
-  @apply h-60 bg-cover text-white px-9 pt-20;
+.heading--blue {
   background-image: url("../assets/images/header-blue-bg.png");
+}
+
+.heading--center {
+  @apply flex flex-col justify-center items-center;
+}
+
+.heading--compact {
+  @apply h-auto;
 }
 
 .heading-light-green {
