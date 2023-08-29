@@ -112,11 +112,13 @@ const Welcome: React.FC = () => {
               <input
                 {...register("password")}
                 type="password"
+                required
                 placeholder="Nueva contraseña"
               />
               <input
                 {...register("password_confirmation")}
                 type="password"
+                required
                 placeholder="Repite tu nueva contraseña"
               />
               <p className="mb-12 mt-4">
