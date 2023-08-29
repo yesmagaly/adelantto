@@ -1,20 +1,58 @@
+import { useState } from "react";
+import { RouteComponentProps } from "react-router";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
 import emailAnimation from "../assets/animations/email.json";
+import Modal from "../components/Modal/Modal";
+import Loader from "../components/Loader/Loader";
 
-const VerificationEmail: React.FC = () => {
+interface VerificationEmailProps
+  extends RouteComponentProps<{
+    phone: string;
+  }> {}
+
+type FormValues = {
+  email: number;
+};
+
+const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
-
   const {
     register,
     handleSubmit,
-    formState: {},
+    setError,
+    formState: { isSubmitting, errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // router.push("/advance-immediately")
+  const onSubmit = async function (data: FormValues) {
+    const email = data.email;
+    const phone = match.params.phone;
+
+    // Send phone request.
+    const response = await fetch(
+      "http://adelantto-server.docksal/api/send-email-password",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email, phone }),
+      }
+    );
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push(`/advance-immediately`);
+    } else {
+      // Show server errors.
+      setError("email", { message: json.message, type: "server" });
+      setIsOpen(true);
+    }
 
     console.log(data);
   };
@@ -58,6 +96,15 @@ const VerificationEmail: React.FC = () => {
 
           <div className="border-bottom" />
         </div>
+
+        <Loader isOpen={isSubmitting} />
+
+        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+          <h3 className="font-semibold text-lg mb-5 text-center">
+            Lo sentimos
+          </h3>
+          {<p>{errors?.email?.message}</p>}
+        </Modal>
       </IonContent>
     </IonPage>
   );
