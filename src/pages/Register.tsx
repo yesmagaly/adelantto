@@ -83,7 +83,7 @@ const Register: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading">
+        <div className="heading heading--green">
           <div className="heading__pager text-right">Paso 1 de 4</div>
           <h1 className="heading__title">
             Registra <br />
