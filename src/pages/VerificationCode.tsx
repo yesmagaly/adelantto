@@ -1,22 +1,59 @@
+import { useState } from "react";
+import { RouteComponentProps } from "react-router";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
 import verificationCodeAnimation from "../assets/animations/verification-code.json";
+import Modal from "../components/Modal/Modal";
+import Loader from "../components/Loader/Loader";
 
-const VerificationCode: React.FC = () => {
+interface VerificationCodeProps
+  extends RouteComponentProps<{
+    phone: string;
+  }> {}
+
+type FormValues = {
+  code: number;
+};
+
+const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
 
   const {
     register,
     handleSubmit,
-    formState: {},
+    setError,
+    formState: { isSubmitting, errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // router.push("/verification-email")
+  const onSubmit = async function (data: FormValues) {
+    const code = data.code; 
+    const phone = match.params.phone;
 
-    console.log(data);
+    // Send phone request.
+    const response = await fetch(
+      "http://adelantto-server.docksal/api/verify-phone-code",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ code, phone }),
+      }
+    );
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push(`/verification-email/${phone}`);
+    } else {
+      // Show server errors.
+      setError("code", { message: json.message, type: "server" });
+      setIsOpen(true);
+    }
   };
 
   return (
@@ -41,16 +78,20 @@ const VerificationCode: React.FC = () => {
 
           <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
             <input
-              type="text"
+              type="numeric"
+              maxLength={6}
+              minLength={6}
               placeholder="Código de verificación"
-              {...register("verificationCode", { required: true })}
+              {...register("code", { required: true })}
             />
 
             <div className="mb-24">
               <p className="text-primary-green mb-4">03:00</p>
               <p className="help-text mb-4">
                 Si no recibiste el código, envíalo nuevamente desde{" "}
-                <a className="underline">aquí</a>
+                <a href="#" onClick={() => router.goBack()} className="underline">
+                  aquí
+                </a>
               </p>
             </div>
 
@@ -59,6 +100,15 @@ const VerificationCode: React.FC = () => {
 
           <div className="border-bottom" />
         </div>
+
+        <Loader isOpen={isSubmitting} />
+
+        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+          <h3 className="font-semibold text-lg mb-5 text-center">
+            Lo sentimos
+          </h3>
+          {<p>{errors?.code?.message}</p>}
+        </Modal>
       </IonContent>
     </IonPage>
   );
