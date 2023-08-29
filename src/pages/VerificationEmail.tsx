@@ -11,7 +11,7 @@ import Loader from "../components/Loader/Loader";
 interface VerificationEmailProps
   extends RouteComponentProps<{
     phone: string;
-  }> {}
+  }> { }
 
 type FormValues = {
   email: number;
@@ -47,7 +47,7 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
     const json = await response.json();
 
     if (json.status === "success") {
-      router.push(`/advance-immediately`);
+      router.push(`/login`);
     } else {
       // Show server errors.
       setError("email", { message: json.message, type: "server" });
