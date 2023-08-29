@@ -69,7 +69,7 @@ const Login: React.FC<LoginProps> = () => {
 
           <p className="leading-5 mb-4">
             ¿Eres nuevo?{" "}
-            <a className="font-semibold" href="#">
+            <a className="font-semibold" href="/register">
               Registrate aquí
             </a>
           </p>
