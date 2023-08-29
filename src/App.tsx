@@ -81,16 +81,20 @@ const App: React.FC = () => {
               <Route exact path="/welcome" component={Welcome} />
               <Route exact path="/advance-immediately" component={AdvanceImmediately} />
               <Route exact path="/create-profile" component={CreateProfile} />
-              <Redirect from="/" to="/welcome" exact />
+              <Route exact path="/">
+                <Redirect to="/welcome" />
+              </Route>
             </IonReactRouter>
           ) : (
             <IonReactRouter>
-              <Route path="/" component={Login} exact />
               <Route path="/create-account" component={Register} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
               <Route path="/verification-code/:phone" component={VerificationCode} />
               <Route path="/verification-email/:phone" component={VerificationEmail} />
+              <Route exact path="/">
+                <Redirect to="/login" />
+              </Route>
             </IonReactRouter>
           )}
         </>
