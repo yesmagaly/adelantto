@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
-import { useForm, Controller, Resolver } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
