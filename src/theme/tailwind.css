@@ -41,6 +41,11 @@
   @apply font-semibold;
 }
 
+.blue-bg {
+  @apply bg-cover px-9 py-6;
+  background-image: url("../assets/images/blue-bg.png");
+}
+
 /** Content styles. **/
 .content {
   @apply flex p-4 flex-col items-center text-center;
@@ -78,5 +83,5 @@
 }
 
 .border-bottom {
-  @apply border-[3px] border-b border-primary-blue w-[138px] my-0 mx-auto;
+  @apply border-[3px] border-b w-[138px] my-0 mx-auto;
 }
