@@ -5,14 +5,12 @@ const ContractData: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
-          <h1 className="heading__title">
-            Datos de contrato{" "}
-            <strong>
-              <br /> de arrendamiento
-            </strong>
+        <div className="heading heading--blue heading--center">
+          <h1 className="text-[40px]">
+            Datos de contrato <strong>de arrendamiento</strong>
           </h1>
         </div>
+
         <div>
           <form className="form mb-7">
             <input type="text" placeholder="valor de tu renta mensual" />
