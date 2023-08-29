@@ -1,31 +1,83 @@
+import { useEffect, useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, Resolver } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
+import Modal from "../components/Modal/Modal";
+import Loader from "../components/Loader/Loader";
 
 import registerAnimation from "../assets/animations/register.json";
 
+type FormValues = {
+  phone: string | undefined;
+};
+
 const Register: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
   const {
     control,
     handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = async function (data) {
-    // router.push("/verification-code")
-    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
-    const response = await fetch('http://adelantto-server.docksal/api/send-verification-code', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({ phone }),
-    });
+  const validate = function (values: FormValues) {
+    const errors = {};
 
-    const jsonString = await response.json();
-    console.log(data, phone, jsonString, response.status);
+    if (!values.phone) {
+      errors.phone = {
+        type: "required",
+        message: "The cellphone number is required.",
+      };
+    } else if (
+      !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{3}$/g.test(values.phone)
+    ) {
+      errors.phone = {
+        type: "pattern",
+        message: "Invalid cellphone number.",
+      };
+    }
+
+    return errors;
+  };
+
+  const onSubmit = async function (data: FormValues) {
+    // Make validaions.
+    const errors = validate(data);
+
+    // Show phone errors.
+    if (errors.phone) {
+      setError("phone", errors.phone);
+      setIsOpen(true);
+      return;
+    }
+
+    // Clean up phone number.
+    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
+
+    // Send phone request.
+    const response = await fetch(
+      "http://adelantto-server.docksal/api/send-verification-code",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ phone }),
+      }
+    );
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push("/verification-code");
+    } else {
+      // Show server errors.
+      setError("phone", { message: json.message, type: "server" });
+      setIsOpen(true);
+    }
   };
 
   return (
@@ -82,15 +134,13 @@ const Register: React.FC = () => {
           <div className="border-bottom" />
         </div>
 
-        <div className=" absolute flex justify-center w-full">
-          <div className="fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 bg-white shadow-md px-8 py-6 rounded-lg">
-            <h3 className="font-semibold text-lg mb-5 text-center">Ups</h3>
-            <p>
-              Por el momento no cumples los requisitos Adelantto, te
-              recomendamos intentarlo en 3 meses nuevamente
-            </p>
-          </div>
-        </div>
+        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+          <h3 className="font-semibold text-lg mb-5 text-center">
+            Lo sentimos
+          </h3>
+          {<p>{errors?.phone?.message}</p>}
+        </Modal>
+        <Loader isOpen={isSubmitting} />
       </IonContent>
     </IonPage>
   );
