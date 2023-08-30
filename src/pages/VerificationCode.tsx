@@ -22,7 +22,7 @@ const VerificationCode: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading">
+        <div className="heading heading--green">
           <h1 className="heading__title">
             Código
             <br />
