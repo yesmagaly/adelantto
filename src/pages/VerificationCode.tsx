@@ -7,11 +7,12 @@ import { useForm } from "react-hook-form";
 import verificationCodeAnimation from "../assets/animations/verification-code.json";
 import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
+import { API_SERVER_URL } from "../config";
 
 interface VerificationCodeProps
   extends RouteComponentProps<{
     phone: string;
-  }> {}
+  }> { }
 
 type FormValues = {
   code: number;
@@ -34,7 +35,7 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
 
     // Send phone request.
     const response = await fetch(
-      "http://adelantto-server.docksal/api/verify-phone-code",
+      `${API_SERVER_URL}/api/verify-phone-code`,
       {
         method: "POST",
         headers: {

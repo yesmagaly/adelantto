@@ -1,4 +1,5 @@
 import React from "react";
+import { API_SERVER_URL } from "../../config";
 
 type UserDataInterface = { initialized: boolean; loggedIn: boolean; user: any };
 type MyContextInterface = {
@@ -35,7 +36,7 @@ export const AuthProvider: React.FC = (props: any) => {
 
   const logIn = async (email: string, password: string) => {
     // Send phone request.
-    const response = await fetch("http://adelantto-server.docksal/api/login", {
+    const response = await fetch(`${API_SERVER_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
