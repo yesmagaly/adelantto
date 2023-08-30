@@ -12,33 +12,34 @@ const Passport: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading">
+        <div className="heading heading--green">
           <h1 className="heading__title">
             Captura tu
             <strong>
               <br /> INE o Pasaporte
             </strong>
           </h1>
-          <h5>Captura una foto de tus identificaciones.</h5>
+          <h6>Captura una foto de tus identificaciones.</h6>
         </div>
-
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>Frente</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>Vuelta</IonCardTitle>
-          </IonCardHeader>
-        </IonCard>
-        <button
-          className="button-primary mb-16"
-          onClick={() => router.push("")}
-        >
-          Siguiente
-        </button>
-        <div className="border-bottom" />
+        <div className="content">
+          <IonCard>
+            <IonCardHeader>
+              <IonCardTitle>Frente</IonCardTitle>
+            </IonCardHeader>
+          </IonCard>
+          <IonCard>
+            <IonCardHeader>
+              <IonCardTitle>Vuelta</IonCardTitle>
+            </IonCardHeader>
+          </IonCard>
+          <button
+            className="button-primary mb-16"
+            onClick={() => router.push("")}
+          >
+            Siguiente
+          </button>
+          <div className="border-bottom" />
+        </div>
       </IonContent>
     </IonPage>
   );
