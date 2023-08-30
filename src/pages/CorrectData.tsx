@@ -9,7 +9,7 @@ const CorrectData: React.FC = () => {
           <h3 className="font-bold text-4xl text-center">¡Felicitaciones!</h3>
         </div>
         <div className="content">
-          <p className="help-text border-y border-solid border-primary-blue py-6 mb-28">
+          <p className="text-sm leading-4 border-y border-solid border-primary-blue py-6 mb-28">
             Cuéntanos dónde quieres tu dinero
           </p>
           <button
