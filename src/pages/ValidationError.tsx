@@ -5,13 +5,13 @@ const ValidationError: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
+        <div className="content">
           <h3 className=" font-bold text-4xl text-center">
             <strong>¡Lo sentimos!</strong>
           </h3>
         </div>
         <div className="content">
-          <p className="help-text border-y border-solid border-primary-blue py-6 mb-28">
+          <p className="text-sm leading-4 border-y border-solid border-primary-blue py-6 mb-28">
             Los datos de tu propiedad no han pasado <br /> nuestro proceso de
             validación
           </p>
