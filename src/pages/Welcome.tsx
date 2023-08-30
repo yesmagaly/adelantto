@@ -5,32 +5,33 @@ const Welcome: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
-          <h1 className="heading__title">¡Bienvenido!</h1>
-          <p className="w-44 mb-14 leading-5">
+        <div className="heading--center">
+          <h1 className="text-[35px]">¡Bienvenido!</h1>
+          <p>
             Ahora eres parte <br />
             <strong> de Adelantto </strong>
           </p>
         </div>
         <div className="content">
-          <p>Actualiza tu contraseña</p>
-          <form className="form mb-7">
-            <input type="text" placeholder="Nueva contraseña" />
-          </form>
-          <form className="form mb-7">
-            <input type="text" placeholder="Repite tu nueva contraseña" />
-          </form>
-          <div>
-            <a className="underline"> Validación de password*</a>
-          </div>
+          <form className="form">
+            <p>Actualiza tu contraseña</p>
+            <div className="mb-7">
+              <input type="text" placeholder="Nueva contraseña" />
+              <input type="text" placeholder="Repite tu nueva contraseña" />
+            </div>
 
-          <button
-            className="button-primary mb-16"
-            onClick={() => router.push("/verification-email")}
-          >
-            Cambiar contraseña
-          </button>
-          <div className="border-bottom" />
+            <div>
+              <a className="underline"> Validación de password*</a>
+            </div>
+
+            <button
+              className="button-primary mb-16"
+              onClick={() => router.push("")}
+            >
+              Cambiar contraseña
+            </button>
+            <div className="border-bottom" />
+          </form>
         </div>
       </IonContent>
     </IonPage>
