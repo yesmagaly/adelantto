@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import emailAnimation from "../assets/animations/email.json";
 import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
+import { API_SERVER_URL } from "../config";
 
 interface VerificationEmailProps
   extends RouteComponentProps<{
@@ -33,7 +34,7 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
 
     // Send phone request.
     const response = await fetch(
-      "http://adelantto-server.docksal/api/send-email-password",
+      `${API_SERVER_URL}/api/send-email-password`,
       {
         method: "POST",
         headers: {

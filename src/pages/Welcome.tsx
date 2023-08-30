@@ -6,6 +6,7 @@ import Loader from "../components/Loader/Loader";
 import { useAuth } from "./auth/authContext";
 
 import logo from "../assets/icons/alternative-logo.svg";
+import { API_SERVER_URL } from "../config";
 
 type FormValues = {
   password: string | undefined;
@@ -72,7 +73,7 @@ const Welcome: React.FC = () => {
     const password_confirmation = data.password_confirmation;
 
     // Send phone request.
-    const response = await fetch("http://adelantto-server.docksal/api/user/update-password", {
+    const response = await fetch(`${API_SERVER_URL}/api/user/update-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

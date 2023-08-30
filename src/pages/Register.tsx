@@ -7,6 +7,7 @@ import Modal from "../components/Modal/Modal";
 import Loader from "../components/Loader/Loader";
 
 import registerAnimation from "../assets/animations/register.json";
+import { API_SERVER_URL } from "../config";
 
 type FormValues = {
   phone: string | undefined;
@@ -31,7 +32,7 @@ const Register: React.FC = () => {
         message: "The cellphone number is required.",
       };
     } else if (
-      !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{3}$/g.test(values.phone)
+      !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g.test(values.phone)
     ) {
       errors.phone = {
         type: "pattern",
@@ -57,17 +58,14 @@ const Register: React.FC = () => {
     const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
     // Send phone request.
-    const response = await fetch(
-      "http://adelantto-server.docksal/api/send-verification-code",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ phone }),
-      }
-    );
+    const response = await fetch(`${API_SERVER_URL}/api/send-verification-code`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ phone }),
+    });
 
     const json = await response.json();
 
@@ -113,7 +111,7 @@ const Register: React.FC = () => {
                     className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format="+51 (###) ###-###"
+                    format="+57 (###) ###-####"
                     allowEmptyFormatting
                     mask="_"
                     required
