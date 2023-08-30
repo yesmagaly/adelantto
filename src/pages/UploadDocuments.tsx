@@ -6,7 +6,7 @@ const UploadDocuments: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading-blue">
+        <div className="heading heading--blue">
           <div className="heading__pager text-right">Paso 3 de 3</div>
           <h4 className="text-xl">
             A continuación <br />
