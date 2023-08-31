@@ -12,49 +12,57 @@ const Outlay: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
-          <h3>
+        <div className="heading heading--blue heading--center">
+          <h3 className="text-[30px] mb-7">
             <strong>Desembolso</strong>
           </h3>
           <p>Conoce el desglose de tu servicio</p>
         </div>
-        <IonList>
-          <IonItem>
-            <IonLabel>
-              <p>
-                <strong>términos</strong> de desembolso
-              </p>
-            </IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>
-              <p>
-                <strong>Tiempos </strong> interbancarios
-              </p>
-            </IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>
-              <p>
-                <strong>Claridad </strong> en comisiones
-              </p>
-            </IonLabel>
-          </IonItem>
-          <IonItem>
-            <IonLabel>
-              <p>
-                <strong>Envío de notificación </strong> con <br /> tracking
-              </p>
-            </IonLabel>
-          </IonItem>
-        </IonList>
-        <button
-          className="button-primary mb-16"
-          onClick={() => router.push("")}
-        >
-          Siguiente
-        </button>
-        <div className="border-bottom" />
+        <div className="content">
+          <div className="mb-7">
+            <IonList>
+              <IonItem>
+                <IonLabel>
+                  <p>
+                    <strong>términos</strong> de desembolso
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>
+                  <p>
+                    <strong>Tiempos </strong> interbancarios
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>
+                  <p>
+                    <strong>Claridad </strong> en comisiones
+                  </p>
+                </IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>
+                  <p>
+                    <strong>Envío de notificación </strong> con <br /> tracking
+                  </p>
+                </IonLabel>
+              </IonItem>
+            </IonList>
+          </div>
+
+          <div>
+            <button
+              className="button-primary mb-16"
+              onClick={() => router.push("")}
+            >
+              Siguiente
+            </button>
+          </div>
+
+          <div className="border-bottom" />
+        </div>
 
         <div>
           <h3>
