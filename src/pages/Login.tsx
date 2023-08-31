@@ -11,7 +11,7 @@ import { useAuth } from "./auth/authContext";
 interface LoginProps
   extends RouteComponentProps<{
     phone: string;
-  }> { }
+  }> {}
 
 type FormValues = {
   email: number;
@@ -64,7 +64,9 @@ const Login: React.FC<LoginProps> = () => {
               {...register("password")}
             />
 
-            <button className="block button-primary">Iniciar sesión</button>
+            <button className="block button button-primary">
+              Iniciar sesión
+            </button>
           </form>
 
           <p className="leading-5 mb-4">
