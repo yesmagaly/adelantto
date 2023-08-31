@@ -38,26 +38,26 @@ const PreOffer: React.FC = () => {
                 Costo de nuestro servicio y seguro"
               />
             </div>
-          </form>
-        </div>
-        <div className="content">
-          <p className="help-text mb-4">
-            ¿Te interesa ver el reumen para otros meses?
-          </p>
 
-          <form className="form">
-            <input type="text" placeholder="6" />
-          </form>
+            <div>
+              <p className="help-text mb-4">
+                ¿Te interesa ver el reumen para otros meses?
+              </p>
 
-          <IonButton>
-            Iniciar proceso de Validación <br />
-            de documentos
-          </IonButton>
-          <p className="heading__paper">
-            Al aceptar estas aprovando el uso de tus datos <br />
-            para validaciones de identificación.{" "}
-            <a className="underline">Ver detalle</a>
-          </p>
+              <input type="text" placeholder="6" />
+
+              <button className="button button-secondary mb-7">
+                Iniciar proceso de Validación <br />
+                de documentos
+              </button>
+
+              <p className="text-xs leading-4">
+                Al aceptar estas aprovando el uso de tus datos <br />
+                para validaciones de identificación.{" "}
+                <a className="underline">Ver detalle</a>
+              </p>
+            </div>
+          </form>
         </div>
       </IonContent>
     </IonPage>
