@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { IonApp, IonRouterOutlet, setupIonicReact, IonLoading, IonSplitPane } from "@ionic/react";
+import {
+  IonApp,
+  IonRouterOutlet,
+  setupIonicReact,
+  IonLoading,
+  IonSplitPane,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 import Home from "./pages/Home";
@@ -67,11 +73,7 @@ const App: React.FC = () => {
   }, [authInfo, initialize]);
 
   if (!authInfo || !authInfo.initialized) {
-    return (
-      <IonApp>
-        {/* <IonLoading isOpen={true} /> */}
-      </IonApp>
-    );
+    return <IonApp>{/* <IonLoading isOpen={true} /> */}</IonApp>;
   } else {
     return (
       <IonApp>
@@ -79,7 +81,11 @@ const App: React.FC = () => {
           {authInfo?.loggedIn === true ? (
             <IonReactRouter>
               <Route exact path="/welcome" component={Welcome} />
-              <Route exact path="/advance-immediately" component={AdvanceImmediately} />
+              <Route
+                exact
+                path="/advance-immediately"
+                component={AdvanceImmediately}
+              />
               <Route exact path="/create-profile" component={CreateProfile} />
               <Route exact path="/">
                 <Redirect to="/welcome" />
@@ -90,8 +96,79 @@ const App: React.FC = () => {
               <Route path="/create-account" component={Register} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
-              <Route path="/verification-code/:phone" component={VerificationCode} />
-              <Route path="/verification-email/:phone" component={VerificationEmail} />
+              <Route
+                path="/verification-code/:phone"
+                component={VerificationCode}
+              />
+              <Route
+                path="/verification-email/:phone"
+                component={VerificationEmail}
+              />
+
+              <Route exact path="/upload-documents">
+                <UploadDocuments />
+              </Route>
+              <Route exact path="/contract-data">
+                <ContractData />
+              </Route>
+              <Route exact path="/rent-advance">
+                <RentAdvance />
+              </Route>
+              <Route exact path="/passport">
+                <Passport />
+              </Route>
+              <Route exact path="/terms-and-conditions">
+                <TermsAndConditions />
+              </Route>
+              <Route exact path="/bug">
+                <Bug />
+              </Route>
+              <Route exact path="/search">
+                <Search />
+              </Route>
+              <Route exact path="/pre-offer">
+                <PreOffer />
+              </Route>
+              <Route exact path="/biometric-validation">
+                <BiometricValidation />
+              </Route>
+              <Route exact path="/data-validation">
+                <DataValidation />
+              </Route>
+              <Route exact path="/validation-error">
+                <ValidationError />
+              </Route>
+              <Route exact path="/correct-data">
+                <CorrectData />
+              </Route>
+              <Route exact path="/withdrawals">
+                <Withdrawals />
+              </Route>
+              <Route exact path="/signature">
+                <Signature />
+              </Route>
+              <Route exact path="/outlay">
+                <Outlay />
+              </Route>
+              <Route exact path="/upload-pictures">
+                <UploadPictures />
+              </Route>
+              <Route exact path="/confirmation-data">
+                <ConfirmationData />
+              </Route>
+              <Route exact path="/correct-deposit">
+                <CorrectDeposit />
+              </Route>
+              <Route exact path="/full-advance">
+                <FullAdvance />
+              </Route>
+              <Route exact path="/summary">
+                <Summary />
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+
               <Route exact path="/">
                 <Redirect to="/login" />
               </Route>
