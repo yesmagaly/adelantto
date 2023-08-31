@@ -68,7 +68,7 @@ const UploadDocuments: React.FC = () => {
           </FileInputItem>
         </div>
 
-        <div className="text-center">
+        <div className="text-center mb-7">
           <p className="font-semibold text-[10px] leading-3 mb-4">
             Los documentos deberán ser escaneados en alta resolución <br /> y en
             formato PDF, de lo contrario declinaremos el proceso.
@@ -77,6 +77,7 @@ const UploadDocuments: React.FC = () => {
             Siguiente
           </button>
         </div>
+        <div className="border-bottom border-primary-blue" />
       </IonContent>
     </IonPage>
   );
