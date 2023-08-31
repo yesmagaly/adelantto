@@ -6,8 +6,16 @@
 
 /** other custom global styles can go here */
 
+.button {
+  @apply font-semibold px-7 py-3 rounded text-white leading-5; 
+}
+
 .button-primary {
-  @apply font-semibold bg-primary-green px-7 py-3 rounded text-white;
+  @apply bg-primary-green;
+}
+
+.button-secondary {
+  @apply bg-primary-blue-light;
 }
 
 .heading {
