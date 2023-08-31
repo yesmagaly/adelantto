@@ -1,37 +1,29 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonAvatar,
-  IonCheckbox,
-  IonCol,
-  IonGrid,
-  IonRow,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
 const Signature: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>¡Firma y recibe!</IonCardTitle>
-          </IonCardHeader>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
-          />
-        </IonCard>
-        <IonGrid>
-          <IonRow>
-            <IonCol>Firma aquí</IonCol>
-          </IonRow>
-        </IonGrid>
-        <IonButton>Firmar</IonButton>
+        <div className="content">
+          <form className="form">
+            <div className="mb-7">
+              <h3 className="font-bold text-4xl text-center">
+                ¡Firma y recibe!
+              </h3>
+            </div>
+            <div className=" mb-7">
+              <input type="text" placeholder="Firmar aquí" />
+            </div>
+            <button
+              className="button-primary mb-16"
+              onClick={() => router.push("")}
+            >
+              Firmar
+            </button>
+            <div className="border-bottom" />
+          </form>
+        </div>
       </IonContent>
     </IonPage>
   );
