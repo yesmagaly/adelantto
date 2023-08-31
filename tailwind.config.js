@@ -12,6 +12,7 @@ export default {
         primary: {
           green: "#5BC79B",
           blue: "#0D1B3B",
+          "blue-light": "#1977F3",
         },
       },
     },
