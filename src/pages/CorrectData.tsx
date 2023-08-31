@@ -13,12 +13,12 @@ const CorrectData: React.FC = () => {
             Cuéntanos dónde quieres tu dinero
           </p>
           <button
-            className="button-primary mb-16"
+            className=" button button-primary mb-10"
             onClick={() => router.push("")}
           >
             Datos bancarios
           </button>
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>
