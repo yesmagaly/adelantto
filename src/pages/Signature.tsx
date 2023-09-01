@@ -8,7 +8,7 @@ const Signature: React.FC = () => {
         <div className="content">
           <form className="form">
             <div className="mb-7">
-              <h3 className="font-bold text-4xl text-center">
+              <h3 className="font-bold text-2xl text-center">
                 ¡Firma y recibe!
               </h3>
             </div>
