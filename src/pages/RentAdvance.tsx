@@ -5,7 +5,7 @@ const RentAdvance: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue heading--center">
+        <div className="heading heading--blue flex flex-col justify-center">
           <h3 className="text-[30px]">
             Selecciona el monto <br />{" "}
             <strong>
@@ -35,13 +35,13 @@ const RentAdvance: React.FC = () => {
             </div>
 
             <button
-              className="button-primary mb-18"
+              className="button button-secondary mb-18 mb-7"
               onClick={() => router.push("/verification-code")}
             >
               Siguiente
             </button>
 
-            <div className="border-bottom" />
+            <div className="border-primary-blue border-bottom" />
           </form>
         </div>
       </IonContent>
