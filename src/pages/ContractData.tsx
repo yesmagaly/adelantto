@@ -29,19 +29,19 @@ const ContractData: React.FC = () => {
               <input type="text" placeholder="Código postal de tu inmueble" />
             </div>
 
-            <div>
+            <div className="mb-7">
               <strong>¿Cómo recibes el pago de tu renta?</strong>
               <div>
                 <IonCheckbox labelPlacement="end">Efectivo</IonCheckbox>
                 <IonCheckbox labelPlacement="end">Transparencia</IonCheckbox>
               </div>
-              <button
-                className="button-primary mb-16"
-                onClick={() => router.push("/verification-email")}
-              >
-                Siguiente
-              </button>
             </div>
+            <button
+              className="button button-primary mb-16"
+              onClick={() => router.push("/verification-email")}
+            >
+              Siguiente
+            </button>
           </form>
         </div>
       </IonContent>
