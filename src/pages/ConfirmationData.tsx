@@ -13,7 +13,7 @@ const ConfirmationData: React.FC = () => {
             Reporte de Crédito
           </h4>
         </div>
-        <div className="mb-7">
+        <div className="mb-7 px-9">
           <p className="mb-7">
             Autorizo expresamente a Adelantto, para que lleve a cabo
             investigaciones sobre el comportamiento crediticio de mi persona,
