@@ -28,14 +28,14 @@ const Withdrawals: React.FC = () => {
 
           <div className="mb-7">
             <button
-              className="button-primary mb-16"
+              className="button button-primary mb-16"
               onClick={() => router.push("/verification-email")}
             >
               Siguiente
             </button>
           </div>
 
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
 
         <div>
