@@ -16,12 +16,12 @@ const ValidationError: React.FC = () => {
             validación
           </p>
           <button
-            className="button-primary mb-16"
+            className="button button-primary mb-16"
             onClick={() => router.push("")}
           >
             Finalizar
           </button>
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>
