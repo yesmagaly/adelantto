@@ -1,7 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 
-import wrongCodeAnimation from "../assets/animations/wrong-code.json"
+import wrongCodeAnimation from "../assets/animations/wrong-code.json";
 
 const Bug: React.FC = () => {
   const router = useIonRouter();
@@ -23,16 +23,18 @@ const Bug: React.FC = () => {
         </div>
 
         <div className="content">
-          <p className="help-text border-y border-solid border-primary-blue py-6 mb-28">El código que ingresaste es incorrecto, inténtalo nuevamente.</p>
+          <p className="help-text border-y border-solid border-primary-blue py-6 mb-28">
+            El código que ingresaste es incorrecto, inténtalo nuevamente.
+          </p>
 
           <button
-            className="button-primary mb-16"
+            className="button button-primary mb-16"
             onClick={() => router.push("/register")}
           >
             Enviar código
           </button>
 
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>
