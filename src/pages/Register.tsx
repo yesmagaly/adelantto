@@ -58,14 +58,17 @@ const Register: React.FC = () => {
     const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
     // Send phone request.
-    const response = await fetch(`${API_SERVER_URL}/api/send-verification-code`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ phone }),
-    });
+    const response = await fetch(
+      `${API_SERVER_URL}/api/send-verification-code`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ phone }),
+      }
+    );
 
     const json = await response.json();
 
@@ -126,7 +129,7 @@ const Register: React.FC = () => {
               validación de tu identidad.
             </p>
 
-            <button className="button-primary">Enviar código</button>
+            <button className="button button-primary">Enviar código</button>
           </form>
 
           <div className="border-bottom border-primary-blue" />
