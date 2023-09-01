@@ -13,20 +13,22 @@ const BiometricValidation: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="content">
+        <div>
           <div>
-            <h2 className="font-bold text-3xl mb-2">
+            <h2 className="heading__title text-center pt-20">
               Validación
               <strong>
                 <br />
                 Biométrica
               </strong>
             </h2>
-            <p className="text-sm leading-4">¡Sonrie! Queremos conocerte</p>
+            <p className="text-sm leading-4 text-center">
+              ¡Sonrie! Queremos conocerte
+            </p>
           </div>
 
-          <div>
-            <IonAvatar>
+          <div className="content">
+            <IonAvatar className="mb-16">
               <img
                 alt="Silhouette of a person's head"
                 src="https://ionicframework.com/docs/img/demos/avatar.svg"
@@ -34,24 +36,24 @@ const BiometricValidation: React.FC = () => {
             </IonAvatar>
 
             <button
-              className="button-primary mb-16"
+              className="button button-primary mb-16"
               onClick={() => router.push("/verification-email")}
             >
               Capturar foto
             </button>
 
-            <div className="border-bottom" />
+            <div className="border-bottom border-primary-blue" />
           </div>
         </div>
 
-        <div>
+        <div className="content">
           <IonIcon icon={closeCircle}></IonIcon>
-          <h5>
+          <h5 className="mb-7">
             Lo sentimos, tu validación <br />
             <strong>no ha sido exitosa.</strong>
           </h5>
           <button
-            className="button-primary mb-16"
+            className="button button-primary mb-16"
             onClick={() => router.push("/verification-email")}
           >
             Tomar foto
