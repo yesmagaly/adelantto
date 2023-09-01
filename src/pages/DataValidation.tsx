@@ -27,7 +27,7 @@ const DataValidation: React.FC = () => {
         <div className="heading--center">
           <form className="form">
             <div className="mb-7">
-              <p className="text-sm leading-4">
+              <p className="text-center text-sm leading-4">
                 Por último validaremos los datos de tu propiedad. Te
                 <br />
                 enviaremos un correo electrónico en las próximas <br />
@@ -45,15 +45,17 @@ const DataValidation: React.FC = () => {
           </div>
 
           <div className="mb-7">
-            <strong>¡Hasta pronto!</strong>
+            <h4 className="font-bold text-xl">
+              <strong>¡Hasta pronto!</strong>
+            </h4>
           </div>
           <button
-            className="button-primary mb-16"
+            className="button button-primary mb-16"
             onClick={() => router.push("")}
           >
             Finalizar
           </button>
-          <div className="border-bottom" />
+          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>
