@@ -16,12 +16,12 @@ const Signature: React.FC = () => {
               <input type="text" placeholder="Firmar aquí" />
             </div>
             <button
-              className="button-primary mb-16"
+              className="button button-primary mb-16"
               onClick={() => router.push("")}
             >
               Firmar
             </button>
-            <div className="border-bottom" />
+            <div className="border-bottom border-primary-blue" />
           </form>
         </div>
       </IonContent>
