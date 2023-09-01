@@ -13,11 +13,12 @@ const PreOffer: React.FC = () => {
           <form className="form">
             <div className="mb-7">
               <p>
-                Seleccionaste 6 meses,
                 <strong>
-                  <br /> a continuación te presentamos <br /> el resumen de
-                  nuestra oferta.
+                  Seleccionaste 6 meses,
+                  <br />
                 </strong>
+                a continuación te presentamos <br /> el resumen de nuestra
+                oferta.
               </p>
             </div>
 
