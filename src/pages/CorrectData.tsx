@@ -5,7 +5,7 @@ const CorrectData: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
+        <div className="py-20">
           <h3 className="font-bold text-4xl text-center">¡Felicitaciones!</h3>
         </div>
         <div className="content">
@@ -13,7 +13,7 @@ const CorrectData: React.FC = () => {
             Cuéntanos dónde quieres tu dinero
           </p>
           <button
-            className=" button button-primary mb-10"
+            className=" button button-secondary mb-10"
             onClick={() => router.push("")}
           >
             Datos bancarios
