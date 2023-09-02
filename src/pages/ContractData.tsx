@@ -5,29 +5,32 @@ const ContractData: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue heading--center">
+        <div className="heading heading--blue heading--center mb-7">
           <h1 className="text-[40px]">
             Datos de contrato <strong>de arrendamiento</strong>
           </h1>
         </div>
 
-        <div className="content">
+        <div>
           <form className="form">
-            <div className="mb-7">
-              <input type="text" placeholder="valor de tu renta mensual" />
+            <input type="text" placeholder="valor de tu renta mensual" />
+            <div className="border-full" />
 
-              <input
-                type="text"
-                placeholder="Fecha de inicio del contrato de arrendamiento"
-              />
+            <input
+              type="text"
+              placeholder="Fecha de inicio del contrato de arrendamiento"
+            />
+            <div className="border-full" />
 
-              <input
-                type="text"
-                placeholder="Fecha de fin del contrato de arrendamiento"
-              />
+            <input
+              type="text"
+              placeholder="Fecha de fin del contrato de arrendamiento"
+            />
+            <div className="border-full" />
 
-              <input type="text" placeholder="Código postal de tu inmueble" />
-            </div>
+            <input type="text" placeholder="Código postal de tu inmueble" />
+
+            <div className="border-full" />
 
             <div className="mb-7">
               <strong>¿Cómo recibes el pago de tu renta?</strong>
