@@ -13,34 +13,50 @@ const RentAdvance: React.FC = () => {
             </strong>
           </h3>
         </div>
-        <div className="content">
-          <form>
-            <div className="mb-7">
-              <button>$ 5,000.00</button>{" "}
-            </div>
-            <div className="mb-7">
-              <button>$ 10,000.00</button>{" "}
-            </div>
-            <div className="mb-7">
-              <button>$ 15,000.00</button>{" "}
-            </div>
-            <div className="mb-7">
-              <button>$ 20,000.00</button>{" "}
-            </div>
-            <div className="mb-7">
-              <button>$ 25,000.00</button>{" "}
-            </div>
-            <div className="mb-7">
-              <button>$ 30,000.00</button>{" "}
-            </div>
-
+        <div className="px-16 py-8">
+          <form className="form">
+            <button
+              type="submit"
+              className="w-full text-3xl font-medium pattern-format"
+            >
+              $ 5,000.00
+            </button>
+            <button
+              type="submit"
+              className="w-full text-3xl font-medium pattern-format"
+            >
+              $ 10,000.00
+            </button>
+            <button
+              type="submit"
+              className="w-full text-3xl font-medium pattern-format"
+            >
+              $ 15,000.00
+            </button>
+            <button
+              type="submit"
+              className="w-full text-3xl font-medium pattern-format"
+            >
+              $ 20,000.00
+            </button>
+            <button
+              type="submit"
+              className="w-full text-3xl font-medium pattern-format"
+            >
+              $ 25,000.00
+            </button>
+            <button
+              type="submit"
+              className="w-full text-3xl font-medium pattern-format"
+            >
+              $ 30,000.00
+            </button>
             <button
               className="button button-secondary mb-18 mb-7"
               onClick={() => router.push("/verification-code")}
             >
               Siguiente
             </button>
-
             <div className="border-primary-blue border-bottom" />
           </form>
         </div>
