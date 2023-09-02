@@ -103,3 +103,7 @@
 .border-bottom {
   @apply border-[3px] border-b w-[138px] my-0 mx-auto;
 }
+
+.border-full {
+  @apply border-b border-solid border-gray-400 w-full my-5;
+}
