@@ -16,14 +16,17 @@ const FullAdvance: React.FC = () => {
           <p className="text-2xl font-bold">$150,000.00</p>
         </div>
         <h6 className=" mb-7">Pagos</h6>
-        <div className="content">
+        <div className="text-center">
           <div>
             <h4 className="font-bold text-lx leading-5">Adelantto 00001</h4>
             <p className="text-[12px]">Calle 17 Sur 13-22</p>
+            <div className="border-full" />
             <h4 className="font-bold text-lx leading-5">Adelantto 00002</h4>
             <p className="text-[12px]">Calle 17 Sur 13-22</p>
+            <div className="border-full" />
             <h4 className="font-bold text-lx leading-5">Adelantto 00003</h4>
             <p className="text-[12px]">Calle 17 Sur 13-22</p>
+            <div className="border-full" />
           </div>
         </div>
       </IonContent>
