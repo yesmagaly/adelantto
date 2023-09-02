@@ -31,12 +31,15 @@ const Summary: React.FC = () => {
           <div>
             <h6 className="font-bold text-[15px] leading-3">MES 1 - PAGADO</h6>
             <p className="text-[12px] mb-4">26-04-2023</p>
+            <div className="border-full" />
             <h6 className="font-bold text-[15px] leading-3">MES 2 - PAGADO</h6>
             <p className="text-[12px] mb-4">26-05-2023</p>
+            <div className="border-full" />
             <h6 className="font-bold text-[15px] leading-3">
               MES 3 - PENDIENTE POR PAGAR
             </h6>
             <p className="text-[12px] mb-4">26-06-2023</p>
+            <div className="border-full" />
           </div>
         </div>
 
