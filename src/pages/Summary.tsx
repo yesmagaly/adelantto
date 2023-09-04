@@ -8,7 +8,8 @@ const Summary: React.FC = () => {
         <div className="py-10">
           <div className="heading heading--blue flex flex-col justify-center">
             <h5 className="font-bold text-lx leading-3"> Adelantto 00001</h5>
-            <p className="text-[15px] mb-7">Calle 17 Sur 22</p>
+            <p className="text-[15px] mb-2">Calle 17 Sur 22</p>
+            <div className="border-full" />
             <div>
               <h6 className="mb-4">CUOTA A PAGAR</h6>
               <p className="font-bold text-lx leading-3 mb-4">$ 10.000</p>
@@ -28,19 +29,56 @@ const Summary: React.FC = () => {
             <button>MES 3</button>
             <button>MES 2</button>
           </div>
-          <div>
-            <h6 className="font-bold text-[15px] leading-3">MES 1 - PAGADO</h6>
-            <p className="text-[12px] mb-4">26-04-2023</p>
-            <div className="border-full" />
-            <h6 className="font-bold text-[15px] leading-3">MES 2 - PAGADO</h6>
-            <p className="text-[12px] mb-4">26-05-2023</p>
-            <div className="border-full" />
-            <h6 className="font-bold text-[15px] leading-3">
-              MES 3 - PENDIENTE POR PAGAR
-            </h6>
-            <p className="text-[12px] mb-4">26-06-2023</p>
-            <div className="border-full" />
-          </div>
+          <form className="flex flex-row space-x-44">
+            <div>
+              <h6 className="font-bold text-[15px] leading-3">
+                MES 1 - PAGADO
+              </h6>
+              <p className="text-[12px] mb-4">26-04-2023</p>
+            </div>
+            <button
+              className="font-regular px-2 py-1 rounded text-white leading-5 button-secondary mb-10"
+              onClick={() => router.push("")}
+            >
+              Ver
+            </button>
+          </form>
+
+          <div className="border-full" />
+          <form className="flex flex-row space-x-44">
+            <div>
+              <h6 className="font-bold text-[15px] leading-3">
+                MES 2 - PAGADO
+              </h6>
+              <p className="text-[12px] mb-4">26-05-2023</p>
+            </div>
+
+            <button
+              className="font-regular px-2 py-1 rounded text-white leading-5 button-secondary mb-10"
+              onClick={() => router.push("")}
+            >
+              Ver
+            </button>
+          </form>
+
+          <div className="border-full" />
+          <form className="flex flex-row space-x-16">
+            <div>
+              <h6 className="font-bold text-[15px] leading-3">
+                MES 3 - PENDIENTE POR PAGAR
+              </h6>
+              <p className="text-[12px] mb-4">26-06-2023</p>
+            </div>
+
+            <button
+              className=" font-regular px-2 py-1 rounded text-white leading-5 button-secondary mb-10"
+              onClick={() => router.push("")}
+            >
+              Ver
+            </button>
+          </form>
+
+          <div className="border-full" />
         </div>
 
         <div>
