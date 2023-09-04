@@ -34,7 +34,7 @@ const ConfirmationData: React.FC = () => {
             Adelantto y sus servicios.
           </p>
         </div>
-        <div className="text-center mb-7">
+        <div className="font-bold text-center mb-7">
           <IonCheckbox labelPlacement="end">
             Acepto términos y condiciones del servicio
           </IonCheckbox>
