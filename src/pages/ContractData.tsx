@@ -24,7 +24,7 @@ const ContractData: React.FC = () => {
 
             <input
               type="text"
-              placeholder="Fecha de fin del contrato de arrendamiento"
+              placeholder="Fecha de fin del contrato <br/> de arrendamiento"
             />
             <div className="border-full" />
 
