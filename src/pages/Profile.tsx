@@ -40,13 +40,18 @@ const Profile: React.FC = () => {
           <div>
             <h6 className="font-bold text-xs leading-3 mb-4">Adelanto</h6>
             <p className="text-[16px] mb-4">Notificaciones</p>
+            <div className="border-full" />
             <p className="text-[16px] mb-4">Mis datos</p>
+            <div className="border-full" />
           </div>
           <div>
             <h6 className="font-bold text-xs leading-3 mb-4">Ayuda</h6>
             <p className="text-[16px] mb-4">Reportar un problema</p>
+            <div className="border-full" />
             <p className="text-[16px] mb-4">Preguntas frecuentes</p>
+            <div className="border-full" />
             <p className="text-[16px] mb-4">Términos y condiciones</p>
+            <div className="border-full" />
           </div>
         </div>
       </IonContent>
