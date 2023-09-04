@@ -40,9 +40,9 @@ const PreOffer: React.FC = () => {
               />
             </div>
 
-            <div>
+            <div className="content">
               <p className="help-text mb-4">
-                ¿Te interesa ver el reumen para otros meses?
+                ¿Te interesa ver el reumen <br /> para otros meses?
               </p>
 
               <input type="text" placeholder="6" />
