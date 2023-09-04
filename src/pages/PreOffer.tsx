@@ -11,7 +11,7 @@ const PreOffer: React.FC = () => {
         </div>
         <div className="content">
           <form className="form">
-            <div className="mb-7">
+            <div className="mb-7 leading-5">
               <p>
                 <strong>
                   Seleccionaste 6 meses,
