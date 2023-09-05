@@ -1,12 +1,7 @@
-import {
-  IonContent,
-  IonPage,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCheckbox,
-  useIonRouter,
-} from "@ionic/react";
+import { IonContent, IonPage, IonCheckbox, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player";
+
+import searchHomeAnimation from "../assets/animations/search-home.json";
 
 const DataValidation: React.FC = () => {
   const router = useIonRouter();
@@ -14,11 +9,13 @@ const DataValidation: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="content">
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          <Lottie
+            animationData={searchHomeAnimation}
+            style={{ width: 251, height: 251 }}
+            loop
+            play
           />
-          <h3 className="font-bold text-xl">¡Ya casi!</h3>
+          <h3 className="font-bold text-2xl">¡Ya casi!</h3>
           <div className="border-full" />
           <p className="text-center text-sm leading-4">
             Por último validaremos los datos de tu propiedad. Te
