@@ -1,4 +1,7 @@
 import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player";
+
+import walletAnimation from "../assets/animations/wallet.json";
 
 const CorrectData: React.FC = () => {
   const router = useIonRouter();
@@ -6,6 +9,12 @@ const CorrectData: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading-light-green flex p-4 flex-col items-center text-center mb-10 py-20">
+          <Lottie
+            animationData={walletAnimation}
+            style={{ width: 251, height: 251 }}
+            loop
+            play
+          />
           <h3 className="font-bold text-4xl text-center">¡Felicitaciones!</h3>
         </div>
         <div className="content">
