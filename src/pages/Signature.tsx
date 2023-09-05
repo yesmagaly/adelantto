@@ -1,4 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player";
+
+import singAnimation from "../assets/animations/sing.json";
 
 const Signature: React.FC = () => {
   const router = useIonRouter();
@@ -7,12 +10,14 @@ const Signature: React.FC = () => {
       <IonContent fullscreen>
         <div className="content">
           <form className="form">
-            <div className="mb-7">
-              <h3 className="font-bold text-2xl text-center">
-                ¡Firma y recibe!
-              </h3>
+            <div className="mb-5">
+              <h3 className="font-bold text-4xl">¡Firma y recibe!</h3>
+              <Lottie
+                animationData={singAnimation}
+                style={{ width: 400, height: 400 }}
+              />
             </div>
-            <div className=" mb-7">
+            <div className=" mb-5">
               <input type="text" placeholder="Firmar aquí" />
             </div>
             <button
