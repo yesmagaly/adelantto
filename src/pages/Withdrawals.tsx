@@ -1,4 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player";
+
+import walletAnimation from "../assets/animations/wallet.json";
 
 const Withdrawals: React.FC = () => {
   const router = useIonRouter();
@@ -12,14 +15,20 @@ const Withdrawals: React.FC = () => {
           </h3>
         </div>
         <div className="content">
+          <Lottie
+            animationData={walletAnimation}
+            style={{ width: 251, height: 251 }}
+            loop
+            play
+          />
           <form className="form mb-7">
             <input
               type="text"
               placeholder="Subir carátula de tu estado de cuenta"
             />
           </form>
-          <div className="mb-7">
-            <a className="underline">Términos interbancarios</a>
+          <div className="mb-16">
+            <a className="underline leading-10">Términos interbancarios</a>
             <p>
               A continuación encontrarás el contrato <br /> relacionado a tu
               solicitud.
