@@ -42,7 +42,7 @@ const Profile: React.FC = () => {
             <h6 className="font-bold text-xs leading-3 mb-4">Adelanto</h6>
 
             <p className="text-[16px] mb-4">
-              <Icon name="bell" />
+              <Icon name="bell" className="mr-3 text-xs bg-black" />
               Notificaciones
             </p>
             <div className="border-full" />
@@ -54,11 +54,20 @@ const Profile: React.FC = () => {
           </div>
           <div>
             <h6 className="font-bold text-xs leading-3 mb-4">Ayuda</h6>
-            <p className="text-[16px] mb-4">Reportar un problema</p>
+            <p className="text-[16px] mb-4">
+              <Icon name="alert" className="mr-3 text-xs bg-black" />
+              Reportar un problema
+            </p>
             <div className="border-full" />
-            <p className="text-[16px] mb-4">Preguntas frecuentes</p>
+            <p className="text-[16px] mb-4">
+              <Icon name="user" className="mr-3 text-xs bg-black" />
+              Preguntas frecuentes
+            </p>
             <div className="border-full" />
-            <p className="text-[16px] mb-4">Términos y condiciones</p>
+            <p className="text-[16px] mb-4">
+              <Icon name="queries" className="mr-3 text-xs bg-black" />
+              Términos y condiciones
+            </p>
             <div className="border-full" />
           </div>
         </div>
