@@ -1,4 +1,5 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Icon from "../components/Icon/Icon";
 
 const FullAdvance: React.FC = () => {
   const router = useIonRouter();
@@ -71,6 +72,14 @@ const FullAdvance: React.FC = () => {
             </button>
           </form>
           <div className="border-full" />
+        </div>
+
+        <div className="px-10 py-36 ">
+          <Icon name="home" className="mr-6 text-6xl bg-black " />
+          <Icon name="world" className="mr-6 text-6xl bg-black" />
+          <Icon name="location" className="mr-6 text-6xl bg-black" />
+          <Icon name="search" className="mr-6 text-6xl bg-black" />
+          <div className="border-bottom border-primary-blue px-6" />
         </div>
       </IonContent>
     </IonPage>
