@@ -1,4 +1,5 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Icon from "../components/Icon/Icon";
 
 const Summary: React.FC = () => {
   const router = useIonRouter();
@@ -81,6 +82,13 @@ const Summary: React.FC = () => {
           <div className="border-full" />
         </div>
 
+        <div className="px-10 py-6">
+          <Icon name="home" className="mr-6 text-6xl bg-black " />
+          <Icon name="world" className="mr-6 text-6xl bg-black" />
+          <Icon name="location" className="mr-6 text-6xl bg-black" />
+          <Icon name="search" className="mr-6 text-6xl bg-black" />
+        </div>
+        <div className="border-bottom border-primary-blue" />
         <div>
           <h6>CUOTA A PAGAR</h6>
           <p>$ 10.000</p>
