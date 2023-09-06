@@ -6,6 +6,7 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { ellipse } from "ionicons/icons";
+import Icon from "../components/Icon/Icon";
 
 const Profile: React.FC = () => {
   const router = useIonRouter();
@@ -39,9 +40,16 @@ const Profile: React.FC = () => {
         <div className="px-10">
           <div>
             <h6 className="font-bold text-xs leading-3 mb-4">Adelanto</h6>
-            <p className="text-[16px] mb-4">Notificaciones</p>
+
+            <p className="text-[16px] mb-4">
+              <Icon name="bell" />
+              Notificaciones
+            </p>
             <div className="border-full" />
-            <p className="text-[16px] mb-4">Mis datos</p>
+            <p className="text-[16px] mb-4">
+              <Icon name="user" className="mr-3 text-xs bg-black" />
+              Mis datos
+            </p>
             <div className="border-full" />
           </div>
           <div>
