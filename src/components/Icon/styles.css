@@ -23,3 +23,19 @@
 .icon-queries {
     mask-image: url(../../assets/icons/queries.svg);
 }
+
+.icon-home {
+    mask-image: url(../../assets/icons/home.svg);
+}
+
+.icon-world {
+    mask-image: url(../../assets/icons/world.svg);
+}
+
+.icon-location {
+    mask-image: url(../../assets/icons/location.svg);
+}
+
+.icon-search {
+    mask-image: url(../../assets/icons/search.svg);
+}

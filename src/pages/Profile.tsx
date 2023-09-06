@@ -71,6 +71,13 @@ const Profile: React.FC = () => {
             <div className="border-full" />
           </div>
         </div>
+        <div className="px-10 py-6">
+          <Icon name="home" className="mr-6 text-6xl bg-black " />
+          <Icon name="world" className="mr-6 text-6xl bg-black" />
+          <Icon name="location" className="mr-6 text-6xl bg-black" />
+          <Icon name="search" className="mr-6 text-6xl bg-black" />
+        </div>
+        <div className="border-bottom border-primary-blue" />
       </IonContent>
     </IonPage>
   );
