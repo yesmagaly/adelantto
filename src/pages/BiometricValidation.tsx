@@ -5,7 +5,10 @@ import {
   useIonRouter,
   IonIcon,
 } from "@ionic/react";
+import Lottie from "react-lottie-player";
 import { close, closeCircle, pin } from "ionicons/icons";
+
+import photographyAnimation from "../assets/animations/photography.json";
 
 const BiometricValidation: React.FC = () => {
   const router = useIonRouter();
@@ -14,30 +17,30 @@ const BiometricValidation: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div>
-          <div>
-            <h2 className="heading__title text-center pt-20">
+          <div className="content">
+            <h2 className="heading__title pt-20">
               Validación
               <strong>
                 <br />
                 Biométrica
               </strong>
             </h2>
-            <p className="text-sm leading-4 text-center">
+            <p className="text-sm leading-4 mb-16">
               ¡Sonrie! Queremos conocerte
             </p>
+
+            <Lottie
+              animationData={photographyAnimation}
+              style={{ width: 320, height: 320 }}
+              loop
+              play
+            />
           </div>
 
-          <div className="content">
-            <IonAvatar className="mb-16">
-              <img
-                alt="Silhouette of a person's head"
-                src="https://ionicframework.com/docs/img/demos/avatar.svg"
-              />
-            </IonAvatar>
-
+          <div className="text-center py-24">
             <button
-              className="button button-primary mb-16"
-              onClick={() => router.push("/verification-email")}
+              className="button button-primary mb-14"
+              onClick={() => router.push("")}
             >
               Capturar foto
             </button>
