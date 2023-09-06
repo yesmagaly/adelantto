@@ -1,55 +1,39 @@
-import {
-  IonContent,
-  IonPage,
-  IonList,
-  IonItem,
-  IonLabel,
-  useIonRouter,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Icon from "../components/Icon/Icon";
 
 const Outlay: React.FC = () => {
   const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue heading--center">
+        <div className="heading heading--blue heading--center mb-10">
           <h3 className="text-[30px] mb-7">
             <strong>Desembolso</strong>
           </h3>
           <p>Conoce el desglose de tu servicio</p>
         </div>
         <div className="content">
-          <div className="mb-7">
-            <IonList>
-              <IonItem>
-                <IonLabel>
-                  <p>
-                    <strong>términos</strong> de desembolso
-                  </p>
-                </IonLabel>
-              </IonItem>
-              <IonItem>
-                <IonLabel>
-                  <p>
-                    <strong>Tiempos </strong> interbancarios
-                  </p>
-                </IonLabel>
-              </IonItem>
-              <IonItem>
-                <IonLabel>
-                  <p>
-                    <strong>Claridad </strong> en comisiones
-                  </p>
-                </IonLabel>
-              </IonItem>
-              <IonItem>
-                <IonLabel>
-                  <p>
-                    <strong>Envío de notificación </strong> con <br /> tracking
-                  </p>
-                </IonLabel>
-              </IonItem>
-            </IonList>
+          <div className="mb-16">
+            <p className="underline text-[16px] mb-8 mr-8">
+              <Icon name="document" className="mr-12 text-3xl bg-black" />
+              <strong>términos</strong> de desembolso
+            </p>
+            <div className="border-full" />
+            <p className="underline text-[16px] mb-8 mr-10">
+              <Icon name="clock" className="mr-14 text-4xl bg-black" />
+              <strong>Tiempos </strong> interbancarios
+            </p>
+            <div className="border-full" />
+            <p className="underline text-[16px] mb-8 mr-12">
+              <Icon name="sun" className="mr-12 text-5xl bg-black" />
+              <strong>Claridad </strong> en comisiones
+            </p>
+            <div className="border-full" />
+            <p className="underline text-[16px] mb-8 mr-6">
+              <Icon name="bell" className="mr-12 text-3xl bg-black" />
+              <strong>Envío de notificación </strong> con <br /> tracking
+            </p>
+            <div className="border-full" />
           </div>
 
           <div>
