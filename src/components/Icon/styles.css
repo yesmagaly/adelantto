@@ -1,0 +1,18 @@
+.icon { 
+    mask-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    mask-size: 100%;
+    mask-position: center;
+    outline: 2px solid red;
+    background-color: #0D1B3B;
+}
+
+.icon-bell {
+    mask-image: url(../../assets/icons/bell.svg);
+}
+
+.icon-user {
+    mask-image: url(../../assets/icons/user.svg);
+}
