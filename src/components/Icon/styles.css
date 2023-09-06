@@ -5,7 +5,6 @@
     display: inline-block;
     mask-size: 100%;
     mask-position: center;
-    outline: 2px solid red;
     background-color: #0D1B3B;
 }
 
@@ -15,4 +14,12 @@
 
 .icon-user {
     mask-image: url(../../assets/icons/user.svg);
+}
+
+.icon-alert {
+    mask-image: url(../../assets/icons/alert.svg);
+}
+
+.icon-queries {
+    mask-image: url(../../assets/icons/queries.svg);
 }
