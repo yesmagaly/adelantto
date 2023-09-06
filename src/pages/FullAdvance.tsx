@@ -1,5 +1,6 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Icon from "../components/Icon/Icon";
+import { ellipse } from "ionicons/icons";
 
 const FullAdvance: React.FC = () => {
   const router = useIonRouter();
@@ -7,7 +8,21 @@ const FullAdvance: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div>
-          <h4 className="font-bold text-2xl py-7 px-7">
+          <div className="heading__paper text-right h-20 py-10 px-7">
+            <button onClick={() => router.push("")}>
+              <IonIcon icon={ellipse}></IonIcon>
+            </button>
+
+            <button onClick={() => router.push("")}>
+              <IonIcon icon={ellipse}></IonIcon>
+            </button>
+
+            <button onClick={() => router.push("")}>
+              <IonIcon icon={ellipse}></IonIcon>
+            </button>
+            <Icon name="bell" className="mr-6 text-2xl bg-black" />
+          </div>
+          <h4 className="text-2xl py-7 px-7">
             ¡Hola, <br />
             <strong>Alexander Cruz!</strong>{" "}
           </h4>
