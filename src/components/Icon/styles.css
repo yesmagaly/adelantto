@@ -39,3 +39,15 @@
 .icon-search {
     mask-image: url(../../assets/icons/search.svg);
 }
+
+.icon-document {
+    mask-image: url(../../assets/icons/document.svg);
+}
+
+.icon-clock {
+    mask-image: url(../../assets/icons/clock.svg);
+}
+
+.icon-sun {
+    mask-image: url(../../assets/icons/sun.svg);
+}
