@@ -1,12 +1,8 @@
-import {
-  IonContent,
-  IonPage,
-  useIonRouter,
-  IonAvatar,
-  IonIcon,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonRouter, IonIcon } from "@ionic/react";
 import { ellipse } from "ionicons/icons";
 import Icon from "../components/Icon/Icon";
+
+import avatar from "../assets/icons/avatar.png";
 
 const Profile: React.FC = () => {
   const router = useIonRouter();
@@ -24,15 +20,10 @@ const Profile: React.FC = () => {
             <IonIcon icon={ellipse}></IonIcon>
           </button>
         </div>
-        <div className="heading--center mb-4">
-          <IonAvatar>
-            <img
-              alt="Silhouette of a person's head"
-              src="https://ionicframework.com/docs/img/demos/avatar.svg"
-            />
-          </IonAvatar>
+        <div className="heading--center">
+          <img className="h-40 mb-8" src={avatar} />
         </div>
-        <div className="text-center">
+        <div className="text-center mb-16">
           <h5 className="font-bold text-lx leading-5">Alexander Cruz Páez</h5>
           <p>acruz@csoft.co</p>
         </div>
