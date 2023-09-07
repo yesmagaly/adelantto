@@ -1,11 +1,8 @@
-import {
-  IonContent,
-  IonPage,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  useIonRouter,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+
+import check from "../assets/icons/check.png";
+
+import close from "../assets/icons/close.png";
 
 const Passport: React.FC = () => {
   const router = useIonRouter();
@@ -23,17 +20,12 @@ const Passport: React.FC = () => {
             Captura una foto de tus identificaciones.
           </p>
         </div>
-        <div className="content">
-          <IonCard>
-            <IonCardHeader>
-              <IonCardTitle>Frente</IonCardTitle>
-            </IonCardHeader>
-          </IonCard>
-          <IonCard>
-            <IonCardHeader>
-              <IonCardTitle>Vuelta</IonCardTitle>
-            </IonCardHeader>
-          </IonCard>
+        <div className="content ">
+          <form className="form py-20">
+            <input type="text" placeholder="Frente" />
+
+            <input type="text" placeholder="Vuelta" />
+          </form>
           <div className="content">
             <button
               className="button button-primary mb-16"
@@ -43,6 +35,24 @@ const Passport: React.FC = () => {
             </button>
             <div className="border-bottom border-primary-blue" />
           </div>
+        </div>
+
+        <div className="heading--center ">
+          <img className="h-10 mb-4" src={check} />
+          <p className="text-[20px] mb-4">Datos correctos</p>
+        </div>
+
+        <div className="content">
+          <div className="heading--center ">
+            <img className="h-12 mb-8" src={close} />
+          </div>
+          <h5 className="font-bold text-[30px]">¡Ups!</h5>
+          <p>
+            Por el momento no cumples <br />
+            los requisitos Adelantto, <br /> te recomendamos intentrlo en
+            <br />
+            <strong>3 meses nuevamente</strong>
+          </p>
         </div>
       </IonContent>
     </IonPage>
