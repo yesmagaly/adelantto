@@ -1,11 +1,9 @@
-import {
-  IonContent,
-  IonPage,
-  IonAvatar,
-  useIonRouter,
-  IonIcon,
-} from "@ionic/react";
+import { IonContent, IonPage, useIonRouter, IonIcon } from "@ionic/react";
+import Icon from "../components/Icon/Icon";
+
 import Lottie from "react-lottie-player";
+import avatar from "../assets/icons/avatar.png";
+import check from "../assets/icons/check.png";
 import { close, closeCircle, pin } from "ionicons/icons";
 
 import photographyAnimation from "../assets/animations/photography.json";
@@ -51,7 +49,7 @@ const BiometricValidation: React.FC = () => {
 
         <div className="content">
           <IonIcon icon={closeCircle}></IonIcon>
-          <h5 className="mb-7">
+          <h5 className="mb-7 text-[20px] mb-4">
             Lo sentimos, tu validación <br />
             <strong>no ha sido exitosa.</strong>
           </h5>
@@ -61,6 +59,31 @@ const BiometricValidation: React.FC = () => {
           >
             Tomar foto
           </button>
+        </div>
+
+        <div className="content">
+          <div className="heading--center ">
+            <img className="h-40 mb-8" src={avatar} />
+          </div>
+          <button
+            className="button button-primary mb-10"
+            onClick={() => router.push("")}
+          >
+            Tomar foto
+          </button>
+          <button
+            className="button button-secondary mb-16"
+            onClick={() => router.push("")}
+          >
+            Cancelar
+          </button>
+        </div>
+
+        <div>
+          <div className="heading--center ">
+            <img className="h-10 mb-4" src={check} />
+            <p className="text-[20px] mb-4">Datos correctos</p>
+          </div>
         </div>
       </IonContent>
     </IonPage>
