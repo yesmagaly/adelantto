@@ -1,7 +1,8 @@
-import { IonContent, IonPage, IonList, IonItem, IonLabel } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import FileInputItem from "../components/FileInputItem";
 
 const UploadPictures: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -45,6 +46,24 @@ const UploadPictures: React.FC = () => {
           </button>
         </div>
         <div className="border-bottom border-primary-blue" />
+
+        <div className="content">
+          <form className="form py-20">
+            <input type="text" placeholder="Tomar foto" />
+          </form>
+          <button
+            className="button button-primary mb-4"
+            onClick={() => router.push("")}
+          >
+            Tomar foto
+          </button>
+          <button
+            className="button button-secondary mb-8"
+            onClick={() => router.push("")}
+          >
+            Cancelar
+          </button>
+        </div>
       </IonContent>
     </IonPage>
   );
