@@ -1,8 +1,11 @@
-import { IonContent, IonPage, IonButton, IonList } from "@ionic/react";
-
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import FileInputItem from "../components/FileInputItem";
+import Lottie from "react-lottie-player";
+
+import documentsAnimation from "../assets/animations/documents.json";
 
 const UploadDocuments: React.FC = () => {
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -78,6 +81,45 @@ const UploadDocuments: React.FC = () => {
           </button>
         </div>
         <div className="border-bottom border-primary-blue" />
+
+        <div className="content">
+          <Lottie
+            animationData={documentsAnimation}
+            style={{ width: 274, height: 274 }}
+            loop
+            play
+          />
+          <form className="form py-2">
+            <input type="text" placeholder="Buscar" />
+          </form>
+          <button
+            className="button button-secondary mb-8"
+            onClick={() => router.push("")}
+          >
+            Continuar
+          </button>
+        </div>
+
+        <div className="content">
+          <Lottie
+            animationData={documentsAnimation}
+            style={{ width: 225, height: 225 }}
+            loop
+            play
+          />
+          <h6 className="text-[20px] mb-6">
+            Sube <strong>tus documentos</strong>
+          </h6>
+          <form className="form py-2">
+            <input type="text" placeholder="Contrato Depto 204" />
+          </form>
+          <button
+            className="button button-secondary mb-8"
+            onClick={() => router.push("")}
+          >
+            Continuar
+          </button>
+        </div>
       </IonContent>
     </IonPage>
   );
