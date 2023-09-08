@@ -2,6 +2,7 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 
 import walletAnimation from "../assets/animations/wallet.json";
+import lensAnimation from "../assets/animations/lens.json";
 
 const Withdrawals: React.FC = () => {
   const router = useIonRouter();
@@ -73,6 +74,27 @@ const Withdrawals: React.FC = () => {
             nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
             ex ea commodo consequat.
           </p>
+        </div>
+
+        <div className="content">
+          <Lottie
+            animationData={lensAnimation}
+            style={{ width: 219, height: 219 }}
+            loop
+            play
+          />
+          <p className="text-[16px] mb-6 leading-5">
+            En este punto estamos validando <br />
+            el convenio con tu entidad bancaria,
+            <br />
+            para cualquier disposición de <br /> efectivo necesaria.
+          </p>
+          <button
+            className="button button-secondary mb-8"
+            onClick={() => router.push("")}
+          >
+            Siguiente
+          </button>
         </div>
       </IonContent>
     </IonPage>
