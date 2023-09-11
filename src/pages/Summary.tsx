@@ -6,16 +6,16 @@ const Summary: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="py-10">
+        <div className="py-20">
           <div className="heading heading--blue flex flex-col justify-center">
-            <h5 className="font-bold text-lx leading-3"> Adelantto 00001</h5>
+            <h5 className="font-bold text-[24px] leading-6">Adelantto 00001</h5>
             <p className="text-[15px] mb-2">Calle 17 Sur 22</p>
             <div className="border-full" />
             <div>
               <h6 className="mb-4">CUOTA A PAGAR</h6>
-              <p className="font-bold text-lx leading-3 mb-4">$ 10.000</p>
+              <p className="font-bold text-[24px] leading-3 mb-4">$ 10.000</p>
               <h6 className="mb-4">Saldo</h6>
-              <p className="font-bold text-lx leading-3">$ 30.000</p>
+              <p className="font-bold text-[24px] leading-3">$ 30.000</p>
             </div>
           </div>
         </div>
