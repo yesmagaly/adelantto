@@ -7,9 +7,9 @@ const RentAdvance: React.FC = () => {
       <IonContent fullscreen>
         <div className="heading heading--blue flex flex-col justify-center">
           <h3 className="text-[30px]">
-            Selecciona el monto <br />{" "}
+            Selecciona el monto <br />
             <strong>
-              que te gustaría que <br /> adelentemos de rentas
+              que te gustaría que <br /> adelantemos de rentas
             </strong>
           </h3>
         </div>
