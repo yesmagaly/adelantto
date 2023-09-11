@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
 
         <div className="px-10">
           <div>
-            <h6 className="font-bold text-xs leading-3 mb-4">Adelanto</h6>
+            <h6 className="font-bold text-xs leading-3 mb-4">Adelantto</h6>
 
             <p className="text-[16px] mb-4">
               <Icon name="bell" className="mr-3 text-xs bg-black" />
