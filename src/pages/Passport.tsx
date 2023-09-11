@@ -49,7 +49,7 @@ const Passport: React.FC = () => {
           <h5 className="font-bold text-[30px]">¡Ups!</h5>
           <p>
             Por el momento no cumples <br />
-            los requisitos Adelantto, <br /> te recomendamos intentrlo en
+            los requisitos Adelantto, <br /> te recomendamos intentarlo en
             <br />
             <strong>3 meses nuevamente</strong>
           </p>
