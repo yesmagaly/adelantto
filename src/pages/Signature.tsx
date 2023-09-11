@@ -18,7 +18,7 @@ const Signature: React.FC = () => {
               />
             </div>
             <div className=" mb-5">
-              <input type="text" placeholder="Firmar aquí" />
+              <input type="text" placeholder="Firma aquí" />
             </div>
             <button
               className="button button-primary mb-16"
