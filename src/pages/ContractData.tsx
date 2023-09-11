@@ -24,7 +24,7 @@ const ContractData: React.FC = () => {
 
             <input
               type="text"
-              placeholder="Fecha de fin del contrato <br/> de arrendamiento"
+              placeholder="Fecha de fin del contrato de arrendamiento"
             />
             <div className="border-full" />
 
@@ -32,11 +32,11 @@ const ContractData: React.FC = () => {
 
             <div className="border-full" />
 
-            <div className="mb-7">
-              <strong>¿Cómo recibes el pago de tu renta?</strong>
-              <div>
-                <IonCheckbox labelPlacement="end">Efectivo</IonCheckbox>
-                <IonCheckbox labelPlacement="end">Transparencia</IonCheckbox>
+            <div className="mb-8 font-bold text-[16px]">
+              ¿Cómo recibes el pago de tu renta?
+              <div className="text-[12px] py-8 ">
+                <IonCheckbox labelPlacement="end"> Efectivo </IonCheckbox>
+                <IonCheckbox labelPlacement="end"> Transferencia </IonCheckbox>
               </div>
             </div>
             <button
