@@ -36,7 +36,7 @@ const DataValidation: React.FC = () => {
           </div>
           <div className="border-full" />
           <div className="mb-7">
-            <h4 className="font-bold text-xl">¡Hasta pronto!</h4>
+            <h4 className="font-bold text-[30px]">¡Hasta pronto!</h4>
           </div>
           <button
             className="button button-primary mb-16"
