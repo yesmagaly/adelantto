@@ -16,16 +16,17 @@ const UploadDocuments: React.FC = () => {
             <strong>
               sube los siguientes documentos <br />
             </strong>
-            para tu propiedad
+            para validar tu propiedad
           </h4>
         </div>
         <div className="py-6 mb-4">
           <FileInputItem>
             <h5 className="font-bold text-xs leading-3">
-              Caratula de tu escritura
+              Carátula de tu escritura
             </h5>
             <p className="text-[10px]">
-              Con sello de inscripsión del Registro Público de la Propiedad
+              Con sello de inscripción del Registro Público <br />
+              de la Propiedad
             </p>
           </FileInputItem>
 
@@ -47,13 +48,13 @@ const UploadDocuments: React.FC = () => {
               Comprobante de ingresos
             </h5>
             <p className="text-[10px]">
-              útimos tres meses (Nóminas o Bancarios)
+              Útimos tres meses (Nómina o bancarios)
             </p>
           </FileInputItem>
 
           <FileInputItem>
             <h5 className="font-bold text-xs leading-3">
-              Certificado de fiscalización en el RPP
+              Certificado de finalización en el RPP
             </h5>
             <p className="text-[10px]">Registro Público de la Propiedad</p>
           </FileInputItem>
@@ -61,7 +62,8 @@ const UploadDocuments: React.FC = () => {
           <FileInputItem>
             <h5 className="font-bold text-xs leading-3">RFC</h5>
             <p className="text-[10px]">
-              Constancia de situación fiscal con antigüedad no mayor a 3 meses
+              Constancia de situación fiscal con antigüedad <br /> no mayor a 3
+              meses
             </p>
           </FileInputItem>
 
