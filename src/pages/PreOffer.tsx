@@ -42,7 +42,7 @@ const PreOffer: React.FC = () => {
 
             <div className="content">
               <p className="help-text mb-4">
-                ¿Te interesa ver el reumen <br /> para otros meses?
+                ¿Te interesa ver el resumen <br /> para otros meses?
               </p>
 
               <input type="text" placeholder="6" />
