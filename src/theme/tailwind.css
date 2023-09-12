@@ -105,5 +105,5 @@
 }
 
 .border-full {
-  @apply border-b border-solid border-gray-400 w-full my-5;
+  @apply border-b border-solid border-gray-400 w-full my-3;
 }
