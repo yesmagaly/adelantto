@@ -11,41 +11,43 @@ const PreOffer: React.FC = () => {
         </div>
         <div className="content">
           <form className="form">
-            <div className="mb-7 leading-5">
-              <p>
-                <strong>
-                  Seleccionaste 6 meses,
-                  <br />
-                </strong>
-                a continuación te presentamos <br /> el resumen de nuestra
-                oferta.
-              </p>
-            </div>
+            <div className="bg-white py-3 shadow-xl mb-5">
+              <div className="mb-7 leading-5">
+                <p>
+                  <strong>
+                    Seleccionaste 6 meses,
+                    <br />
+                  </strong>
+                  a continuación te presentamos <br /> el resumen de nuestra
+                  oferta.
+                </p>
+              </div>
 
-            <div>
-              <input
-                type="text"
-                placeholder="$ 30,000.00 MXN 
+              <div>
+                <input
+                  type="text"
+                  placeholder="$ 30,000.00 MXN 
                 El total de los meses de tu renta"
-              />
-              <input
-                type="text"
-                placeholder="$ 28,000.00 MXN
+                />
+                <input
+                  type="text"
+                  placeholder="$ 28,000.00 MXN
                 El monto que recibirás"
-              />
-              <input
-                type="text"
-                placeholder="$ 2,000.00 MXN
+                />
+                <input
+                  type="text"
+                  placeholder="$ 2,000.00 MXN
                 Costo de nuestro servicio y seguro"
-              />
+                />
+              </div>
             </div>
-
-            <div className="content">
-              <p className="help-text mb-4">
+            <div className="bg-white py-5 shadow-xl w-full">
+              <p className="text-center font-bold mb-4">
                 ¿Te interesa ver el resumen <br /> para otros meses?
               </p>
-
-              <input type="text" placeholder="6" />
+              <div>
+                <input type="text" placeholder="6" size="4" />
+              </div>
 
               <button className="button button-secondary mb-7">
                 Iniciar proceso de Validación <br />
