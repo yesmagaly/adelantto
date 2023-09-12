@@ -17,17 +17,24 @@ const CorrectData: React.FC = () => {
           />
           <h3 className="font-bold text-4xl text-center">¡Felicitaciones!</h3>
         </div>
-        <div className="content">
-          <p className="text-sm leading-4 border-y border-solid border-primary-blue py-6 mb-28">
-            Cuéntanos dónde quieres tu dinero
-          </p>
-          <button
-            className=" button button-secondary mb-10"
-            onClick={() => router.push("")}
-          >
-            Datos bancarios
-          </button>
-          <div className="border-bottom border-primary-blue" />
+        <div className="py-10">
+          <div className="mb-20">
+            <div className="border-full" />
+            <p className="text-center text-xl leading-4 py-6">
+              Cuéntanos dónde quieres tu dinero
+            </p>
+            <div className="border-full" />
+          </div>
+
+          <div className="content">
+            <button
+              className=" button button-secondary mb-10"
+              onClick={() => router.push("")}
+            >
+              Datos bancarios
+            </button>
+            <div className="border-bottom border-primary-blue" />
+          </div>
         </div>
       </IonContent>
     </IonPage>
