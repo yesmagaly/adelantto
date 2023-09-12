@@ -1,5 +1,6 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Icon from "../components/Icon/Icon";
+import IconItem from "../components/IconItem";
 
 const Outlay: React.FC = () => {
   const router = useIonRouter();
@@ -7,36 +8,39 @@ const Outlay: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue heading--center mb-10">
-          <h3 className="text-[30px] mb-7">
+          <h3 className="text-[30px] mb-4">
             <strong>Desembolso</strong>
           </h3>
           <p>Conoce el desglose de tu servicio</p>
         </div>
-        <div className="content">
+        <div className="mb-10">
           <div className="mb-16">
-            <p className="underline text-[16px] mb-8 mr-8">
-              <Icon name="document" className="mr-12 text-3xl bg-black" />
-              <strong>términos</strong> de desembolso
-            </p>
+            <IconItem icon="document">
+              <p className="underline">
+                <strong>Términos </strong> de desembolso
+              </p>
+            </IconItem>
             <div className="border-full" />
-            <p className="underline text-[16px] mb-8 mr-10">
-              <Icon name="clock" className="mr-14 text-4xl bg-black" />
-              <strong>Tiempos </strong> interbancarios
-            </p>
+            <IconItem icon="clock">
+              <p className="underline">
+                <strong>Tiempos </strong> interbancarios
+              </p>
+            </IconItem>
             <div className="border-full" />
-            <p className="underline text-[16px] mb-8 mr-12">
-              <Icon name="sun" className="mr-12 text-5xl bg-black" />
-              <strong>Claridad </strong> en comisiones
-            </p>
+            <IconItem icon="sun">
+              <p className="underline">
+                <strong>Claridad </strong> en comisiones
+              </p>
+            </IconItem>
             <div className="border-full" />
-            <p className="underline text-[16px] mb-8 mr-6">
-              <Icon name="bell" className="mr-12 text-3xl bg-black" />
-              <strong>Envío de notificación </strong> con <br /> tracking
-            </p>
-            <div className="border-full" />
+            <IconItem icon="bell">
+              <p className="underline leading-5">
+                <strong>Envío de notificación </strong> con <br /> tracking
+              </p>
+            </IconItem>
           </div>
 
-          <div>
+          <div className="content">
             <button
               className="button button-primary mb-16"
               onClick={() => router.push("")}
@@ -48,7 +52,7 @@ const Outlay: React.FC = () => {
           <div className="border-bottom border-primary-blue" />
         </div>
 
-        <div>
+        <div className="px-5">
           <h3>
             <strong>
               Términos <br /> de desembolso
