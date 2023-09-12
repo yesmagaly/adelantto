@@ -13,24 +13,36 @@ const ContractData: React.FC = () => {
 
         <div>
           <form className="form">
-            <input type="text" placeholder="valor de tu renta mensual" />
-            <div className="border-full" />
+            <div className="mb-6">
+              <input
+                type="text"
+                placeholder="valor de tu renta mensual"
+                className="!mb-0"
+              />
+              <div className="border-full" />
 
-            <input
-              type="text"
-              placeholder="Fecha de inicio del contrato de arrendamiento"
-            />
-            <div className="border-full" />
+              <input
+                type="text"
+                placeholder="Fecha de inicio del contrato de arrendamiento"
+                className="!mb-0"
+              />
+              <div className="border-full" />
 
-            <input
-              type="text"
-              placeholder="Fecha de fin del contrato de arrendamiento"
-            />
-            <div className="border-full" />
+              <input
+                type="text"
+                placeholder="Fecha de fin del contrato de arrendamiento"
+                className="!mb-0"
+              />
+              <div className="border-full" />
 
-            <input type="text" placeholder="Código postal de tu inmueble" />
+              <input
+                type="text"
+                placeholder="Código postal de tu inmueble"
+                className="!mb-0"
+              />
 
-            <div className="border-full" />
+              <div className="border-full" />
+            </div>
 
             <div>
               <p className="mb-6 font-bold text-[16px]">
