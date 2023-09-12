@@ -32,11 +32,31 @@ const ContractData: React.FC = () => {
 
             <div className="border-full" />
 
-            <div className="mb-8 font-bold text-[16px]">
-              ¿Cómo recibes el pago de tu renta?
-              <div className="text-[12px] py-8 ">
-                <IonCheckbox labelPlacement="end"> Efectivo </IonCheckbox>
-                <IonCheckbox labelPlacement="end"> Transferencia </IonCheckbox>
+            <div>
+              <p className="mb-6 font-bold text-[16px]">
+                ¿Cómo recibes el pago de tu renta?
+              </p>
+              <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center">
+                  <input type="radio" />
+                  <label
+                    htmlFor="scales"
+                    className="text-[12px] font-bold ml-2"
+                  >
+                    {" "}
+                    Efectivo{" "}
+                  </label>
+                </div>
+                <div className="flex items-center">
+                  <input type="radio" />
+                  <label
+                    htmlFor="scales"
+                    className="text-[12px] font-bold ml-2"
+                  >
+                    {" "}
+                    Transferencia{" "}
+                  </label>
+                </div>
               </div>
             </div>
             <button
