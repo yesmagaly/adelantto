@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonCheckbox, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 
 import searchHomeAnimation from "../assets/animations/search-home.json";
@@ -11,7 +11,7 @@ const DataValidation: React.FC = () => {
         <div className="content">
           <Lottie
             animationData={searchHomeAnimation}
-            style={{ width: 251, height: 251 }}
+            style={{ width: 220, height: 220 }}
             loop
             play
           />
@@ -25,17 +25,29 @@ const DataValidation: React.FC = () => {
           </p>
           <div className="border-full" />
         </div>
-        <div className="heading--center">
+        <div className="heading--center px-10">
           <div className="mb-7">
-            <IonCheckbox labelPlacement="end">
-              Acepto que “S.A. de C.V.” <br /> consulte mi buró de crédito
-            </IonCheckbox>{" "}
-            <br />
-            <IonCheckbox labelPlacement="end">SMS</IonCheckbox> <br />
-            <IonCheckbox labelPlacement="end">Push</IonCheckbox>
+            <div className="flex items-center mb-3">
+              <input type="checkbox" className="w-6 h-6" />
+              <label htmlFor="cv" className="ml-4">
+                Acepto que “S.A. de C.V.” consulte mi buró de crédito
+              </label>
+            </div>
+            <div className="flex items-center mb-5">
+              <input type="checkbox" className="w-5 h-5" />
+              <label htmlFor="cv" className="ml-4">
+                SMS
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input type="checkbox" className="w-5 h-5" />
+              <label htmlFor="cv" className="ml-4">
+                Push
+              </label>
+            </div>
           </div>
           <div className="border-full" />
-          <div className="mb-7">
+          <div className="my-7">
             <h4 className="font-bold text-[30px]">¡Hasta pronto!</h4>
           </div>
           <button
