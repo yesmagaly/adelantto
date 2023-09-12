@@ -10,11 +10,11 @@ const Signature: React.FC = () => {
       <IonContent fullscreen>
         <div className="content">
           <form className="form">
-            <div className="mb-5">
+            <div className="pt-10">
               <h3 className="font-bold text-4xl">¡Firma y recibe!</h3>
               <Lottie
                 animationData={singAnimation}
-                style={{ width: 400, height: 400 }}
+                style={{ width: 300, height: 300 }}
               />
             </div>
             <div className=" mb-5">
