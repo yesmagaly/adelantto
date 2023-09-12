@@ -15,44 +15,47 @@ const RentAdvance: React.FC = () => {
         </div>
         <div className="px-16 py-8">
           <form className="form">
+            <div className="mb-6">
+              <button
+                type="submit"
+                className="font-[600] w-full text-3xl font-medium pattern-format"
+              >
+                $ 5,000.00
+              </button>
+              <button
+                type="submit"
+                className="font-[600] w-full text-3xl font-medium pattern-format"
+              >
+                $ 10,000.00
+              </button>
+              <button
+                type="submit"
+                className="font-[600] w-full text-3xl font-medium pattern-format"
+              >
+                $ 15,000.00
+              </button>
+              <button
+                type="submit"
+                className="font-[600] w-full text-3xl font-medium pattern-format"
+              >
+                $ 20,000.00
+              </button>
+              <button
+                type="submit"
+                className="font-[600] w-full text-3xl font-medium pattern-format"
+              >
+                $ 25,000.00
+              </button>
+              <button
+                type="submit"
+                className="font-[600] w-full text-3xl font-medium pattern-format"
+              >
+                $ 30,000.00
+              </button>
+            </div>
+
             <button
-              type="submit"
-              className="w-full text-3xl font-medium pattern-format"
-            >
-              $ 5,000.00
-            </button>
-            <button
-              type="submit"
-              className="w-full text-3xl font-medium pattern-format"
-            >
-              $ 10,000.00
-            </button>
-            <button
-              type="submit"
-              className="w-full text-3xl font-medium pattern-format"
-            >
-              $ 15,000.00
-            </button>
-            <button
-              type="submit"
-              className="w-full text-3xl font-medium pattern-format"
-            >
-              $ 20,000.00
-            </button>
-            <button
-              type="submit"
-              className="w-full text-3xl font-medium pattern-format"
-            >
-              $ 25,000.00
-            </button>
-            <button
-              type="submit"
-              className="w-full text-3xl font-medium pattern-format"
-            >
-              $ 30,000.00
-            </button>
-            <button
-              className="button button-secondary mb-18 mb-7"
+              className="button button-secondary mb-7"
               onClick={() => router.push("/verification-code")}
             >
               Siguiente
