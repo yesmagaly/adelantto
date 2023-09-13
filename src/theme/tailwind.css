@@ -107,3 +107,8 @@
 .border-full {
   @apply border-b border-solid border-gray-400 w-full my-3;
 }
+
+#bg-checkbox {
+  @apply accent-primary-green;
+}
+

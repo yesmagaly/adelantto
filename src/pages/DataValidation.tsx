@@ -28,20 +28,20 @@ const DataValidation: React.FC = () => {
         <div className="heading--center px-10">
           <div className="mb-7">
             <div className="flex items-center mb-3">
-              <input type="checkbox" className="w-6 h-6" />
-              <label htmlFor="cv" className="ml-4">
+              <input type="checkbox" id="bg-checkbox" className="w-6 h-6" />
+              <label htmlFor="bg-checkbox" className="main ml-4">
                 Acepto que “S.A. de C.V.” consulte mi buró de crédito
               </label>
             </div>
             <div className="flex items-center mb-5">
-              <input type="checkbox" className="w-5 h-5" />
-              <label htmlFor="cv" className="ml-4">
+              <input type="checkbox" id="bg-checkbox" className="w-5 h-5" />
+              <label htmlFor="bg-checkbox" className="ml-4">
                 SMS
               </label>
             </div>
             <div className="flex items-center">
-              <input type="checkbox" className="w-5 h-5" />
-              <label htmlFor="cv" className="ml-4">
+              <input type="checkbox" id="bg-checkbox" className="w-5 h-5" />
+              <label htmlFor="bg-checkbox" className="ml-4">
                 Push
               </label>
             </div>
