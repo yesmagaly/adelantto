@@ -51,3 +51,11 @@
 .icon-sun {
     mask-image: url(../../assets/icons/sun.svg);
 }
+
+.icon-upload {
+    mask-image: url(../../assets/icons/upload.svg);
+}
+
+.icon-camera {
+    mask-image: url(../../assets/icons/camera.svg);
+}
