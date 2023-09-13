@@ -20,7 +20,7 @@ const UploadDocuments: React.FC = () => {
           </h4>
         </div>
         <div className="py-6 mb-4">
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">
               Carátula de tu escritura
             </h5>
@@ -30,20 +30,20 @@ const UploadDocuments: React.FC = () => {
             </p>
           </FileInputItem>
 
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">
               Contrato de arrendamiento
             </h5>
             <p className="text-[10px]">Firmado por ambas partes</p>
           </FileInputItem>
 
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">
               Copia del último pago predial del inmueble
             </h5>
           </FileInputItem>
 
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">
               Comprobante de ingresos
             </h5>
@@ -52,14 +52,14 @@ const UploadDocuments: React.FC = () => {
             </p>
           </FileInputItem>
 
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">
               Certificado de finalización en el RPP
             </h5>
             <p className="text-[10px]">Registro Público de la Propiedad</p>
           </FileInputItem>
 
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">RFC</h5>
             <p className="text-[10px]">
               Constancia de situación fiscal con antigüedad <br /> no mayor a 3
@@ -67,7 +67,7 @@ const UploadDocuments: React.FC = () => {
             </p>
           </FileInputItem>
 
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">CURP</h5>
             <p className="text-[10px]">Certificada y emitida por la RENAPO</p>
           </FileInputItem>

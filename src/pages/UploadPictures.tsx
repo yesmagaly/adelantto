@@ -17,21 +17,21 @@ const UploadPictures: React.FC = () => {
           </h4>
         </div>
         <div className="py-6 mb-40">
-          <FileInputItem>
+          <FileInputItem icon="camera">
             <h5 className="font-bold text-xs leading-3">Frente de la casa</h5>
             <p className="text-[10px]">Toma una foto del frente de tu casa</p>
           </FileInputItem>
-          <FileInputItem>
+          <FileInputItem icon="camera">
             <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
             <p className="text-[10px]">Toma una foto del medidor de luz</p>
           </FileInputItem>
-          <FileInputItem>
+          <FileInputItem icon="camera">
             <h5 className="font-bold text-xs leading-3">Toma de agua</h5>
             <p className="text-[10px]">
               Toma una foto de la toma de agua principal
             </p>
           </FileInputItem>
-          <FileInputItem>
+          <FileInputItem icon="upload">
             <h5 className="font-bold text-xs leading-3">Calle</h5>
             <p className="text-[10px]">Toma una foto de la vista de la calle</p>
           </FileInputItem>
