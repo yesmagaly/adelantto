@@ -30,6 +30,11 @@
   background-image: url("../assets/images/header-blue-bg.png");
 }
 
+.heading--sky-blue {
+  @apply pt-16;
+  background-image: url("../assets/images/sky-blue-bg.png");
+}
+
 .heading--center {
   @apply flex flex-col justify-center items-center;
 }
