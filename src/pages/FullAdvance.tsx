@@ -1,6 +1,7 @@
 import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Icon from "../components/Icon/Icon";
 import { ellipse } from "ionicons/icons";
+import masterCardIcon from "../assets/icons/master-card.png";
 
 const FullAdvance: React.FC = () => {
   const router = useIonRouter();
@@ -8,19 +9,22 @@ const FullAdvance: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div>
-          <div className="heading__paper text-right h-20 py-10 px-7">
-            <button onClick={() => router.push("")}>
-              <IonIcon icon={ellipse}></IonIcon>
-            </button>
+          <div className="heading__paper flex justify-end gap-3 items-center h-20 py-10 px-7">
+            <div>
+              <button onClick={() => router.push("")}>
+                <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+              </button>
 
-            <button onClick={() => router.push("")}>
-              <IonIcon icon={ellipse}></IonIcon>
-            </button>
+              <button onClick={() => router.push("")}>
+                <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+              </button>
 
-            <button onClick={() => router.push("")}>
-              <IonIcon icon={ellipse}></IonIcon>
-            </button>
-            <Icon name="bell" className="mr-6 text-2xl bg-black" />
+              <button onClick={() => router.push("")}>
+                <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+              </button>
+            </div>
+
+            <Icon name="bell" className="mr-6 text-2xl bg-blue-800" />
           </div>
           <h4 className="text-2xl py-7 px-7">
             ¡Hola, <br />
@@ -28,72 +32,94 @@ const FullAdvance: React.FC = () => {
           </h4>
         </div>
         <div className="heading heading--blue heading--compact mb-7">
-          <form className="flex flex-row space-x-32">
-            <div>
-              <h5 className="leading-7">Adelantto total</h5>
-              <p className="text-2xl font-bold">$150,000.00</p>
+          <form className="">
+            <div className="flex justify-between items-center">
+              <div>
+                <h5 className="leading-7">Adelantto total</h5>
+                <p className="text-2xl font-bold">$150,000.00</p>
+              </div>
+
+              <button
+                className="font-regular px-3 py-1 rounded text-white button-secondary"
+                onClick={() => router.push("")}
+              >
+                Ver
+              </button>
             </div>
-            <button
-              className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary mb-7"
-              onClick={() => router.push("")}
-            >
-              Ver
-            </button>
           </form>
         </div>
 
-        <div className="px-10">
+        <div className="px-10 mb-40">
           <h6 className=" mb-7">Pagos</h6>
           <div className="border-full" />
-          <form className="flex flex-row space-x-36">
-            <div>
-              <h4 className="font-bold text-lx leading-5">Adelantto 00001</h4>
-              <p className="text-[12px]">Calle 17 Sur 13-22</p>
-            </div>
+          <form>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-6 items-center">
+                <img src={masterCardIcon} className="w-5 h-4" />
+                <div>
+                  <h4 className="font-bold text-lx leading-5">
+                    Adelantto 00001
+                  </h4>
+                  <p className="text-[12px]">Calle 17 Sur 13-22</p>
+                </div>
+              </div>
 
-            <button
-              className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary mb-7"
-              onClick={() => router.push("")}
-            >
-              Ver
-            </button>
-          </form>
-          <div className="border-full" />
-          <form className="flex flex-row space-x-36">
-            <div>
-              <h4 className="font-bold text-lx leading-5">Adelantto 00002</h4>
-              <p className="text-[12px]">Calle 17 Sur 13-22</p>
+              <button
+                className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary"
+                onClick={() => router.push("")}
+              >
+                Ver
+              </button>
             </div>
+            <div className="border-full" />
 
-            <button
-              className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary mb-7"
-              onClick={() => router.push("")}
-            >
-              Ver
-            </button>
-          </form>
-          <div className="border-full" />
-          <form className="flex flex-row space-x-36">
-            <div>
-              <h4 className="font-bold text-lx leading-5">Adelantto 00003</h4>
-              <p className="text-[12px]">Calle 17 Sur 13-22</p>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-6 items-center">
+                <img src={masterCardIcon} className="w-5 h-4" />
+                <div>
+                  <h4 className="font-bold text-lx leading-5">
+                    Adelantto 00002
+                  </h4>
+                  <p className="text-[12px]">Calle 17 Sur 13-22</p>
+                </div>
+              </div>
+              <button
+                className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary"
+                onClick={() => router.push("")}
+              >
+                Ver
+              </button>
             </div>
+            <div className="border-full" />
 
-            <button
-              className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary mb-7"
-              onClick={() => router.push("")}
-            >
-              Ver
-            </button>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-6 items-center">
+                <img src={masterCardIcon} className="w-5 h-4" />
+                <div>
+                  <h4 className="font-bold text-lx leading-5">
+                    Adelantto 00003
+                  </h4>
+                  <p className="text-[12px]">Calle 17 Sur 13-22</p>
+                </div>
+              </div>
+              <button
+                className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary"
+                onClick={() => router.push("")}
+              >
+                Ver
+              </button>
+            </div>
+            <div className="border-full" />
           </form>
-          <div className="border-full" />
         </div>
 
-        <div className="px-10 py-36 ">
-          <Icon name="home" className="mr-6 text-6xl bg-black " />
-          <Icon name="world" className="mr-6 text-6xl bg-black" />
-          <Icon name="location" className="mr-6 text-6xl bg-black" />
-          <Icon name="search" className="mr-6 text-6xl bg-black" />
+        <div className="bg-gray-100 py-4">
+          <div className="flex justify-between px-10 mb-5">
+            <Icon name="home" className="text-6xl bg-black " />
+            <Icon name="world" className="text-6xl bg-black" />
+            <Icon name="location" className="text-6xl bg-black" />
+            <Icon name="search" className="text-6xl bg-black" />
+          </div>
           <div className="border-bottom border-primary-blue px-6" />
         </div>
       </IonContent>
