@@ -38,7 +38,7 @@ import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
 import Summary from "./pages/Summary";
 import Profile from "./pages/Profile";
-
+import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -167,6 +167,9 @@ const App: React.FC = () => {
               </Route>
               <Route exact path="/profile">
                 <Profile />
+              </Route>
+              <Route exact path="/succesful-transaction">
+                <SuccesfulTransaction />
               </Route>
 
               <Route exact path="/">
