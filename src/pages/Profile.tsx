@@ -9,16 +9,20 @@ const Profile: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading__paper text-right h-20 py-7 px-7">
-          <button onClick={() => router.push("")}>
-            <IonIcon icon={ellipse}></IonIcon>
-          </button>
-          <button onClick={() => router.push("")}>
-            <IonIcon icon={ellipse}></IonIcon>
-          </button>
-          <button onClick={() => router.push("")}>
-            <IonIcon icon={ellipse}></IonIcon>
-          </button>
+        <div className="heading__paper flex justify-end h-20 py-10 px-8">
+          <div>
+            <button onClick={() => router.push("")}>
+              <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+            </button>
+
+            <button onClick={() => router.push("")}>
+              <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+            </button>
+
+            <button onClick={() => router.push("")}>
+              <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+            </button>
+          </div>
         </div>
         <div className="heading--center">
           <img className="h-40 mb-8" src={avatar} />
@@ -30,7 +34,7 @@ const Profile: React.FC = () => {
 
         <div className="px-10">
           <div>
-            <h6 className="font-bold text-xs leading-3 mb-4">Adelantto</h6>
+            <h6 className="text-gray-400 text-xs leading-3 mb-4">Adelantto</h6>
 
             <p className="text-[16px] mb-4">
               <Icon name="bell" className="mr-3 text-xs bg-black" />
@@ -44,7 +48,7 @@ const Profile: React.FC = () => {
             <div className="border-full" />
           </div>
           <div>
-            <h6 className="font-bold text-xs leading-3 mb-4">Ayuda</h6>
+            <h6 className="text-gray-400 text-xs leading-3 mb-4">Ayuda</h6>
             <p className="text-[16px] mb-4">
               <Icon name="alert" className="mr-3 text-xs bg-black" />
               Reportar un problema
@@ -59,16 +63,17 @@ const Profile: React.FC = () => {
               <Icon name="queries" className="mr-3 text-xs bg-black" />
               Términos y condiciones
             </p>
-            <div className="border-full" />
           </div>
         </div>
-        <div className="px-10 py-6">
-          <Icon name="home" className="mr-6 text-6xl bg-black " />
-          <Icon name="world" className="mr-6 text-6xl bg-black" />
-          <Icon name="location" className="mr-6 text-6xl bg-black" />
-          <Icon name="search" className="mr-6 text-6xl bg-black" />
+        <div className="bg-gray-100 py-4">
+          <div className="flex justify-between px-10 mb-5">
+            <Icon name="home" className="text-6xl bg-black " />
+            <Icon name="world" className="text-6xl bg-black" />
+            <Icon name="location" className="text-6xl bg-black" />
+            <Icon name="search" className="text-6xl bg-black" />
+          </div>
+          <div className="border-bottom border-primary-blue px-6" />
         </div>
-        <div className="border-bottom border-primary-blue" />
       </IonContent>
     </IonPage>
   );
