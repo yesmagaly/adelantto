@@ -35,7 +35,7 @@ const FullAdvance: React.FC = () => {
           <form className="">
             <div className="flex justify-between items-center">
               <div>
-                <h5 className="leading-7">Adelantto total</h5>
+                <h5 className="leading-7 text-green-300">Adelantto total</h5>
                 <p className="text-2xl font-bold">$150,000.00</p>
               </div>
 
@@ -50,7 +50,7 @@ const FullAdvance: React.FC = () => {
         </div>
 
         <div className="px-10 mb-40">
-          <h6 className=" mb-7">Pagos</h6>
+          <h6 className=" mb-7 text-gray-400">Pagos</h6>
           <div className="border-full" />
           <form>
             <div className="flex justify-between items-center">
