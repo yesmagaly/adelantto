@@ -1,5 +1,6 @@
 import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Icon from "../components/Icon/Icon";
+import masterCardIcon from "../assets/icons/master-card.png";
 import { ellipse } from "ionicons/icons";
 
 const Summary: React.FC = () => {
@@ -113,10 +114,34 @@ const Summary: React.FC = () => {
           </div>
           <div className="border-bottom border-primary-blue px-6" />
         </div>
-        <div>
-          <h6>CUOTA A PAGAR</h6>
-          <p>$ 10.000</p>
-          <h4>MEDIOS DE PAGO</h4>
+        <div className="text-center py-10">
+          <h6 className="text-blue-700 mb-6">CUOTA A PAGAR</h6>
+          <p className="text-3xl font-bold mb-6">$ 10.000</p>
+          <h4 className="font-bold text-lg text-blue-900">MEDIOS DE PAGO</h4>
+        </div>
+        <div className="flex justify-center gap-3 mb-2">
+          <img src={masterCardIcon} className="bg-gray-100 px-14 py-3" />
+          <img src={masterCardIcon} className="bg-gray-100 px-14 py-3" />
+        </div>
+        <div className="flex justify-center mb-2">
+          <img src={masterCardIcon} className="bg-gray-100 px-32 py-3" />
+        </div>
+        <div className="flex justify-center mb-12">
+          <div className="flex bg-gray-100">
+            <img src={masterCardIcon} className="px-6 py-3" />
+            <img src={masterCardIcon} className="px-6 py-3" />
+            <img src={masterCardIcon} className="px-6 py-3" />
+            <img src={masterCardIcon} className="px-6 py-3" />
+          </div>
+        </div>
+        <div className="bg-gray-100 py-4">
+          <div className="flex justify-between px-10 mb-5">
+            <Icon name="home" className="text-6xl bg-black " />
+            <Icon name="world" className="text-6xl bg-black" />
+            <Icon name="location" className="text-6xl bg-black" />
+            <Icon name="search" className="text-6xl bg-black" />
+          </div>
+          <div className="border-bottom border-primary-blue px-6" />
         </div>
       </IonContent>
     </IonPage>
