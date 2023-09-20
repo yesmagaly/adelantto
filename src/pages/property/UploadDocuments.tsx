@@ -1,8 +1,8 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import FileInputItem from "../components/FileInputItem";
+import FileInputItem from "../../components/FileInputItem";
 import Lottie from "react-lottie-player";
 
-import documentsAnimation from "../assets/animations/documents.json";
+import documentsAnimation from "../../assets/animations/documents.json";
 
 const UploadDocuments: React.FC = () => {
   const router = useIonRouter();

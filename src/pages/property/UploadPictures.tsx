@@ -1,5 +1,5 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import FileInputItem from "../components/FileInputItem";
+import FileInputItem from "../../components/FileInputItem";
 
 const UploadPictures: React.FC = () => {
   const router = useIonRouter();

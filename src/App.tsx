@@ -16,7 +16,10 @@ import VerificationCode from "./pages/auth/VerificationCode";
 import VerificationEmail from "./pages/auth/VerificationEmail";
 import AdvanceImmediately from "./pages/AdvanceImmediately";
 import CreateProfile from "./pages/CreateProfile";
-import UploadDocuments from "./pages/UploadDocuments";
+
+import UploadDocuments from "./pages/property/UploadDocuments";
+import UploadPictures from "./pages/property/UploadPictures";
+
 import ContractData from "./pages/ContractData";
 import RentAdvance from "./pages/RentAdvance";
 import Passport from "./pages/Passport";
@@ -32,7 +35,6 @@ import CorrectData from "./pages/CorrectData";
 import Withdrawals from "./pages/Withdrawals";
 import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
-import UploadPictures from "./pages/UploadPictures";
 import ConfirmationData from "./pages/ConfirmationData";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
