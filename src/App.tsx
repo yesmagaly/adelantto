@@ -19,6 +19,7 @@ import CreateProfile from "./pages/CreateProfile";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";
+import ConfirmationData from "./pages/property/ConfirmationData";
 
 import ContractData from "./pages/ContractData";
 import RentAdvance from "./pages/RentAdvance";
@@ -35,7 +36,6 @@ import CorrectData from "./pages/CorrectData";
 import Withdrawals from "./pages/Withdrawals";
 import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
-import ConfirmationData from "./pages/ConfirmationData";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
 import Summary from "./pages/Summary";
@@ -110,6 +110,10 @@ const App: React.FC = () => {
               <Route exact path="/upload-documents">
                 <UploadDocuments />
               </Route>
+              <Route exact path="/upload-pictures">
+                <UploadPictures />
+              </Route>
+
               <Route exact path="/contract-data">
                 <ContractData />
               </Route>
@@ -152,9 +156,7 @@ const App: React.FC = () => {
               <Route exact path="/outlay">
                 <Outlay />
               </Route>
-              <Route exact path="/upload-pictures">
-                <UploadPictures />
-              </Route>
+              
               <Route exact path="/confirmation-data">
                 <ConfirmationData />
               </Route>
