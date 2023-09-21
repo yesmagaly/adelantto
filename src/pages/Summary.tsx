@@ -64,7 +64,7 @@ const Summary: React.FC = () => {
                 </div>
 
                 <button
-                  className="font-regular px-2 py-1 rounded text-white button-secondary"
+                  className="font-regular px-3 py-1 rounded text-white bg-blue-900"
                   onClick={() => router.push("")}
                 >
                   Ver
@@ -78,7 +78,7 @@ const Summary: React.FC = () => {
                 </div>
 
                 <button
-                  className="font-regular px-2 py-1 rounded text-white button-secondary"
+                  className="font-regular px-3 py-1 rounded text-white bg-blue-900"
                   onClick={() => router.push("")}
                 >
                   Ver
@@ -94,7 +94,7 @@ const Summary: React.FC = () => {
                 </div>
 
                 <button
-                  className="font-regular px-2 py-1 rounded text-white button-secondary"
+                  className="font-regular px-3 py-1 rounded text-white bg-blue-900"
                   onClick={() => router.push("")}
                 >
                   Ver
