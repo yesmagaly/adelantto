@@ -1,7 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 
-import wrongCodeAnimation from "../assets/animations/wrong-code.json";
+import wrongCodeAnimation from "../../assets/animations/wrong-code.json";
 
 const Bug: React.FC = () => {
   const router = useIonRouter();

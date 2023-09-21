@@ -10,10 +10,10 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import VerificationCode from "./pages/VerificationCode";
-import VerificationEmail from "./pages/VerificationEmail";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import VerificationCode from "./pages/auth/VerificationCode";
+import VerificationEmail from "./pages/auth/VerificationEmail";
 import AdvanceImmediately from "./pages/AdvanceImmediately";
 import CreateProfile from "./pages/CreateProfile";
 import UploadDocuments from "./pages/UploadDocuments";
@@ -21,8 +21,8 @@ import ContractData from "./pages/ContractData";
 import RentAdvance from "./pages/RentAdvance";
 import Passport from "./pages/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
-import Bug from "./pages/Bug";
-import Welcome from "./pages/Welcome";
+import Bug from "./pages/auth/Bug";
+import Welcome from "./pages/auth/Welcome";
 import Search from "./pages/Search";
 import PreOffer from "./pages/PreOffer";
 import BiometricValidation from "./pages/BiometricValidation";

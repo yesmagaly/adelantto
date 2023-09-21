@@ -3,11 +3,11 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm, Controller } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
-import Modal from "../components/Modal/Modal";
-import Loader from "../components/Loader/Loader";
+import Modal from "../../components/Modal/Modal";
+import Loader from "../../components/Loader/Loader";
 
-import registerAnimation from "../assets/animations/register.json";
-import { API_SERVER_URL } from "../config";
+import registerAnimation from "../../assets/animations/register.json";
+import { API_SERVER_URL } from "../../config";
 
 type FormValues = {
   phone: string | undefined;

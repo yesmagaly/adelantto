@@ -4,24 +4,23 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
-import verificationCodeAnimation from "../assets/animations/verification-code.json";
-import Modal from "../components/Modal/Modal";
-import Loader from "../components/Loader/Loader";
-import { API_SERVER_URL } from "../config";
+import emailAnimation from "../../assets/animations/email.json";
+import Modal from "../../components/Modal/Modal";
+import Loader from "../../components/Loader/Loader";
+import { API_SERVER_URL } from "../../config";
 
-interface VerificationCodeProps
+interface VerificationEmailProps
   extends RouteComponentProps<{
     phone: string;
-  }> { }
+  }> {}
 
 type FormValues = {
-  code: number;
+  email: number;
 };
 
-const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
+const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
-
   const {
     register,
     handleSubmit,
@@ -30,48 +29,47 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
   } = useForm();
 
   const onSubmit = async function (data: FormValues) {
-    const code = data.code;
+    const email = data.email;
     const phone = match.params.phone;
 
     // Send phone request.
-    const response = await fetch(
-      `${API_SERVER_URL}/api/verify-phone-code`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ code, phone }),
-      }
-    );
+    const response = await fetch(`${API_SERVER_URL}/api/send-email-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ email, phone }),
+    });
 
     const json = await response.json();
 
     if (json.status === "success") {
-      router.push(`/verification-email/${phone}`);
+      router.push(`/login`);
     } else {
       // Show server errors.
-      setError("code", { message: json.message, type: "server" });
+      setError("email", { message: json.message, type: "server" });
       setIsOpen(true);
     }
+
+    console.log(data);
   };
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--green">
+        <div className="heading">
           <h1 className="heading__title">
             Código
             <br />
             <strong>de verificación</strong>
           </h1>
-          <div className="heading__pager">Paso 2 de 4</div>
+          <div className="heading__pager">Paso 3 de 4</div>
         </div>
 
         <div className="content">
           <Lottie
-            animationData={verificationCodeAnimation}
+            animationData={emailAnimation}
             style={{ width: 174, height: 262 }}
             loop
             play
@@ -79,24 +77,15 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
 
           <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
             <input
-              type="numeric"
-              maxLength={6}
-              minLength={6}
-              placeholder="Código de verificación"
-              {...register("code", { required: true })}
+              type="email"
+              placeholder="Email"
+              {...register("email", { required: true })}
             />
 
-            <div className="mb-24">
-              <p className="text-primary-green mb-4">03:00</p>
+            <div className="mb-24 mt-9">
               <p className="help-text mb-4">
-                Si no recibiste el código, envíalo nuevamente desde{" "}
-                <a
-                  href="#"
-                  onClick={() => router.goBack()}
-                  className="underline"
-                >
-                  aquí
-                </a>
+                Enviaremos una contraseña tu cuenta de correo para que puedas{" "}
+                <a className="underline">iniciar sesión.</a>
               </p>
             </div>
 
@@ -112,11 +101,11 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
           <h3 className="font-semibold text-lg mb-5 text-center">
             Lo sentimos
           </h3>
-          {<p>{errors?.code?.message}</p>}
+          {<p>{errors?.email?.message}</p>}
         </Modal>
       </IonContent>
     </IonPage>
   );
 };
 
-export default VerificationCode;
+export default VerificationEmail;

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm, Controller } from "react-hook-form";
-import Modal from "../components/Modal/Modal";
-import Loader from "../components/Loader/Loader";
-import { useAuth } from "./auth/authContext";
+import { useForm } from "react-hook-form";
+import Modal from "../../components/Modal/Modal";
+import Loader from "../../components/Loader/Loader";
+import { useAuth } from "./authContext";
 
-import logo from "../assets/icons/alternative-logo.svg";
-import { API_SERVER_URL } from "../config";
+import logo from "../../assets/icons/alternative-logo.svg";
+import { API_SERVER_URL } from "../../config";
 
 type FormValues = {
   password: string | undefined;
@@ -33,7 +33,8 @@ const validate = function (values: FormValues) {
   if (values.password !== values.password_confirmation) {
     errors.password_confirmation = {
       type: "be_equal",
-      message: "The confirmation password should be equal to your new password.",
+      message:
+        "The confirmation password should be equal to your new password.",
     };
   }
 
@@ -80,7 +81,11 @@ const Welcome: React.FC = () => {
         Accept: "application/json",
         Authorization: `Bearer ${authInfo.user.token}`,
       },
-      body: JSON.stringify({ password, password_confirmation, email: authInfo.user.email }),
+      body: JSON.stringify({
+        password,
+        password_confirmation,
+        email: authInfo.user.email,
+      }),
     });
 
     const json = await response.json();

@@ -3,10 +3,10 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import { useForm } from "react-hook-form";
 
-import logo from "../assets/icons/logo.svg";
-import Modal from "../components/Modal/Modal";
-import Loader from "../components/Loader/Loader";
-import { useAuth } from "./auth/authContext";
+import logo from "../../assets/icons/logo.svg";
+import Modal from "../../components/Modal/Modal";
+import Loader from "../../components/Loader/Loader";
+import { useAuth } from "./authContext";
 
 interface LoginProps
   extends RouteComponentProps<{
