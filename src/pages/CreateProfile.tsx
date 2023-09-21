@@ -4,6 +4,12 @@ import { useForm } from "react-hook-form";
 
 import userAnimation from "../assets/animations/user.json";
 import { ellipse } from "ionicons/icons";
+import { API_SERVER_URL } from "../config";
+
+type FormValues = {
+  name: string | undefined;
+  last_name: string | undefined;
+};
 
 const CreateProfile: React.FC = () => {
   const router = useIonRouter();
@@ -14,9 +20,26 @@ const CreateProfile: React.FC = () => {
     formState: {},
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data: FormValues) => {
+    const name = data.name;
+    const last_name = data.last_name;
     // router.push("/advance-immediately")
     // router.push("/create-profile")
+
+    const response = await fetch(`${API_SERVER_URL}/api/profiles`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ name, last_name }),
+    });
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push(`/advance-immediately`);
+    }
 
     console.log(data);
   };
@@ -64,7 +87,7 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <button>Guardar</button>
+                <button className="button button-primary">Guardar</button>
               </div>
 
               <div className="text-center">
