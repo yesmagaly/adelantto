@@ -1,7 +1,32 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { useForm } from "react-hook-form";
+import { API_SERVER_URL } from "../../config";
 
 const ContractData: React.FC = () => {
   const router = useIonRouter();
+
+  const {
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push(`/rent-advance`);
+    }
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -12,7 +37,7 @@ const ContractData: React.FC = () => {
         </div>
 
         <div>
-          <form className="form">
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <input type="text" placeholder="valor de tu renta mensual" />
             </div>
@@ -71,12 +96,7 @@ const ContractData: React.FC = () => {
                 </div>
               </div>
             </div>
-            <button
-              className="button button-primary mb-10"
-              onClick={() => router.push("/verification-email")}
-            >
-              Siguiente
-            </button>
+            <button className="button button-primary mb-10">Siguiente</button>
             <div className="border-bottom border-primary-blue" />
           </form>
         </div>
