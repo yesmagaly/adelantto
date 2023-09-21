@@ -12,7 +12,7 @@ const SuccesfulTransaction: React.FC = () => {
             <img className="h-14 mb-10 " src={check} />
           </div>
 
-          <h3 className="font-bold text-green-300 text-3xl text-center h-60">
+          <h3 className="font-bold text-primary-green text-3xl text-center h-60">
             Tu transacción <br />
             <span className="text-white">ha sido exitosa</span>
           </h3>
