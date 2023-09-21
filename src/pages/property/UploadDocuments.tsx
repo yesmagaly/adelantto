@@ -1,11 +1,37 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import FileInputItem from "../../components/FileInputItem";
 import Lottie from "react-lottie-player";
+import { useForm } from "react-hook-form";
+import { API_SERVER_URL } from "../../config";
 
+import FileInputItem from "../../components/FileInputItem";
 import documentsAnimation from "../../assets/animations/documents.json";
 
 const UploadDocuments: React.FC = () => {
   const router = useIonRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const response = await fetch(`${API_SERVER_URL}/api/properties`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push(`/property/upload-pictures`);
+    }
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -19,69 +45,71 @@ const UploadDocuments: React.FC = () => {
             para validar tu propiedad
           </h4>
         </div>
-        <div className="py-6 mb-4">
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">
-              Carátula de tu escritura
-            </h5>
-            <p className="text-[10px]">
-              Con sello de inscripción del Registro Público <br />
-              de la Propiedad
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="py-6 mb-4">
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">
+                Carátula de tu escritura
+              </h5>
+              <p className="text-[10px]">
+                Con sello de inscripción del Registro Público <br />
+                de la Propiedad
+              </p>
+            </FileInputItem>
+
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">
+                Contrato de arrendamiento
+              </h5>
+              <p className="text-[10px]">Firmado por ambas partes</p>
+            </FileInputItem>
+
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">
+                Copia del último pago predial del inmueble
+              </h5>
+            </FileInputItem>
+
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">
+                Comprobante de ingresos
+              </h5>
+              <p className="text-[10px]">
+                Útimos tres meses (Nómina o bancarios)
+              </p>
+            </FileInputItem>
+
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">
+                Certificado de finalización en el RPP
+              </h5>
+              <p className="text-[10px]">Registro Público de la Propiedad</p>
+            </FileInputItem>
+
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">RFC</h5>
+              <p className="text-[10px]">
+                Constancia de situación fiscal con antigüedad <br /> no mayor a
+                3 meses
+              </p>
+            </FileInputItem>
+
+            <FileInputItem icon="upload">
+              <h5 className="font-bold text-xs leading-3">CURP</h5>
+              <p className="text-[10px]">Certificada y emitida por la RENAPO</p>
+            </FileInputItem>
+          </div>
+
+          <div className="text-center mb-7">
+            <p className="font-semibold text-[10px] leading-3 mb-4">
+              Los documentos deberán ser escaneados en alta resolución <br /> y
+              en formato PDF, de lo contrario declinaremos el proceso.
             </p>
-          </FileInputItem>
-
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">
-              Contrato de arrendamiento
-            </h5>
-            <p className="text-[10px]">Firmado por ambas partes</p>
-          </FileInputItem>
-
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">
-              Copia del último pago predial del inmueble
-            </h5>
-          </FileInputItem>
-
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">
-              Comprobante de ingresos
-            </h5>
-            <p className="text-[10px]">
-              Útimos tres meses (Nómina o bancarios)
-            </p>
-          </FileInputItem>
-
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">
-              Certificado de finalización en el RPP
-            </h5>
-            <p className="text-[10px]">Registro Público de la Propiedad</p>
-          </FileInputItem>
-
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">RFC</h5>
-            <p className="text-[10px]">
-              Constancia de situación fiscal con antigüedad <br /> no mayor a 3
-              meses
-            </p>
-          </FileInputItem>
-
-          <FileInputItem icon="upload">
-            <h5 className="font-bold text-xs leading-3">CURP</h5>
-            <p className="text-[10px]">Certificada y emitida por la RENAPO</p>
-          </FileInputItem>
-        </div>
-
-        <div className="text-center mb-7">
-          <p className="font-semibold text-[10px] leading-3 mb-4">
-            Los documentos deberán ser escaneados en alta resolución <br /> y en
-            formato PDF, de lo contrario declinaremos el proceso.
-          </p>
-          <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
-            Siguiente
-          </button>
-        </div>
+            <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
+              Siguiente
+            </button>
+          </div>
+        </form>
         <div className="border-bottom border-primary-blue" />
 
         <div className="content">
