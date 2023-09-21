@@ -101,6 +101,9 @@ const App: React.FC = () => {
               <Route exact path="/property/contract-data">
                 <ContractData />
               </Route>
+              <Route exact path="/rent-advance">
+                <RentAdvance />
+              </Route>
               <Route exact path="/">
                 <Redirect to="/welcome" />
               </Route>
@@ -119,9 +122,6 @@ const App: React.FC = () => {
                 component={VerificationEmail}
               />
 
-              <Route exact path="/rent-advance">
-                <RentAdvance />
-              </Route>
               <Route exact path="/passport">
                 <Passport />
               </Route>
