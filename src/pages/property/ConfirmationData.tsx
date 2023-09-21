@@ -1,6 +1,32 @@
-import { IonContent, IonPage, IonCheckbox } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { useForm } from "react-hook-form";
+import { API_SERVER_URL } from "../../config";
 
 const ConfirmationData: React.FC = () => {
+  const router = useIonRouter();
+
+  const {
+    handleSubmit,
+    formState: {},
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const response = await fetch(`${API_SERVER_URL}/api/properties`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const json = await response.json();
+
+    if (json.status === "success") {
+      router.push(`/property/contract-data`);
+    }
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -13,37 +39,45 @@ const ConfirmationData: React.FC = () => {
             Reporte de Crédito
           </h4>
         </div>
-        <div className="mb-7 px-9">
-          <p className="mb-7">
-            Autorizo expresamente a Adelantto, para que lleve a cabo
-            investigaciones sobre el comportamiento crediticio de mi persona,
-            con las Sociedades de Información Crediticia: Bla, bla, bla, S.A.
-            y/o Trans Banco de México, S.A., durante los siguientes tres años o
-            durante el tiempo que mantenga relación jurídica con Adelantto.
-          </p>
-          <p className="mb-7">
-            Así mismo, declaro que conozco la naturaleza y alcance de la
-            información que se solicitará, del uso que Adelantto hará de tal
-            información y de que ésta podrá realizar consultas periódicas del
-            historial crediticio de mi persona, durante los siguientes tres años
-            o durante el tiempo que mantengamos relación jurídica.
-          </p>
-          <p>
-            De igual manera corroboró que toda la información aquí expresada es
-            verídica y esta a dispocisión y consulta para fines prácticos de
-            Adelantto y sus servicios.
-          </p>
-        </div>
-        <div className="font-bold text-center mb-7">
-          <IonCheckbox labelPlacement="end">
-            Acepto términos y condiciones del servicio
-          </IonCheckbox>
-        </div>
-        <div className="text-center mb-7">
-          <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
-            Siguiente
-          </button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-7 px-9">
+            <p className="mb-4">
+              Autorizo expresamente a Adelantto, para que lleve a cabo
+              investigaciones sobre el comportamiento crediticio de mi persona,
+              con las Sociedades de Información Crediticia: Bla, bla, bla, S.A.
+              y/o Trans Banco de México, S.A., durante los siguientes tres años
+              o durante el tiempo que mantenga relación jurídica con Adelantto.
+            </p>
+            <p className="mb-4">
+              Así mismo, declaro que conozco la naturaleza y alcance de la
+              información que se solicitará, del uso que Adelantto hará de tal
+              información y de que ésta podrá realizar consultas periódicas del
+              historial crediticio de mi persona, durante los siguientes tres
+              años o durante el tiempo que mantengamos relación jurídica.
+            </p>
+            <p>
+              De igual manera corroboró que toda la información aquí expresada
+              es verídica y esta a dispocisión y consulta para fines prácticos
+              de Adelantto y sus servicios.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 mb-10 px-9">
+            <input
+              type="radio"
+              id="terms_conditions"
+              name="confirmation_data"
+              value="transfer"
+            />
+            <label htmlFor="terms_conditions" className="text-xs font-bold">
+              Acepto términos y condiciones del servicio
+            </label>
+          </div>
+          <div className="text-center mb-7">
+            <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
+              Siguiente
+            </button>
+          </div>
+        </form>
 
         <div className="border-bottom border-primary-blue" />
       </IonContent>
