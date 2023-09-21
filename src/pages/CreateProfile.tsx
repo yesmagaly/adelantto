@@ -46,34 +46,25 @@ const CreateProfile: React.FC = () => {
 
           <div className="px-9">
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
-              <input
-                type="text"
-                id="name"
-                placeholder="Nombre (s)"
-                className="min-w-full"
-                {...register("name", { required: true })}
-              />
-              <input
-                type="text"
-                id="last_name"
-                placeholder="Apellido"
-                className="min-w-full"
-                {...register("last_name", { required: true })}
-              />
+              <div>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Nombre (s)"
+                  className="min-w-full"
+                  {...register("name", { required: true })}
+                />
+                <input
+                  type="text"
+                  id="last_name"
+                  placeholder="Apellido"
+                  className="min-w-full"
+                  {...register("last_name", { required: true })}
+                />
+              </div>
 
               <div className="mb-8">
-                <a
-                  href="#"
-                  className="block border border-gray-400 mb-4 p-4 min-w-full"
-                >
-                  Continuar con Google
-                </a>
-                <a
-                  href="#"
-                  className="block border border-gray-400 mb-4 p-4 min-w-full"
-                >
-                  Continuar con Facebook
-                </a>
+                <button>Guardar</button>
               </div>
 
               <div className="text-center">
