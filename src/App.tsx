@@ -95,6 +95,9 @@ const App: React.FC = () => {
               <Route exact path="/property/upload-pictures">
                 <UploadPictures />
               </Route>
+              <Route exact path="/property/confirmation-data">
+                <ConfirmationData />
+              </Route>
               <Route exact path="/">
                 <Redirect to="/welcome" />
               </Route>
@@ -156,9 +159,6 @@ const App: React.FC = () => {
                 <Outlay />
               </Route>
 
-              <Route exact path="/confirmation-data">
-                <ConfirmationData />
-              </Route>
               <Route exact path="/correct-deposit">
                 <CorrectDeposit />
               </Route>
