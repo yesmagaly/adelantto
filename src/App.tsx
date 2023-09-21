@@ -21,7 +21,7 @@ import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";
 import ConfirmationData from "./pages/property/ConfirmationData";
 
-import ContractData from "./pages/ContractData";
+import ContractData from "./pages/property/ContractData";
 import RentAdvance from "./pages/RentAdvance";
 import Passport from "./pages/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
@@ -98,6 +98,9 @@ const App: React.FC = () => {
               <Route exact path="/property/confirmation-data">
                 <ConfirmationData />
               </Route>
+              <Route exact path="/property/contract-data">
+                <ContractData />
+              </Route>
               <Route exact path="/">
                 <Redirect to="/welcome" />
               </Route>
@@ -116,9 +119,6 @@ const App: React.FC = () => {
                 component={VerificationEmail}
               />
 
-              <Route exact path="/contract-data">
-                <ContractData />
-              </Route>
               <Route exact path="/rent-advance">
                 <RentAdvance />
               </Route>
