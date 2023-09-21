@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
 const RentAdvance: React.FC = () => {
   const router = useIonRouter();
@@ -6,7 +6,7 @@ const RentAdvance: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue flex flex-col justify-center">
-          <h3 className="text-[30px]">
+          <h3 className="text-3xl">
             Selecciona el monto <br />
             <strong>
               que te gustaría que <br /> adelantemos de rentas
@@ -18,37 +18,37 @@ const RentAdvance: React.FC = () => {
             <div className="mb-6">
               <button
                 type="submit"
-                className="font-[600] w-full text-3xl font-medium pattern-format"
+                className="w-full text-3xl font-semibold pattern-format"
               >
                 $ 5,000.00
               </button>
               <button
                 type="submit"
-                className="font-[600] w-full text-3xl font-medium pattern-format"
+                className="w-full text-3xl font-semibold pattern-format"
               >
                 $ 10,000.00
               </button>
               <button
                 type="submit"
-                className="font-[600] w-full text-3xl font-medium pattern-format"
+                className="w-full text-3xl font-semibold pattern-format"
               >
                 $ 15,000.00
               </button>
               <button
                 type="submit"
-                className="font-[600] w-full text-3xl font-medium pattern-format"
+                className="w-full text-3xl font-semibold pattern-format"
               >
                 $ 20,000.00
               </button>
               <button
                 type="submit"
-                className="font-[600] w-full text-3xl font-medium pattern-format"
+                className="w-full text-3xl font-semibold pattern-format"
               >
                 $ 25,000.00
               </button>
               <button
                 type="submit"
-                className="font-[600] w-full text-3xl font-medium pattern-format"
+                className="w-full text-3xl font-semibold pattern-format"
               >
                 $ 30,000.00
               </button>
