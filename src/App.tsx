@@ -89,6 +89,12 @@ const App: React.FC = () => {
                 component={AdvanceImmediately}
               />
               <Route exact path="/create-profile" component={CreateProfile} />
+              <Route exact path="/property/upload-documents">
+                <UploadDocuments />
+              </Route>
+              <Route exact path="/property/upload-pictures">
+                <UploadPictures />
+              </Route>
               <Route exact path="/">
                 <Redirect to="/welcome" />
               </Route>
@@ -106,13 +112,6 @@ const App: React.FC = () => {
                 path="/verification-email/:phone"
                 component={VerificationEmail}
               />
-
-              <Route exact path="/upload-documents">
-                <UploadDocuments />
-              </Route>
-              <Route exact path="/upload-pictures">
-                <UploadPictures />
-              </Route>
 
               <Route exact path="/contract-data">
                 <ContractData />
@@ -156,7 +155,7 @@ const App: React.FC = () => {
               <Route exact path="/outlay">
                 <Outlay />
               </Route>
-              
+
               <Route exact path="/confirmation-data">
                 <ConfirmationData />
               </Route>
