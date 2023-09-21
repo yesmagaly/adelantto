@@ -38,7 +38,7 @@ const CreateProfile: React.FC = () => {
     const json = await response.json();
 
     if (json.status === "success") {
-      router.push(`/advance-immediately`);
+      router.push(`/property/upload-documents`);
     }
 
     console.log(data);
