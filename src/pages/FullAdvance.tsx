@@ -26,27 +26,31 @@ const FullAdvance: React.FC = () => {
 
             <Icon name="bell" className="mr-6 text-2xl bg-blue-800" />
           </div>
-          <h4 className="text-2xl py-7 px-7">
+          <h4 className="text-3xl py-7 px-7">
             ¡Hola, <br />
             <strong>Alexander Cruz!</strong>{" "}
           </h4>
         </div>
-        <div className="heading heading--blue heading--compact mb-7">
-          <form className="">
-            <div className="flex justify-between items-center">
-              <div>
-                <h5 className="leading-7 text-green-300">Adelantto total</h5>
-                <p className="text-2xl font-bold">$150,000.00</p>
-              </div>
+        <div className="px-8">
+          <div className="heading heading--blue heading--compact mb-7">
+            <form className="">
+              <div className="flex justify-between items-end">
+                <div>
+                  <h5 className="text-2xl mb-4 text-green-300">
+                    Adelantto total
+                  </h5>
+                  <p className="text-3xl font-bold">$150,000.00</p>
+                </div>
 
-              <button
-                className="font-regular px-3 py-1 rounded text-white button-secondary"
-                onClick={() => router.push("")}
-              >
-                Ver
-              </button>
-            </div>
-          </form>
+                <button
+                  className="text-2xl px-4 py-1 rounded-xl text-white bg-blue-900"
+                  onClick={() => router.push("")}
+                >
+                  Ver
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <div className="px-10 mb-40">
@@ -65,7 +69,7 @@ const FullAdvance: React.FC = () => {
               </div>
 
               <button
-                className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary"
+                className="font-regular px-3 py-1 rounded text-white leading-5 bg-blue-900"
                 onClick={() => router.push("")}
               >
                 Ver
@@ -84,7 +88,7 @@ const FullAdvance: React.FC = () => {
                 </div>
               </div>
               <button
-                className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary"
+                className="font-regular px-3 py-1 rounded text-white leading-5 bg-blue-900"
                 onClick={() => router.push("")}
               >
                 Ver
@@ -103,7 +107,7 @@ const FullAdvance: React.FC = () => {
                 </div>
               </div>
               <button
-                className="font-regular px-3 py-1 rounded text-white leading-5 button-secondary"
+                className="font-regular px-3 py-1 rounded text-white leading-5 bg-blue-900"
                 onClick={() => router.push("")}
               >
                 Ver
