@@ -40,8 +40,6 @@ const CreateProfile: React.FC = () => {
     if (json.status === "success") {
       router.push(`/property/upload-documents`);
     }
-
-    console.log(data);
   };
 
   return (
