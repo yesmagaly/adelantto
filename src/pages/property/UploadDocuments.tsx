@@ -11,8 +11,9 @@ const UploadDocuments: React.FC = () => {
 
   const {
     register,
+    control,
     handleSubmit,
-    formState: {},
+    formState: { },
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -28,7 +29,7 @@ const UploadDocuments: React.FC = () => {
     const json = await response.json();
 
     if (json.status === "success") {
-      router.push(`/property/upload-pictures`);
+      // router.push(`/property/upload-pictures`);
     }
   };
 
@@ -45,64 +46,66 @@ const UploadDocuments: React.FC = () => {
             para validar tu propiedad
           </h4>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="py-6 mb-4">
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">
+
+        <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-6">
+            <FileInputItem name="deed_of_ownership" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">
                 Carátula de tu escritura
               </h5>
-              <p className="text-[10px]">
+
+              <p className="text-xs">
                 Con sello de inscripción del Registro Público <br />
                 de la Propiedad
               </p>
             </FileInputItem>
 
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">
+            <FileInputItem name="lease_agreement" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">
                 Contrato de arrendamiento
               </h5>
-              <p className="text-[10px]">Firmado por ambas partes</p>
+              <p className="text-xs">Firmado por ambas partes</p>
             </FileInputItem>
 
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">
+            <FileInputItem name="latest_property_tax_receipt" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">
                 Copia del último pago predial del inmueble
               </h5>
             </FileInputItem>
 
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">
+            <FileInputItem name="proof_of_income" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">
                 Comprobante de ingresos
               </h5>
-              <p className="text-[10px]">
+              <p className="text-xs">
                 Útimos tres meses (Nómina o bancarios)
               </p>
             </FileInputItem>
 
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">
+            <FileInputItem name="rpp_certificate" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">
                 Certificado de finalización en el RPP
               </h5>
-              <p className="text-[10px]">Registro Público de la Propiedad</p>
+              <p className="text-xs">Registro Público de la Propiedad</p>
             </FileInputItem>
 
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">RFC</h5>
-              <p className="text-[10px]">
+            <FileInputItem name="rfc" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">RFC</h5>
+              <p className="text-xs">
                 Constancia de situación fiscal con antigüedad <br /> no mayor a
                 3 meses
               </p>
             </FileInputItem>
 
-            <FileInputItem icon="upload">
-              <h5 className="font-bold text-xs leading-3">CURP</h5>
-              <p className="text-[10px]">Certificada y emitida por la RENAPO</p>
+            <FileInputItem name="curp" control={control} icon="upload">
+              <h5 className="font-bold text-sm leading-4">CURP</h5>
+              <p className="text-xs">Certificada y emitida por la RENAPO</p>
             </FileInputItem>
           </div>
 
           <div className="text-center mb-7">
-            <p className="font-semibold text-[10px] leading-3 mb-4">
-              Los documentos deberán ser escaneados en alta resolución <br /> y
+            <p className="font-medium text-sm leading-4 mb-4">
+              Los documentos deberán ser escaneados en alta resolución y
               en formato PDF, de lo contrario declinaremos el proceso.
             </p>
             <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
@@ -111,45 +114,6 @@ const UploadDocuments: React.FC = () => {
           </div>
         </form>
         <div className="border-bottom border-primary-blue" />
-
-        <div className="content">
-          <Lottie
-            animationData={documentsAnimation}
-            style={{ width: 274, height: 274 }}
-            loop
-            play
-          />
-          <form className="form py-2">
-            <input type="text" placeholder="Buscar" />
-          </form>
-          <button
-            className="button button-secondary mb-8"
-            onClick={() => router.push("")}
-          >
-            Continuar
-          </button>
-        </div>
-
-        <div className="content">
-          <Lottie
-            animationData={documentsAnimation}
-            style={{ width: 225, height: 225 }}
-            loop
-            play
-          />
-          <h6 className="text-[20px] mb-6">
-            Sube <strong>tus documentos</strong>
-          </h6>
-          <form className="form py-2">
-            <input type="text" placeholder="Contrato Depto 204" />
-          </form>
-          <button
-            className="button button-secondary mb-8"
-            onClick={() => router.push("")}
-          >
-            Continuar
-          </button>
-        </div>
       </IonContent>
     </IonPage>
   );
