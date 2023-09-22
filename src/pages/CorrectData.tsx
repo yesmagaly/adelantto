@@ -18,7 +18,7 @@ const CorrectData: React.FC = () => {
           <h3 className="font-bold text-4xl text-center">¡Felicitaciones!</h3>
         </div>
         <div className="py-10">
-          <div className="mb-20">
+          <div className="mb-28">
             <div className="border-full" />
             <p className="text-center text-xl leading-4 py-6">
               Cuéntanos dónde quieres tu dinero
@@ -28,7 +28,7 @@ const CorrectData: React.FC = () => {
 
           <div className="content">
             <button
-              className=" button button-secondary mb-10"
+              className=" button button-secondary mb-20"
               onClick={() => router.push("")}
             >
               Datos bancarios
