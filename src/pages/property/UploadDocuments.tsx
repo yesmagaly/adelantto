@@ -1,80 +1,80 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
-import { API_SERVER_URL } from "../../config";
 
+import { API_SERVER_URL } from "../../config";
 import FileInputItem from "../../components/FileInputItem";
-import documentsAnimation from "../../assets/animations/documents.json";
+import { useAuth } from "../auth/authContext";
 
 const UploadDocuments: React.FC = () => {
   const router = useIonRouter();
+  const { authInfo } = useAuth()!;
 
   const {
     register,
     control,
     handleSubmit,
-    formState: { },
+    formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
+    console.log('submit ...');
+
     const response = await fetch(`${API_SERVER_URL}/api/properties`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authInfo.user.token}`,
         Accept: "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    const json = await response.json();
+    const property = await response.json();
 
-    if (json.status === "success") {
-      // router.push(`/property/upload-pictures`);
+    if (response.status === 200) {
+      router.push(`/property/upload-pictures`);
     }
   };
+
+  console.log(errors);
 
   return (
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue flex flex-col justify-center">
           <div className="heading__pager text-right">Paso 3 de 3</div>
-          <h4 className="text-xl">
-            A continuación <br />
-            <strong>
-              sube los siguientes documentos <br />
-            </strong>
-            para validar tu propiedad
+          <h4 className="text-2xl">
+            A continuación <strong>sube los siguientes documentos</strong> para validar tu propiedad
           </h4>
         </div>
 
         <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <FileInputItem name="deed_of_ownership" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">
+            <FileInputItem name="deed_of_ownership" control={control} icon="upload" rules={{ required: 'Campo requerido' }}>
+              <h5 className="font-semibold text-sm leading-4">
                 Carátula de tu escritura
               </h5>
 
               <p className="text-xs">
-                Con sello de inscripción del Registro Público <br />
-                de la Propiedad
+                Con sello de inscripción del Registro Público de la Propiedad
               </p>
             </FileInputItem>
 
             <FileInputItem name="lease_agreement" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="font-semibold text-sm leading-4">
                 Contrato de arrendamiento
               </h5>
               <p className="text-xs">Firmado por ambas partes</p>
             </FileInputItem>
 
             <FileInputItem name="latest_property_tax_receipt" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="font-semibold text-sm leading-4">
                 Copia del último pago predial del inmueble
               </h5>
             </FileInputItem>
 
             <FileInputItem name="proof_of_income" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="font-semibold text-sm leading-4">
                 Comprobante de ingresos
               </h5>
               <p className="text-xs">
@@ -83,32 +83,32 @@ const UploadDocuments: React.FC = () => {
             </FileInputItem>
 
             <FileInputItem name="rpp_certificate" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="font-semibold text-sm leading-4">
                 Certificado de finalización en el RPP
               </h5>
               <p className="text-xs">Registro Público de la Propiedad</p>
             </FileInputItem>
 
             <FileInputItem name="rfc" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">RFC</h5>
+              <h5 className="font-semibold text-sm leading-4">RFC</h5>
               <p className="text-xs">
-                Constancia de situación fiscal con antigüedad <br /> no mayor a
-                3 meses
+                Constancia de situación fiscal con antigüedad no mayor a 3 meses
               </p>
             </FileInputItem>
 
             <FileInputItem name="curp" control={control} icon="upload">
-              <h5 className="font-bold text-sm leading-4">CURP</h5>
+              <h5 className="font-semibold text-sm leading-4">CURP</h5>
               <p className="text-xs">Certificada y emitida por la RENAPO</p>
             </FileInputItem>
           </div>
 
           <div className="text-center mb-7">
-            <p className="font-medium text-sm leading-4 mb-4">
+            <p className="font-medium text-sm leading-4 mb-6">
               Los documentos deberán ser escaneados en alta resolución y
               en formato PDF, de lo contrario declinaremos el proceso.
             </p>
-            <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
+
+            <button className="button button-primary">
               Siguiente
             </button>
           </div>

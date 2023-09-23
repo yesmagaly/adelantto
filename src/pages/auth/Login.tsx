@@ -11,7 +11,7 @@ import { useAuth } from "./authContext";
 interface LoginProps
   extends RouteComponentProps<{
     phone: string;
-  }> {}
+  }> { }
 
 type FormValues = {
   email: number;
@@ -85,11 +85,12 @@ const Login: React.FC<LoginProps> = () => {
 
         <Loader isOpen={isSubmitting} />
 
-        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+        <Modal isOpen={isOpen}>
           <h3 className="font-semibold text-lg mb-5 text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.password?.message}</p>}
+          <button onClick={() => setIsOpen(false)} className="button button-secondary">Close</button>
         </Modal>
       </IonContent>
     </IonPage>

@@ -1,7 +1,12 @@
 import React from "react";
 import { API_SERVER_URL } from "../../config";
 
-type UserDataInterface = { initialized: boolean; loggedIn: boolean; user: any };
+type UserDataInterface = {
+  initialized: boolean;
+  loggedIn: boolean;
+  user: any
+};
+
 type MyContextInterface = {
   authInfo: UserDataInterface;
   initialize: () => Promise<boolean>;
@@ -51,7 +56,11 @@ export const AuthProvider: React.FC = (props: any) => {
       let v = {
         initialized: true,
         loggedIn: true,
-        user: { email, token: json.token, id: new Date().getTime() + "" },
+        user: {
+          token: json.token,
+          is_verified: json.is_verified,
+          id: new Date().getTime() + ""
+        },
       };
 
       setAuthInfo(v);

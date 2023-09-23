@@ -41,7 +41,7 @@ const validate = function (values: FormValues) {
   return errors;
 };
 
-const Welcome: React.FC = () => {
+const UpdateTemporaryPassword: React.FC = () => {
   const { authInfo } = useAuth()!;
   const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -152,4 +152,4 @@ const Welcome: React.FC = () => {
   );
 };
 
-export default Welcome;
+export default UpdateTemporaryPassword;
