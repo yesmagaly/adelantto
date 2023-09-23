@@ -8,25 +8,26 @@ import Icon from "../components/Icon/Icon";
 import Modal from "../components/Modal/Modal";
 import documentsAnimation from "../assets/animations/documents.json";
 
-interface ComponentProp {
+export interface ComponentProp extends UseControllerProps {
   icon: string;
+  children: string | JSX.Element | JSX.Element[]
 }
 
-const UploadDocuments: UseControllerProps<ComponentProp> = ({ icon, ...props }) => {
+const UploadDocuments: React.FC<ComponentProp> = ({ icon, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { field: { onChange, ...field }, fieldState } = useController(props);
+  const { field: { onChange, value, ...field }, fieldState } = useController(props);
 
-  const handleChange = async (event) => {
+  const handleChange = async (event: { target: { files: any; }; }) => {
     const { files } = event.target
+
+    // Start Loading.
+    setLoading(true);
 
     if (files.length) {
       const file = files[0];
       const body = new FormData();
       body.append('file', file);
-
-      // Loading ...
-      setLoading(true);
 
       const response = await fetch(`${API_SERVER_URL}/api/files`, {
         method: "POST",
@@ -34,35 +35,36 @@ const UploadDocuments: UseControllerProps<ComponentProp> = ({ icon, ...props }) 
         body,
       });
 
-      // Stop loading ...
+      // Stop loading.
       setLoading(false);
 
       if (response.status === 200) {
-        const { id, ...data } = await response.json();
-
-        onChange({ target_id: id, entity: { ...data } })
-      } else {
-
+        const data = await response.json();
+        onChange(data);
       }
     }
   }
 
-  const handleRemove = (event: Event) => {
+  const handleRemove = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    onChange({})
+    onChange({});
+  }
+
+  const openModal = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+    setIsOpen(true)
   }
 
   return (
-    <div>
+    <>
       <div className="flex gap-4">
-        <div className="flex justify-center gap-5 items-center basis-32 border-b border-r-2 border-[#D8D8D8] border-solid">
-          <input type="checkbox" checked={field?.value?.entity} />
-
-          <button onClick={() => setIsOpen(true)}>
-            <Icon name={icon} className="bg-gray-400" />
-          </button>
+        <div className="flex justify-center gap-5 items-center basis-32 border-b border-r border-[#D8D8D8] border-solid">
+          <input name={`${props?.name}-checkbox`} type="checkbox" checked={value?.id} />
+          <button onClick={openModal}><Icon name={icon} className="bg-gray-400" /></button>
         </div>
-        <div className="my-4 basis-full leading-3">{props?.children}</div>
+        <div className="my-4 basis-full leading-3">
+          {props?.children}
+        </div>
       </div>
 
       <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
@@ -74,24 +76,21 @@ const UploadDocuments: UseControllerProps<ComponentProp> = ({ icon, ...props }) 
         />
 
         <label className="mb-4 p-2 flex items-center justify-center bg-slate-200 rounded text-slate-800 text-center h-20" htmlFor={props.name}>
-          {!loading && field?.value?.entity && (
+          {!loading && value?.id && (
             <div>
-              <span>{field.value?.entity?.name}</span>
-              <button className="ml-2" onClick={handleRemove}>Remove</button>
+              {value?.name} <button className="ml-2" onClick={handleRemove}>Remove</button>
             </div>
           )}
-          {!loading && !field?.value?.entity && <span>Buscar</span>}
-
+          {!loading && !value?.id && <span>Buscar</span>}
           {loading && <span>Loading ...</span>}
-          <input className="hidden" id={props.name} onChange={handleChange} type="file" placeholder="Buscar" />
+          <input {...field} className="hidden" id={props.name} onChange={handleChange} type="file" placeholder="Buscar" />
         </label>
 
         <button onClick={() => setIsOpen(false)} className="button button-secondary" disabled={loading}>
           Continuar
         </button>
       </Modal>
-    </div>
-
+    </>
   );
 };
 

@@ -26,7 +26,8 @@ import RentAdvance from "./pages/RentAdvance";
 import Passport from "./pages/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Bug from "./pages/auth/Bug";
-import Welcome from "./pages/auth/Welcome";
+import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
+import Welcome from "./pages/Welcome";
 import Search from "./pages/Search";
 import PreOffer from "./pages/PreOffer";
 import BiometricValidation from "./pages/BiometricValidation";
@@ -83,6 +84,9 @@ const App: React.FC = () => {
           {authInfo?.loggedIn === true ? (
             <IonReactRouter>
               <Route exact path="/welcome" component={Welcome} />
+              <Route exact path="/update-temporary-password"
+                render={() => authInfo.user?.is_verified ? <Welcome /> : <UpdateTemporaryPassword />}
+              />
               <Route
                 exact
                 path="/advance-immediately"
@@ -178,6 +182,7 @@ const App: React.FC = () => {
               <Route exact path="/">
                 <Redirect to="/login" />
               </Route>
+              <Route component={Login} />
             </IonReactRouter>
           )}
         </>

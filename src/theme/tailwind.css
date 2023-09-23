@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,15 +7,15 @@
 /** other custom global styles can go here */
 
 .button {
-  @apply font-semibold px-7 py-3 rounded text-white leading-5; 
+  @apply font-semibold px-7 py-3 rounded leading-5 bg-gray-100;
 }
 
 .button-primary {
-  @apply bg-primary-green;
+  @apply bg-primary-green text-white;
 }
 
 .button-secondary {
-  @apply bg-primary-blue-light;
+  @apply bg-primary-blue-light text-white;
 }
 
 .heading {
@@ -116,4 +116,3 @@
 #bg-checkbox {
   @apply accent-primary-green;
 }
-
