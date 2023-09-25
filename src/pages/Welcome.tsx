@@ -1,44 +1,41 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
-import { useEffect, useState } from "react";
+import Lottie from "react-lottie-player";
+
+import homeAnimation from "../assets/animations/home.json";
 
 const Welcome: React.FC = () => {
-  const [photoUrl, setPhotoUrl] = useState();
   const router = useIonRouter();
-
-  const takePhoto = async () => {
-    const photo = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100
-    });
-    const fileName = new Date().getTime() + '.jpeg';
-
-    setPhotoUrl(photo?.webPath);
-
-    // const savedFileImage = await savePicture(photo, fileName);
-    // const newPhotos = [savedFileImage, ...photos];
-    // setPhotos(newPhotos);
-    // Preferences.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
-  };
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        Welcome!
+        <div className="h-40 px-9 pt-6">
+          <h1 className="text-3xl text-center pt-20">
+            Recibe una <strong>pre-oferta</strong> en segundos
+          </h1>
+        </div>
+        <div className="content">
+          <Lottie
+            animationData={homeAnimation}
+            style={{ width: 294, height: 294 }}
+            loop
+            play
+          />
+          <p className="font-medium my-10">
+            A continuación solicitaremos algunos datos de tu propiedad para
+            poder generar una propuesta y en caso de que sea de tu interés,
+            iniciaremos el proceso de validación de documentos.
+          </p>
 
-        <div className="flex gap-2">
-          <button className="button" onClick={() => router.push("/property/upload-documents")}>
+          <button
+            className="button button-primary mb-10"
+            onClick={() => router.push("/property/contract-data")}
+          >
             Iniciar
           </button>
 
-          <button onClick={() => takePhoto()} className="button button-secondary">
-            Continuar
-          </button>
-
+          <div className="border-bottom border-primary-blue" />
         </div>
-
-        {photoUrl && <img src={photoUrl}></img>}
       </IonContent>
     </IonPage>
   );
