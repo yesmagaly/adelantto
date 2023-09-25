@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 
 import FileInputItem from "../../components/FileInputItem";
+import PhotoInputItem from "../../components/photo-input/PhotoInputItem";
 
 const UploadPictures: React.FC = () => {
   const router = useIonRouter();
@@ -45,27 +46,28 @@ const UploadPictures: React.FC = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
-            <FileInputItem control={control} name="house_from_id" icon="camera">
+            <FileInputItem control={control} name="house_from_id">
               <h5 className="font-bold text-xs leading-3">Frente de la casa</h5>
               <p className="text-[10px]">Toma una foto del frente de tu casa</p>
             </FileInputItem>
-            <FileInputItem control={control} name="electricity_meter_id" icon="camera">
+            <PhotoInputItem control={control} name="electricity_meter_id">
               <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
               <p className="text-[10px]">Toma una foto del medidor de luz</p>
-            </FileInputItem>
-            <FileInputItem control={control} name="water_meter_id" icon="camera">
+            </PhotoInputItem>
+            <FileInputItem control={control} name="water_meter_id">
               <h5 className="font-bold text-xs leading-3">Toma de agua</h5>
               <p className="text-[10px]">
                 Toma una foto de la toma de agua principal
               </p>
             </FileInputItem>
-            <FileInputItem control={control} name="street_id" icon="upload">
+            <FileInputItem control={control} name="street_id">
               <h5 className="font-bold text-xs leading-3">Calle</h5>
               <p className="text-[10px]">
                 Toma una foto de la vista de la calle
               </p>
             </FileInputItem>
           </div>
+
           <div className="text-center mb-7">
             <p className="font-semibold text-[10px] leading-3 mb-4">
               Los documentos deberán ser escaneados en alta resolución <br /> y

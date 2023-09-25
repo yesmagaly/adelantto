@@ -5,20 +5,26 @@ import { API_SERVER_URL } from "../../config";
 import FileInputItem from "../../components/FileInputItem";
 import { useAuth } from "../auth/authContext";
 
+interface File {
+  id: number;
+  name: string;
+}
+
+interface FormData {
+  deed_of_ownership?: File
+}
+
 const UploadDocuments: React.FC = () => {
   const router = useIonRouter();
   const { authInfo } = useAuth()!;
 
   const {
-    register,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    console.log('submit ...');
-
+  const onSubmit = async (data: FormData) => {
     const response = await fetch(`${API_SERVER_URL}/api/properties`, {
       method: "POST",
       headers: {
@@ -36,8 +42,6 @@ const UploadDocuments: React.FC = () => {
     }
   };
 
-  console.log(errors);
-
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -50,31 +54,33 @@ const UploadDocuments: React.FC = () => {
 
         <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <FileInputItem name="deed_of_ownership" control={control} icon="upload" rules={{ required: 'Campo requerido' }}>
-              <h5 className="font-semibold text-sm leading-4">
+            <FileInputItem name="deed_of_ownership" control={control} rules={{ required: 'Documento requerido' }}>
+              <h5 className="font-bold text-sm leading-4">
                 Carátula de tu escritura
               </h5>
+
+              {errors?.deed_of_ownership && <span className="text-sm text-red-600">{errors.deed_of_ownership?.message}</span>}
 
               <p className="text-xs">
                 Con sello de inscripción del Registro Público de la Propiedad
               </p>
             </FileInputItem>
 
-            <FileInputItem name="lease_agreement" control={control} icon="upload">
-              <h5 className="font-semibold text-sm leading-4">
+            <FileInputItem name="lease_agreement" control={control}>
+              <h5 className="font-bold text-sm leading-4">
                 Contrato de arrendamiento
               </h5>
               <p className="text-xs">Firmado por ambas partes</p>
             </FileInputItem>
 
-            <FileInputItem name="latest_property_tax_receipt" control={control} icon="upload">
-              <h5 className="font-semibold text-sm leading-4">
+            <FileInputItem name="latest_property_tax_receipt" control={control} >
+              <h5 className="font-bold text-sm leading-4">
                 Copia del último pago predial del inmueble
               </h5>
             </FileInputItem>
 
-            <FileInputItem name="proof_of_income" control={control} icon="upload">
-              <h5 className="font-semibold text-sm leading-4">
+            <FileInputItem name="proof_of_income" control={control} >
+              <h5 className="font-bold text-sm leading-4">
                 Comprobante de ingresos
               </h5>
               <p className="text-xs">
@@ -82,22 +88,22 @@ const UploadDocuments: React.FC = () => {
               </p>
             </FileInputItem>
 
-            <FileInputItem name="rpp_certificate" control={control} icon="upload">
-              <h5 className="font-semibold text-sm leading-4">
+            <FileInputItem name="rpp_certificate" control={control} >
+              <h5 className="font-bold text-sm leading-4">
                 Certificado de finalización en el RPP
               </h5>
               <p className="text-xs">Registro Público de la Propiedad</p>
             </FileInputItem>
 
-            <FileInputItem name="rfc" control={control} icon="upload">
-              <h5 className="font-semibold text-sm leading-4">RFC</h5>
+            <FileInputItem name="rfc" control={control} >
+              <h5 className="font-bold text-sm leading-4">RFC</h5>
               <p className="text-xs">
                 Constancia de situación fiscal con antigüedad no mayor a 3 meses
               </p>
             </FileInputItem>
 
-            <FileInputItem name="curp" control={control} icon="upload">
-              <h5 className="font-semibold text-sm leading-4">CURP</h5>
+            <FileInputItem name="curp" control={control} >
+              <h5 className="font-bold text-sm leading-4">CURP</h5>
               <p className="text-xs">Certificada y emitida por la RENAPO</p>
             </FileInputItem>
           </div>

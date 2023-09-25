@@ -9,13 +9,13 @@ import Modal from "../components/Modal/Modal";
 import documentsAnimation from "../assets/animations/documents.json";
 
 export interface ComponentProp extends UseControllerProps {
-  icon: string;
   children: string | JSX.Element | JSX.Element[]
 }
 
-const UploadDocuments: React.FC<ComponentProp> = ({ icon, ...props }) => {
+const UploadDocuments: React.FC<ComponentProp> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({ message: null });
   const { field: { onChange, value, ...field }, fieldState } = useController(props);
 
   const handleChange = async (event: { target: { files: any; }; }) => {
@@ -29,19 +29,25 @@ const UploadDocuments: React.FC<ComponentProp> = ({ icon, ...props }) => {
       const body = new FormData();
       body.append('file', file);
 
-      const response = await fetch(`${API_SERVER_URL}/api/files`, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body,
-      });
+      try {
+        const response = await fetch(`${API_SERVER_URL}/api/files`, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body,
+        });
+
+        if (response.status === 200) {
+          const data = await response.json();
+          onChange(data);
+        } else {
+
+        }
+      } catch (errorFetch) {
+        setError({ message: errorFetch?.message })
+      }
 
       // Stop loading.
       setLoading(false);
-
-      if (response.status === 200) {
-        const data = await response.json();
-        onChange(data);
-      }
     }
   }
 
@@ -59,8 +65,10 @@ const UploadDocuments: React.FC<ComponentProp> = ({ icon, ...props }) => {
     <>
       <div className="flex gap-4">
         <div className="flex justify-center gap-5 items-center basis-32 border-b border-r border-[#D8D8D8] border-solid">
-          <input name={`${props?.name}-checkbox`} type="checkbox" checked={value?.id} />
-          <button onClick={openModal}><Icon name={icon} className="bg-gray-400" /></button>
+          {value?.id ? <Icon name="square-check" className="bg-green-400" /> : <Icon name="square" className="bg-slate-300" />}
+          <button onClick={openModal} className="inline-flex">
+            <Icon name='upload' className="bg-gray-400 text-lg" />
+          </button>
         </div>
         <div className="my-4 basis-full leading-3">
           {props?.children}
@@ -85,6 +93,8 @@ const UploadDocuments: React.FC<ComponentProp> = ({ icon, ...props }) => {
           {loading && <span>Loading ...</span>}
           <input {...field} className="hidden" id={props.name} onChange={handleChange} type="file" placeholder="Buscar" />
         </label>
+
+        {error.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
 
         <button onClick={() => setIsOpen(false)} className="button button-secondary" disabled={loading}>
           Continuar
