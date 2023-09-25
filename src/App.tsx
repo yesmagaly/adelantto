@@ -108,6 +108,9 @@ const App: React.FC = () => {
               <Route exact path="/rent-advance">
                 <RentAdvance />
               </Route>
+              <Route exact path="/pre-offer">
+                <PreOffer />
+              </Route>
               <Route exact path="/">
                 <Redirect to="/welcome" />
               </Route>
@@ -137,9 +140,6 @@ const App: React.FC = () => {
               </Route>
               <Route exact path="/search">
                 <Search />
-              </Route>
-              <Route exact path="/pre-offer">
-                <PreOffer />
               </Route>
               <Route exact path="/biometric-validation">
                 <BiometricValidation />

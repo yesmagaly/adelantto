@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 
 const PreOffer: React.FC = () => {
   return (
@@ -9,9 +9,9 @@ const PreOffer: React.FC = () => {
             Pre<strong>-Oferta Adelantto</strong>
           </h2>
         </div>
-        <div className="content">
+        <div className="content mb-8">
           <form className="form">
-            <div className="bg-white py-3 shadow-xl mb-5">
+            <div className="bg-white py-3 border border-gray-400 mb-7">
               <div className="mb-7 leading-5">
                 <p>
                   <strong>
@@ -62,6 +62,7 @@ const PreOffer: React.FC = () => {
             </div>
           </form>
         </div>
+        <div className="border-bottom border-primary-blue" />
       </IonContent>
     </IonPage>
   );
