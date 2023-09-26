@@ -9,36 +9,38 @@ const Withdrawals: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue text-center heading--compact ">
-          <h3 className="text-[30px]">
+        <div className="heading heading--blue text-center heading--compact mb-2">
+          <h3 className="text-3xl py-5">
             ¿Dónde quieres <br />
             <strong>tu dinero?</strong>
           </h3>
         </div>
         <div className="content">
-          <Lottie
-            animationData={walletAnimation}
-            style={{ width: 251, height: 251 }}
-            loop
-            play
-          />
-          <form className="form mb-7">
-            <input
-              type="text"
-              placeholder="Subir carátula de tu estado de cuenta"
+          <div className="content bg-white py-5 shadow-2xl w-full border border-gray-200 mb-5">
+            <Lottie
+              animationData={walletAnimation}
+              style={{ width: 251, height: 251 }}
+              loop
+              play
             />
-          </form>
-          <div className="mb-16">
-            <a className="underline leading-10">Términos interbancarios</a>
-            <p>
-              A continuación encontrarás el contrato <br /> relacionado a tu
-              solicitud.
-            </p>
+            <form className="form mb-7">
+              <input
+                type="text"
+                placeholder="Subir carátula de tu estado de cuenta"
+              />
+            </form>
+            <div className="mb-16">
+              <a className="underline leading-10">Términos interbancarios</a>
+              <p>
+                A continuación encontrarás el contrato <br /> relacionado a tu
+                solicitud.
+              </p>
+            </div>
           </div>
 
           <div className="mb-7">
             <button
-              className="button button-primary mb-16"
+              className="button button-primary mb-8"
               onClick={() => router.push("/verification-email")}
             >
               Siguiente
@@ -48,7 +50,7 @@ const Withdrawals: React.FC = () => {
           <div className="border-bottom border-primary-blue" />
         </div>
 
-        <div>
+        <div className="py-10">
           <h2>
             <strong>
               Términos <br /> interbancarios
