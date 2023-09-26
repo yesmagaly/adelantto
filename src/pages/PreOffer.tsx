@@ -4,14 +4,14 @@ const PreOffer: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue heading--center heading--compact">
-          <h2 className="text-[30px]">
+        <div className="heading heading--blue heading--center heading--compact mb-7">
+          <h2 className="text-3xl py-5">
             Pre<strong>-Oferta Adelantto</strong>
           </h2>
         </div>
-        <div className="content mb-8">
+        <div className="content mb-7">
           <form className="form">
-            <div className="bg-white py-3 border border-gray-400 mb-7">
+            <div className="bg-white py-3 shadow-2xl w-96 border border-gray-200 mb-5">
               <div className="mb-7 leading-5">
                 <p>
                   <strong>
@@ -41,7 +41,7 @@ const PreOffer: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="bg-white py-5 shadow-xl w-full">
+            <div className="bg-white py-6 shadow-2xl w-96 border border-gray-200 mb-7">
               <p className="text-center font-bold mb-4">
                 ¿Te interesa ver el resumen <br /> para otros meses?
               </p>
@@ -61,8 +61,8 @@ const PreOffer: React.FC = () => {
               </p>
             </div>
           </form>
+          <div className="border-bottom border-primary-blue" />
         </div>
-        <div className="border-bottom border-primary-blue" />
       </IonContent>
     </IonPage>
   );
