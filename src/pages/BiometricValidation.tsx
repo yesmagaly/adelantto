@@ -14,9 +14,9 @@ const BiometricValidation: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div>
-          <div className="content">
-            <h2 className="heading__title pt-20">
+        <div className="content">
+          <div className="bg-white py-5 shadow-2xl w-96 border border-gray-200 mb-10">
+            <h2 className="heading__title pt-8">
               Validación
               <strong>
                 <br />
@@ -26,25 +26,25 @@ const BiometricValidation: React.FC = () => {
             <p className="text-sm leading-4 mb-16">
               ¡Sonrie! Queremos conocerte
             </p>
+            <div className="heading--center mb-36">
+              <Lottie
+                animationData={photographyAnimation}
+                style={{ width: 320, height: 320 }}
+                loop
+                play
+              />
+            </div>
 
-            <Lottie
-              animationData={photographyAnimation}
-              style={{ width: 320, height: 320 }}
-              loop
-              play
-            />
+            <div className="text-center">
+              <button
+                className="button button-primary mb-10"
+                onClick={() => router.push("")}
+              >
+                Capturar foto
+              </button>
+            </div>
           </div>
-
-          <div className="text-center py-24">
-            <button
-              className="button button-primary mb-14"
-              onClick={() => router.push("")}
-            >
-              Capturar foto
-            </button>
-
-            <div className="border-bottom border-primary-blue" />
-          </div>
+          <div className="border-bottom border-primary-blue" />
         </div>
 
         <div className="content">
