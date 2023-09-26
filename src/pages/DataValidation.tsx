@@ -8,16 +8,16 @@ const DataValidation: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="content">
+        <div className="heading--center">
           <Lottie
             animationData={searchHomeAnimation}
             style={{ width: 220, height: 220 }}
             loop
             play
           />
-          <h3 className="font-bold text-2xl">¡Ya casi!</h3>
+          <h3 className="font-bold text-3xl mb-4">¡Ya casi!</h3>
           <div className="border-full" />
-          <p className="text-center text-sm leading-4">
+          <p className="text-center text-sm leading-4 py-4">
             Por último validaremos los datos de tu propiedad. Te
             <br />
             enviaremos un correo electrónico en las próximas <br />
@@ -26,7 +26,7 @@ const DataValidation: React.FC = () => {
           <div className="border-full" />
         </div>
         <div className="heading--center px-10">
-          <div className="mb-7">
+          <div className="py-4">
             <div className="flex items-center mb-3">
               <input type="checkbox" id="bg-checkbox" className="w-6 h-6" />
               <label htmlFor="bg-checkbox" className="main ml-4">
@@ -46,10 +46,11 @@ const DataValidation: React.FC = () => {
               </label>
             </div>
           </div>
-          <div className="border-full" />
-          <div className="my-7">
-            <h4 className="font-bold text-[30px]">¡Hasta pronto!</h4>
-          </div>
+        </div>
+        <div className="border-full" />
+        <div className="heading--center">
+          <h4 className="font-bold text-3xl py-10">¡Hasta pronto!</h4>
+
           <button
             className="button button-primary mb-16"
             onClick={() => router.push("")}
