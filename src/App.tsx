@@ -111,29 +111,9 @@ const App: React.FC = () => {
               <Route exact path="/pre-offer">
                 <PreOffer />
               </Route>
-              <Route exact path="/">
-                <Redirect to="/welcome" />
-              </Route>
-            </IonReactRouter>
-          ) : (
-            <IonReactRouter>
-              <Route path="/create-account" component={Register} exact />
-              <Route path="/login" component={Login} exact />
-              <Route path="/register" component={Register} exact />
-              <Route
-                path="/verification-code/:phone"
-                component={VerificationCode}
-              />
-              <Route
-                path="/verification-email/:phone"
-                component={VerificationEmail}
-              />
 
               <Route exact path="/passport">
                 <Passport />
-              </Route>
-              <Route exact path="/terms-and-conditions">
-                <TermsAndConditions />
               </Route>
               <Route exact path="/bug">
                 <Bug />
@@ -177,6 +157,29 @@ const App: React.FC = () => {
               </Route>
               <Route exact path="/succesful-transaction">
                 <SuccesfulTransaction />
+              </Route>
+
+
+              <Route exact path="/">
+                <Redirect to="/welcome" />
+              </Route>
+            </IonReactRouter>
+          ) : (
+            <IonReactRouter>
+              <Route path="/create-account" component={Register} exact />
+              <Route path="/login" component={Login} exact />
+              <Route path="/register" component={Register} exact />
+              <Route
+                path="/verification-code/:phone"
+                component={VerificationCode}
+              />
+              <Route
+                path="/verification-email/:phone"
+                component={VerificationEmail}
+              />
+
+              <Route exact path="/terms-and-conditions">
+                <TermsAndConditions />
               </Route>
 
               <Route exact path="/">
