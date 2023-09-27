@@ -8,23 +8,25 @@ const ValidationError: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="content">
-          <h3 className=" font-bold text-4xl">¡Lo sentimos!</h3>
+        <div className="heading--center">
+          <div className="py-28">
+            <h3 className="text-center font-bold text-[40px]">¡Lo sentimos!</h3>
 
-          <Lottie
-            animationData={closeHomeAnimation}
-            style={{ width: 274, height: 274 }}
-            loop
-            play
-          />
+            <Lottie
+              animationData={closeHomeAnimation}
+              style={{ width: 274, height: 274 }}
+              loop
+              play
+            />
+          </div>
         </div>
         <div className="text-center">
-          <p className="text-sm leading-4 border-y border-solid border-primary-blue py-6 mb-28">
+          <p className="text-sm leading-4 border-y border-solid border-primary-blue py-6 mb-24">
             Los datos de tu propiedad no han pasado <br /> nuestro proceso de
             validación
           </p>
           <button
-            className="button button-primary mb-16"
+            className="button button-primary mb-14"
             onClick={() => router.push("")}
           >
             Finalizar
