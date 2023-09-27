@@ -8,7 +8,7 @@ const Summary: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading__paper flex justify-end gap-3 items-center h-20 py-10 px-8">
+        <div className="heading__paper flex justify-end gap-3 items-center h-20 py-12 px-8">
           <div>
             <button onClick={() => router.push("")}>
               <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
@@ -26,7 +26,7 @@ const Summary: React.FC = () => {
           <Icon name="bell" className="text-2xl bg-blue-800" />
         </div>
 
-        <div className="h-96 bg-cover text-white px-9 py-14 heading--blue">
+        <div className="h-90 bg-cover text-white px-9 py-10 heading--blue">
           <h5 className="font-bold text-2xl leading-6">Adelantto 00001</h5>
           <p className="mb-6">Calle 17 Sur 13-22</p>
           <div className="border-full" />
@@ -39,7 +39,7 @@ const Summary: React.FC = () => {
         </div>
 
         <div className="px-7 py-8">
-          <h4 className="font-bold text-lx mb-4">RESUMEN</h4>
+          <h4 className="font-bold text-xl mb-4">RESUMEN</h4>
 
           <div className="flex justify-between gap-3 mb-7">
             <button className="text-lg bg-gray-200 px-4 py-0.5 rounded-md">
@@ -74,7 +74,7 @@ const Summary: React.FC = () => {
               <div className="flex justify-between items-center">
                 <div className="mb-4">
                   <h6 className="font-bold leading-6">MES 2 - PAGADO</h6>
-                  <p className="text-xs">26-04-2023</p>
+                  <p className="text-xs">26-05-2023</p>
                 </div>
 
                 <button
@@ -90,7 +90,7 @@ const Summary: React.FC = () => {
                   <h6 className="font-bold text-blue-900 leading-6">
                     MES 3 - PENDIENTE POR PAGAR
                   </h6>
-                  <p className="text-xs">26-04-2023</p>
+                  <p className="text-xs">26-06-2023</p>
                 </div>
 
                 <button
