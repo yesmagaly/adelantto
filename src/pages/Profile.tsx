@@ -9,32 +9,30 @@ const Profile: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading__paper flex justify-end h-20 py-10 px-8">
-          <div>
-            <button onClick={() => router.push("")}>
-              <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
-            </button>
+        <div className="heading__paper flex justify-end h-20 py-10 px-8 mb-8">
+          <button onClick={() => router.push("")}>
+            <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+          </button>
 
-            <button onClick={() => router.push("")}>
-              <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
-            </button>
+          <button onClick={() => router.push("")}>
+            <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+          </button>
 
-            <button onClick={() => router.push("")}>
-              <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
-            </button>
-          </div>
+          <button onClick={() => router.push("")}>
+            <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
+          </button>
         </div>
         <div className="heading--center">
           <img className="h-40 mb-8" src={avatar} />
         </div>
-        <div className="text-center mb-16">
+        <div className="text-center mb-14">
           <h5 className="font-bold text-lx leading-5">Alexander Cruz Páez</h5>
           <p>acruz@csoft.co</p>
         </div>
 
         <div className="px-10">
           <div>
-            <h6 className="text-gray-400 text-xs leading-3 mb-4">Adelantto</h6>
+            <h6 className="text-gray-400 text-xs leading-3 mb-10">Adelantto</h6>
 
             <p className="text-[16px] mb-4">
               <Icon name="bell" className="mr-3 text-xs bg-black" />
@@ -48,7 +46,7 @@ const Profile: React.FC = () => {
             <div className="border-full" />
           </div>
           <div>
-            <h6 className="text-gray-400 text-xs leading-3 mb-4">Ayuda</h6>
+            <h6 className="text-gray-400 text-xs leading-3 py-6">Ayuda</h6>
             <p className="text-[16px] mb-4">
               <Icon name="alert" className="mr-3 text-xs bg-black" />
               Reportar un problema
