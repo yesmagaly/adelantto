@@ -31,7 +31,7 @@ const CorrectDeposit: React.FC = () => {
                 nuevo Adelantto.
               </p>
               <button
-                className="font-semibold px-16 py-2 rounded text-white leading-5 bg-primary-blue-light"
+                className="button button-secondary"
                 onClick={() => router.push("")}
               >
                 Menú
