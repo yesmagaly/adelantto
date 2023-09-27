@@ -8,32 +8,32 @@ const Outlay: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue heading--center mb-10">
-          <h3 className="text-[30px] mb-4">
+          <h3 className="text-3xl mb-4">
             <strong>Desembolso</strong>
           </h3>
           <p>Conoce el desglose de tu servicio</p>
         </div>
         <div className="mb-10">
           <div className="mb-16">
-            <IconItem icon="document">
+            <IconItem icon="document text-3xl bg-black">
               <p className="underline">
                 <strong>Términos </strong> de desembolso
               </p>
             </IconItem>
             <div className="border-full" />
-            <IconItem icon="clock">
+            <IconItem icon="clock text-4xl">
               <p className="underline">
                 <strong>Tiempos </strong> interbancarios
               </p>
             </IconItem>
             <div className="border-full" />
-            <IconItem icon="sun">
+            <IconItem icon="sun text-5xl">
               <p className="underline">
                 <strong>Claridad </strong> en comisiones
               </p>
             </IconItem>
             <div className="border-full" />
-            <IconItem icon="bell">
+            <IconItem icon="bell text-3xl">
               <p className="underline leading-5">
                 <strong>Envío de notificación </strong> con <br /> tracking
               </p>
