@@ -7,7 +7,7 @@
 /** other custom global styles can go here */
 
 .button {
-  @apply font-semibold px-7 py-3 rounded leading-5 bg-gray-100;
+  @apply font-semibold px-12 py-2.5 rounded leading-5 bg-gray-100;
 }
 
 .button-primary {
