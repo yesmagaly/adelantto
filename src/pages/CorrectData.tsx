@@ -15,7 +15,7 @@ const CorrectData: React.FC = () => {
             loop
             play
           />
-          <h3 className="font-bold text-4xl text-center">¡Felicitaciones!</h3>
+          <h3 className="font-bold text-[40px]">¡Felicitaciones!</h3>
         </div>
         <div className="py-10">
           <div className="mb-28">
@@ -26,9 +26,9 @@ const CorrectData: React.FC = () => {
             <div className="border-full" />
           </div>
 
-          <div className="content">
+          <div className="heading--center">
             <button
-              className=" button button-secondary mb-20"
+              className="font-semibold px-4 py-2.5 rounded leading-5 bg-gray-100 button-secondary mb-20"
               onClick={() => router.push("")}
             >
               Datos bancarios
