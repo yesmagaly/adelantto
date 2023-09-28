@@ -43,30 +43,27 @@ const LeaseContract: React.FC = () => {
         <div>
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <input {...register("monthly_lease_income")} type="numeric" placeholder="valor de tu renta mensual" required />
+              <label>Valor de tu renta mensual</label>
+              <input {...register("monthly_lease_income")} type="numeric" placeholder="" required />
             </div>
             <div className="border-full !mt-0" />
 
             <div>
-              <input {...register("lease_start_date")} type="date" required placeholder="Fecha de inicio del contrato de arrendamiento" />
+              <label>Fecha de inicio del contrato de arrendamiento</label>
+              <input {...register("lease_start_date")} type="date" required placeholder="" />
             </div>
             <div className="border-full !mt-0" />
 
             <div>
-              <input {...register("lease_end_date")} type="date"
-                placeholder="Fecha de fin del contrato de arrendamiento"
-                required
-              />
+              <label>Fecha de fin del contrato de arrendamiento</label>
+              <input {...register("lease_end_date")} type="date" placeholder="" required />
             </div>
+
             <div className="border-full !mt-0" />
 
             <div>
-              <input
-                {...register("property_zip_code")}
-                type="text"
-                placeholder="Código postal de tu inmueble"
-                required
-              />
+              <label>Código postal de tu inmueble</label>
+              <input {...register("property_zip_code")} type="text" placeholder="" required />
             </div>
             <div className="border-full !mt-0" />
 
