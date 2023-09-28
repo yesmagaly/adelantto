@@ -10,7 +10,7 @@ const LeaseContract: React.FC = () => {
   const {
     handleSubmit,
     register,
-    formState: { },
+    formState: {},
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -40,30 +40,50 @@ const LeaseContract: React.FC = () => {
           </h1>
         </div>
 
-        <div>
+        <div className="px-6 text-center text-sm">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label>Valor de tu renta mensual</label>
-              <input {...register("monthly_lease_income")} type="numeric" placeholder="" required />
+              <input
+                {...register("monthly_lease_income")}
+                type="numeric"
+                placeholder=""
+                required
+              />
             </div>
             <div className="border-full !mt-0" />
 
             <div>
               <label>Fecha de inicio del contrato de arrendamiento</label>
-              <input {...register("lease_start_date")} type="date" required placeholder="" />
+              <input
+                {...register("lease_start_date")}
+                type="date"
+                required
+                placeholder=""
+              />
             </div>
             <div className="border-full !mt-0" />
 
             <div>
               <label>Fecha de fin del contrato de arrendamiento</label>
-              <input {...register("lease_end_date")} type="date" placeholder="" required />
+              <input
+                {...register("lease_end_date")}
+                type="date"
+                placeholder=""
+                required
+              />
             </div>
 
             <div className="border-full !mt-0" />
 
             <div>
               <label>Código postal de tu inmueble</label>
-              <input {...register("property_zip_code")} type="text" placeholder="" required />
+              <input
+                {...register("property_zip_code")}
+                type="text"
+                placeholder=""
+                required
+              />
             </div>
             <div className="border-full !mt-0" />
 
@@ -78,6 +98,7 @@ const LeaseContract: React.FC = () => {
                     type="radio"
                     id="payment_cash"
                     value="cash"
+                    required
                   />
                   <label htmlFor="payment_cash" className="text-xs font-bold">
                     Efectivo
@@ -89,6 +110,7 @@ const LeaseContract: React.FC = () => {
                     type="radio"
                     id="payment_transfer"
                     value="transfer"
+                    required
                   />
                   <label
                     htmlFor="payment_transfer"

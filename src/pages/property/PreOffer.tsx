@@ -8,10 +8,10 @@ import { API_SERVER_URL } from "../../config";
 interface PreOfferProps
   extends RouteComponentProps<{
     id: string;
-  }> { }
+  }> {}
 
 interface LoanContract {
-  desired_loan: number
+  desired_loan: number;
 }
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
@@ -22,12 +22,15 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   // GET with fetch API
   useEffect(() => {
     const fetchLoanContract = async () => {
-      const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts/${match.params.id}`, {
-        headers: {
-          Authorization: `Bearer ${authInfo.user.token}`,
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        `${API_SERVER_URL}/api/leasing-contracts/${match.params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${authInfo.user.token}`,
+            Accept: "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       setLoanContract(data);
@@ -36,10 +39,9 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     fetchLoanContract();
   }, []);
 
-
   const handleMothsChange = (event) => {
-    setLoanMonths(event.target.value)
-  }
+    setLoanMonths(event.target.value);
+  };
 
   return (
     <IonPage>
@@ -54,40 +56,54 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
         {loanContract?.id && (
           <div className="content mb-7">
             <form className="form">
-              <div className="bg-white py-3 shadow-2xl w-96 border border-gray-200 mb-5">
+              <div className="bg-white py-4 shadow-2xl w-96 border border-gray-200 mb-5">
                 <div className="mb-7 leading-5">
                   <p>
-                    <strong>Seleccionaste {loanMonths} meses,</strong>
-                      <br />
+                    <strong className="text-lg">
+                      Seleccionaste {loanMonths} meses,
+                    </strong>
+                    <br />
                     a continuación te presentamos <br /> el resumen de nuestra
                     oferta.
                   </p>
                 </div>
 
-                <div>
-                  <div>
-                    <div>$ {loanContract?.desired_loan} MXN</div>
+                <div className="px-5">
+                  <div className="bg-gray-100 mb-4 py-3">
+                    <div className="font-medium text-2xl">
+                      $ {loanContract?.desired_loan} MXN
+                    </div>
                     <span>El total de los meses de tu renta</span>
                   </div>
 
-                  <div>
-                    <div>$ {loanContract?.desired_loan * 0.80} MXN</div>
+                  <div className="bg-gray-100 mb-4 py-3">
+                    <div className="font-medium text-2xl">
+                      $ {loanContract?.desired_loan * 0.8} MXN
+                    </div>
                     <span>El monto que recibirás</span>
                   </div>
 
-                  <div>
-                    <div>$ {loanContract?.desired_loan * 0.20} MXN</div>
+                  <div className="bg-gray-100 py-3">
+                    <div className="font-medium text-2xl">
+                      $ {loanContract?.desired_loan * 0.2} MXN
+                    </div>
                     <span>Costo de nuestro servicio y seguro</span>
                   </div>
                 </div>
               </div>
 
               <div className="bg-white py-6 shadow-2xl w-96 border border-gray-200 mb-7">
-                <p className="text-center font-bold mb-4">
+                <p className="text-center font-medium mb-4 leading-4">
                   ¿Te interesa ver el resumen <br /> para otros meses?
                 </p>
-                <div>
-                  <input type="number" size="4" defaultValue={loanMonths} onChange={handleMothsChange} />
+                <div className="mb-5">
+                  <input
+                    type="number"
+                    size="4"
+                    defaultValue={loanMonths}
+                    onChange={handleMothsChange}
+                    className="font-semibold text-xl text-center bg-gray-100 w-12 py-3 shadow-md"
+                  />
                 </div>
 
                 <button className="button button-secondary mb-7">

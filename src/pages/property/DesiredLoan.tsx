@@ -10,7 +10,6 @@ interface DesiredLoanProps
     id: string;
   }> {}
 
-
 const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const router = useIonRouter();
   const { authInfo } = useAuth()!;
@@ -18,19 +17,22 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const {
     handleSubmit,
     register,
-    formState: { },
+    formState: {},
   } = useForm();
 
   const onSubmit = async (data) => {
-    const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts/${match.params.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${authInfo.user.token}`,
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      `${API_SERVER_URL}/api/leasing-contracts/${match.params.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${authInfo.user.token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
     const leaseContract = await response.json();
 
@@ -39,14 +41,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
     }
   };
 
-  const options = [
-    5000,
-    10000,
-    15000,
-    20000,
-    25000,
-    30000,
-  ]
+  const options = [5000, 10000, 15000, 20000, 25000, 30000];
 
   return (
     <IonPage>
@@ -61,10 +56,22 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
         </div>
         <div className="px-16 py-8">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            {options.map(option => (
-              <div key={`dl-${option}`}>
-                <input {...register('desired_loan')} type="radio" value={option} id={`desired_loan-${option}`} />
-                <label className="w-full text-3xl font-semibold" htmlFor={`desired_loan-${option}`}>
+            {options.map((option) => (
+              <div
+                key={`dl-${option}`}
+                className="cursor-pointer px-5 py-2 w-48 opacity-100 bg-gradient-to-t bg-gray-100"
+              >
+                <input
+                  className="mr-4"
+                  {...register("desired_loan")}
+                  type="radio"
+                  value={option}
+                  id={`desired_loan-${option}`}
+                />
+                <label
+                  className="w-full text-3xl font-semibold"
+                  htmlFor={`desired_loan-${option}`}
+                >
                   {option}
                 </label>
               </div>
