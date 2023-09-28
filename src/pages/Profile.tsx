@@ -9,7 +9,7 @@ const Profile: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading__paper flex justify-end h-20 py-10 px-8 mb-8">
+        <div className="flex justify-end h-20 py-10 px-8 mb-8">
           <button onClick={() => router.push("")}>
             <IonIcon className="w-2 text-gray-300" icon={ellipse}></IonIcon>
           </button>
@@ -34,12 +34,12 @@ const Profile: React.FC = () => {
           <div>
             <h6 className="text-gray-400 text-xs leading-3 mb-10">Adelantto</h6>
 
-            <p className="text-[16px] mb-4">
+            <p className="mb-4">
               <Icon name="bell" className="mr-3 text-xs bg-black" />
               Notificaciones
             </p>
             <div className="border-full" />
-            <p className="text-[16px] mb-4">
+            <p className="mb-4">
               <Icon name="user" className="mr-3 text-xs bg-black" />
               Mis datos
             </p>
@@ -47,17 +47,17 @@ const Profile: React.FC = () => {
           </div>
           <div>
             <h6 className="text-gray-400 text-xs leading-3 py-6">Ayuda</h6>
-            <p className="text-[16px] mb-4">
+            <p className="mb-4">
               <Icon name="alert" className="mr-3 text-xs bg-black" />
               Reportar un problema
             </p>
             <div className="border-full" />
-            <p className="text-[16px] mb-4">
+            <p className="mb-4">
               <Icon name="user" className="mr-3 text-xs bg-black" />
               Preguntas frecuentes
             </p>
             <div className="border-full" />
-            <p className="text-[16px] mb-4">
+            <p className="mb-4">
               <Icon name="queries" className="mr-3 text-xs bg-black" />
               Términos y condiciones
             </p>
