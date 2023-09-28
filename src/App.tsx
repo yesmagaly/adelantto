@@ -21,15 +21,15 @@ import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";
 import ConfirmationData from "./pages/property/ConfirmationData";
 
-import ContractData from "./pages/property/ContractData";
-import RentAdvance from "./pages/RentAdvance";
+import LeaseContract from "./pages/property/LeaseContract";
+import DesiredLoan from "./pages/property/DesiredLoan";
 import Passport from "./pages/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Bug from "./pages/auth/Bug";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import Welcome from "./pages/Welcome";
 import Search from "./pages/Search";
-import PreOffer from "./pages/PreOffer";
+import PreOffer from "./pages/property/PreOffer";
 import BiometricValidation from "./pages/BiometricValidation";
 import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
@@ -63,7 +63,6 @@ import "./theme/variables.css";
 
 /* Tailwind styles */
 import "./theme/tailwind.css";
-import UserPage from "./pages/UserPage";
 import { useAuth } from "./pages/auth/authContext";
 
 setupIonicReact();
@@ -74,6 +73,7 @@ const App: React.FC = () => {
   useEffect(() => {
     !authInfo?.initialized && (async () => await initialize())();
   }, [authInfo, initialize]);
+
 
   if (!authInfo || !authInfo.initialized) {
     return <IonApp>{/* <IonLoading isOpen={true} /> */}</IonApp>;
@@ -102,170 +102,41 @@ const App: React.FC = () => {
               <Route exact path="/property/confirmation-data">
                 <ConfirmationData />
               </Route>
-              <Route exact path="/property/contract-data">
-                <ContractData />
-              </Route>
-              <Route exact path="/rent-advance">
-                <RentAdvance />
-              </Route>
-              <Route exact path="/pre-offer">
-                <PreOffer />
-              </Route>
 
-              <Route exact path="/passport">
-                <Passport />
-              </Route>
-              <Route exact path="/bug">
-                <Bug />
-              </Route>
-              <Route exact path="/search">
-                <Search />
-              </Route>
-              <Route exact path="/biometric-validation">
-                <BiometricValidation />
-              </Route>
-              <Route exact path="/data-validation">
-                <DataValidation />
-              </Route>
-              <Route exact path="/validation-error">
-                <ValidationError />
-              </Route>
-              <Route exact path="/correct-data">
-                <CorrectData />
-              </Route>
-              <Route exact path="/withdrawals">
-                <Withdrawals />
-              </Route>
-              <Route exact path="/signature">
-                <Signature />
-              </Route>
-              <Route exact path="/outlay">
-                <Outlay />
-              </Route>
+              <Route exact path="/lease-contract" component={LeaseContract} />
+              <Route exact path="/lease-contract/:id/desired-loan" component={DesiredLoan} />
+              <Route exact path="/lease-contract/:id/pre-offer" component={PreOffer} />
 
-              <Route exact path="/correct-deposit">
-                <CorrectDeposit />
-              </Route>
-              <Route exact path="/full-advance">
-                <FullAdvance />
-              </Route>
-              <Route exact path="/summary">
-                <Summary />
-              </Route>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-              <Route exact path="/succesful-transaction">
-                <SuccesfulTransaction />
-              </Route>
-
-
-              <Route exact path="/">
-                <Redirect to="/welcome" />
-              </Route>
+              <Route exact path="/passport" component={Passport} />
+              <Route exact path="/bug" component={Bug} />
+              <Route exact path="/search" component={Search} />
+              <Route exact path="/biometric-validation" component={BiometricValidation} />
+              <Route exact path="/data-validation" component={DataValidation} />
+              <Route exact path="/validation-error" component={ValidationError} />
+              <Route exact path="/correct-data" component={CorrectData} />
+              <Route exact path="/withdrawals" component={Withdrawals} />
+              <Route exact path="/signature" component={Signature} />
+              <Route exact path="/outlay" component={Outlay} />
+              <Route exact path="/correct-deposit" component={CorrectDeposit} />
+              <Route exact path="/full-advance" component={FullAdvance} />
+              <Route exact path="/summary" component={Summary} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/succesful-transaction" component={SuccesfulTransaction} />
+              <Route exact path="/"><Redirect to="/welcome" /></Route>
             </IonReactRouter>
           ) : (
             <IonReactRouter>
-              <Route path="/create-account" component={Register} exact />
-              <Route path="/login" component={Login} exact />
-              <Route path="/register" component={Register} exact />
-              <Route
-                path="/verification-code/:phone"
-                component={VerificationCode}
-              />
-              <Route
-                path="/verification-email/:phone"
-                component={VerificationEmail}
-              />
-
-              <Route exact path="/terms-and-conditions">
-                <TermsAndConditions />
-              </Route>
-
-              <Route exact path="/">
-                <Redirect to="/login" />
-              </Route>
-              <Route component={Login} />
+              <Route exact path="/create-account" component={Register}  />
+              <Route exact path="/login" component={Login}  />
+              <Route exact path="/register" component={Register}  />
+              <Route path="/verification-code/:phone" component={VerificationCode} />
+              <Route path="/verification-email/:phone" component={VerificationEmail} />
+              <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
+              <Route exact path="/"><Redirect to="/login" /></Route>
             </IonReactRouter>
           )}
         </>
       </IonApp>
-
-      // <IonApp>
-      //   <IonReactRouter>
-      //     <IonRouterOutlet>
-      //       <Route exact path="/home">
-      //         <Home />
-      //       </Route>
-      //       <Route exact path="/upload-documents">
-      //         <UploadDocuments />
-      //       </Route>
-      //       <Route exact path="/contract-data">
-      //         <ContractData />
-      //       </Route>
-      //       <Route exact path="/rent-advance">
-      //         <RentAdvance />
-      //       </Route>
-      //       <Route exact path="/passport">
-      //         <Passport />
-      //       </Route>
-      //       <Route exact path="/terms-and-conditions">
-      //         <TermsAndConditions />
-      //       </Route>
-      //       <Route exact path="/bug">
-      //         <Bug />
-      //       </Route>
-      //       <Route exact path="/search">
-      //         <Search />
-      //       </Route>
-      //       <Route exact path="/pre-offer">
-      //         <PreOffer />
-      //       </Route>
-      //       <Route exact path="/biometric-validation">
-      //         <BiometricValidation />
-      //       </Route>
-      //       <Route exact path="/data-validation">
-      //         <DataValidation />
-      //       </Route>
-      //       <Route exact path="/validation-error">
-      //         <ValidationError />
-      //       </Route>
-      //       <Route exact path="/correct-data">
-      //         <CorrectData />
-      //       </Route>
-      //       <Route exact path="/withdrawals">
-      //         <Withdrawals />
-      //       </Route>
-      //       <Route exact path="/signature">
-      //         <Signature />
-      //       </Route>
-      //       <Route exact path="/outlay">
-      //         <Outlay />
-      //       </Route>
-      //       <Route exact path="/upload-pictures">
-      //         <UploadPictures />
-      //       </Route>
-      //       <Route exact path="/confirmation-data">
-      //         <ConfirmationData />
-      //       </Route>
-      //       <Route exact path="/correct-deposit">
-      //         <CorrectDeposit />
-      //       </Route>
-      //       <Route exact path="/full-advance">
-      //         <FullAdvance />
-      //       </Route>
-      //       <Route exact path="/summary">
-      //         <Summary />
-      //       </Route>
-      //       <Route exact path="/profile">
-      //         <Profile />
-      //       </Route>
-      //       <Route exact path="/">
-      //         <Redirect to="/home" />
-      //       </Route>
-      //     </IonRouterOutlet>
-      //   </IonReactRouter>
-      // </IonApp>
     );
   }
 };

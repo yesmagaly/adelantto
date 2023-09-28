@@ -29,7 +29,7 @@ const Welcome: React.FC = () => {
 
           <button
             className="button button-primary mb-10"
-            onClick={() => router.push("/property/contract-data")}
+            onClick={() => router.push("/lease-contract")}
           >
             Iniciar
           </button>

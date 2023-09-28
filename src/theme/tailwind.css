@@ -90,6 +90,7 @@
 .form input[type="password"],
 .form input[type="email"],
 .form input[type="date"],
+
 .form .pattern-format {
   @apply p-4 mb-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
 }

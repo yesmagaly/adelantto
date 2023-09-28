@@ -7,7 +7,7 @@ const ConfirmationData: React.FC = () => {
 
   const {
     handleSubmit,
-    formState: {},
+    formState: { },
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -23,7 +23,7 @@ const ConfirmationData: React.FC = () => {
     const json = await response.json();
 
     if (json.status === "success") {
-      router.push(`/property/contract-data`);
+      router.push(`/lease-contract`);
     }
   };
 

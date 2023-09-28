@@ -1,13 +1,16 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
+import { useAuth } from "../auth/authContext";
 
-const ContractData: React.FC = () => {
+const LeaseContract: React.FC = () => {
   const router = useIonRouter();
+  const { authInfo } = useAuth()!;
 
   const {
     handleSubmit,
-    formState: {},
+    register,
+    formState: { },
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -15,15 +18,16 @@ const ContractData: React.FC = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authInfo.user.token}`,
         Accept: "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    const json = await response.json();
+    const leaseContract = await response.json();
 
-    if (json.status === "success") {
-      router.push(`/rent-advance`);
+    if (response.status === 200) {
+      router.push(`/lease-contract/${leaseContract.id}/desired-loan`);
     }
   };
 
@@ -39,26 +43,17 @@ const ContractData: React.FC = () => {
         <div>
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <input
-                type="text"
-                placeholder="valor de tu renta mensual"
-                required
-              />
+              <input {...register("monthly_lease_income")} type="numeric" placeholder="valor de tu renta mensual" required />
             </div>
             <div className="border-full !mt-0" />
 
             <div>
-              <input
-                type="date"
-                required
-                placeholder="Fecha de inicio del contrato de arrendamiento"
-              />
+              <input {...register("lease_start_date")} type="date" required placeholder="Fecha de inicio del contrato de arrendamiento" />
             </div>
             <div className="border-full !mt-0" />
 
             <div>
-              <input
-                type="date"
+              <input {...register("lease_end_date")} type="date"
                 placeholder="Fecha de fin del contrato de arrendamiento"
                 required
               />
@@ -67,6 +62,7 @@ const ContractData: React.FC = () => {
 
             <div>
               <input
+                {...register("property_zip_code")}
                 type="text"
                 placeholder="Código postal de tu inmueble"
                 required
@@ -81,9 +77,9 @@ const ContractData: React.FC = () => {
               <div className="flex items-center justify-between mb-10">
                 <div className="flex items-center gap-2">
                   <input
+                    {...register("payment_method")}
                     type="radio"
                     id="payment_cash"
-                    name="rent_payment"
                     value="cash"
                   />
                   <label htmlFor="payment_cash" className="text-xs font-bold">
@@ -92,9 +88,9 @@ const ContractData: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <input
+                    {...register("payment_method")}
                     type="radio"
                     id="payment_transfer"
-                    name="rent_payment"
                     value="transfer"
                   />
                   <label
@@ -115,4 +111,4 @@ const ContractData: React.FC = () => {
   );
 };
 
-export default ContractData;
+export default LeaseContract;
