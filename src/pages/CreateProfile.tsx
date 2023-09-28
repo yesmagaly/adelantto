@@ -45,62 +45,78 @@ const CreateProfile: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="px-9 py-6">
-          <div className="heading__pager text-right">Paso 2 de 3</div>
-        </div>
-
         <div className="content">
-          <Lottie
-            animationData={userAnimation}
-            style={{ width: 250, height: 250 }}
-            loop
-            play
-          />
-
-          <div className="mb-10">
-            <h1 className="font-bold text-3xl mb-2">Crea tu perfil</h1>
-            <p className="text-sm leading-4">
-              Tu nombre deberá registrarse del mismo modo en que aparece en tu
-              identificación oficial
-            </p>
-          </div>
-
-          <div className="px-9">
-            <form className="form" onSubmit={handleSubmit(onSubmit)}>
-              <div>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Nombre (s)"
-                  className="min-w-full"
-                  {...register("name", { required: true })}
-                />
-                <input
-                  type="text"
-                  id="last_name"
-                  placeholder="Apellido"
-                  className="min-w-full"
-                  {...register("last_name", { required: true })}
-                />
+          <div className="bg-white py-3 shadow-2xl w-96 border border-gray-200 mb-10">
+            <div className="px-9 py-6">
+              <div className="heading__pager text-gray-300 text-right">
+                2 de 3
               </div>
+            </div>
+
+            <div className="content mb-4">
+              <Lottie
+                animationData={userAnimation}
+                style={{ width: 250, height: 250 }}
+                loop
+                play
+              />
 
               <div className="mb-8">
-                <button className="button button-primary">Guardar</button>
+                <h1 className="font-bold text-3xl mb-2">Crea tu perfil</h1>
+                <p className="text-xs leading-4">
+                  Tu nombre deberá registrarse del mismo modo <br /> en que
+                  aparece en tu identificación oficial
+                </p>
               </div>
 
-              <div className="text-center">
-                <button>
-                  <IonIcon icon={ellipse}></IonIcon>
-                </button>
-                <button>
-                  <IonIcon icon={ellipse}></IonIcon>
-                </button>
-                <button>
-                  <IonIcon icon={ellipse}></IonIcon>
-                </button>
+              <div className="px-9">
+                <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                  <div>
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="Nombre (s)"
+                      className="min-w-full"
+                      {...register("name", { required: true })}
+                    />
+                    <input
+                      type="text"
+                      id="last_name"
+                      placeholder="Apellido"
+                      className="min-w-full"
+                      {...register("last_name", { required: true })}
+                    />
+                  </div>
+
+                  <div className="mb-8">
+                    <button className="button button-primary">Guardar</button>
+                  </div>
+
+                  <div className="text-center">
+                    <button>
+                      <IonIcon
+                        className="w-3 mr-3 text-gray-300"
+                        icon={ellipse}
+                      ></IonIcon>
+                    </button>
+                    <button>
+                      <IonIcon
+                        className="w-3 mr-3 text-gray-300"
+                        icon={ellipse}
+                      ></IonIcon>
+                    </button>
+                    <button>
+                      <IonIcon
+                        className="w-3 mr-3 text-gray-300"
+                        icon={ellipse}
+                      ></IonIcon>
+                    </button>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
+          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>
