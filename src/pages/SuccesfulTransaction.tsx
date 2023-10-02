@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
 import check from "../assets/icons/check.png";
 
@@ -19,7 +19,7 @@ const SuccesfulTransaction: React.FC = () => {
 
           <div className="py-10">
             <button
-              className=" button button-primary mb-16"
+              className="button button-primary mb-16"
               onClick={() => router.push("")}
             >
               Finalizar
