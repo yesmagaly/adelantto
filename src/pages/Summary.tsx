@@ -31,10 +31,10 @@ const Summary: React.FC = () => {
           <p className="mb-6">Calle 17 Sur 13-22</p>
           <div className="border-full" />
           <div>
-            <h6 className="mb-10 mt-5 text-primary-green">CUOTA A PAGAR</h6>
-            <p className="font-bold text-2xl leading-3 mb-10">$ 10.000</p>
-            <h6 className="mb-8 text-primary-green">Saldo</h6>
-            <p className="font-bold text-2xl leading-3">$ 30.000</p>
+            <h6 className="mb-8 mt-5 text-primary-green">CUOTA A PAGAR</h6>
+            <p className="font-bold text-2xl mb-8">$ 10.000</p>
+            <h6 className="text-primary-green mb-8">Saldo</h6>
+            <p className="font-bold text-2xl">$ 30.000</p>
           </div>
         </div>
 
