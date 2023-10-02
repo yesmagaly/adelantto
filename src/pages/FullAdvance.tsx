@@ -24,7 +24,7 @@ const FullAdvance: React.FC = () => {
               </button>
             </div>
 
-            <Icon name="bell" className="mr-6 text-2xl bg-blue-800" />
+            <Icon name="bell" className="mr-6 text-2xl bg-blue-900" />
           </div>
           <h4 className="text-3xl py-7 px-7">
             ¡Hola, <br />
@@ -36,7 +36,7 @@ const FullAdvance: React.FC = () => {
             <form className="">
               <div className="flex justify-between items-end">
                 <div>
-                  <h5 className="text-2xl mb-4 text-green-300">
+                  <h5 className="text-xl mb-4 text-green-300">
                     Adelantto total
                   </h5>
                   <p className="text-3xl font-bold">$150,000.00</p>
@@ -54,7 +54,7 @@ const FullAdvance: React.FC = () => {
         </div>
 
         <div className="px-10 mb-40">
-          <h6 className=" mb-7 text-gray-400">Pagos</h6>
+          <h6 className="mb-7 text-gray-400">Pagos</h6>
           <div className="border-full" />
           <form>
             <div className="flex justify-between items-center">
@@ -64,7 +64,7 @@ const FullAdvance: React.FC = () => {
                   <h4 className="font-bold text-lx leading-5">
                     Adelantto 00001
                   </h4>
-                  <p className="text-[12px]">Calle 17 Sur 13-22</p>
+                  <p className="text-xs">Calle 17 Sur 13-22</p>
                 </div>
               </div>
 
@@ -84,7 +84,7 @@ const FullAdvance: React.FC = () => {
                   <h4 className="font-bold text-lx leading-5">
                     Adelantto 00002
                   </h4>
-                  <p className="text-[12px]">Calle 17 Sur 13-22</p>
+                  <p className="text-xs">Calle 17 Sur 13-22</p>
                 </div>
               </div>
               <button
@@ -103,7 +103,7 @@ const FullAdvance: React.FC = () => {
                   <h4 className="font-bold text-lx leading-5">
                     Adelantto 00003
                   </h4>
-                  <p className="text-[12px]">Calle 17 Sur 13-22</p>
+                  <p className="text-xs">Calle 17 Sur 13-22</p>
                 </div>
               </div>
               <button
