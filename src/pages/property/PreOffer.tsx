@@ -78,14 +78,14 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
 
                   <div className="bg-gray-100 mb-4 py-3">
                     <div className="font-medium text-2xl">
-                      $ {loanContract?.desired_loan * 0.8} MXN
+                      $ {loanContract?.desired_loan * 0.9} MXN
                     </div>
                     <span>El monto que recibirás</span>
                   </div>
 
                   <div className="bg-gray-100 py-3">
                     <div className="font-medium text-2xl">
-                      $ {loanContract?.desired_loan * 0.2} MXN
+                      $ {loanContract?.desired_loan * 0.1} MXN
                     </div>
                     <span>Costo de nuestro servicio y seguro</span>
                   </div>

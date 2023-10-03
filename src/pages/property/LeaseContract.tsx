@@ -1,7 +1,12 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import { useAuth } from "../auth/authContext";
+import { NumericFormat } from 'react-number-format';
+
+function removeNumericFormat(value: string) {
+  return value.replaceAll(/\,|\$|\s/g, '');
+}
 
 const LeaseContract: React.FC = () => {
   const router = useIonRouter();
@@ -11,9 +16,10 @@ const LeaseContract: React.FC = () => {
     handleSubmit,
     register,
     formState: {},
+    control,
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async ({ monthly_lease_income, ...data}) => {
     const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts`, {
       method: "POST",
       headers: {
@@ -21,7 +27,7 @@ const LeaseContract: React.FC = () => {
         Authorization: `Bearer ${authInfo.user.token}`,
         Accept: "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ monthly_lease_income: removeNumericFormat(monthly_lease_income), ...data }),
     });
 
     const leaseContract = await response.json();
@@ -44,11 +50,21 @@ const LeaseContract: React.FC = () => {
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label>Valor de tu renta mensual</label>
-              <input
-                {...register("monthly_lease_income")}
-                type="numeric"
-                placeholder=""
-                required
+              <Controller
+                control={control}
+                name="monthly_lease_income"
+                render={({ field: { ref, ...field } }) => (
+                  <NumericFormat
+                    {...field}
+                    className="pattern-format"
+                    type="text"
+                    required
+                    getInputRef={ref}
+                    decimalScale={2}
+                    thousandSeparator=","
+                    prefix={'$ '}
+                  />
+                )}
               />
             </div>
             <div className="border-full !mt-0" />
