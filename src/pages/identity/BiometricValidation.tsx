@@ -1,12 +1,11 @@
 import { IonContent, IonPage, useIonRouter, IonIcon } from "@ionic/react";
-import Icon from "../components/Icon/Icon";
 
 import Lottie from "react-lottie-player";
-import avatar from "../assets/icons/avatar.png";
-import check from "../assets/icons/check.png";
+import avatar from "../../assets/icons/avatar.png";
+import check from "../../assets/icons/check.png";
 import { close, closeCircle, pin } from "ionicons/icons";
 
-import photographyAnimation from "../assets/animations/photography.json";
+import photographyAnimation from "../../assets/animations/photography.json";
 
 const BiometricValidation: React.FC = () => {
   const router = useIonRouter();

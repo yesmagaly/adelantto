@@ -23,14 +23,14 @@ import ConfirmationData from "./pages/property/ConfirmationData";
 
 import LeaseContract from "./pages/property/LeaseContract";
 import DesiredLoan from "./pages/property/DesiredLoan";
-import Passport from "./pages/Passport";
+import Passport from "./pages/identity/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Bug from "./pages/auth/Bug";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import Welcome from "./pages/Welcome";
 import Search from "./pages/Search";
 import PreOffer from "./pages/property/PreOffer";
-import BiometricValidation from "./pages/BiometricValidation";
+import BiometricValidation from "./pages/identity/BiometricValidation";
 import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";

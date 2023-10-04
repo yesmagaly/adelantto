@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IonContent, IonPage } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
 import { useAuth } from "../auth/authContext";
@@ -15,6 +15,7 @@ interface LoanContract {
 }
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
+  const router = useIonRouter();
   const [loanContract, setLoanContract] = useState(null);
   const [loanMonths, setLoanMonths] = useState(6);
   const { authInfo } = useAuth()!;
@@ -106,7 +107,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
                   />
                 </div>
 
-                <button className="button button-secondary mb-7">
+                <button onClick={() => router.push("/passport")} className="button button-secondary mb-7">
                   Iniciar proceso de Validación <br />
                   de documentos
                 </button>
