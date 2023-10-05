@@ -3,16 +3,11 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 
 import { FrontId, BackId, Selfie } from "../incode/Incode"
-import { createSession, processId, processFace } from "../incode/client"
+import { initSession, processId, processFace, finishStatus, addDevicefin, initSessiongerPrint } from "../incode/client"
 
 import Modal from "../../components/Modal/Modal";
 import check from "../../assets/icons/check.png";
 import close from "../../assets/icons/close.png";
-
-export function useQuery() {
-  return useMemo(() => new URLSearchParams(window.location.search), []);
-}
-
 
 const Passport: React.FC = () => {
   const router = useIonRouter();
@@ -25,28 +20,28 @@ const Passport: React.FC = () => {
       const incodeSession =  localStorage.getItem('incode_session');
 
       if (incodeSession) {
-        return setSession(JSON.parse(incodeSession));
-      }
+        setSession(JSON.parse(incodeSession));
+      } else {
 
-      const response = await createSession();
-      const session = await response.json();
-
-      if (response.status) {
-        localStorage.setItem('incode_session', JSON.stringify(session))
-        setSession(session)
+        try {
+          const session = await initSession();
+          localStorage.setItem('incode_session', JSON.stringify(session))
+          setSession(session)
+        } catch (error) {
+          alert(error)
+        }
       }
     }
 
     syncSession();
   }, []);
 
-
   const handleProcessId = async () => {
     const response = await processId({ session });
     const data = await response.json();
 
     if (response.status === 200) {
-      console.log(data);
+      alert(JSON.stringify(data));
     } else {
       console.log(data, 'Error');
     }
@@ -60,8 +55,14 @@ const Passport: React.FC = () => {
       console.log(data);
       if (data.confidence === 0) {
         alert('Buuu!')
+        alert(JSON.stringify(data))
         localStorage.removeItem('incode_session');
       }else {
+        const res = await finishStatus({ session })
+        const js = await res.json();
+
+        alert(JSON.stringify(data))
+        alert(JSON.stringify(js))
         alert('Yeah!')
       }
 
@@ -70,8 +71,15 @@ const Passport: React.FC = () => {
     }
   }
 
-  const successCallback = (data) => {
+  const clearSession = () => {
+    localStorage.removeItem('incode_session');
+  }
+
+  const successFrontCallback = (data) => {
     setSkipBackIdCapture(data.skipBackIdCapture)
+  }
+
+  const successCallback = () => {
   }
 
   const errorCallback = () => {}
@@ -107,7 +115,7 @@ const Passport: React.FC = () => {
               className="button button-primary mb-16"
               onClick={handleProcessId}
             >
-              Siguiente
+              Process ID
             </button>
             <div className="border-bottom border-primary-blue" />
           </div>
@@ -120,6 +128,13 @@ const Passport: React.FC = () => {
             <button
               className="button button-primary mb-16"
               onClick={handleProcessFace}
+            >
+              Process
+            </button>
+
+            <button
+              className="button button-primary mb-16"
+              onClick={clearSession}
             >
               Process
             </button>
