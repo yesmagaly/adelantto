@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router";
 import { useForm } from "react-hook-form";
 
 import logo from "../../assets/icons/logo.svg";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 

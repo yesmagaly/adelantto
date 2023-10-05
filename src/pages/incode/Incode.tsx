@@ -3,7 +3,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 
 import { addFrontId, addBackId, addFaceSelfie } from "./client";
 import Icon from "../../components/Icon/Icon";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/modal";
 import "./styles.css"
 
 const errorsMap = {
@@ -26,7 +26,11 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('');
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1);
+
+  const startStep = () => {
+    setStep(0)
+  }
 
   const takePhoto = async () => {
     const newPhoto = await Camera.getPhoto({
@@ -48,7 +52,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
     try {
       const data = await addFrontId({ session, body: { base64Image: photo.base64String } });
       setStatus('is-success');
-      setStep(0);
+      setStep(-1);
       props.onSuccess(data)
     } catch (error) {
       setStatus('is-fail');
@@ -67,7 +71,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
     setPhoto(null);
     setError(null);
     setStatus('');
-    setStep(0);
+    setStep(-1);
   }
 
   return (
@@ -76,7 +80,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
         {!photo && (
           <>
             <div className="upload-label">Frente</div>
-            <button className="button button-secondary" onClick={takePhoto}>Capturar</button>
+            <button className="button button-secondary" onClick={startStep}>Capturar</button>
           </>
         )}
         {loading && <span>Cargando ...</span>}
@@ -87,6 +91,12 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
           </>
         )}
       </div>
+
+      {!photo && <Modal isOpen={step === 0}>
+        <h3>Tome una fotografía clara, sin sombras ni reflejos.</h3>
+        <video></video>
+        <button onClick={takePhoto}>Continuar</button>
+      </Modal>}
 
       {photo && (
         <>

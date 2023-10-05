@@ -5,7 +5,7 @@ import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
 import verificationCodeAnimation from "../../assets/animations/verification-code.json";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 import { API_SERVER_URL } from "../../config";
 

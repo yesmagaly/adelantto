@@ -3,7 +3,7 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm, Controller } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 
 import registerAnimation from "../../assets/animations/register.json";

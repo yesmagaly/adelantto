@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 

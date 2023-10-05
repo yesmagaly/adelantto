@@ -5,7 +5,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 import { API_SERVER_URL } from "../../config";
 
 import Icon from "../Icon/Icon";
-import Modal from "../Modal/Modal";
+import Modal from "../modal";
 
 export interface ComponentProp extends UseControllerProps {
   children: string | JSX.Element | JSX.Element[]

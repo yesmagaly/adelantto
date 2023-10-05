@@ -78,17 +78,34 @@ export async function addFrontId({ session, body }) {
   }
 }
 
-export function addBackId({ session, body }) {
-  return fetch(`${VITE_INCODE_API_URL}/omni/add/back-id/v2?retry=false`, {
-    method: "POST",
-    headers: {
-      'Api-Version': "1.0",
-      'X-Api-Key': sha1(session?.clientId),
-      'X-Incode-Hardware-Id': session?.token,
-      'Content-Type': "application/json"
-    },
-    body: JSON.stringify(body),
-  });
+export async function addBackId({ session, body }) {
+  try {
+    const response = await fetch(`${VITE_INCODE_API_URL}/omni/add/back-id/v2?retry=false`, {
+      method: "POST",
+      headers: {
+        'Api-Version': "1.0",
+        'X-Api-Key': sha1(session?.clientId),
+        'X-Incode-Hardware-Id': session?.token,
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+      if (!data.failReason) {
+        return data;
+      } else {
+        throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
+      }
+
+    } else {
+      throw new Error(data.error, { cause: INCODE_PROCESSING_ERROR });
+    }
+  } catch (error) {
+    throw new Error(error?.message, { cause: INCODE_HTTP_ERROR });
+  }
 }
 
 export function processId({ session }) {

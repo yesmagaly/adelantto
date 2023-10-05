@@ -5,7 +5,7 @@ import { useController, UseControllerProps } from 'react-hook-form'
 import { API_SERVER_URL } from "../config";
 
 import Icon from "../components/Icon/Icon";
-import Modal from "../components/Modal/Modal";
+import Modal from "../components/modal";
 import documentsAnimation from "../assets/animations/documents.json";
 
 export interface ComponentProp extends UseControllerProps {
