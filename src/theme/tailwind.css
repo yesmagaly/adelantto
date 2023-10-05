@@ -1,22 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap");
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url(base.css);
+@import url(button.css);
 
 /** other custom global styles can go here */
-
-.button {
-  @apply font-semibold px-6 py-4 rounded leading-5 bg-gray-100;
-}
-
-.button-primary, .button.is-primary {
-  @apply bg-primary-green text-white;
-}
-
-.button-secondary {
-  @apply bg-primary-blue-light text-white;
-}
 
 .heading {
   @apply h-60 bg-cover text-white px-9 py-6;
