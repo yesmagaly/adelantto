@@ -86,37 +86,32 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
   return (
     <div>
-      <Modal.Root variant="fully" isOpen={step === 0}>
-        <Modal.Header className="text-center">
-          <h3>Ahora toca el back side</h3>
-        </Modal.Header>
-        <Modal.Body className="flex items-center">
-          <img src="/../src/assets/video/tutorial.gif"></img>
-        </Modal.Body>
-        <Modal.Footer>
-          <button onClick={takePhoto} className="button is-primary">
-            Continuar
-          </button>
-        </Modal.Footer>
+      <Modal.Root isOpen={step === 0}>
+        <h3>Ahora toca el back side</h3>
+        <img src="/../src/assets/video/tutorial.gif"></img>
+        <button onClick={takePhoto} className="button is-primary">
+          Continuar
+        </button>
       </Modal.Root>
 
       {photo && (
         <>
           <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
-            <h2 className="heading-3">Revisa tu foto</h2>
-            <Modal.Body className="flex items-center">
+            <Modal.Header className="text-center">
+              <h2 className="heading-3">Revisa tu foto</h2>
               <p>
                 Asegúrate de que las letras sean claras y tenga buena
                 iluminación.
               </p>
-            </Modal.Body>
-            <Modal.Footer className="gap-6">
+            </Modal.Header>
+            <Modal.Body className="flex items-center">
               <div>
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
               </div>
-
+            </Modal.Body>
+            <Modal.Footer>
               <button onClick={takePhoto} className="button">
                 volver a Capturar
               </button>
@@ -137,12 +132,14 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
             <Modal.Footer className="gap-6">
               {loading && <div>Cargando ...</div>}
               {error && (
-                <div>
-                  <div>La verificación frontal de identificación fall'o</div>
-                  <button onClick={tryAgain} className="button">
-                    Capturar otra vez
-                  </button>
-                </div>
+                <>
+                  <div>
+                    <div>La verificación frontal de identificación fall'o</div>
+                    <button onClick={tryAgain} className="button">
+                      Capturar otra vez
+                    </button>
+                  </div>
+                </>
               )}
             </Modal.Footer>
           </Modal.Root>
