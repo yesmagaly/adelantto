@@ -6,6 +6,18 @@ export const INCODE_PROCESSING_ERROR = "incode_processing_error";
 export const INCODE_ERROR = "incode_error";
 export const HTTP_ERROR = "http_error";
 
+const errorsMap = {
+  UNKNOWN_DOCUMENT_TYPE: "document classification failed",
+  WRONG_DOCUMENT_SIDE:
+    "can happen when uploading back side of id when front id is required or the other way around",
+  WRONG_ONE_SIDED_DOCUMENT: "uploading wrong document with only one side",
+  DOCUMENT_NOT_READABLE:
+    "document couldn't be read, probably due to image quality",
+  UNABLE_TO_ALIGN_DOCUMENT: "alignment failed",
+  ID_TYPE_UNACCEPTABLE: "invalid type of id",
+  UNEXPECTED_ERROR_OCCURRED: "unexpected error",
+};
+
 export function createSession() {
   return fetch(`${VITE_INCODE_API_URL}/omni/start`, {
     method: "POST",

@@ -3,25 +3,11 @@ import {
   Camera,
   CameraResultType,
   CameraSource,
-  Photo,
 } from "@capacitor/camera";
 
-import { addFrontId, addBackId, addFaceSelfie } from "../client";
-import Icon from "../../../components/Icon/Icon";
+import { addFaceSelfie } from "../client";
 import * as Modal from "../../../components/modal";
 import "../styles.css";
-
-const errorsMap = {
-  UNKNOWN_DOCUMENT_TYPE: "document classification failed",
-  WRONG_DOCUMENT_SIDE:
-    "can happen when uploading back side of id when front id is required or the other way around",
-  WRONG_ONE_SIDED_DOCUMENT: "uploading wrong document with only one side",
-  DOCUMENT_NOT_READABLE:
-    "document couldn't be read, probably due to image quality",
-  UNABLE_TO_ALIGN_DOCUMENT: "alignment failed",
-  ID_TYPE_UNACCEPTABLE: "invalid type of id",
-  UNEXPECTED_ERROR_OCCURRED: "unexpected error",
-};
 
 export interface ComponentProp {
   children: string | JSX.Element | JSX.Element[];
@@ -88,11 +74,10 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
     <div>
       {!photo && (
         <Modal.Root isOpen={step === 0} variant="fully">
-          <h3 className="heading-3">Let's take a selfie.</h3>
-          <p>
-            Keep a neutral expression, find balanced light and remove any
-            glasses and hats
-          </p>
+          <Modal.Header className="text-center">
+            <h3 className="heading-3">Validación Biométrica</h3>
+            <p>¡Sonríe! Queremos conocerte</p>
+          </Modal.Header>
           <Modal.Body className="flex items-center">
             <video src="/../src/assets/video/selfie.mp4" autoPlay loop></video>
           </Modal.Body>
@@ -108,8 +93,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
             <Modal.Header className="text-center">
               <h2 className="heading-3">Revisa tu foto</h2>
               <p>
-                Asegúrate de que las letras sean claras y tenga buena
-                iluminación.
+                Mantenga una expresión neutra, busque una luz equilibrada y quítese las gafas y los sombreros.
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">

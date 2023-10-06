@@ -3,25 +3,11 @@ import {
   Camera,
   CameraResultType,
   CameraSource,
-  Photo,
 } from "@capacitor/camera";
 
-import { addFrontId, addBackId, addFaceSelfie } from "../client";
-import Icon from "../../../components/Icon/Icon";
+import { addBackId } from "../client";
 import * as Modal from "../../../components/modal";
 import "../styles.css";
-
-const errorsMap = {
-  UNKNOWN_DOCUMENT_TYPE: "document classification failed",
-  WRONG_DOCUMENT_SIDE:
-    "can happen when uploading back side of id when front id is required or the other way around",
-  WRONG_ONE_SIDED_DOCUMENT: "uploading wrong document with only one side",
-  DOCUMENT_NOT_READABLE:
-    "document couldn't be read, probably due to image quality",
-  UNABLE_TO_ALIGN_DOCUMENT: "alignment failed",
-  ID_TYPE_UNACCEPTABLE: "invalid type of id",
-  UNEXPECTED_ERROR_OCCURRED: "unexpected error",
-};
 
 export interface ComponentProp {
   children: string | JSX.Element | JSX.Element[];
