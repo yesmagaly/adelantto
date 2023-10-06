@@ -94,9 +94,11 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
             </h3>
           </Modal.Header>
           <Modal.Body className="flex items-center">
-            <video src="/../src/assets/video/id-shadow.mp4" autoPlay loop>
-              tunavegador
-            </video>
+            <video
+              src="/../src/assets/video/id-shadow.mp4"
+              autoPlay
+              loop
+            ></video>
           </Modal.Body>
           <Modal.Footer>
             <button className="button is-primary" onClick={takePhoto}>
