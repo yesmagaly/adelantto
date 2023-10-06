@@ -2,9 +2,9 @@ import { useState, useEffect, useMemo } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 
-import { Selfie } from "../incode/Incode"
 import { FrontId } from "../incode/components/FrontId"
 import { BackId } from "../incode/components/BackId"
+import { Selfie } from "../incode/components/Selfie"
 import { initSession, processId, processFace, finishStatus, addDevicefin, initSessiongerPrint } from "../incode/client"
 
 import Modal from "../../components/modal";
