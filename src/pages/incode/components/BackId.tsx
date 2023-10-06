@@ -8,7 +8,7 @@ import {
 
 import { addFrontId, addBackId, addFaceSelfie } from "../client";
 import Icon from "../../../components/Icon/Icon";
-import Modal from "../../../components/modal";
+import * as Modal from "../../../components/modal";
 import "../styles.css";
 
 const errorsMap = {
@@ -86,11 +86,17 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
   return (
     <div>
-      <Modal isOpen={step === 0}>
-        <h3>Ahora toca el back side</h3>
-        <img src="/../src/assets/video/tutorial.gif"></img>
-        <button onClick={takePhoto}>Continuar</button>
-      </Modal>
+      <Modal.Root variant="fully" isOpen={step === 0}>
+        <Modal.Header className="text-center">
+          <h3>Ahora toca el back side</h3>
+        </Modal.Header>
+        <Modal.Body className="flex items-center">
+          <img src="/../src/assets/video/tutorial.gif"></img>
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={takePhoto}>Continuar</button>
+        </Modal.Footer>
+      </Modal.Root>
 
       {photo && (
         <>
