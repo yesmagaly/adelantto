@@ -94,7 +94,9 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
           <img src="/../src/assets/video/tutorial.gif"></img>
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={takePhoto}>Continuar</button>
+          <button onClick={takePhoto} className="button is-primary">
+            Continuar
+          </button>
         </Modal.Footer>
       </Modal.Root>
 
@@ -115,8 +117,12 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
                 ></img>
               </div>
 
-              <button onClick={takePhoto}>volver a Capturar</button>
-              <button onClick={uploadFrontId}>Continuar</button>
+              <button onClick={takePhoto} className="button">
+                volver a Capturar
+              </button>
+              <button onClick={uploadFrontId} className="button is-primary">
+                Continuar
+              </button>
             </Modal.Footer>
           </Modal.Root>
 
@@ -133,7 +139,9 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               {error && (
                 <div>
                   <div>La verificación frontal de identificación fall'o</div>
-                  <button onClick={tryAgain}>Capturar otra vez</button>
+                  <button onClick={tryAgain} className="button">
+                    Capturar otra vez
+                  </button>
                 </div>
               )}
             </Modal.Footer>
