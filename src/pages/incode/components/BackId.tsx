@@ -100,37 +100,44 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
       {photo && (
         <>
-          <Modal isOpen={Boolean(photo) && step === 1}>
+          <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
             <h2 className="heading-3">Revisa tu foto</h2>
-            <p>
-              Asegúrate de que las letras sean claras y tenga buena iluminación.
-            </p>
-
-            <div>
-              <img
-                src={`data:image/${photo.format};base64,${photo.base64String}`}
-              ></img>
-            </div>
-
-            <button onClick={takePhoto}>volver a Capturar</button>
-            <button onClick={uploadFrontId}>Continuar</button>
-          </Modal>
-
-          <Modal isOpen={Boolean(photo) && step === 2}>
-            <div className={status}>
-              <img
-                src={`data:image/${photo.format};base64,${photo.base64String}`}
-              ></img>
-            </div>
-
-            {loading && <div>Cargando ...</div>}
-            {error && (
+            <Modal.Body className="flex items-center">
+              <p>
+                Asegúrate de que las letras sean claras y tenga buena
+                iluminación.
+              </p>
+            </Modal.Body>
+            <Modal.Footer className="gap-6">
               <div>
-                <div>La verificación frontal de identificación fall'o</div>
-                <button onClick={tryAgain}>Capturar otra vez</button>
+                <img
+                  src={`data:image/${photo.format};base64,${photo.base64String}`}
+                ></img>
               </div>
-            )}
-          </Modal>
+
+              <button onClick={takePhoto}>volver a Capturar</button>
+              <button onClick={uploadFrontId}>Continuar</button>
+            </Modal.Footer>
+          </Modal.Root>
+
+          <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
+            <Modal.Body className="flex items-center">
+              <div className={status}>
+                <img
+                  src={`data:image/${photo.format};base64,${photo.base64String}`}
+                ></img>
+              </div>
+            </Modal.Body>
+            <Modal.Footer className="gap-6">
+              {loading && <div>Cargando ...</div>}
+              {error && (
+                <div>
+                  <div>La verificación frontal de identificación fall'o</div>
+                  <button onClick={tryAgain}>Capturar otra vez</button>
+                </div>
+              )}
+            </Modal.Footer>
+          </Modal.Root>
         </>
       )}
     </div>
