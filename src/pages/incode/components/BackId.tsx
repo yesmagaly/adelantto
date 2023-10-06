@@ -86,9 +86,11 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
   return (
     <div>
-      <Modal.Root isOpen={step === 0}>
-        <h3>Ahora toca el back side</h3>
-        <img src="/../src/assets/video/tutorial.gif"></img>
+      <Modal.Root isOpen={step === 0} variant="fully">
+        <h3 className="heading-3">Ahora toca el back side</h3>
+        <Modal.Body className="flex items-center">
+          <img src="/../src/assets/video/tutorial.gif"></img>
+        </Modal.Body>
         <button onClick={takePhoto} className="button is-primary">
           Continuar
         </button>
@@ -112,11 +114,11 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <button onClick={takePhoto} className="button">
-                volver a Capturar
-              </button>
               <button onClick={uploadFrontId} className="button is-primary">
                 Continuar
+              </button>
+              <button onClick={takePhoto} className="button">
+                volver a Capturar
               </button>
             </Modal.Footer>
           </Modal.Root>

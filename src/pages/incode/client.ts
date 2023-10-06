@@ -66,11 +66,14 @@ export async function addFrontId({ session, body }) {
 
     if (response.status === 200) {
       if (!data.failReason && data.classification) {
+        if (data.skipBackIdCapture) {
+          await processId({ session });
+        }
+
         return data;
-      } else {
-        throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
       }
 
+      throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
@@ -96,11 +99,11 @@ export async function addBackId({ session, body }) {
 
     if (response.status === 200) {
       if (!data.failReason && data.classification) {
+        await processId({ session });
         return data;
-      } else {
-        throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
       }
 
+      throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }

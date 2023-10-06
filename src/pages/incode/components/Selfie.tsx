@@ -87,13 +87,15 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
   return (
     <div>
       {!photo && (
-        <Modal.Root isOpen={step === 0}>
-          <h3>Let's take a selfie.</h3>
+        <Modal.Root isOpen={step === 0} variant="fully">
+          <h3 className="heading-3">Let's take a selfie.</h3>
           <p>
             Keep a neutral expression, find balanced light and remove any
             glasses and hats
           </p>
-          <video src="/../src/assets/video/selfie.mp4" autoPlay loop></video>
+          <Modal.Body className="flex items-center">
+            <video src="/../src/assets/video/selfie.mp4" autoPlay loop></video>
+          </Modal.Body>
           <button onClick={takePhoto} className="button is-primary">
             Continuar
           </button>
@@ -139,12 +141,10 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               {loading && <div>Cargando ...</div>}
               {error && (
                 <>
-                  <div>
-                    <div>La verificación frontal de identificación fall'o</div>
-                    <button onClick={tryAgain} className="button is-primary">
-                      Capturar otra vez
-                    </button>
-                  </div>
+                  <p>La verificación frontal de identificación fall'o</p>
+                  <button onClick={tryAgain} className="button is-primary">
+                    Capturar otra vez
+                  </button>
                 </>
               )}
             </Modal.Footer>

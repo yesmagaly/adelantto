@@ -87,7 +87,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   return (
     <div>
       {!photo && (
-        <Modal.Root variant="fully" isOpen={step === 0}>
+        <Modal.Root isOpen={step === 0} variant="fully">
           <Modal.Header className="text-center">
             <h3 className="heading-3">
               Tome una fotografía clara, sin sombras ni reflejos.
