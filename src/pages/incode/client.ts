@@ -3,7 +3,8 @@ import sha1 from "js-sha1"
 
 
 export const INCODE_PROCESSING_ERROR = "incode_processing_error";
-export const INCODE_HTTP_ERROR = "incode_http_error";
+export const INCODE_ERROR = "incode_error";
+export const HTTP_ERROR = "http_error";
 
 export function createSession() {
   return fetch(`${VITE_INCODE_API_URL}/omni/start`, {
@@ -64,17 +65,17 @@ export async function addFrontId({ session, body }) {
     const data = await response.json();
 
     if (response.status === 200) {
-      if (!data.failReason) {
+      if (!data.failReason && data.classification) {
         return data;
       } else {
         throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
       }
 
     } else {
-      throw new Error(data.error, { cause: INCODE_PROCESSING_ERROR });
+      throw new Error(data.error, { cause: INCODE_ERROR });
     }
   } catch (error) {
-    throw new Error(error?.message, { cause: INCODE_HTTP_ERROR });
+    throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
 
@@ -94,30 +95,46 @@ export async function addBackId({ session, body }) {
     const data = await response.json();
 
     if (response.status === 200) {
-      if (!data.failReason) {
+      if (!data.failReason && data.classification) {
         return data;
       } else {
         throw new Error(data.failReason, { cause: INCODE_PROCESSING_ERROR });
       }
 
     } else {
-      throw new Error(data.error, { cause: INCODE_PROCESSING_ERROR });
+      throw new Error(data.error, { cause: INCODE_ERROR });
     }
   } catch (error) {
-    throw new Error(error?.message, { cause: INCODE_HTTP_ERROR });
+    throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
 
-export function processId({ session }) {
-  return fetch(`${VITE_INCODE_API_URL}/omni/process/id?queueName=diogenes`, {
-    method: "POST",
-    headers: {
-      'Api-Version': "1.0",
-      'X-Api-Key': sha1(session?.clientId),
-      'X-Incode-Hardware-Id': session?.token,
-      'Content-Type': "application/json"
-    },
-  });
+export async function processId({ session }) {
+  try {
+    const response = await fetch(`${VITE_INCODE_API_URL}/omni/process/id?queueName=diogenes`, {
+      method: "POST",
+      headers: {
+        'Api-Version': "1.0",
+        'X-Api-Key': sha1(session?.clientId),
+        'X-Incode-Hardware-Id': session?.token,
+        'Content-Type': "application/json"
+      },
+    });
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+      if (data.success) {
+        return data;
+      } else {
+        throw new Error("Something went wrong.", { cause: INCODE_PROCESSING_ERROR });
+      }
+    } else {
+      throw new Error(data.error, { cause: INCODE_ERROR });
+    }
+  } catch (error) {
+    throw new Error(error?.message, { cause: HTTP_ERROR });
+  }
 }
 
 export function addFaceSelfie({ session, body }) {
@@ -156,7 +173,6 @@ export function finishStatus({ session }) {
     },
   });
 }
-
 
 export async function initSession() {
   try {

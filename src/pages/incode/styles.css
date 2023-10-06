@@ -51,3 +51,12 @@
   top: 1rem;
   right: 1rem;
 }
+
+.message {
+  font-size: var(--font-medium);
+  line-height: 1;
+}
+
+.message.is-danger {
+
+}

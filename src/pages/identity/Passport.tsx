@@ -20,8 +20,8 @@ const Passport: React.FC = () => {
   const [step, setStep] = useState(-1)
 
   useEffect(() => {
-    const syncSession = async function() {
-      const incodeSession =  localStorage.getItem('incode_session');
+    const syncSession = async function () {
+      const incodeSession = localStorage.getItem('incode_session');
 
       if (incodeSession) {
         setSession(JSON.parse(incodeSession));
@@ -61,7 +61,7 @@ const Passport: React.FC = () => {
         alert('Buuu!')
         alert(JSON.stringify(data))
         localStorage.removeItem('incode_session');
-      }else {
+      } else {
         const res = await finishStatus({ session })
         const js = await res.json();
 
@@ -78,7 +78,7 @@ const Passport: React.FC = () => {
     localStorage.removeItem('incode_session');
   }
 
-  const successFrontCallback = (data) => {
+  const successFrontCallback = async (data) => {
     if (data.skipBackIdCapture) {
       setStep(2);
     } else {
@@ -93,7 +93,7 @@ const Passport: React.FC = () => {
   const successCallback = () => {
   }
 
-  const errorCallback = () => {}
+  const errorCallback = () => { }
 
   return (
     <IonPage>
@@ -105,29 +105,14 @@ const Passport: React.FC = () => {
           <p className="text-base">
             Captura una foto de tus identificaciones.
           </p>
-
-          <button onClick={() => setStep(0)}>Iniciar captura</button>
         </div>
 
         <div className="p-6">
-          {session && step === 0 && <FrontId
-            session={session}
-            onSuccess={successFrontCallback}
-            onError={errorCallback}
-          />}
+          <button className="button is-primary" onClick={() => setStep(0)}>Iniciar captura</button>
 
-          {session && step === 1 && <BackId
-            session={session}
-            onSuccess={successBackCallback}
-            onError={errorCallback}
-            required={skipBackIdCapture}
-          />}
-
-          {session && step === 2 && <Selfie
-            session={session}
-            onSuccess={successCallback}
-            onError={errorCallback}
-          />}
+          {session && step === 0 && <FrontId session={session} onSuccess={successFrontCallback} />}
+          {session && step === 1 && <BackId session={session} onSuccess={successBackCallback} />}
+          {session && step === 2 && <Selfie session={session} onSuccess={successCallback} />}
 
           <div className="content">
             <button
@@ -139,19 +124,19 @@ const Passport: React.FC = () => {
             <div className="border-bottom border-primary-blue" />
           </div>
 
-            <button
-              className="button button-primary mb-16"
-              onClick={handleProcessFace}
-            >
-              Process
-            </button>
+          <button
+            className="button button-primary mb-16"
+            onClick={handleProcessFace}
+          >
+            Process
+          </button>
 
-            <button
-              className="button button-primary mb-16"
-              onClick={clearSession}
-            >
-              Process
-            </button>
+          <button
+            className="button button-primary mb-16"
+            onClick={clearSession}
+          >
+            Process
+          </button>
 
         </div>
 

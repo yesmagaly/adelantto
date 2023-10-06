@@ -144,7 +144,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
               {loading && <div>Cargando ...</div>}
               {error && (
                 <>
-                  <p className="message is-danger text-lg font-medium leading-6 text-center">
+                  <p className="message is-danger">
                     Fallo la verificación frontal de identificación
                   </p>
                   <button onClick={tryAgain} className="button is-primary">
