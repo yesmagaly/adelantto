@@ -19,12 +19,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [status, setStatus] = useState("");
   const [step, setStep] = useState(0);
-
-  const startStep = () => {
-    setStep(0);
-  };
 
   const takePhoto = async () => {
     const newPhoto = await Camera.getPhoto({
@@ -48,11 +43,9 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
         session,
         body: { base64Image: photo.base64String },
       });
-      setStatus("is-success");
       setStep(-1);
       props.onSuccess(data);
     } catch (error) {
-      setStatus("is-fail");
       setError(error?.message);
     }
 
@@ -67,14 +60,15 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const clear = () => {
     setPhoto(null);
     setError(null);
-    setStatus("");
     setStep(-1);
   };
 
   return (
     <div>
       <Modal.Root isOpen={step === 0} variant="fully">
-        <h3 className="heading-3">Ahora toca el back side</h3>
+        <Modal.Header className="text-center">
+          <h3 className="heading-3">Ahora escanea el reverso de tu identificación</h3>
+        </Modal.Header>
         <Modal.Body className="flex items-center">
           <img src="/../src/assets/video/tutorial.gif"></img>
         </Modal.Body>
@@ -85,7 +79,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
       {photo && (
         <>
-          <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
+          <Modal.Root isOpen={step === 1} variant="fully">
             <Modal.Header className="text-center">
               <h2 className="heading-3">Revisa tu foto</h2>
               <p>
@@ -94,7 +88,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">
-              <div>
+              <div className="income-document">
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
@@ -110,9 +104,9 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Footer>
           </Modal.Root>
 
-          <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
+          <Modal.Root isOpen={step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <div className={status}>
+              <div className="income-image">
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
@@ -122,12 +116,10 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               {loading && <div>Cargando ...</div>}
               {error && (
                 <>
-                  <div>
-                    <div>La verificación frontal de identificación fall'o</div>
-                    <button onClick={tryAgain} className="button">
-                      Capturar otra vez
-                    </button>
-                  </div>
+                  <p className="message is-danger">Fallo la verificación del reverso de tu identificación.</p>
+                  <button onClick={tryAgain} className="button">
+                    Capturar otra vez
+                  </button>
                 </>
               )}
             </Modal.Footer>

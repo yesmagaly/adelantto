@@ -19,12 +19,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [status, setStatus] = useState("");
   const [step, setStep] = useState(0);
-
-  const startStep = () => {
-    setStep(0);
-  };
 
   const takePhoto = async () => {
     const newPhoto = await Camera.getPhoto({
@@ -48,11 +43,9 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
         session,
         body: { base64Image: photo.base64String },
       });
-      setStatus("is-success");
       setStep(-1);
       props.onSuccess(data);
     } catch (error) {
-      setStatus("is-fail");
       setError(error?.message);
     }
 
@@ -67,33 +60,30 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const clear = () => {
     setPhoto(null);
     setError(null);
-    setStatus("");
     setStep(-1);
   };
 
   return (
     <div>
-      {!photo && (
-        <Modal.Root isOpen={step === 0} variant="fully">
-          <Modal.Header className="text-center">
-            <h3 className="heading-3">
-              Tome una fotografía clara, sin sombras ni reflejos.
-            </h3>
-          </Modal.Header>
-          <Modal.Body className="flex items-center">
-            <video
-              src="/../src/assets/video/id-shadow.mp4"
-              autoPlay
-              loop
-            ></video>
-          </Modal.Body>
-          <Modal.Footer>
-            <button className="button is-primary" onClick={takePhoto}>
-              Continuar
-            </button>
-          </Modal.Footer>
-        </Modal.Root>
-      )}
+      <Modal.Root isOpen={step === 0} variant="fully">
+        <Modal.Header className="text-center">
+          <h3 className="heading-3">
+            Tome una fotografía clara, sin sombras ni reflejos.
+          </h3>
+        </Modal.Header>
+        <Modal.Body className="flex items-center">
+          <video
+            src="/../src/assets/video/id-shadow.mp4"
+            autoPlay
+            loop
+          ></video>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="button is-primary" onClick={takePhoto}>
+            Continuar
+          </button>
+        </Modal.Footer>
+      </Modal.Root>
 
       {photo && (
         <>
@@ -106,9 +96,9 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">
-              <img
-                src={`data:image/${photo.format};base64,${photo.base64String}`}
-              ></img>
+              <div className="income-document">
+                <img src={`data:image/${photo.format};base64,${photo.base64String}`}></img>
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <button onClick={uploadFrontId} className="button is-primary">
@@ -122,13 +112,10 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <img
-                className={status}
-                src={`data:image/${photo.format};base64,${photo.base64String}`}
-              ></img>
+              <img src={`data:image/${photo.format};base64,${photo.base64String}`}></img>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {loading && <div>Cargando ...</div>}
+              {loading && <p className="message">Cargando ...</p>}
               {error && (
                 <>
                   <p className="message is-danger">
