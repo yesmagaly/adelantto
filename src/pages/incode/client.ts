@@ -1,6 +1,5 @@
-import { VITE_INCODE_API_URL, VITE_INCODE_CLIENT_ID, VITE_INCODE_FLOW_ID } from "../../config";
 import sha1 from "js-sha1"
-
+import { VITE_INCODE_API_URL, VITE_INCODE_CLIENT_ID, VITE_INCODE_FLOW_ID } from "../../config";
 
 export const INCODE_PROCESSING_ERROR = "incode_processing_error";
 export const INCODE_ERROR = "incode_error";

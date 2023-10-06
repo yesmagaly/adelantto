@@ -14,6 +14,7 @@ export interface ComponentProp {
   session: any;
   onSuccess: any;
 }
+
 export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
