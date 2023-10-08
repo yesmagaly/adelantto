@@ -6,7 +6,7 @@ import {
 } from "@capacitor/camera";
 
 import * as Modal from "../../../components/modal";
-import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS, VALIDATING_STATUS } from "./constants";
+import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS } from "./constants";
 import { addFaceSelfie, processFace, finishStatus } from "../client";
 import "../styles.css";
 
