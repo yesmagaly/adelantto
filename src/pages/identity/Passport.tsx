@@ -5,7 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { FrontId } from "../incode/components/FrontId"
 import { BackId } from "../incode/components/BackId"
 import { Selfie } from "../incode/components/Selfie"
-import { initSession, processId, processFace, finishStatus, addDevicefin, initSessiongerPrint } from "../incode/client"
+import { initSession, processFace, finishStatus, addDevicefin, initSessiongerPrint } from "../incode/client"
 
 import Modal from "../../components/modal";
 import check from "../../assets/icons/check.png";
@@ -39,17 +39,6 @@ const Passport: React.FC = () => {
 
     syncSession();
   }, []);
-
-  const handleProcessId = async () => {
-    const response = await processId({ session });
-    const data = await response.json();
-
-    if (response.status === 200) {
-      alert(JSON.stringify(data));
-    } else {
-      console.log(data, 'Error');
-    }
-  }
 
   const handleProcessFace = async () => {
     const response = await processFace({ session });
@@ -114,30 +103,13 @@ const Passport: React.FC = () => {
           {session && step === 1 && <BackId session={session} onSuccess={successBackCallback} />}
           {session && step === 2 && <Selfie session={session} onSuccess={successCallback} />}
 
-          <div className="content">
-            <button
-              className="button button-primary mb-16"
-              onClick={handleProcessId}
-            >
-              Process ID
-            </button>
-            <div className="border-bottom border-primary-blue" />
-          </div>
-
-          <button
-            className="button button-primary mb-16"
-            onClick={handleProcessFace}
-          >
+          <button className="button is-primary mb-16" onClick={handleProcessFace}>
             Process
           </button>
 
-          <button
-            className="button button-primary mb-16"
-            onClick={clearSession}
-          >
-            Process
+          <button className="button is-primary mb-16" onClick={clearSession}>
+            Clear Session
           </button>
-
         </div>
 
         <div className="heading--center ">

@@ -5,8 +5,9 @@ import {
   CameraSource,
 } from "@capacitor/camera";
 
-import { addFaceSelfie } from "../client";
 import * as Modal from "../../../components/modal";
+import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS, VALIDATING_STATUS } from "./constants";
+import { addFaceSelfie, processFace, finishStatus } from "../client";
 import "../styles.css";
 
 export interface ComponentProp {
@@ -17,13 +18,9 @@ export interface ComponentProp {
 
 export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(0);
-
-  const startStep = () => {
-    setStep(0);
-  };
+  const [status, setStatus] = useState<null | string>();
 
   const takePhoto = async () => {
     const newPhoto = await Camera.getPhoto({
@@ -38,22 +35,33 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
     }
   };
 
-  const uploadFrontId = async () => {
+  const upload = async () => {
     setStep(2);
-    setLoading(true);
+    setStatus(LOADING_STATUS);
 
     try {
       const data = await addFaceSelfie({
         session,
         body: { base64Image: photo.base64String },
       });
-      setStep(-1);
-      props.onSuccess(data);
+
+      setStatus(PROCESSING_STATUS);
+      const process = await processFace({ session })
+
+      if (process.confidence === 1) {
+        setStep(3);
+        setStatus(LOADING_STATUS);
+
+        await finishStatus({ session })
+        setStatus(APPROVED_STATUS);
+        props.onSuccess(data);
+      } else {
+        setStatus(REJECTED_STATUS);
+      }
     } catch (error) {
+      setStatus(REJECTED_STATUS);
       setError(error?.message);
     }
-
-    setLoading(false);
   };
 
   const tryAgain = () => {
@@ -64,7 +72,8 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
   const clear = () => {
     setPhoto(null);
     setError(null);
-    setStep(-1);
+    setStatus(null);
+    setStep(0);
   };
 
   return (
@@ -92,39 +101,67 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">
-              <div>
+              <div className="income-photo">
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
               </div>
             </Modal.Body>
             <Modal.Footer>
+              <button onClick={upload} className="button is-primary">
+                Continuar
+              </button>
               <button onClick={takePhoto} className="button">
                 volver a Capturar
-              </button>
-              <button onClick={uploadFrontId} className="button is-primary">
-                Continuar
               </button>
             </Modal.Footer>
           </Modal.Root>
 
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <div className="">
+              <div className="income-photo">
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
               </div>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {loading && <div>Cargando ...</div>}
-              {error && (
+              {status === LOADING_STATUS && <p className="message is-info">Cargando ...</p>}
+              {status === PROCESSING_STATUS && <p className="message is-info">Procesando ...</p>}
+              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === REJECTED_STATUS && (
                 <>
-                  <p>La verificación frontal de identificación fall'o</p>
-                  <button onClick={tryAgain} className="button is-primary">
+                  <p className="message is-danger">
+                    Fallo la verificación del reverso de tu identificación.
+                    <span>({error})</span>
+                  </p>
+                  <button onClick={tryAgain} className="button">
                     Capturar otra vez
                   </button>
                 </>
+              )}
+            </Modal.Footer>
+          </Modal.Root>
+
+          <Modal.Root isOpen={Boolean(photo) && step === 3} variant="fully">
+            <Modal.Header>
+              <h3 className="heading-3">Validando documento y photo</h3>
+            </Modal.Header>
+            <Modal.Body className="flex items-center">
+              <div className="income-photo">
+                <img
+                  src={`data:image/${photo.format};base64,${photo.base64String}`}
+                ></img>
+              </div>
+            </Modal.Body>
+            <Modal.Footer className="gap-6">
+              {status === LOADING_STATUS && <p className="message is-info">Validando ...</p>}
+              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === REJECTED_STATUS && (
+                <p className="message is-danger">
+                  Fallo la verificación.
+                  <span>({error})</span>
+                </p>
               )}
             </Modal.Footer>
           </Modal.Root>

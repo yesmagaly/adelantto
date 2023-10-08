@@ -77,10 +77,6 @@ export async function addFrontId({ session, body }) {
 
     if (response.status === 200) {
       if (!data.failReason && data.classification) {
-        if (data.skipBackIdCapture) {
-          await processId({ session });
-        }
-
         return data;
       }
 
@@ -110,7 +106,6 @@ export async function addBackId({ session, body }) {
 
     if (response.status === 200) {
       if (!data.failReason && data.classification) {
-        await processId({ session });
         return data;
       }
 
@@ -151,41 +146,106 @@ export async function processId({ session }) {
   }
 }
 
-export function addFaceSelfie({ session, body }) {
-  return fetch(`${VITE_INCODE_API_URL}/omni/add/face/third-party?imageType=selfie`, {
-    method: "POST",
-    headers: {
-      'Api-Version': "1.0",
-      'X-Api-Key': sha1(session?.clientId),
-      'X-Incode-Hardware-Id': session?.token,
-      'Content-Type': "application/json"
-    },
-    body: JSON.stringify(body),
-  });
+export async function addFaceSelfie({ session, body }) {
+  try {
+    const response = await fetch(`${VITE_INCODE_API_URL}/omni/add/face/third-party?imageType=selfie`, {
+      method: "POST",
+      headers: {
+        'Api-Version': "1.0",
+        'X-Api-Key': sha1(session?.clientId),
+        'X-Incode-Hardware-Id': session?.token,
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+
+      if (data.confidence === 1 || !data.isBright || data.hasLenses || data.hasFaceMask || data.hasHeadCover) {
+        if (data.confidence === 1) {
+          throw new Error("Spoof attempt detected", { cause: INCODE_PROCESSING_ERROR });
+        }
+
+        if (!data.isBright) {
+          throw new Error("Bad brightness", { cause: INCODE_PROCESSING_ERROR });
+        }
+
+        if (data.hasLenses) {
+          throw new Error("Lenses detected", { cause: INCODE_PROCESSING_ERROR });
+        }
+
+        if (data.hasFaceMask) {
+          throw new Error("Mask detected", { cause: INCODE_PROCESSING_ERROR });
+        }
+
+        if (data.hasHeadCover) {
+          throw new Error("Head cover detected", { cause: INCODE_PROCESSING_ERROR });
+        }
+
+        throw new Error("Something went wrong.", { cause: INCODE_PROCESSING_ERROR });
+      } else {
+        return data;
+      }
+    } else {
+      throw new Error(data.error, { cause: INCODE_ERROR });
+    }
+  } catch (error) {
+    throw new Error(error?.message, { cause: HTTP_ERROR });
+  }
 }
 
-export function processFace({ session }) {
-  return fetch(`${VITE_INCODE_API_URL}/omni/process/face?imageType=selfie`, {
-    method: "POST",
-    headers: {
-      'Api-Version': "1.0",
-      'X-Api-Key': sha1(session?.clientId),
-      'X-Incode-Hardware-Id': session?.token,
-      'Content-Type': "application/json"
-    },
-  });
+export async function processFace({ session }) {
+  try {
+    const response = await fetch(`${VITE_INCODE_API_URL}/omni/process/face?imageType=selfie`, {
+      method: "POST",
+      headers: {
+        'Api-Version': "1.0",
+        'X-Api-Key': sha1(session?.clientId),
+        'X-Incode-Hardware-Id': session?.token,
+        'Content-Type': "application/json"
+      },
+    });
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+      return data;
+    } else {
+      throw new Error(data.error, { cause: INCODE_ERROR });
+    }
+  } catch (error) {
+    throw new Error(error?.message, { cause: HTTP_ERROR });
+  }
 }
 
-export function finishStatus({ session }) {
-  return fetch(`${VITE_INCODE_API_URL}/omni/finish-status?flowId=${VITE_INCODE_FLOW_ID}`, {
-    method: "GET",
-    headers: {
-      'Api-Version': "1.0",
-      'X-Api-Key': sha1(session?.clientId),
-      'X-Incode-Hardware-Id': session?.token,
-      'Content-Type': "application/json"
-    },
-  });
+export async function finishStatus({ session }) {
+  try {
+    const response = await fetch(`${VITE_INCODE_API_URL}/omni/finish-status?flowId=${VITE_INCODE_FLOW_ID}`, {
+      method: "GET",
+      headers: {
+        'Api-Version': "1.0",
+        'X-Api-Key': sha1(session?.clientId),
+        'X-Incode-Hardware-Id': session?.token,
+        'Content-Type': "application/json"
+      },
+    });
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+      if (data.action === 'approved') {
+        return data;
+      }
+
+      throw new Error("Something went wrong.", { cause: INCODE_PROCESSING_ERROR });
+    } else {
+      throw new Error(data.error, { cause: INCODE_ERROR });
+    }
+  } catch (error) {
+    throw new Error(error?.message, { cause: HTTP_ERROR });
+  }
 }
 
 export async function initSession() {

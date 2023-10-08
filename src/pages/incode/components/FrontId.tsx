@@ -5,8 +5,9 @@ import {
   CameraSource,
 } from "@capacitor/camera";
 
-import { addFrontId } from "../client";
 import * as Modal from "../../../components/modal";
+import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS } from "./constants";
+import { addFrontId, processId } from "../client";
 import "../styles.css";
 
 export interface ComponentProp {
@@ -15,11 +16,15 @@ export interface ComponentProp {
   onSuccess: any;
 }
 
+const flushPromise = () => new Promise(resolve => {
+  setTimeout(resolve, 3000)
+});
+
 export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(0);
+  const [status, setStatus] = useState<null | string>();
 
   const takePhoto = async () => {
     const newPhoto = await Camera.getPhoto({
@@ -34,22 +39,29 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
     }
   };
 
-  const uploadFrontId = async () => {
+  const upload = async () => {
     setStep(2);
-    setLoading(true);
+    setStatus(LOADING_STATUS);
 
     try {
       const data = await addFrontId({
         session,
         body: { base64Image: photo.base64String },
       });
-      setStep(-1);
+
+      if (data.skipBackIdCapture) {
+        setStatus(PROCESSING_STATUS);
+        await processId({ session });
+      }
+
+      setStatus(APPROVED_STATUS);
+      await flushPromise();
+
       props.onSuccess(data);
     } catch (error) {
+      setStatus(REJECTED_STATUS);
       setError(error?.message);
     }
-
-    setLoading(false);
   };
 
   const tryAgain = () => {
@@ -60,7 +72,8 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const clear = () => {
     setPhoto(null);
     setError(null);
-    setStep(-1);
+    setStatus(null);
+    setStep(0);
   };
 
   return (
@@ -101,7 +114,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <button onClick={uploadFrontId} className="button is-primary">
+              <button onClick={upload} className="button is-primary">
                 Continuar
               </button>
               <button onClick={takePhoto} className="button">
@@ -115,8 +128,10 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
               <img src={`data:image/${photo.format};base64,${photo.base64String}`}></img>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {loading && <p className="message">Cargando ...</p>}
-              {error && (
+              {status === LOADING_STATUS && <p className="message">Cargando ...</p>}
+              {status === PROCESSING_STATUS && <p className="message">Procesando ...</p>}
+              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === REJECTED_STATUS && (
                 <>
                   <p className="message is-danger">
                     Fallo la verificación frontal de identificación

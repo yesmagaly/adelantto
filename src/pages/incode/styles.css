@@ -3,60 +3,20 @@
   --color-success: hsl(153, 53%,  53%);
 }
 
-.upload {
-  @apply w-full
-    rounded
-    bg-slate-200
-    overflow-hidden
-    text-slate-800
-    text-center
-    h-52
-    p-1
-    flex
-    flex-col
-    items-center
-    justify-center
-    relative;
-}
-
-.upload.is-fail {
-  background-color: var(--color-danger);
-}
-
-
-.upload.is-success {
-  background-color: var(--color-success);
-}
-
-.upload img {
-  width: 100%;
-  height: 100%;
-  border-radius: 4px;
-}
-
-.upload-label {
-  margin-bottom: 1rem;
-}
-
-.upload button {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.upload .clear-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
 .message {
   font-size: var(--font-medium);
   line-height: 1;
+  font-weight: 600;
 }
 
 .message.is-danger {
+  color: var(--color-danger);
+}
 
+.message.is-success {
+  color: var(--color-success);
+}
+
+.message.is-info {
+  color: var(--color-success);
 }

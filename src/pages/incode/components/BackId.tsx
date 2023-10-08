@@ -5,8 +5,9 @@ import {
   CameraSource,
 } from "@capacitor/camera";
 
-import { addBackId } from "../client";
 import * as Modal from "../../../components/modal";
+import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS } from "./constants";
+import { addBackId, processId } from "../client";
 import "../styles.css";
 
 export interface ComponentProp {
@@ -15,11 +16,15 @@ export interface ComponentProp {
   onSuccess: any;
 }
 
+const flushPromise = () => new Promise(resolve => {
+  setTimeout(resolve, 3000)
+});
+
 export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [step, setStep] = useState(0);
+  const [status, setStatus] = useState<null | string>();
 
   const takePhoto = async () => {
     const newPhoto = await Camera.getPhoto({
@@ -34,22 +39,26 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
     }
   };
 
-  const uploadFrontId = async () => {
+  const upload = async () => {
     setStep(2);
-    setLoading(true);
+    setStatus(LOADING_STATUS);
 
     try {
       const data = await addBackId({
         session,
         body: { base64Image: photo.base64String },
       });
-      setStep(-1);
+      setStatus(PROCESSING_STATUS);
+      await processId({ session });
+
+      setStatus(APPROVED_STATUS);
+      await flushPromise();
+
       props.onSuccess(data);
     } catch (error) {
+      setStatus(REJECTED_STATUS);
       setError(error?.message);
     }
-
-    setLoading(false);
   };
 
   const tryAgain = () => {
@@ -60,7 +69,8 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const clear = () => {
     setPhoto(null);
     setError(null);
-    setStep(-1);
+    setStatus(null);
+    setStep(0);
   };
 
   return (
@@ -72,9 +82,11 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
         <Modal.Body className="flex items-center">
           <img src="/../src/assets/video/tutorial.gif"></img>
         </Modal.Body>
-        <button onClick={takePhoto} className="button is-primary">
-          Continuar
-        </button>
+        <Modal.Footer>
+          <button onClick={takePhoto} className="button is-primary">
+            Continuar
+          </button>
+        </Modal.Footer>
       </Modal.Root>
 
       {photo && (
@@ -95,7 +107,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <button onClick={uploadFrontId} className="button is-primary">
+              <button onClick={upload} className="button is-primary">
                 Continuar
               </button>
               <button onClick={takePhoto} className="button">
@@ -113,8 +125,10 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {loading && <div>Cargando ...</div>}
-              {error && (
+              {status === LOADING_STATUS && <p className="message is-info">Cargando ...</p>}
+              {status === PROCESSING_STATUS && <p className="message is-info">Procesando ...</p>}
+              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === REJECTED_STATUS && (
                 <>
                   <p className="message is-danger">Fallo la verificación del reverso de tu identificación.</p>
                   <button onClick={tryAgain} className="button">
