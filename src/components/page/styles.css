@@ -1,0 +1,14 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-body {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.page-footer {
+  padding: 1.5rem;
+}

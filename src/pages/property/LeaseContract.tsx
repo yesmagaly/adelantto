@@ -5,7 +5,28 @@ import { useAuth } from "../auth/authContext";
 import { NumericFormat } from 'react-number-format';
 
 function removeNumericFormat(value: string) {
-  return value.replaceAll(/\,|\$|\s/g, '');
+  return parseFloat(value.replaceAll(/\,|\$|\s/g, ''));
+}
+
+function addMonths(date, months) {
+  date.setMonth(date.getMonth() + months);
+
+  return date;
+}
+
+function parseDate(str: string) {
+  const [year, month, day] = str.split('-');
+  return new Date(+year, month - 1, +day);
+}
+
+// Validate minimum period of contract time
+function validateMinContractTime(startDateStr: string, endDateStr: string) {
+  const minMonths = 6;
+  const oneDayTimestamp = 86400000;
+  const endDate = parseDate(endDateStr);
+  const minEndDate = addMonths(parseDate(startDateStr), minMonths);
+
+  return (minEndDate.getTime() - oneDayTimestamp) <= endDate.getTime();
 }
 
 const LeaseContract: React.FC = () => {
@@ -15,11 +36,17 @@ const LeaseContract: React.FC = () => {
   const {
     handleSubmit,
     register,
-    formState: {},
+    setError,
+    formState: { errors },
     control,
   } = useForm();
 
-  const onSubmit = async ({ monthly_lease_income, ...data}) => {
+  const onSubmit = async ({ monthly_lease_income, ...data }) => {
+    // Validate minimum period of contract time
+    if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
+      return setError('lease_end_date', { message: "El contrato mínima es de 6 meses" })
+    }
+
     const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts`, {
       method: "POST",
       headers: {
@@ -51,6 +78,11 @@ const LeaseContract: React.FC = () => {
             <div>
               <label>Valor de tu renta mensual</label>
               <Controller
+                rules={{
+                  validate: {
+                    greaterThan: v => removeNumericFormat(v) >= 15000 || 'El monto mínimo es de $15,000 MXN',
+                  }
+                }}
                 control={control}
                 name="monthly_lease_income"
                 render={({ field: { ref, ...field } }) => (
@@ -60,12 +92,18 @@ const LeaseContract: React.FC = () => {
                     type="text"
                     required
                     getInputRef={ref}
-                    decimalScale={2}
+                    decimalScale={2} a
                     thousandSeparator=","
-                    prefix={'$ '}
+                    prefix={'$'}
                   />
                 )}
               />
+              {errors?.monthly_lease_income && (
+                <div className="">
+                  {errors?.monthly_lease_income?.message}
+                </div>
+              )}
+
             </div>
             <div className="border-full !mt-0" />
 
@@ -85,9 +123,15 @@ const LeaseContract: React.FC = () => {
               <input
                 {...register("lease_end_date")}
                 type="date"
-                placeholder=""
                 required
               />
+
+              {errors?.lease_end_date && (
+                <div className="">
+                  {errors?.lease_end_date?.message}
+                </div>
+              )}
+
             </div>
 
             <div className="border-full !mt-0" />

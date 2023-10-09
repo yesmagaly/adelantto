@@ -21,7 +21,7 @@
 /** other custom global styles can go here */
 
 .heading {
-  @apply h-60 bg-cover text-white px-9 py-6;
+  @apply h-60 bg-cover text-white px-9 py-6 flex flex-col justify-end;
 }
 
 .heading--green {
@@ -38,7 +38,7 @@
 }
 
 .heading--center {
-  @apply flex flex-col justify-center items-center;
+  @apply justify-center items-center;
 }
 
 .heading--compact {
@@ -55,7 +55,7 @@
 }
 
 .heading__title {
-  @apply text-[44px] mb-2;
+  @apply text-[44px] mb-2 leading-none;
 }
 
 .heading__title strong {
@@ -64,6 +64,10 @@
 
 .heading__headline {
   @apply font-semibold;
+}
+
+.heading-1 {
+  @apply text-[44px] mb-2 leading-none;
 }
 
 .heading-2 {

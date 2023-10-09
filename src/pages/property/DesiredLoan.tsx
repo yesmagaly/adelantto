@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { RouteComponentProps } from "react-router";
@@ -5,19 +6,46 @@ import { RouteComponentProps } from "react-router";
 import { API_SERVER_URL } from "../../config";
 import { useAuth } from "../auth/authContext";
 
+function formatCurrency(value: number) {
+  return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
+}
+
 interface DesiredLoanProps
   extends RouteComponentProps<{
     id: string;
-  }> {}
+  }> { }
 
 const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const router = useIonRouter();
+  const [loading, setLoading] = useState(true);
+  const [loanContract, setLoanContract] = useState(null);
   const { authInfo } = useAuth()!;
+
+  // GET with fetch API
+  useEffect(() => {
+    const fetchLoanContract = async () => {
+      const response = await fetch(
+        `${API_SERVER_URL}/api/leasing-contracts/${match.params.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${authInfo.user.token}`,
+            Accept: "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+      setLoading(false);
+      setLoanContract(data);
+    };
+
+    fetchLoanContract();
+  }, []);
 
   const {
     handleSubmit,
     register,
-    formState: {},
+    formState: { },
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -41,7 +69,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
     }
   };
 
-  const options = [5000, 10000, 15000, 20000, 25000, 30000];
+  const months = [3, 4, 5, 6];
 
   return (
     <IonPage>
@@ -55,31 +83,36 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
           </h3>
         </div>
         <div className="px-16 py-8">
-          <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            {options.map((option) => (
-              <div
-                key={`dl-${option}`}
-                className="cursor-pointer px-5 py-2 w-48 opacity-100 bg-gradient-to-t bg-gray-100"
-              >
-                <input
-                  className="mr-4"
-                  {...register("desired_loan")}
-                  type="radio"
-                  value={option}
-                  id={`desired_loan-${option}`}
-                />
-                <label
-                  className="w-full text-3xl font-semibold"
-                  htmlFor={`desired_loan-${option}`}
+          {loading && <div>Loading</div>}
+          {!loading && loanContract && (
+            <form className="form" onSubmit={handleSubmit(onSubmit)}>
+              {months.map((option) => (
+                <div
+                  key={`dl-${option}`}
+                  className="cursor-pointer px-5 py-2 bg-gradient-to-t bg-gray-100"
                 >
-                  {option}
-                </label>
-              </div>
-            ))}
+                  <input
+                    className="mr-4"
+                    {...register("desired_loan")}
+                    type="radio"
+                    value={option * loanContract.monthly_lease_income}
+                    id={`desired_loan-${option}`}
+                  />
+                  <label
+                    className="w-full text-3xl font-semibold"
+                    htmlFor={`desired_loan-${option}`}
+                  >
+                    {formatCurrency(option * loanContract.monthly_lease_income)}
+                  </label>
+                </div>
+              ))}
 
-            <button className="button button-secondary mb-7">Siguiente</button>
-            <div className="border-primary-blue border-bottom" />
-          </form>
+              <button className="button button-secondary mb-7">Siguiente</button>
+              <div className="border-primary-blue border-bottom" />
+            </form>
+          )}
+
+
         </div>
       </IonContent>
     </IonPage>

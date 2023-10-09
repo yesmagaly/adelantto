@@ -122,7 +122,7 @@ const App: React.FC = () => {
               <Route exact path="/summary" component={Summary} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/succesful-transaction" component={SuccesfulTransaction} />
-              <Route exact path="/"><Redirect to="/passport" /></Route>
+              <Route exact path="/"><Redirect to="/welcome" /></Route>
             </IonReactRouter>
           ) : (
             <IonReactRouter>
