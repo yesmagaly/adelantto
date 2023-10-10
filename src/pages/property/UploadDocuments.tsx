@@ -59,7 +59,9 @@ const UploadDocuments: React.FC = () => {
                 Carátula de tu escritura
               </h5>
 
-              {errors?.deed_of_ownership && <span className="text-sm text-red-600">{errors.deed_of_ownership?.message}</span>}
+              {errors?.deed_of_ownership && <span className="message is-danger text-xs font-medium">
+                {errors.deed_of_ownership?.message}
+              </span>}
 
               <p className="text-xs">
                 Con sello de inscripción del Registro Público de la Propiedad
