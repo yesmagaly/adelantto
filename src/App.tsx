@@ -100,12 +100,12 @@ const App: React.FC = () => {
               <Route exact path="/lease-contract" component={LeaseContract} />
               <Route exact path="/lease-contract/:id/desired-loan" component={DesiredLoan} />
               <Route exact path="/lease-contract/:id/pre-offer" component={PreOffer} />
+              <Route exact path="/data-validation" component={DataValidation} />
 
               <Route exact path="/passport" component={Passport} />
               <Route exact path="/bug" component={Bug} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/biometric-validation" component={BiometricValidation} />
-              <Route exact path="/data-validation" component={DataValidation} />
               <Route exact path="/validation-error" component={ValidationError} />
               <Route exact path="/correct-data" component={CorrectData} />
               <Route exact path="/withdrawals" component={Withdrawals} />

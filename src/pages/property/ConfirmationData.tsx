@@ -68,7 +68,7 @@ const ConfirmationData: React.FC = ({ match }) => {
             </label>
           </div>
           <div className="text-center mb-7">
-            <button className="button is-primary">Siguiente</button>
+            <button className="button is-primary" onClick={router.push('/data-validation')}>Siguiente</button>
           </div>
         </form>
 
