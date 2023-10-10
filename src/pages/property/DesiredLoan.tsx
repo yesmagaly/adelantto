@@ -5,6 +5,7 @@ import { RouteComponentProps } from "react-router";
 
 import { API_SERVER_URL } from "../../config";
 import { useAuth } from "../auth/authContext";
+import * as Page from "../../components/page"
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
@@ -74,22 +75,25 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue flex flex-col justify-center">
-          <h3 className="text-3xl">
-            Selecciona el monto <br />
-            <strong>
-              que te gustaría que <br /> adelantemos de rentas
-            </strong>
-          </h3>
-        </div>
-        <div className="px-16 py-8">
-          {loading && <div>Loading</div>}
-          {!loading && loanContract && (
-            <form className="form" onSubmit={handleSubmit(onSubmit)}>
-              {months.map((option) => (
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <Page.Root>
+            <Page.Header>
+              <div className="heading heading--blue">
+                <h3 className="text-3xl">
+                  Selecciona el monto <br />
+                  <strong>
+                    que te gustaría que <br /> adelantemos de rentas
+                  </strong>
+                </h3>
+              </div>
+            </Page.Header>
+            <Page.Body>
+              {loading && <div>Loading</div>}
+
+              {!loading && months.map((option) => (
                 <div
                   key={`dl-${option}`}
-                  className="cursor-pointer px-5 py-2 bg-gradient-to-t bg-gray-100"
+                  className="cursor-pointer px-5 py-4 bg-gradient-to-t bg-gray-100"
                 >
                   <input
                     className="mr-4"
@@ -106,14 +110,12 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   </label>
                 </div>
               ))}
-
-              <button className="button button-secondary mb-7">Siguiente</button>
-              <div className="border-primary-blue border-bottom" />
-            </form>
-          )}
-
-
-        </div>
+            </Page.Body>
+            <Page.Footer>
+              <button className="button button-secondary">Siguiente</button>
+            </Page.Footer>
+          </Page.Root>
+        </form>
       </IonContent>
     </IonPage>
   );

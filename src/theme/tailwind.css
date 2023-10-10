@@ -3,6 +3,7 @@
 @import url(base.css);
 @import url(button.css);
 @import url(income.css);
+@import url(form.css);
 
 :root {
   --color-neutral-50: #fafafa;
@@ -88,7 +89,7 @@
 
 /** Content styles. **/
 .content {
-  @apply flex p-4 flex-col items-center text-center;
+  @apply flex p-8 flex-col items-center text-center;
   min-height: calc(100% - 15rem);
 }
 
@@ -96,22 +97,8 @@
   @apply justify-center;
 }
 
-/** Form Styles **/
-
-.form {
-  @apply flex flex-col gap-4 items-center;
-}
-
-.form input[type="text"],
-.form input[type="numeric"],
-.form input[type="password"],
-.form input[type="email"],
-.form input[type="date"],
-.form .pattern-format {
-  @apply p-4 mb-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
-}
-
 .help-text {
+
   @apply max-w-xs font-semibold leading-5;
 }
 
@@ -133,4 +120,11 @@
 
 #bg-checkbox {
   @apply accent-primary-green;
+}
+
+ion-footer {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

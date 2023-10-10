@@ -6,6 +6,6 @@
   @apply bg-primary-green text-white;
 }
 
-.button-secondary {
+.button-secondary, .button.is-secondary {
   @apply bg-primary-blue-light text-white;
 }

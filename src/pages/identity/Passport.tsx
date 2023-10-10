@@ -104,11 +104,6 @@ const Passport: React.FC = () => {
                 </p>
               </Modal.Root>
             )}
-            <div className="p-6">
-              <button className="button is-primary mb-16" onClick={clearSession}>
-                Clear Session
-              </button>
-            </div>
           </Page.Body>
           <Page.Footer>
             <button className="button is-primary" onClick={() => setStep(0)}>Iniciar captura</button>

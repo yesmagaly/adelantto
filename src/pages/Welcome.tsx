@@ -1,4 +1,4 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 
 import homeAnimation from "../assets/animations/home.json";
@@ -17,26 +17,25 @@ const Welcome: React.FC = () => {
         <div className="content">
           <Lottie
             animationData={homeAnimation}
-            style={{ width: 294, height: 294 }}
+            style={{ width: 280, height: 280 }}
             loop
             play
           />
-          <p className="font-medium my-10">
+          <p className="text-xl leading-tight">
             A continuación solicitaremos algunos datos de tu propiedad para
             poder generar una propuesta y en caso de que sea de tu interés,
             iniciaremos el proceso de validación de documentos.
           </p>
-
+        </div>
+      </IonContent>
+      <IonFooter>
           <button
-            className="button button-primary mb-10"
+            className="button button-primary"
             onClick={() => router.push("/lease-contract")}
           >
             Iniciar
           </button>
-
-          <div className="border-bottom border-primary-blue" />
-        </div>
-      </IonContent>
+      </IonFooter>
     </IonPage>
   );
 };

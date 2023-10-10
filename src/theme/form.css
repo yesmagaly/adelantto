@@ -1,0 +1,66 @@
+/** Form Styles **/
+
+.form {
+  /* @apply flex flex-col gap-4 items-center; */
+}
+
+form .form-control:last-child {
+  margin-bottom: 0;
+}
+
+.form-control {
+  margin-bottom: 1.5rem;
+}
+
+.form-control:not(.is-inline) label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.form-control .description {
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  margin-top: 0.125rem;
+}
+
+.form-control input[type="text"],
+.form-control input[type="numeric"],
+.form-control input[type="password"],
+.form-control input[type="email"],
+.form-control input[type="date"],
+.form-control .pattern-format {
+  width: 100%;
+  border-radius: 0.25rem;
+}
+
+.form input[type="text"],
+.form input[type="numeric"],
+.form input[type="password"],
+.form input[type="email"],
+.form input[type="date"],
+.form .pattern-format {
+  @apply p-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
+}
+
+.form-control.is-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control.is-center label {
+  max-width: 90%;
+  text-align: center;
+}
+
+
+.dislay-control {
+  border-radius: 0.25rem;
+  @apply bg-gray-100 py-3 px-4 text-center;
+}
+
+
+.dislay-control .number {
+  @apply font-medium text-2xl;
+}
