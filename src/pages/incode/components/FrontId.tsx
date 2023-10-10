@@ -125,9 +125,11 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <img
-                src={`data:image/${photo.format};base64,${photo.base64String}`}
-              ></img>
+              <div className="income-document">
+                <img
+                  src={`data:image/${photo.format};base64,${photo.base64String}`}
+                ></img>
+              </div>
             </Modal.Body>
             <Modal.Footer className="gap-6">
               {status === LOADING_STATUS && (
