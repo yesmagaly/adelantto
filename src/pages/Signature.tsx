@@ -22,7 +22,7 @@ const Signature: React.FC = () => {
                 <input type="text" placeholder="Firma aquí" />
               </div>
               <button
-                className="button button is-primary mb-16"
+                className="button is-primary mb-16"
                 onClick={() => router.push("")}
               >
                 Firmar

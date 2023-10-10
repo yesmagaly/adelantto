@@ -179,7 +179,7 @@ const LeaseContract: React.FC = () => {
               </div>
             </Page.Body>
             <Page.Footer>
-              <button className="button button is-primary">Siguiente</button>
+              <button className="button is-primary">Siguiente</button>
             </Page.Footer>
           </Page.Root>
         </form>

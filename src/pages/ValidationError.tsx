@@ -26,7 +26,7 @@ const ValidationError: React.FC = () => {
             validación
           </p>
           <button
-            className="button button is-primary mb-14"
+            className="button is-primary mb-14"
             onClick={() => router.push("")}
           >
             Finalizar

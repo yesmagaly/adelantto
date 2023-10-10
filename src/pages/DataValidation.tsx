@@ -52,7 +52,7 @@ const DataValidation: React.FC = () => {
           <h4 className="font-bold text-3xl py-10">¡Hasta pronto!</h4>
 
           <button
-            className="button button is-primary mb-16"
+            className="button is-primary mb-16"
             onClick={() => router.push("")}
           >
             Finalizar

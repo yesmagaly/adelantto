@@ -11,7 +11,7 @@ import { useAuth } from "./authContext";
 interface LoginProps
   extends RouteComponentProps<{
     phone: string;
-  }> { }
+  }> {}
 
 type FormValues = {
   email: number;
@@ -67,9 +67,7 @@ const Login: React.FC<LoginProps> = () => {
               />
             </div>
 
-            <button className="button is-primary w-full">
-              Iniciar sesión
-            </button>
+            <button className="button is-primary w-full">Iniciar sesión</button>
           </form>
 
           <p className="leading-5 mb-4">
@@ -93,7 +91,12 @@ const Login: React.FC<LoginProps> = () => {
             Lo sentimos
           </h3>
           {<p>{errors?.password?.message}</p>}
-          <button onClick={() => setIsOpen(false)} className="button button-secondary">Close</button>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="button is-secondary"
+          >
+            Close
+          </button>
         </Modal>
       </IonContent>
     </IonPage>

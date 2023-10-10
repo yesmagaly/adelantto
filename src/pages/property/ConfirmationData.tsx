@@ -7,7 +7,7 @@ const ConfirmationData: React.FC = () => {
 
   const {
     handleSubmit,
-    formState: { },
+    formState: {},
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -73,9 +73,7 @@ const ConfirmationData: React.FC = () => {
             </label>
           </div>
           <div className="text-center mb-7">
-            <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
-              Siguiente
-            </button>
+            <button className="button is-primary">Siguiente</button>
           </div>
         </form>
 

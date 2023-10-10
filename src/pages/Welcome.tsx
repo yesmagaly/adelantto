@@ -30,7 +30,7 @@ const Welcome: React.FC = () => {
       </IonContent>
       <IonFooter>
         <button
-          className="button button is-primary"
+          className="button is-primary"
           onClick={() => router.push("/lease-contract")}
         >
           Iniciar

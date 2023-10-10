@@ -129,7 +129,7 @@ const Register: React.FC = () => {
               validación de tu identidad.
             </p>
 
-            <button className="button button is-primary">Enviar código</button>
+            <button className="button is-primary">Enviar código</button>
           </form>
 
           <div className="border-bottom border-primary-blue" />

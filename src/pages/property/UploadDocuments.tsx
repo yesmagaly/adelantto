@@ -121,7 +121,7 @@ const UploadDocuments: React.FC = () => {
               formato PDF, de lo contrario declinaremos el proceso.
             </p>
 
-            <button className="button button is-primary">Siguiente</button>
+            <button className="button is-primary">Siguiente</button>
           </div>
         </form>
         <div className="border-bottom border-primary-blue" />

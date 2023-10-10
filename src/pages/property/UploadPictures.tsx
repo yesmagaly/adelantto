@@ -11,7 +11,7 @@ const UploadPictures: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { },
+    formState: {},
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -73,9 +73,7 @@ const UploadPictures: React.FC = () => {
               Los documentos deberán ser escaneados en alta resolución <br /> y
               en formato PDF, de lo contrario declinaremos el proceso.
             </p>
-            <button className="bg-primary-green font-semibold py-2 px-11 rounded text-white">
-              Siguiente
-            </button>
+            <button className="button is-primary">Siguiente</button>
           </div>
         </form>
         <div className="border-bottom border-primary-blue" />
