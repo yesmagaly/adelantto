@@ -1,12 +1,13 @@
 import { useState } from "react";
-import {
-  Camera,
-  CameraResultType,
-  CameraSource,
-} from "@capacitor/camera";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 
 import * as Modal from "../../../components/modal";
-import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS } from "./constants";
+import {
+  LOADING_STATUS,
+  APPROVED_STATUS,
+  REJECTED_STATUS,
+  PROCESSING_STATUS,
+} from "./constants";
 import { addFaceSelfie, processFace, finishStatus } from "../client";
 import "../styles.css";
 
@@ -46,13 +47,13 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
       });
 
       setStatus(PROCESSING_STATUS);
-      const process = await processFace({ session })
+      const process = await processFace({ session });
 
       if (process.confidence === 1) {
         setStep(3);
         setStatus(LOADING_STATUS);
 
-        await finishStatus({ session })
+        await finishStatus({ session });
         setStatus(APPROVED_STATUS);
         props.onSuccess(data);
       } else {
@@ -97,7 +98,8 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
             <Modal.Header className="text-center">
               <h2 className="heading-3">Revisa tu foto</h2>
               <p>
-                Mantenga una expresión neutra, busque una luz equilibrada y quítese las gafas y los sombreros.
+                Mantenga una expresión neutra, busque una luz equilibrada y
+                quítese las gafas y los sombreros.
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">
@@ -126,12 +128,20 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {status === LOADING_STATUS && <p className="message is-info">Cargando ...</p>}
-              {status === PROCESSING_STATUS && <p className="message is-info">Procesando ...</p>}
-              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === LOADING_STATUS && (
+                <p className="message is-info text-center">Cargando ...</p>
+              )}
+              {status === PROCESSING_STATUS && (
+                <p className="message is-info text-center">Procesando ...</p>
+              )}
+              {status === APPROVED_STATUS && (
+                <p className="message is-success text-center">
+                  Validación Exitosa
+                </p>
+              )}
               {status === REJECTED_STATUS && (
                 <>
-                  <p className="message is-danger">
+                  <p className="message is-danger text-center">
                     Fallo la verificación del reverso de tu identificación.
                     <span>({error})</span>
                   </p>
@@ -155,10 +165,16 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {status === LOADING_STATUS && <p className="message is-info">Validando ...</p>}
-              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === LOADING_STATUS && (
+                <p className="message is-info text-center">Validando ...</p>
+              )}
+              {status === APPROVED_STATUS && (
+                <p className="message is-success text-center">
+                  Validación Exitosa
+                </p>
+              )}
               {status === REJECTED_STATUS && (
-                <p className="message is-danger">
+                <p className="message is-danger text-center">
                   Fallo la verificación.
                   <span>({error})</span>
                 </p>
