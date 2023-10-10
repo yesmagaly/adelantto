@@ -124,7 +124,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               <div
                 className={`income-photo ${
                   status === REJECTED_STATUS ? "is-danger" : ""
-                }`}
+                } ${status === APPROVED_STATUS ? "is-success" : ""}`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
