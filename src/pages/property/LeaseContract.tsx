@@ -45,7 +45,7 @@ const LeaseContract: React.FC = () => {
   const onSubmit = async ({ monthly_lease_income, ...data }) => {
     // Validate minimum period of contract time
     if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
-      return setError('lease_end_date', { message: "El contrato mínima es de 6 meses" })
+      return setError('lease_end_date', { message: "El contrato mínimo es de 6 meses" })
     }
 
     const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts`, {

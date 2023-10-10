@@ -16,9 +16,11 @@ interface LoanContract {
 }
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
+  const params = new URLSearchParams(window.location.search)
+
   const router = useIonRouter();
   const [loading, setLoading] = useState(true);
-  const [months, setMonths] = useState(6);
+  const [months, setMonths] = useState(params.get('months'));
   const [offer, setOffer] = useState()!;
   const [income, setIncome] = useState()!;
 
@@ -27,7 +29,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     const fetchLoanContract = async () => {
       const response = await loanContracts.load({ id: match.params.id });
       const loan = await response.json();
-      const calcResponse = await calculator.calc({ clientRent: loan.monthly_lease_income, months: months })
+      const calcResponse = await calculator.calc({ principal: loan.monthly_lease_income * months, months: months })
       const data = await calcResponse.json();
       setOffer(data);
       setLoading(false);
@@ -41,10 +43,16 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     const newMonths = parseInt(event.target.value);
     setMonths(newMonths);
 
-    const calcResponse = await calculator.calc({ clientRent: income, months: newMonths })
+    const calcResponse = await calculator.calc({ principal: income * newMonths, months: newMonths })
     const data = await calcResponse.json();
     setOffer(data);
   };
+
+
+  const handleSubmit = async () => {
+
+    router.push("/passport")
+  }
 
   return (
     <IonPage>
@@ -70,7 +78,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
               </h3>
 
               {offer && (
-                <div className="mx-5 flex flex-col gap-1" >
+                <div className="mx-5 flex flex-col gap-3" >
                   <div className="dislay-control">
                     <div className="number">
                       {formatCurrency(offer.primal)} MXN
@@ -92,32 +100,24 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
                     <span>Costo de nuestro servicio y seguro</span>
                   </div>
 
-                  <div className="dislay-control">
-                    <div className="number">
-                      {formatCurrency(offer.opening_commission)} MXN
-                    </div>
-                    <span>Costo de apertura</span>
-                  </div>
+                  <p className="text-center text-xs leading-tight">{offer.note}</p>
                 </div>
               )}
-
-
             </Page.Body>
+
             <Page.Footer className="has-divider">
+              <form></form>
               <div className="form-control is-center">
                 <label>¿Te interesa ver el resumen para otros meses?</label>
-                  <input
-                    min={3}
-                    max={6}
-                    type="number"
-                    size="4"
-                    defaultValue={months}
-                    onChange={handleMothsChange}
-                    className="font-semibold text-xl text-center bg-gray-100 w-12 py-3 shadow-md"
-                  />
+                  <select defaultValue={months} onChange={handleMothsChange}>
+                    <option value={3}>3 meses</option>
+                    <option value={4}>4 meses</option>
+                    <option value={5}>5 meses</option>
+                    <option value={6}>6 meses</option>
+                  </select>
               </div>
 
-              <button onClick={() => router.push("/passport")} className="button button-secondary mb-7">
+              <button onClick={handleSubmit} className="button button-secondary mb-7">
                 Iniciar proceso de Validación de documentos
               </button>
 

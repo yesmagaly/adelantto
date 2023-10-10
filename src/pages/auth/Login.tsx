@@ -49,22 +49,25 @@ const Login: React.FC<LoginProps> = () => {
           <img className="h-40 mb-20" src={logo} />
 
           <form className="form mb-14" onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="email"
-              placeholder="Email"
-              required
-              {...register("email")}
-            />
+            <div className="form-control">
+              <input
+                type="email"
+                placeholder="Email"
+                required
+                {...register("email")}
+              />
+            </div>
+            <div className="form-control">
+              <input
+                type="password"
+                placeholder="Password"
+                required
+                maxLength={8}
+                {...register("password")}
+              />
+            </div>
 
-            <input
-              type="password"
-              placeholder="Password"
-              required
-              maxLength={8}
-              {...register("password")}
-            />
-
-            <button className="block button button-primary">
+            <button className="button is-primary w-full">
               Iniciar sesión
             </button>
           </form>

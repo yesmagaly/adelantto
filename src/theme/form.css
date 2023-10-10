@@ -43,6 +43,11 @@ form .form-control:last-child {
   @apply p-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
 }
 
+.form-control select {
+  padding: 1rem 1.25rem;
+  border-radius: 0.25rem;
+}
+
 .form-control.is-center {
   display: flex;
   flex-direction: column;

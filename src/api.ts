@@ -21,11 +21,26 @@ export const loanContracts = {
   },
 }
 
+export const loanAgreements = {
+  create: async ({ body }) => {
+    return fetch(
+      `${API_SERVER_URL}/api/loan-agreements`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: getToken(),
+          Accept: "application/json",
+        },
+        body: JSON.stringify(body)
+      }
+    );
+  },
+}
 
 export const calculator = {
-  calc: async ({ clientRent, months }) => {
+  calc: async ({ principal, months }) => {
     return fetch(
-      `${API_SERVER_URL}/api/calc?client_rent=${clientRent}&months=${months}`,
+      `${API_SERVER_URL}/api/calc?principal=${principal}&months=${months}`,
       {
         headers: {
           Authorization: getToken(),
