@@ -40,7 +40,7 @@ const Withdrawals: React.FC = () => {
 
           <div className="mb-7">
             <button
-              className="button button-primary mb-8"
+              className="button button is-primary mb-8"
               onClick={() => router.push("/verification-email")}
             >
               Siguiente

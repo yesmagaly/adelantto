@@ -29,12 +29,12 @@ const Welcome: React.FC = () => {
         </div>
       </IonContent>
       <IonFooter>
-          <button
-            className="button button-primary"
-            onClick={() => router.push("/lease-contract")}
-          >
-            Iniciar
-          </button>
+        <button
+          className="button button is-primary"
+          onClick={() => router.push("/lease-contract")}
+        >
+          Iniciar
+        </button>
       </IonFooter>
     </IonPage>
   );

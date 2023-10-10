@@ -89,7 +89,7 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
               </p>
             </div>
 
-            <button className="button-primary">Enviar código</button>
+            <button className="button is-primary">Enviar código</button>
           </form>
 
           <div className="border-bottom border-primary-blue" />

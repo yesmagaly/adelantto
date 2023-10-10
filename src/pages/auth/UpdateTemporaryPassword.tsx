@@ -133,7 +133,7 @@ const UpdateTemporaryPassword: React.FC = () => {
                   Validación de password*
                 </a>
               </p>
-              <button className="button-primary">Cambiar contraseña</button>
+              <button className="button is-primary">Cambiar contraseña</button>
             </form>
             <div className="border-bottom border-white" />
           </div>

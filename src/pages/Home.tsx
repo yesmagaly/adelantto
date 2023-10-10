@@ -15,7 +15,7 @@ const Home: React.FC = () => {
           </p>
 
           <button
-            className="button-primary mb-4"
+            className="button is-primary mb-4"
             onClick={() => router.push("/register")}
           >
             Crear cuenta

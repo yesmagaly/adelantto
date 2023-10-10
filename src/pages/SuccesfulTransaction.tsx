@@ -19,7 +19,7 @@ const SuccesfulTransaction: React.FC = () => {
 
           <div className="py-10">
             <button
-              className="button button-primary mb-16"
+              className="button button is-primary mb-16"
               onClick={() => router.push("")}
             >
               Finalizar

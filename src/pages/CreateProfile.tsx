@@ -89,7 +89,9 @@ const CreateProfile: React.FC = () => {
                   </div>
 
                   <div className="mb-8">
-                    <button className="button button-primary">Guardar</button>
+                    <button className="button button is-primary">
+                      Guardar
+                    </button>
                   </div>
 
                   <div className="text-center">

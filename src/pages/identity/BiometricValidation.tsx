@@ -36,7 +36,7 @@ const BiometricValidation: React.FC = () => {
 
             <div className="text-center">
               <button
-                className="button button-primary mb-10"
+                className="button button is-primary mb-10"
                 onClick={() => router.push("")}
               >
                 Capturar foto

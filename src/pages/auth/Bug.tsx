@@ -28,7 +28,7 @@ const Bug: React.FC = () => {
           </p>
 
           <button
-            className="button button-primary mb-16"
+            className="button button is-primary mb-16"
             onClick={() => router.push("/register")}
           >
             Enviar código

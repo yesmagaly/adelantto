@@ -42,7 +42,7 @@ const Outlay: React.FC = () => {
 
           <div className="content">
             <button
-              className="button button-primary mb-16"
+              className="button button is-primary mb-16"
               onClick={() => router.push("")}
             >
               Siguiente

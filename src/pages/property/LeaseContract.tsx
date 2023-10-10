@@ -2,11 +2,11 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import { useAuth } from "../auth/authContext";
-import { NumericFormat } from 'react-number-format';
-import * as Page from "../../components/page"
+import { NumericFormat } from "react-number-format";
+import * as Page from "../../components/page";
 
 function removeNumericFormat(value: string) {
-  return parseFloat(value.replaceAll(/\,|\$|\s/g, ''));
+  return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
 }
 
 function addMonths(date, months) {
@@ -16,7 +16,7 @@ function addMonths(date, months) {
 }
 
 function parseDate(str: string) {
-  const [year, month, day] = str.split('-');
+  const [year, month, day] = str.split("-");
   return new Date(+year, month - 1, +day);
 }
 
@@ -27,7 +27,7 @@ function validateMinContractTime(startDateStr: string, endDateStr: string) {
   const endDate = parseDate(endDateStr);
   const minEndDate = addMonths(parseDate(startDateStr), minMonths);
 
-  return (minEndDate.getTime() - oneDayTimestamp) <= endDate.getTime();
+  return minEndDate.getTime() - oneDayTimestamp <= endDate.getTime();
 }
 
 const LeaseContract: React.FC = () => {
@@ -45,7 +45,9 @@ const LeaseContract: React.FC = () => {
   const onSubmit = async ({ monthly_lease_income, ...data }) => {
     // Validate minimum period of contract time
     if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
-      return setError('lease_end_date', { message: "El contrato mínimo es de 6 meses" })
+      return setError("lease_end_date", {
+        message: "El contrato mínimo es de 6 meses",
+      });
     }
 
     const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts`, {
@@ -55,7 +57,10 @@ const LeaseContract: React.FC = () => {
         Authorization: `Bearer ${authInfo.user.token}`,
         Accept: "application/json",
       },
-      body: JSON.stringify({ monthly_lease_income: removeNumericFormat(monthly_lease_income), ...data }),
+      body: JSON.stringify({
+        monthly_lease_income: removeNumericFormat(monthly_lease_income),
+        ...data,
+      }),
     });
 
     const leaseContract = await response.json();
@@ -78,14 +83,15 @@ const LeaseContract: React.FC = () => {
               </div>
             </Page.Header>
             <Page.Body>
-
               <div className="form-control is-center">
                 <label>Valor de tu renta mensual</label>
                 <Controller
                   rules={{
                     validate: {
-                      greaterThan: v => removeNumericFormat(v) >= 15000 || 'El monto mínimo es de $15,000 MXN',
-                    }
+                      greaterThan: (v) =>
+                        removeNumericFormat(v) >= 15000 ||
+                        "El monto mínimo es de $15,000 MXN",
+                    },
                   }}
                   control={control}
                   name="monthly_lease_income"
@@ -96,9 +102,10 @@ const LeaseContract: React.FC = () => {
                       type="text"
                       required
                       getInputRef={ref}
-                      decimalScale={2} a
+                      decimalScale={2}
+                      a
                       thousandSeparator=","
-                      prefix={'$'}
+                      prefix={"$"}
                     />
                   )}
                 />
@@ -107,7 +114,6 @@ const LeaseContract: React.FC = () => {
                     {errors?.monthly_lease_income?.message}
                   </div>
                 )}
-
               </div>
 
               <div className="form-control is-center">
@@ -122,18 +128,13 @@ const LeaseContract: React.FC = () => {
 
               <div className="form-control is-center">
                 <label>Fecha de fin del contrato de arrendamiento</label>
-                <input
-                  {...register("lease_end_date")}
-                  type="date"
-                  required
-                />
+                <input {...register("lease_end_date")} type="date" required />
 
                 {errors?.lease_end_date && (
                   <div className="description is-danger">
                     {errors?.lease_end_date?.message}
                   </div>
                 )}
-
               </div>
               <div className="form-control is-center">
                 <label>Código postal de tu inmueble</label>
@@ -158,7 +159,9 @@ const LeaseContract: React.FC = () => {
                       value="cash"
                       required
                     />
-                    <label className="ml-2" htmlFor="payment_cash">Efectivo</label>
+                    <label className="ml-2" htmlFor="payment_cash">
+                      Efectivo
+                    </label>
                   </div>
                   <div>
                     <input
@@ -176,7 +179,7 @@ const LeaseContract: React.FC = () => {
               </div>
             </Page.Body>
             <Page.Footer>
-              <button className="button button-primary">Siguiente</button>
+              <button className="button button is-primary">Siguiente</button>
             </Page.Footer>
           </Page.Root>
         </form>
