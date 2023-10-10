@@ -1,12 +1,13 @@
 import { useState } from "react";
-import {
-  Camera,
-  CameraResultType,
-  CameraSource,
-} from "@capacitor/camera";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 
 import * as Modal from "../../../components/modal";
-import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS } from "./constants";
+import {
+  LOADING_STATUS,
+  APPROVED_STATUS,
+  REJECTED_STATUS,
+  PROCESSING_STATUS,
+} from "./constants";
 import { addBackId, processId } from "../client";
 import "../styles.css";
 
@@ -16,9 +17,10 @@ export interface ComponentProp {
   onSuccess: any;
 }
 
-const flushPromise = () => new Promise(resolve => {
-  setTimeout(resolve, 3000)
-});
+const flushPromise = () =>
+  new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  });
 
 export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
@@ -77,7 +79,9 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
     <div>
       <Modal.Root isOpen={step === 0} variant="fully">
         <Modal.Header className="text-center">
-          <h3 className="heading-3">Ahora escanea el reverso de tu identificación</h3>
+          <h3 className="heading-3">
+            Ahora escanea el reverso de tu identificación
+          </h3>
         </Modal.Header>
         <Modal.Body className="flex items-center">
           <img src="/../src/assets/video/tutorial.gif"></img>
@@ -125,12 +129,22 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
               </div>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {status === LOADING_STATUS && <p className="message is-info">Cargando ...</p>}
-              {status === PROCESSING_STATUS && <p className="message is-info">Procesando ...</p>}
-              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === LOADING_STATUS && (
+                <p className="message is-info text-center">Cargando ...</p>
+              )}
+              {status === PROCESSING_STATUS && (
+                <p className="message is-info text-center">Procesando ...</p>
+              )}
+              {status === APPROVED_STATUS && (
+                <p className="message is-success text-center">
+                  Validación Exitosa
+                </p>
+              )}
               {status === REJECTED_STATUS && (
                 <>
-                  <p className="message is-danger">Fallo la verificación del reverso de tu identificación.</p>
+                  <p className="message is-danger text-center">
+                    Fallo la verificación del reverso de tu identificación.
+                  </p>
                   <button onClick={tryAgain} className="button">
                     Capturar otra vez
                   </button>
