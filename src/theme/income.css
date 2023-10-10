@@ -26,3 +26,7 @@
 .income-photo.is-danger {
   border-color: var(--color-danger);
 }
+
+.income-document.is-danger {
+  border-color: var(--color-danger);
+}
