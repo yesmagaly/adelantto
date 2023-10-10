@@ -11,6 +11,8 @@ import {
 import { addFrontId, processId } from "../client";
 import "../styles.css";
 
+import videoIdShadow from "../../../assets/video/id-shadow.mp4"
+
 export interface ComponentProp {
   children: string | JSX.Element | JSX.Element[];
   session: any;
@@ -87,7 +89,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
           </h3>
         </Modal.Header>
         <Modal.Body className="flex items-center">
-          <video src="/../src/assets/video/id-shadow.mp4" autoPlay loop></video>
+          <video src={videoIdShadow} autoPlay loop></video>
         </Modal.Body>
         <Modal.Footer>
           <button className="button is-primary" onClick={takePhoto}>

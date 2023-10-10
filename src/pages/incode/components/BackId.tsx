@@ -11,6 +11,8 @@ import {
 import { addBackId, processId } from "../client";
 import "../styles.css";
 
+import videoTutorial from "../../../assets/video/tutorial.gif"
+
 export interface ComponentProp {
   children: string | JSX.Element | JSX.Element[];
   session: any;
@@ -84,7 +86,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
           </h3>
         </Modal.Header>
         <Modal.Body className="flex items-center">
-          <img src="/../src/assets/video/tutorial.gif"></img>
+          <img src={videoTutorial} />
         </Modal.Body>
         <Modal.Footer>
           <button onClick={takePhoto} className="button is-primary">

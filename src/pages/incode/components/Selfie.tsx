@@ -11,6 +11,8 @@ import {
 import { addFaceSelfie, processFace, finishStatus } from "../client";
 import "../styles.css";
 
+import selfie from "../../../assets/video/selfie.mp4"
+
 export interface ComponentProp {
   children: string | JSX.Element | JSX.Element[];
   session: any;
@@ -85,7 +87,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
           <p>¡Sonríe! Queremos conocerte</p>
         </Modal.Header>
         <Modal.Body className="flex items-center">
-          <video src="/../src/assets/video/selfie.mp4" autoPlay loop></video>
+          <video src={selfie} autoPlay loop></video>
         </Modal.Body>
         <button onClick={takePhoto} className="button is-primary">
           Continuar
