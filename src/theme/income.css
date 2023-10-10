@@ -22,3 +22,7 @@
   height: 100%;
   width: 100%;
 }
+
+.income-photo.is-danger {
+  border-color: var(--color-danger);
+}
