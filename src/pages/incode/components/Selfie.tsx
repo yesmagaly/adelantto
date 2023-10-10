@@ -121,7 +121,11 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <div className="income-photo">
+              <div
+                className={`income-photo ${
+                  status === REJECTED_STATUS ? "is-danger" : ""
+                }`}
+              >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
@@ -158,7 +162,11 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               <h3 className="heading-3">Validando documento y photo</h3>
             </Modal.Header>
             <Modal.Body className="flex items-center">
-              <div className="income-photo">
+              <div
+                className={`income-photo ${
+                  status === REJECTED_STATUS ? "is-danger" : ""
+                }`}
+              >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
