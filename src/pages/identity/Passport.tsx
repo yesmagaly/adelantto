@@ -15,11 +15,9 @@ import check from "../../assets/icons/check.png";
 import close from "../../assets/icons/close.png";
 
 const Passport: React.FC = () => {
+  const params = new URLSearchParams(window.location.search)
   const router = useIonRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [session, setSession] = useState();
-  const [skipBackIdCapture, setSkipBackIdCapture] = useState(false);
-
   const [step, setStep] = useState(-1)
 
   useEffect(() => {
@@ -83,7 +81,7 @@ const Passport: React.FC = () => {
                   <p className="text-[20px] mb-4">Datos correctos</p>
                 </div>
                 <Modal.Footer>
-                  <button className="button is-primary" onClick={() => router.push('/property/upload-documents')}>
+                  <button className="button is-primary" onClick={() => router.push(`/property/upload-documents?lease_contract=${params.get('lease_contract')}`)}>
                     Continuar
                   </button>
                 </Modal.Footer>

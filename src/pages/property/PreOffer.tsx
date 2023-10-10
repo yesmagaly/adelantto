@@ -18,7 +18,6 @@ interface LoanContract {
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   const params = new URLSearchParams(window.location.search);
-
   const router = useIonRouter();
   const [loading, setLoading] = useState(true);
   const [months, setMonths] = useState(params.get("months"));
@@ -67,7 +66,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     const loan = await response.json();
 
     if (response.status === 200) {
-      router.push("/passport");
+      router.push(`/passport?lease_contract=${match.params.id}`);
     }
   };
 

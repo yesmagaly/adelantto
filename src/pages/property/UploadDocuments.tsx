@@ -11,10 +11,12 @@ interface File {
 }
 
 interface FormData {
-  deed_of_ownership?: File;
+  deed_of_ownership?: File
+  leasing_contract_id: number
 }
 
 const UploadDocuments: React.FC = () => {
+  const params = new URLSearchParams(window.location.search)
   const router = useIonRouter();
   const { authInfo } = useAuth()!;
 
@@ -25,6 +27,8 @@ const UploadDocuments: React.FC = () => {
   } = useForm();
 
   const onSubmit = async (data: FormData) => {
+    data.leasing_contract_id = parseInt(params.get('lease_contract'));
+
     const response = await fetch(`${API_SERVER_URL}/api/properties`, {
       method: "POST",
       headers: {
@@ -38,7 +42,7 @@ const UploadDocuments: React.FC = () => {
     const property = await response.json();
 
     if (response.status === 200) {
-      router.push(`/property/upload-pictures`);
+      router.push(`/property/${property.id}/upload-pictures`);
     }
   };
 

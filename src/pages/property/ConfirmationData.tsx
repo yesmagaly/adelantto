@@ -1,29 +1,23 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
+import { properties } from "../../api";
 
-const ConfirmationData: React.FC = () => {
+const ConfirmationData: React.FC = ({ match }) => {
   const router = useIonRouter();
 
   const {
     handleSubmit,
-    formState: {},
+    register,
+    formState: { },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const response = await fetch(`${API_SERVER_URL}/api/properties`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
+  const onSubmit = async (body) => {
+    const response = await properties.update({id: match.params.id, body});
     const json = await response.json();
 
-    if (json.status === "success") {
-      router.push(`/lease-contract`);
+    if (response.status === 200) {
+      // router.push(`/lease-contract`);
     }
   };
 
@@ -65,8 +59,9 @@ const ConfirmationData: React.FC = () => {
             <input
               type="radio"
               id="terms_conditions"
-              name="confirmation_data"
-              value="transfer"
+              value="1"
+              required
+              {...register('accept_privacy_policy')}
             />
             <label htmlFor="terms_conditions" className="text-xs font-bold">
               Acepto términos y condiciones del servicio

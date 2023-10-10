@@ -4,8 +4,9 @@ import { API_SERVER_URL } from "../../config";
 
 import FileInputItem from "../../components/FileInputItem";
 import PhotoInputItem from "../../components/photo-input/PhotoInputItem";
+import { properties } from "../../api";
 
-const UploadPictures: React.FC = () => {
+const UploadPictures: React.FC = ({ match }) => {
   const router = useIonRouter();
 
   const {
@@ -14,20 +15,12 @@ const UploadPictures: React.FC = () => {
     formState: {},
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const response = await fetch(`${API_SERVER_URL}/api/properties`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
+  const onSubmit = async (body) => {
+    const response = await properties.update({ id: match.params.id, body });
     const json = await response.json();
 
-    if (json.status === "success") {
-      router.push(`/property/confirmation-data`);
+    if (response.status === 200) {
+      router.push(`/property/${match.params.id}/confirmation-data`);
     }
   };
 
@@ -37,30 +30,26 @@ const UploadPictures: React.FC = () => {
         <div className="heading heading--blue flex flex-col justify-center">
           <div className="heading__pager text-right">Paso 3 de 3</div>
           <h4 className="text-xl">
-            A continuación
-            <strong>
-              <br /> sube algunas fotografías <br />
-            </strong>
-            para validar tu propiedad
+            A continuación <strong>sube algunas fotografías</strong> para validar tu propiedad
           </h4>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
-            <FileInputItem control={control} name="house_from_id">
+            <FileInputItem control={control} name="house_from">
               <h5 className="font-bold text-xs leading-3">Frente de la casa</h5>
               <p className="text-[10px]">Toma una foto del frente de tu casa</p>
             </FileInputItem>
-            <PhotoInputItem control={control} name="electricity_meter_id">
+            <PhotoInputItem control={control} name="electricity_meter">
               <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
               <p className="text-[10px]">Toma una foto del medidor de luz</p>
             </PhotoInputItem>
-            <FileInputItem control={control} name="water_meter_id">
+            <FileInputItem control={control} name="water_meter">
               <h5 className="font-bold text-xs leading-3">Toma de agua</h5>
               <p className="text-[10px]">
                 Toma una foto de la toma de agua principal
               </p>
             </FileInputItem>
-            <FileInputItem control={control} name="street_id">
+            <FileInputItem control={control} name="street">
               <h5 className="font-bold text-xs leading-3">Calle</h5>
               <p className="text-[10px]">
                 Toma una foto de la vista de la calle

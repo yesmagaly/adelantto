@@ -38,6 +38,20 @@ export const loanAgreements = {
   },
 }
 
+export const properties = {
+  update: ({ id, body }) => {
+    return fetch(`${API_SERVER_URL}/api/properties/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: getToken(),
+      },
+      body: JSON.stringify(body),
+    })
+  }
+}
+
 export const calculator = {
   calc: async ({ principal, months }) => {
     return fetch(
