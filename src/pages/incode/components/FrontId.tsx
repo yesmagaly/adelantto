@@ -128,7 +128,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
               <div
                 className={`income-document ${
                   status === REJECTED_STATUS ? "is-danger" : ""
-                }`}
+                } ${status === APPROVED_STATUS ? "is-success" : ""}`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
