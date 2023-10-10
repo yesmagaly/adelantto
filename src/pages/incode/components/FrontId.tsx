@@ -1,12 +1,13 @@
 import { useState } from "react";
-import {
-  Camera,
-  CameraResultType,
-  CameraSource,
-} from "@capacitor/camera";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 
 import * as Modal from "../../../components/modal";
-import { LOADING_STATUS, APPROVED_STATUS, REJECTED_STATUS, PROCESSING_STATUS } from "./constants";
+import {
+  LOADING_STATUS,
+  APPROVED_STATUS,
+  REJECTED_STATUS,
+  PROCESSING_STATUS,
+} from "./constants";
 import { addFrontId, processId } from "../client";
 import "../styles.css";
 
@@ -16,9 +17,10 @@ export interface ComponentProp {
   onSuccess: any;
 }
 
-const flushPromise = () => new Promise(resolve => {
-  setTimeout(resolve, 3000)
-});
+const flushPromise = () =>
+  new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  });
 
 export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [photo, setPhoto] = useState(null);
@@ -85,11 +87,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
           </h3>
         </Modal.Header>
         <Modal.Body className="flex items-center">
-          <video
-            src="/../src/assets/video/id-shadow.mp4"
-            autoPlay
-            loop
-          ></video>
+          <video src="/../src/assets/video/id-shadow.mp4" autoPlay loop></video>
         </Modal.Body>
         <Modal.Footer>
           <button className="button is-primary" onClick={takePhoto}>
@@ -110,7 +108,9 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Header>
             <Modal.Body className="flex items-center">
               <div className="income-document">
-                <img src={`data:image/${photo.format};base64,${photo.base64String}`}></img>
+                <img
+                  src={`data:image/${photo.format};base64,${photo.base64String}`}
+                ></img>
               </div>
             </Modal.Body>
             <Modal.Footer>
@@ -125,15 +125,25 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <img src={`data:image/${photo.format};base64,${photo.base64String}`}></img>
+              <img
+                src={`data:image/${photo.format};base64,${photo.base64String}`}
+              ></img>
             </Modal.Body>
             <Modal.Footer className="gap-6">
-              {status === LOADING_STATUS && <p className="message">Cargando ...</p>}
-              {status === PROCESSING_STATUS && <p className="message">Procesando ...</p>}
-              {status === APPROVED_STATUS && <p className="message is-success">Validación Exitosa</p>}
+              {status === LOADING_STATUS && (
+                <p className="message text-center">Cargando ...</p>
+              )}
+              {status === PROCESSING_STATUS && (
+                <p className="message text-center">Procesando ...</p>
+              )}
+              {status === APPROVED_STATUS && (
+                <p className="message is-success text-center">
+                  Validación Exitosa
+                </p>
+              )}
               {status === REJECTED_STATUS && (
                 <>
-                  <p className="message is-danger">
+                  <p className="message is-danger text-center">
                     Fallo la verificación frontal de identificación
                   </p>
                   <button onClick={tryAgain} className="button is-primary">
