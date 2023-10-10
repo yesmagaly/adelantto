@@ -122,7 +122,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={step === 2} variant="fully">
             <Modal.Body className="flex items-center">
-              <div className="income-image">
+              <div className="income-document">
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
                 ></img>
