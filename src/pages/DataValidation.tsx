@@ -45,10 +45,7 @@ const DataValidation: React.FC = () => {
           <Page.Footer className="text-center">
             <h4 className="font-bold text-xl mb-10">¡Hasta pronto!</h4>
 
-            <button
-              className="button is-primary"
-              onClick={() => router.push("")}
-            >
+            <button className="button is-primary">
               Finalizar
             </button>
           </Page.Footer>
