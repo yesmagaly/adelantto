@@ -58,8 +58,6 @@ const Passport: React.FC = () => {
   const successBackCallback = () => setStep(2);
   const successSelfieCallback = () => setStep(3)
 
-  const errorCallback = () => { }
-
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -80,12 +78,12 @@ const Passport: React.FC = () => {
             {session && step === 2 && <Selfie session={session} onSuccess={successSelfieCallback} />}
             {step === 3 && (
               <Modal.Root isOpen={true}>
-                <div className="heading--center">
-                  <img className="h-10 mb-4" src={check} />
+                <div className="text-center">
+                  <img className="h-10 mb-4 inline-block" src={check} />
                   <p className="text-[20px] mb-4">Datos correctos</p>
                 </div>
                 <Modal.Footer>
-                  <button className="button is-primary">
+                  <button className="button is-primary" onClick={() => router.push('/property/upload-documents')}>
                     Continuar
                   </button>
                 </Modal.Footer>
@@ -98,8 +96,7 @@ const Passport: React.FC = () => {
                 </div>
                 <h5 className="font-bold text-[30px]">¡Ups!</h5>
                 <p>
-                  Por el momento no cumples
-                  los requisitos Adelantto, te recomendamos intentarlo en
+                  Por el momento no cumples los requisitos Adelantto, te recomendamos intentarlo en
                   <strong>3 meses nuevamente</strong>
                 </p>
               </Modal.Root>

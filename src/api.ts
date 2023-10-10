@@ -28,6 +28,7 @@ export const loanAgreements = {
       {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: getToken(),
           Accept: "application/json",
         },

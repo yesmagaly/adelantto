@@ -5,6 +5,7 @@ import { calculator, loanContracts } from "../../api";
 
 import * as Page from "../../components/page"
 import { formatCurrency } from "../../utils";
+import { loanAgreements } from "../../api";
 
 interface PreOfferProps
   extends RouteComponentProps<{
@@ -48,16 +49,25 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     setOffer(data);
   };
 
-
   const handleSubmit = async () => {
+    const body = { 
+      principal: offer.principal,
+      fees: offer.fees,
+      opening_commission: offer.commission,
+      months: months,
+      leasing_contract_id: match.params.id,
+    };
+    const response = await loanAgreements.create({ body });
+    const loan = await response.json();
 
-    router.push("/passport")
+    if (response.status === 200) {
+      router.push("/passport")
+    }
   }
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        <form className="form">
           <Page.Root>
             <Page.Header>
               <div className="heading heading--blue heading--center heading--compact">
@@ -81,7 +91,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
                 <div className="mx-5 flex flex-col gap-3" >
                   <div className="dislay-control">
                     <div className="number">
-                      {formatCurrency(offer.primal)} MXN
+                      {formatCurrency(offer.principal)} MXN
                     </div>
                     <span>El total de los meses de tu renta</span>
                   </div>
@@ -95,7 +105,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
 
                   <div className="dislay-control">
                     <div className="number">
-                      {formatCurrency(offer.revenue)} MXN
+                      {formatCurrency(offer.fees)} MXN
                     </div>
                     <span>Costo de nuestro servicio y seguro</span>
                   </div>
@@ -106,15 +116,14 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
             </Page.Body>
 
             <Page.Footer className="has-divider">
-              <form></form>
               <div className="form-control is-center">
                 <label>¿Te interesa ver el resumen para otros meses?</label>
-                  <select defaultValue={months} onChange={handleMothsChange}>
-                    <option value={3}>3 meses</option>
-                    <option value={4}>4 meses</option>
-                    <option value={5}>5 meses</option>
-                    <option value={6}>6 meses</option>
-                  </select>
+                <select defaultValue={months} onChange={handleMothsChange}>
+                  <option value={3}>3 meses</option>
+                  <option value={4}>4 meses</option>
+                  <option value={5}>5 meses</option>
+                  <option value={6}>6 meses</option>
+                </select>
               </div>
 
               <button onClick={handleSubmit} className="button button-secondary mb-7">
@@ -127,8 +136,6 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
               </p>
             </Page.Footer>
           </Page.Root>
-
-        </form>
       </IonContent>
     </IonPage>
   );
