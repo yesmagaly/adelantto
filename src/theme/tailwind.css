@@ -77,7 +77,7 @@
 
 .heading-2 {
   @apply text-4xl leading-none;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 1rem;
 }
 
