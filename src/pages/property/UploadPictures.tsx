@@ -12,7 +12,7 @@ const UploadPictures: React.FC = ({ match }) => {
   const {
     control,
     handleSubmit,
-    formState: {},
+    formState: { errors },
   } = useForm();
 
   const onSubmit = async (body) => {
@@ -35,9 +35,15 @@ const UploadPictures: React.FC = ({ match }) => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
-            <PhotoInputItem control={control} name="house_from">
-              <h5 className="font-bold text-xs leading-3">Frente de la casa</h5>
-              <p className="text-[10px]">Toma una foto del frente de tu casa</p>
+            <PhotoInputItem control={control} name="house_from" rules={{ required: "Imagen obligatoria" }}>
+              <label className="font-bold text-sm leading-3 is-required">Frente de la casa</label>
+
+              <p className="text-sm">Toma una foto del frente de tu casa</p>
+              {errors?.house_from && (
+                <span className="message is-small is-danger">
+                  {errors?.house_from?.message}
+                </span>
+              )}
             </PhotoInputItem>
             <PhotoInputItem control={control} name="electricity_meter">
               <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
@@ -65,25 +71,6 @@ const UploadPictures: React.FC = ({ match }) => {
             <button className="button is-primary">Siguiente</button>
           </div>
         </form>
-        <div className="border-bottom border-primary-blue" />
-
-        <div className="content">
-          <form className="form py-20">
-            <input type="text" placeholder="Tomar foto" />
-          </form>
-          <button
-            className="button button-primary mb-4"
-            onClick={() => router.push("")}
-          >
-            Tomar foto
-          </button>
-          <button
-            className="button button-secondary mb-8"
-            onClick={() => router.push("")}
-          >
-            Cancelar
-          </button>
-        </div>
       </IonContent>
     </IonPage>
   );

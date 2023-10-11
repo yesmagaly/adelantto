@@ -89,28 +89,25 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
       </div>
 
       <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-        <div className="mb-4 p-2 flex items-center justify-center bg-slate-200 rounded text-slate-800 text-center h-52">
+        <div className="p-2 flex items-center justify-center bg-slate-200 rounded text-slate-800 text-center h-52">
           {photoUrl && <img src={photoUrl}></img>}
-          {!loading && !value?.id && <span>Tomar foto</span>}
-          {loading && <span>Loading ...</span>}
+          {!loading && !value?.id && (
+            <div onClick={takePhoto}>
+              <Icon name='camera' className="bg-gray-800 text-lg" />
+              <p>Tomar foto</p>
+            </div>
+          )}
         </div>
 
-        {fieldState.error && <p className="text-sm">{fieldState.error?.message}</p>}
+        {loading && <span>Loading ...</span>}
         {error.message && <p className="text-sm">{error.message}</p>}
 
         <button
-          className="button button-primary mb-4"
-          onClick={takePhoto}
-        >
-          Tomar foto
-        </button>
-
-        <button
-          className="button button-secondary"
+          className="button is-primary"
           onClick={() => setIsOpen(false)}
           disabled={loading}
         >
-          Cancelar
+          Continuar
         </button>
       </Modal>
     </>

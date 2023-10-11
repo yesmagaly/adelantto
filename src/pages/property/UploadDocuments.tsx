@@ -62,7 +62,7 @@ const UploadDocuments: React.FC = () => {
             <FileInputItem
               name="deed_of_ownership"
               control={control}
-              rules={{ required: "Documento requerido" }}
+              rules={{ required: "Documento obligatorio" }}
             >
               <h5 className="font-bold text-sm leading-4">
                 Carátula de tu escritura

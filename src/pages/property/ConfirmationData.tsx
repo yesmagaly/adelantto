@@ -13,7 +13,7 @@ const ConfirmationData: React.FC = ({ match }) => {
   } = useForm();
 
   const onSubmit = async (body) => {
-    const response = await properties.update({id: match.params.id, body});
+    const response = await properties.update({ id: match.params.id, body });
     const json = await response.json();
 
     if (response.status === 200) {
@@ -68,7 +68,7 @@ const ConfirmationData: React.FC = ({ match }) => {
             </label>
           </div>
           <div className="text-center mb-7">
-            <button className="button is-primary" onClick={router.push('/data-validation')}>Siguiente</button>
+            <button className="button is-primary" onClick={() => router.push('/data-validation')}>Siguiente</button>
           </div>
         </form>
 
