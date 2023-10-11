@@ -1,4 +1,4 @@
-export const API_SERVER_URL = "https://45ac-201-240-244-164.ngrok-free.app";
+export const API_SERVER_URL = "https://10b2-201-240-244-89.ngrok-free.app";
 
 export const VITE_INCODE_API_URL="https://demo-api.incodesmile.com"
 export const VITE_INCODE_CLIENT_ID="26mf229"
