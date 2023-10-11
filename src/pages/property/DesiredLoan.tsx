@@ -3,16 +3,19 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
 import { loanContracts } from "../../api";
-import * as Page from "../../components/page"
+import * as Page from "../../components/page";
 
 function formatCurrency(value: number) {
-  return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
+  return new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+  }).format(value);
 }
 
 interface DesiredLoanProps
   extends RouteComponentProps<{
     id: string;
-  }> { }
+  }> {}
 
 const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const router = useIonRouter();
@@ -38,7 +41,9 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   };
 
   const handleClick = () => {
-    router.push(`/lease-contract/${match.params.id}/pre-offer?months=${months}`);
+    router.push(
+      `/lease-contract/${match.params.id}/pre-offer?months=${months}`
+    );
   };
 
   const allowedMonths = [3, 4, 5, 6];
@@ -49,32 +54,34 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
         <Page.Root>
           <Page.Header>
             <div className="heading heading--blue">
-              <h3 className="text-3xl">
+              <h1 className="heading-3">
                 Selecciona el monto <br />
-                <strong>
-                  que te gustaría que adelantemos de rentas
-                </strong>
-              </h3>
+                <strong>que te gustaría que adelantemos de rentas</strong>
+              </h1>
             </div>
           </Page.Header>
           <Page.Body className="flex flex-col gap-2">
             {loading && <div>Loading</div>}
 
-            {!loading && allowedMonths.map((value) => (
-              <button key={`dl-${value}`}
-                id={`desired-loan-${value}`}
-                className={`button ${value === months ? 'is-secondary' : ''}`}
-                onClick={handleOptionClick(value)}
-              >
-                <div className="w-full text-2xl">
-                  {formatCurrency(value * loanContract.monthly_lease_income)}
-                </div>
-                <div className="font-normal">x {value} meses</div>
-              </button>
-            ))}
+            {!loading &&
+              allowedMonths.map((value) => (
+                <button
+                  key={`dl-${value}`}
+                  id={`desired-loan-${value}`}
+                  className={`button ${value === months ? "is-secondary" : ""}`}
+                  onClick={handleOptionClick(value)}
+                >
+                  <div className="w-full text-2xl">
+                    {formatCurrency(value * loanContract.monthly_lease_income)}
+                  </div>
+                  <div className="font-normal">x {value} meses</div>
+                </button>
+              ))}
           </Page.Body>
           <Page.Footer>
-            <button className="button is-primary" onClick={handleClick}>Siguiente</button>
+            <button className="button is-primary" onClick={handleClick}>
+              Siguiente
+            </button>
           </Page.Footer>
         </Page.Root>
       </IonContent>

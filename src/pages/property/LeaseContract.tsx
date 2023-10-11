@@ -75,9 +75,9 @@ const LeaseContract: React.FC = () => {
       <IonContent fullscreen>
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <Page.Root>
-            <Page.Header>
-              <div className="heading heading--blue heading--center">
-                <h1 className="text-4xl">
+            <Page.Header className="text-center">
+              <div className="heading heading--blue">
+                <h1 className="heading-3">
                   Datos de contrato <strong>de arrendamiento</strong>
                 </h1>
               </div>

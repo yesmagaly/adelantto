@@ -74,11 +74,11 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     <IonPage>
       <IonContent fullscreen>
         <Page.Root>
-          <Page.Header>
-            <div className="heading heading--blue heading--center heading--compact">
-              <h2 className="text-3xl">
+          <Page.Header className="text-center">
+            <div className="heading heading--blue heading--compact">
+              <h1 className="heading-3">
                 Pre<strong>-Oferta Adelantto</strong>
-              </h2>
+              </h1>
             </div>
           </Page.Header>
           <Page.Body>

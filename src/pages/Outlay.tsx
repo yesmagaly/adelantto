@@ -1,56 +1,64 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Icon from "../components/Icon/Icon";
 import IconItem from "../components/IconItem";
+import * as Page from "../components/page";
 
 const Outlay: React.FC = () => {
   const router = useIonRouter();
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue heading--center mb-10">
-          <h3 className="text-3xl mb-4">
-            <strong>Desembolso</strong>
-          </h3>
-          <p>Conoce el desglose de tu servicio</p>
-        </div>
-        <div className="mb-10">
-          <div className="mb-16">
-            <IconItem icon="document text-3xl bg-black">
-              <p className="underline">
-                <strong>Términos </strong> de desembolso
-              </p>
-            </IconItem>
-            <div className="border-full" />
-            <IconItem icon="clock text-4xl">
-              <p className="underline">
-                <strong>Tiempos </strong> interbancarios
-              </p>
-            </IconItem>
-            <div className="border-full" />
-            <IconItem icon="sun text-5xl">
-              <p className="underline">
-                <strong>Claridad </strong> en comisiones
-              </p>
-            </IconItem>
-            <div className="border-full" />
-            <IconItem icon="bell text-3xl">
-              <p className="underline leading-5">
-                <strong>Envío de notificación </strong> con <br /> tracking
-              </p>
-            </IconItem>
-          </div>
+        <Page.Root>
+          <Page.Header>
+            <div className="heading heading--blue heading--center">
+              <h3 className="heading-3">
+                <strong>Desembolso</strong>
+              </h3>
+              <p>Conoce el desglose de tu servicio</p>
+            </div>
+          </Page.Header>
+          <Page.Body>
+            <div className="mb-10">
+              <div className="mb-16">
+                <IconItem icon="document text-3xl bg-black">
+                  <p className="underline">
+                    <strong>Términos </strong> de desembolso
+                  </p>
+                </IconItem>
+                <div className="border-full" />
+                <IconItem icon="clock text-4xl">
+                  <p className="underline">
+                    <strong>Tiempos </strong> interbancarios
+                  </p>
+                </IconItem>
+                <div className="border-full" />
+                <IconItem icon="sun text-5xl">
+                  <p className="underline">
+                    <strong>Claridad </strong> en comisiones
+                  </p>
+                </IconItem>
+                <div className="border-full" />
+                <IconItem icon="bell text-3xl">
+                  <p className="underline leading-5">
+                    <strong>Envío de notificación </strong> con <br /> tracking
+                  </p>
+                </IconItem>
+              </div>
 
-          <div className="content">
-            <button
-              className="button is-primary mb-16"
-              onClick={() => router.push("")}
-            >
-              Siguiente
-            </button>
-          </div>
+              <div className="content">
+                <button
+                  className="button is-primary mb-16"
+                  onClick={() => router.push("")}
+                >
+                  Siguiente
+                </button>
+              </div>
 
-          <div className="border-bottom border-primary-blue" />
-        </div>
+              <div className="border-bottom border-primary-blue" />
+            </div>
+          </Page.Body>
+          <Page.Footer></Page.Footer>
+        </Page.Root>
 
         <div className="px-5">
           <h3>
