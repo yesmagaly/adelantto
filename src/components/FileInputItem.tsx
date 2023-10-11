@@ -91,7 +91,7 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
           )}
           {!loading && !value?.id && <span>Buscar</span>}
           {loading && <span>Loading ...</span>}
-          <input {...field} className="hidden" id={props.name} onChange={handleChange} type="file" placeholder="Buscar" />
+          <input {...field} className="hidden" id={props.name} onChange={handleChange} accept="application/pdf" type="file" placeholder="Buscar" />
         </label>
 
         {error.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
