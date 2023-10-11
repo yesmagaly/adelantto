@@ -69,8 +69,8 @@ const UploadDocuments: React.FC = () => {
               </h5>
 
               {errors?.deed_of_ownership && (
-                <span className="message is-danger text-xs font-medium">
-                  {errors.deed_of_ownership?.message}
+                <span className="message is-small is-danger">
+                  {errors?.deed_of_ownership?.message}
                 </span>
               )}
 

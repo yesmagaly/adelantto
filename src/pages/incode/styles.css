@@ -4,7 +4,7 @@
 }
 
 .message {
-  font-size: var(--font-medium);
+  font-size: var(--font-base);
   line-height: 1;
   font-weight: 600;
 }
@@ -19,4 +19,9 @@
 
 .message.is-info {
   color: var(--color-success);
+}
+
+.message.is-small {
+  font-size: var(--font-sm);
+  font-weight: 400;
 }
