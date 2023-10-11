@@ -9,3 +9,7 @@
 .button-secondary, .button.is-secondary {
   @apply bg-primary-blue-light text-white;
 }
+
+.button.is-small {
+  padding: 0.25rem 1rem;
+}

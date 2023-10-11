@@ -83,10 +83,11 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
           play
         />
 
-        <label className="mb-4 p-2 flex items-center justify-center bg-slate-200 rounded text-slate-800 text-center h-20" htmlFor={props.name}>
+        <label className="mb-4 p-2 flex items-center justify-center bg-slate-200 rounded text-slate-900 text-center min-h-[120px]" htmlFor={props.name}>
           {!loading && value?.id && (
             <div>
-              {value?.name} <button className="ml-2" onClick={handleRemove}>Remove</button>
+              <div className="mb-3">{value?.name}</div>
+              <button className="button is-small" onClick={handleRemove}>Borrar</button>
             </div>
           )}
           {!loading && !value?.id && <span>Buscar</span>}
