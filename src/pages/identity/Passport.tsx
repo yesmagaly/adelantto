@@ -2,41 +2,45 @@ import { useState, useEffect, useMemo } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 
-import { FrontId } from "../incode/components/FrontId"
-import { BackId } from "../incode/components/BackId"
-import { Selfie } from "../incode/components/Selfie"
+import { FrontId } from "../incode/components/FrontId";
+import { BackId } from "../incode/components/BackId";
+import { Selfie } from "../incode/components/Selfie";
 
+import {
+  initSession,
+  processFace,
+  finishStatus,
+  addDevicefin,
+  initSessiongerPrint,
+} from "../incode/client";
 
-import { initSession, processFace, finishStatus, addDevicefin, initSessiongerPrint } from "../incode/client"
-
-import * as Modal from "../../components/modal"
-import * as Page from "../../components/page"
+import * as Modal from "../../components/modal";
+import * as Page from "../../components/page";
 import check from "../../assets/icons/check.png";
 import close from "../../assets/icons/close.png";
 
 const Passport: React.FC = () => {
-  const params = new URLSearchParams(window.location.search)
+  const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const [session, setSession] = useState();
-  const [step, setStep] = useState(-1)
+  const [step, setStep] = useState(-1);
 
   useEffect(() => {
     const syncSession = async function () {
-      const incodeSession = localStorage.getItem('incode_session');
+      const incodeSession = localStorage.getItem("incode_session");
 
       if (incodeSession) {
         setSession(JSON.parse(incodeSession));
       } else {
-
         try {
           const session = await initSession();
-          localStorage.setItem('incode_session', JSON.stringify(session))
-          setSession(session)
+          localStorage.setItem("incode_session", JSON.stringify(session));
+          setSession(session);
         } catch (error) {
-          alert(error)
+          alert(error);
         }
       }
-    }
+    };
 
     syncSession();
   }, []);
@@ -47,15 +51,19 @@ const Passport: React.FC = () => {
     } else {
       setStep(1);
     }
-  }
+  };
 
   const successBackCallback = () => setStep(2);
-  const successSelfieCallback = () => setStep(3)
+  const successSelfieCallback = () => setStep(3);
 
   const finalCallback = () => {
-    localStorage.removeItem('incode_session');
-    router.push(`/property/upload-documents?lease_contract=${params.get('lease_contract')}`)
-  }
+    localStorage.removeItem("incode_session");
+    router.push(
+      `/property/upload-documents?lease_contract=${params.get(
+        "lease_contract"
+      )}`
+    );
+  };
 
   return (
     <IonPage>
@@ -63,7 +71,7 @@ const Passport: React.FC = () => {
         <Page.Root>
           <Page.Header>
             <div className="heading heading--green">
-              <h1 className="heading__title">
+              <h1 className="heading-2">
                 Captura tu <strong>INE o Pasaporte</strong>
               </h1>
               <p className="text-base">
@@ -72,9 +80,15 @@ const Passport: React.FC = () => {
             </div>
           </Page.Header>
           <Page.Body>
-            {session && step === 0 && <FrontId session={session} onSuccess={successFrontCallback} />}
-            {session && step === 1 && <BackId session={session} onSuccess={successBackCallback} />}
-            {session && step === 2 && <Selfie session={session} onSuccess={successSelfieCallback} />}
+            {session && step === 0 && (
+              <FrontId session={session} onSuccess={successFrontCallback} />
+            )}
+            {session && step === 1 && (
+              <BackId session={session} onSuccess={successBackCallback} />
+            )}
+            {session && step === 2 && (
+              <Selfie session={session} onSuccess={successSelfieCallback} />
+            )}
             {step === 3 && (
               <Modal.Root isOpen={true}>
                 <div className="text-center">
@@ -95,17 +109,19 @@ const Passport: React.FC = () => {
                 </div>
                 <h5 className="font-bold text-[30px]">¡Ups!</h5>
                 <p>
-                  Por el momento no cumples los requisitos Adelantto, te recomendamos intentarlo en
+                  Por el momento no cumples los requisitos Adelantto, te
+                  recomendamos intentarlo en
                   <strong>3 meses nuevamente</strong>
                 </p>
               </Modal.Root>
             )}
           </Page.Body>
           <Page.Footer>
-            <button className="button is-primary" onClick={() => setStep(0)}>Iniciar captura</button>
+            <button className="button is-primary" onClick={() => setStep(0)}>
+              Iniciar captura
+            </button>
           </Page.Footer>
         </Page.Root>
-
       </IonContent>
     </IonPage>
   );
