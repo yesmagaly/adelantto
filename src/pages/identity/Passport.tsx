@@ -41,10 +41,6 @@ const Passport: React.FC = () => {
     syncSession();
   }, []);
 
-  const clearSession = () => {
-    localStorage.removeItem('incode_session');
-  }
-
   const successFrontCallback = async (data) => {
     if (data.skipBackIdCapture) {
       setStep(2);
@@ -55,6 +51,11 @@ const Passport: React.FC = () => {
 
   const successBackCallback = () => setStep(2);
   const successSelfieCallback = () => setStep(3)
+
+  const finalCallback = () => {
+    localStorage.removeItem('incode_session');
+    router.push(`/property/upload-documents?lease_contract=${params.get('lease_contract')}`)
+  }
 
   return (
     <IonPage>
@@ -81,7 +82,7 @@ const Passport: React.FC = () => {
                   <p className="text-[20px] mb-4">Datos correctos</p>
                 </div>
                 <Modal.Footer>
-                  <button className="button is-primary" onClick={() => router.push(`/property/upload-documents?lease_contract=${params.get('lease_contract')}`)}>
+                  <button className="button is-primary" onClick={finalCallback}>
                     Continuar
                   </button>
                 </Modal.Footer>
