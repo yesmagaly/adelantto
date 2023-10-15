@@ -53,6 +53,16 @@ export const applications = {
     },
     body: JSON.stringify(body),
   }),
+
+  identityCheck: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/identity-check`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
 }
 
 export const loanContracts = {

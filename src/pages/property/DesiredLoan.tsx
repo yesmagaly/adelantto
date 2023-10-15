@@ -48,6 +48,8 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
     await applications.desiredLoan(match.params.id, {
       desired_loan_amount: application.lease_monthly_income * months,
       desired_loan_term_frame: months,
+
+      step: 'desired_loan'
     });
 
     router.push(

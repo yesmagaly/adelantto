@@ -170,7 +170,6 @@ const LeaseContract: React.FC = () => {
                     </label>
                   </div>
 
-                  <input {...register('status')} type="hidden" value="" />
                 </div>
               </div>
             </Page.Body>

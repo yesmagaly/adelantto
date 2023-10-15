@@ -60,6 +60,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
       pre_offer_fees: offer.fees,
       pre_offer_commissions: offer.commission,
       pre_offer_term_frame: months,
+      step: 'pre_offer'
     };
 
     const response = await applications.preOffer(match.params.id, body);

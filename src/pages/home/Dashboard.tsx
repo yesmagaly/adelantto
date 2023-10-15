@@ -2,6 +2,7 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useState, useEffect } from "react";
 
 import { applications } from "../../api";
+import { nextStepUrl } from "../../utils/steps";
 
 const Dashboard: React.FC = () => {
   const router = useIonRouter();
@@ -30,6 +31,8 @@ const Dashboard: React.FC = () => {
             <pre>
               {JSON.stringify(item, null, 2)}
             </pre>
+
+            <button onClick={() => router.push(nextStepUrl(item))}>Continuar {nextStepUrl(item)}</button>
           </div>
         ))}
 

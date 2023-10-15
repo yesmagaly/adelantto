@@ -1,25 +1,19 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm, Controller } from "react-hook-form";
 
 import { FrontId } from "../incode/components/FrontId";
 import { BackId } from "../incode/components/BackId";
 import { Selfie } from "../incode/components/Selfie";
 
-import {
-  initSession,
-  processFace,
-  finishStatus,
-  addDevicefin,
-  initSessiongerPrint,
-} from "../incode/client";
+import {initSession} from "../incode/client";
 
 import * as Modal from "../../components/modal";
 import * as Page from "../../components/page";
 import check from "../../assets/icons/check.png";
 import close from "../../assets/icons/close.png";
+import { applications } from "../../api";
 
-const Passport: React.FC = () => {
+const Passport: React.FC = ({ match }) => {
   const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const [session, setSession] = useState();
@@ -56,12 +50,16 @@ const Passport: React.FC = () => {
   const successBackCallback = () => setStep(2);
   const successSelfieCallback = () => setStep(3);
 
-  const finalCallback = () => {
+  const finalCallback = async () => {
     localStorage.removeItem("incode_session");
+
+    await applications.identityCheck(match.params.id, {
+      identity_checked: true,
+      step: 'identity_check'
+     });
+
     router.push(
-      `/property/upload-documents?lease_contract=${params.get(
-        "lease_contract"
-      )}`
+      `/applications/${match.params.id}/property/documents`
     );
   };
 
