@@ -105,7 +105,6 @@ const App: React.FC = () => {
               <Route exact path="/applications/:id/privacy-policy" component={ConfirmationData} />
               <Route exact path="/applications/:id/policy-notifications" component={DataValidation} />
 
-
               <Route exact path="/bug" component={Bug} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/biometric-validation" component={BiometricValidation} />
