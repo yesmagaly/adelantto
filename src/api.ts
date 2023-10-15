@@ -63,6 +63,46 @@ export const applications = {
     },
     body: JSON.stringify(body),
   }),
+
+  propertyDocuments: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/property-documents`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
+
+  propertyPictures: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/property-pictures`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
+
+  privacyPolicy: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/privacy-policy`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
+
+  policyNotifications: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/policy-notifications`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
 }
 
 export const loanContracts = {

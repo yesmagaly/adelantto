@@ -1,10 +1,8 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { API_SERVER_URL } from "../../config";
 
-import FileInputItem from "../../components/FileInputItem";
 import PhotoInputItem from "../../components/photo-input/PhotoInputItem";
-import { properties } from "../../api";
+import { applications } from "../../api";
 
 const UploadPictures: React.FC = ({ match }) => {
   const router = useIonRouter();
@@ -15,12 +13,16 @@ const UploadPictures: React.FC = ({ match }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (body) => {
-    const response = await properties.update({ id: match.params.id, body });
+  const onSubmit = async (data) => {
+    const response = await applications.propertyPictures(match.params.id, {
+      ...data,
+      step: 'property_pictures'
+    });
+
     const json = await response.json();
 
     if (response.status === 200) {
-      router.push(`/property/${match.params.id}/confirmation-data`);
+      router.push(`/applications/${match.params.id}/privacy-policy`);
     }
   };
 
@@ -35,7 +37,7 @@ const UploadPictures: React.FC = ({ match }) => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
-            <PhotoInputItem control={control} name="house_from" rules={{ required: "Imagen obligatoria" }}>
+            <PhotoInputItem control={control} name="property_house_from" rules={{ required: "Imagen obligatoria" }}>
               <label className="font-bold text-sm leading-3 is-required">Frente de la casa</label>
 
               <p className="text-sm">Toma una foto del frente de tu casa</p>
@@ -45,17 +47,17 @@ const UploadPictures: React.FC = ({ match }) => {
                 </span>
               )}
             </PhotoInputItem>
-            <PhotoInputItem control={control} name="electricity_meter">
+            <PhotoInputItem control={control} name="property_electricity_meter">
               <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
               <p className="text-[10px]">Toma una foto del medidor de luz</p>
             </PhotoInputItem>
-            <PhotoInputItem control={control} name="water_meter">
+            <PhotoInputItem control={control} name="property_water_meter">
               <h5 className="font-bold text-xs leading-3">Toma de agua</h5>
               <p className="text-[10px]">
                 Toma una foto de la toma de agua principal
               </p>
             </PhotoInputItem>
-            <PhotoInputItem control={control} name="street">
+            <PhotoInputItem control={control} name="property_street">
               <h5 className="font-bold text-xs leading-3">Calle</h5>
               <p className="text-[10px]">
                 Toma una foto de la vista de la calle

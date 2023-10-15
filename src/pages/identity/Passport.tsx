@@ -59,7 +59,7 @@ const Passport: React.FC = ({ match }) => {
      });
 
     router.push(
-      `/applications/${match.params.id}/property/documents`
+      `/applications/${match.params.id}/property-documents`
     );
   };
 

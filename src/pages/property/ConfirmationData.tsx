@@ -1,7 +1,6 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { API_SERVER_URL } from "../../config";
-import { properties } from "../../api";
+import { applications } from "../../api";
 
 const ConfirmationData: React.FC = ({ match }) => {
   const router = useIonRouter();
@@ -12,12 +11,14 @@ const ConfirmationData: React.FC = ({ match }) => {
     formState: { },
   } = useForm();
 
-  const onSubmit = async (body) => {
-    const response = await properties.update({ id: match.params.id, body });
-    const json = await response.json();
+  const onSubmit = async (data) => {
+    const response = await applications.privacyPolicy(match.params.id, {
+      ...data,
+      step: 'accept_privacy_policy'
+    });
 
     if (response.status === 200) {
-      // router.push(`/lease-contract`);
+      router.push(`/applications/${match.params.id}/policy-notifications`);
     }
   };
 
@@ -68,7 +69,7 @@ const ConfirmationData: React.FC = ({ match }) => {
             </label>
           </div>
           <div className="text-center mb-7">
-            <button className="button is-primary" onClick={() => router.push('/data-validation')}>Siguiente</button>
+            <button className="button is-primary">Siguiente</button>
           </div>
         </form>
 

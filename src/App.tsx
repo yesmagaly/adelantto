@@ -95,23 +95,17 @@ const App: React.FC = () => {
                 component={AdvanceImmediately}
               />
               <Route exact path="/create-profile" component={CreateProfile} />
-              <Route exact path="/property/upload-documents" component={UploadDocuments} />
-              <Route exact path="/property/:id/upload-pictures" component={UploadPictures} />
-              <Route exact path="/property/:id/confirmation-data" component={ConfirmationData} />
 
               <Route exact path="/applications/lease-contract" component={LeaseContract} />
               <Route exact path="/applications/:id/desired-loan" component={DesiredLoan} />
               <Route exact path="/applications/:id/pre-offer" component={PreOffer} />
               <Route exact path="/applications/:id/identity-check" component={Passport} />
+              <Route exact path="/applications/:id/property-documents" component={UploadDocuments} />
+              <Route exact path="/applications/:id/property-pictures" component={UploadPictures} />
+              <Route exact path="/applications/:id/privacy-policy" component={ConfirmationData} />
+              <Route exact path="/applications/:id/policy-notifications" component={DataValidation} />
 
-              <Route exact path="/applications/:id/property/documents" component={UploadDocuments} />
-              <Route exact path="/applications/:id/property/pictures" component={UploadPictures} />
-              <Route exact path="/applications/:id/confirmation" component={ConfirmationData} />
 
-
-              {/* <Route exact path="/application/intentity-validation" component={DataValidation} /> */}
-
-              <Route exact path="/passport" component={Passport} />
               <Route exact path="/bug" component={Bug} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/biometric-validation" component={BiometricValidation} />
