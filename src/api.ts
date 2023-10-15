@@ -7,6 +7,54 @@ function getToken() {
   return `Bearer ${user.token}`;
 }
 
+export const applications = {
+  list: async () => await fetch(`${API_SERVER_URL}/api/applications`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    }
+  }),
+
+  get: async (id: number) => await fetch(`${API_SERVER_URL}/api/applications/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    }
+  }),
+
+  leaseContract: async (body = {}) => await fetch(`${API_SERVER_URL}/api/applications/lease-contract`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
+
+  desiredLoan: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/desired-loan`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
+
+  preOffer: async (id: number, body = {}) => await fetch(`${API_SERVER_URL}/api/applications/${id}/pre-offer`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  }),
+}
+
 export const loanContracts = {
   load: async ({ id }) => {
     return fetch(
@@ -22,6 +70,17 @@ export const loanContracts = {
 }
 
 export const loanAgreements = {
+  get: async () => {
+    return fetch(
+      `${API_SERVER_URL}/api/loan-agreements`,
+      {
+        headers: {
+          Authorization: getToken(),
+          Accept: "application/json",
+        },
+      }
+    );
+  },
   create: async ({ body }) => {
     return fetch(
       `${API_SERVER_URL}/api/loan-agreements`,

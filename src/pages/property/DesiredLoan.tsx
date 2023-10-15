@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
-import { loanContracts } from "../../api";
+import { applications } from "../../api";
 import * as Page from "../../components/page";
 
 function formatCurrency(value: number) {
@@ -10,6 +10,10 @@ function formatCurrency(value: number) {
     style: "currency",
     currency: "MXN",
   }).format(value);
+}
+
+interface Application {
+  lease_monthly_income: number,
 }
 
 interface DesiredLoanProps
@@ -21,28 +25,33 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const router = useIonRouter();
   const [loading, setLoading] = useState(true);
   const [months, setMonths] = useState();
-  const [loanContract, setLoanContract] = useState(null);
+  const [application, setApplication] = useState(null);
 
   // GET with fetch API
   useEffect(() => {
-    const fetchLoanContract = async () => {
-      const response = await loanContracts.load({ id: match.params.id });
+    const fetchData = async () => {
+      const response = await applications.get(match.params.id);
       const data = await response.json();
 
       setLoading(false);
-      setLoanContract(data);
+      setApplication(data);
     };
 
-    fetchLoanContract();
+    fetchData();
   }, []);
 
   const handleOptionClick = (option: number) => () => {
     setMonths(option);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    await applications.desiredLoan(match.params.id, {
+      desired_loan_amount: application.lease_monthly_income * months,
+      desired_loan_term_frame: months,
+    });
+
     router.push(
-      `/lease-contract/${match.params.id}/pre-offer?months=${months}`
+      `/applications/${match.params.id}/pre-offer?months=${months}`
     );
   };
 
@@ -72,7 +81,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   onClick={handleOptionClick(value)}
                 >
                   <div className="w-full text-2xl">
-                    {formatCurrency(value * loanContract.monthly_lease_income)}
+                    {formatCurrency(value * application.lease_monthly_income)}
                   </div>
                   <div className="font-normal">x {value} meses</div>
                 </button>

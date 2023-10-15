@@ -42,6 +42,7 @@ import FullAdvance from "./pages/FullAdvance";
 import Summary from "./pages/Summary";
 import Profile from "./pages/Profile";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
+import Dashboard from "./pages/home/Dashboard";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -83,6 +84,7 @@ const App: React.FC = () => {
         <>
           {authInfo?.loggedIn === true ? (
             <IonReactRouter>
+              <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/welcome" component={Welcome} />
               <Route exact path="/update-temporary-password"
                 render={() => authInfo.user?.is_verified ? <Welcome /> : <UpdateTemporaryPassword />}
@@ -97,10 +99,17 @@ const App: React.FC = () => {
               <Route exact path="/property/:id/upload-pictures" component={UploadPictures} />
               <Route exact path="/property/:id/confirmation-data" component={ConfirmationData} />
 
-              <Route exact path="/lease-contract" component={LeaseContract} />
-              <Route exact path="/lease-contract/:id/desired-loan" component={DesiredLoan} />
-              <Route exact path="/lease-contract/:id/pre-offer" component={PreOffer} />
-              <Route exact path="/data-validation" component={DataValidation} />
+              <Route exact path="/applications/lease-contract" component={LeaseContract} />
+              <Route exact path="/applications/:id/desired-loan" component={DesiredLoan} />
+              <Route exact path="/applications/:id/pre-offer" component={PreOffer} />
+              <Route exact path="/applications/:id/identity-check" component={Passport} />
+
+              <Route exact path="/applications/:id/property/documents" component={UploadDocuments} />
+              <Route exact path="/applications/:id/property/pictures" component={UploadPictures} />
+              <Route exact path="/applications/:id/confirmation" component={ConfirmationData} />
+
+
+              {/* <Route exact path="/application/intentity-validation" component={DataValidation} /> */}
 
               <Route exact path="/passport" component={Passport} />
               <Route exact path="/bug" component={Bug} />
@@ -116,7 +125,8 @@ const App: React.FC = () => {
               <Route exact path="/summary" component={Summary} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/succesful-transaction" component={SuccesfulTransaction} />
-              <Route exact path="/"><Redirect to="/welcome" /></Route>
+              {/* <Route exact path="/"><Redirect to="/welcome" /></Route> */}
+              <Route exact path="/"><Redirect to="/dashboard" /></Route>
             </IonReactRouter>
           ) : (
             <IonReactRouter>

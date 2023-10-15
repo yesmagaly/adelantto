@@ -5,6 +5,8 @@ import { useAuth } from "../auth/authContext";
 import { NumericFormat } from "react-number-format";
 import * as Page from "../../components/page";
 
+import { applications } from "../../api";
+
 function removeNumericFormat(value: string) {
   return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
 }
@@ -42,7 +44,7 @@ const LeaseContract: React.FC = () => {
     control,
   } = useForm();
 
-  const onSubmit = async ({ monthly_lease_income, ...data }) => {
+  const onSubmit = async ({ lease_monthly_income, ...data }) => {
     // Validate minimum period of contract time
     if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
       return setError("lease_end_date", {
@@ -50,23 +52,15 @@ const LeaseContract: React.FC = () => {
       });
     }
 
-    const response = await fetch(`${API_SERVER_URL}/api/leasing-contracts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authInfo.user.token}`,
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        monthly_lease_income: removeNumericFormat(monthly_lease_income),
-        ...data,
-      }),
+    const response = await applications.leaseContract({
+      lease_monthly_income: removeNumericFormat(lease_monthly_income),
+      ...data,
     });
 
-    const leaseContract = await response.json();
+    const application = await response.json();
 
     if (response.status === 200) {
-      router.push(`/lease-contract/${leaseContract.id}/desired-loan`);
+      router.push(`/applications/${application.id}/desired-loan`);
     }
   };
 
@@ -94,7 +88,7 @@ const LeaseContract: React.FC = () => {
                     },
                   }}
                   control={control}
-                  name="monthly_lease_income"
+                  name="lease_monthly_income"
                   render={({ field: { ref, ...field } }) => (
                     <NumericFormat
                       {...field}
@@ -109,9 +103,9 @@ const LeaseContract: React.FC = () => {
                     />
                   )}
                 />
-                {errors?.monthly_lease_income && (
+                {errors?.lease_monthly_income && (
                   <div className="description">
-                    {errors?.monthly_lease_income?.message}
+                    {errors?.lease_monthly_income?.message}
                   </div>
                 )}
               </div>
@@ -153,7 +147,7 @@ const LeaseContract: React.FC = () => {
                 <div className="flex items-center justify-between w-full">
                   <div>
                     <input
-                      {...register("payment_method")}
+                      {...register("lease_payment_method")}
                       type="radio"
                       id="payment_cash"
                       value="cash"
@@ -165,7 +159,7 @@ const LeaseContract: React.FC = () => {
                   </div>
                   <div>
                     <input
-                      {...register("payment_method")}
+                      {...register("lease_payment_method")}
                       type="radio"
                       id="payment_transfer"
                       value="transfer"
@@ -175,6 +169,8 @@ const LeaseContract: React.FC = () => {
                       Transferencia
                     </label>
                   </div>
+
+                  <input {...register('status')} type="hidden" value="" />
                 </div>
               </div>
             </Page.Body>

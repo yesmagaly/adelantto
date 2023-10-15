@@ -5,7 +5,7 @@ import { calculator, loanContracts } from "../../api";
 
 import * as Page from "../../components/page";
 import { formatCurrency } from "../../utils";
-import { loanAgreements } from "../../api";
+import { loanAgreements, applications } from "../../api";
 
 interface PreOfferProps
   extends RouteComponentProps<{
@@ -27,16 +27,16 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   // GET with fetch API
   useEffect(() => {
     const fetchLoanContract = async () => {
-      const response = await loanContracts.load({ id: match.params.id });
-      const loan = await response.json();
+      const response = await applications.get(match.params.id);
+      const application = await response.json();
       const calcResponse = await calculator.calc({
-        principal: loan.monthly_lease_income * months,
+        principal: application.lease_monthly_income * months,
         months: months,
       });
       const data = await calcResponse.json();
       setOffer(data);
       setLoading(false);
-      setIncome(loan.monthly_lease_income);
+      setIncome(application.lease_monthly_income);
     };
 
     fetchLoanContract();
@@ -56,17 +56,17 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
 
   const handleSubmit = async () => {
     const body = {
-      principal: offer.principal,
-      fees: offer.fees,
-      opening_commission: offer.commission,
-      months: months,
-      leasing_contract_id: match.params.id,
+      pre_offer_amount: offer.principal,
+      pre_offer_fees: offer.fees,
+      pre_offer_commissions: offer.commission,
+      pre_offer_term_frame: months,
     };
-    const response = await loanAgreements.create({ body });
-    const loan = await response.json();
+
+    const response = await applications.preOffer(match.params.id, body);
+    await response.json();
 
     if (response.status === 200) {
-      router.push(`/passport?lease_contract=${match.params.id}`);
+      router.push(`/applications/${match.params.id}/identity-check`);
     }
   };
 
