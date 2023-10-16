@@ -1,6 +1,8 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useState, useEffect } from "react";
 
+import * as Page from "../../components/page";
+
 import { applications } from "../../api";
 import { nextStepUrl } from "../../utils/steps";
 
@@ -23,22 +25,27 @@ const Dashboard: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        Dahsboard
-
-        {items.map(item => (
+        {items.map((item) => (
           <div>
             {item.id}
-            <pre>
-              {JSON.stringify(item, null, 2)}
-            </pre>
+            <pre>{JSON.stringify(item, null, 2)}</pre>
 
-            <button onClick={() => router.push(nextStepUrl(item))}>Continuar {nextStepUrl(item)}</button>
+            <button onClick={() => router.push(nextStepUrl(item))}>
+              Continuar {nextStepUrl(item)}
+            </button>
           </div>
         ))}
 
-        <button>
-          Recibe un adelantto de tus rentas en tan solo 72 horas.
-        </button>
+        <button>Recibe un adelantto de tus rentas en tan solo 72 horas.</button>
+        <Page.Root>
+          <Page.Header>Dahsboard</Page.Header>
+          <Page.Body></Page.Body>
+          <Page.Footer>
+            <button onClick={() => router.push("/correct-data")}>
+              Siguiente
+            </button>
+          </Page.Footer>
+        </Page.Root>
       </IonContent>
     </IonPage>
   );
