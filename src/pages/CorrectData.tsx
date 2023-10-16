@@ -29,7 +29,7 @@ const CorrectData: React.FC = () => {
           <div className="heading--center">
             <button
               className="font-semibold px-4 py-2.5 rounded leading-5 bg-gray-100 button is-secondary mb-20"
-              onClick={() => router.push("")}
+              onClick={() => router.push("/withdrawals")}
             >
               Datos bancarios
             </button>
