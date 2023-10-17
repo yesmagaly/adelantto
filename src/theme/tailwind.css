@@ -77,21 +77,21 @@
 
 .heading-2 {
   @apply text-4xl leading-none;
-  font-weight: 400;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .heading-3 {
   @apply text-3xl leading-none;
   margin-bottom: 0.75rem;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .heading-4 {
   @apply text-2xl leading-none;
   margin-bottom: 0.75rem;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .heading-3 strong, .heading-2 strong {
