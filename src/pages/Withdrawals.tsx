@@ -94,7 +94,7 @@ const Withdrawals: React.FC = () => {
 
         <Modal.Root isOpen={showModal}>
           <Modal.Header></Modal.Header>
-          <Modal.body>
+          <Modal.Body>
             <Lottie
               animationData={lensAnimation}
               style={{ width: 219, height: 219 }}
@@ -107,11 +107,11 @@ const Withdrawals: React.FC = () => {
               <br />
               para cualquier disposición de <br /> efectivo necesaria.
             </p>
-          </Modal.body>
+          </Modal.Body>
           <Modal.Footer>
             <button
               className="button is-secondary mb-8"
-              onClick={() => router.push("/firma-page")}
+              onClick={() => router.push("/signature")}
             >
               Siguiente
             </button>

@@ -23,7 +23,7 @@ const Signature: React.FC = () => {
               </div>
               <button
                 className="button is-primary mb-16"
-                onClick={() => router.push("")}
+                onClick={() => router.push("/outlay")}
               >
                 Firmar
               </button>

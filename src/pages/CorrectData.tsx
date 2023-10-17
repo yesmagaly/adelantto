@@ -26,7 +26,7 @@ const CorrectData: React.FC = () => {
             <div className="border-full" />
           </div>
 
-          <div className="heading--center">
+          <div className="text-center">
             <button
               className="font-semibold px-4 py-2.5 rounded leading-5 bg-gray-100 button is-secondary mb-20"
               onClick={() => router.push("/withdrawals")}
