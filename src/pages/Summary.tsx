@@ -2,8 +2,11 @@ import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Icon from "../components/Icon/Icon";
 import masterCardIcon from "../assets/icons/master-card.png";
 import { ellipse } from "ionicons/icons";
+import { useState } from "react";
+import * as Modal from "../components/modal";
 
 const Summary: React.FC = () => {
+  const [showPay, setShowPay] = useState(false);
   const router = useIonRouter();
   return (
     <IonPage>
@@ -56,52 +59,50 @@ const Summary: React.FC = () => {
             </button>
           </div>
           <div className="mb-10">
-            <form>
-              <div className="flex justify-between items-center">
-                <div className="mb-4">
-                  <h6 className="font-bold leading-6">MES 1 - PAGADO</h6>
-                  <p className="text-xs">26-04-2023</p>
-                </div>
-
-                <button
-                  className="font-regular px-3 py-1 rounded text-white bg-blue-900"
-                  onClick={() => router.push("")}
-                >
-                  Ver
-                </button>
+            <div className="flex justify-between items-center">
+              <div className="mb-4">
+                <h6 className="font-bold leading-6">MES 1 - PAGADO</h6>
+                <p className="text-xs">26-04-2023</p>
               </div>
-              <div className="border-full" />
-              <div className="flex justify-between items-center">
-                <div className="mb-4">
-                  <h6 className="font-bold leading-6">MES 2 - PAGADO</h6>
-                  <p className="text-xs">26-05-2023</p>
-                </div>
 
-                <button
-                  className="font-regular px-3 py-1 rounded text-white bg-blue-900"
-                  onClick={() => router.push("")}
-                >
-                  Ver
-                </button>
+              <button
+                className="font-regular px-3 py-1 rounded text-white bg-blue-900"
+                onClick={() => router.push("")}
+              >
+                Ver
+              </button>
+            </div>
+            <div className="border-full" />
+            <div className="flex justify-between items-center">
+              <div className="mb-4">
+                <h6 className="font-bold leading-6">MES 2 - PAGADO</h6>
+                <p className="text-xs">26-05-2023</p>
               </div>
-              <div className="border-full" />
-              <div className="flex justify-between items-center">
-                <div className="mb-4">
-                  <h6 className="font-bold text-blue-900 leading-6">
-                    MES 3 - PENDIENTE POR PAGAR
-                  </h6>
-                  <p className="text-xs">26-06-2023</p>
-                </div>
 
-                <button
-                  className="font-regular px-3 py-1 rounded text-white bg-blue-900"
-                  onClick={() => router.push("")}
-                >
-                  Ver
-                </button>
+              <button
+                className="font-regular px-3 py-1 rounded text-white bg-blue-900"
+                onClick={() => router.push("")}
+              >
+                Ver
+              </button>
+            </div>
+            <div className="border-full" />
+            <div className="flex justify-between items-center">
+              <div className="mb-4">
+                <h6 className="font-bold text-blue-900 leading-6">
+                  MES 3 - PENDIENTE POR PAGAR
+                </h6>
+                <p className="text-xs">26-06-2023</p>
               </div>
-              <div className="border-full" />
-            </form>
+
+              <button
+                className="font-regular px-3 py-1 rounded text-white bg-blue-900"
+                onClick={() => setShowPay(true)}
+              >
+                Ver
+              </button>
+            </div>
+            <div className="border-full" />
           </div>
         </div>
 
@@ -114,35 +115,47 @@ const Summary: React.FC = () => {
           </div>
           <div className="border-bottom border-primary-blue px-6" />
         </div>
-        <div className="text-center py-10">
-          <h6 className="text-blue-700 mb-6">CUOTA A PAGAR</h6>
-          <p className="text-3xl font-bold mb-6">$ 10.000</p>
-          <h4 className="font-bold text-lg text-blue-900">MEDIOS DE PAGO</h4>
-        </div>
-        <div className="flex justify-center gap-3 mb-2">
-          <img src={masterCardIcon} className="bg-gray-100 px-14 py-3" />
-          <img src={masterCardIcon} className="bg-gray-100 px-14 py-3" />
-        </div>
-        <div className="flex justify-center mb-2">
-          <img src={masterCardIcon} className="bg-gray-100 px-32 py-3" />
-        </div>
-        <div className="flex justify-center mb-12">
-          <div className="flex bg-gray-100">
-            <img src={masterCardIcon} className="px-6 py-3" />
-            <img src={masterCardIcon} className="px-6 py-3" />
-            <img src={masterCardIcon} className="px-6 py-3" />
-            <img src={masterCardIcon} className="px-6 py-3" />
-          </div>
-        </div>
-        <div className="bg-gray-100 py-4">
-          <div className="flex justify-between px-10 mb-5">
-            <Icon name="home" className="text-6xl bg-black " />
-            <Icon name="world" className="text-6xl bg-black" />
-            <Icon name="location" className="text-6xl bg-black" />
-            <Icon name="search" className="text-6xl bg-black" />
-          </div>
-          <div className="border-bottom border-primary-blue px-6" />
-        </div>
+
+        <Modal.Root isOpen={showPay}>
+          <Modal.Header>
+            <h6 className="text-blue-700 mb-6">CUOTA A PAGAR</h6>
+            <p className="text-3xl font-bold mb-6">$ 10.000</p>
+            <h4 className="font-bold text-lg text-blue-900">MEDIOS DE PAGO</h4>
+          </Modal.Header>
+          <Modal.Body>
+            {" "}
+            <div className="flex justify-center gap-3 mb-2">
+              <img src={masterCardIcon} className="bg-gray-100 px-14 py-3" />
+              <img src={masterCardIcon} className="bg-gray-100 px-14 py-3" />
+            </div>
+            <div className="flex justify-center mb-2">
+              <img src={masterCardIcon} className="bg-gray-100 px-32 py-3" />
+            </div>
+            <div className="flex justify-center mb-12">
+              <div className="flex bg-gray-100">
+                <img src={masterCardIcon} className="px-6 py-3" />
+                <img src={masterCardIcon} className="px-6 py-3" />
+                <img src={masterCardIcon} className="px-6 py-3" />
+                <img src={masterCardIcon} className="px-6 py-3" />
+              </div>
+            </div>
+            <div className="bg-gray-100 py-4">
+              <div className="flex justify-between px-10 mb-5">
+                <Icon name="home" className="text-6xl bg-black " />
+                <Icon name="world" className="text-6xl bg-black" />
+                <Icon name="location" className="text-6xl bg-black" />
+                <Icon name="search" className="text-6xl bg-black" />
+              </div>
+              <div className="border-bottom border-primary-blue px-6" />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={() => router.push("/succesful-transaction")}>
+              cerrar
+            </button>
+          </Modal.Footer>
+        </Modal.Root>
+        <div className="text-center py-10"></div>
       </IonContent>
     </IonPage>
   );

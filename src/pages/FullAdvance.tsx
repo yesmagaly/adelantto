@@ -70,7 +70,7 @@ const FullAdvance: React.FC = () => {
 
               <button
                 className="font-regular px-3 py-1 rounded text-white leading-5 bg-blue-900"
-                onClick={() => router.push("")}
+                onClick={() => router.push("/summary")}
               >
                 Ver
               </button>

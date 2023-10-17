@@ -20,7 +20,7 @@ const SuccesfulTransaction: React.FC = () => {
           <div className="py-10">
             <button
               className="button is-primary mb-16"
-              onClick={() => router.push("")}
+              onClick={() => router.push("/dashboard")}
             >
               Finalizar
             </button>

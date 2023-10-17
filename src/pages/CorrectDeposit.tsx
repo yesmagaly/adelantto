@@ -32,7 +32,7 @@ const CorrectDeposit: React.FC = () => {
               </p>
               <button
                 className="button is-secondary"
-                onClick={() => router.push("")}
+                onClick={() => router.push("/full-advance")}
               >
                 Menú
               </button>

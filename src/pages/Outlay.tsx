@@ -67,7 +67,7 @@ const Outlay: React.FC = () => {
           <Page.Footer>
             <button
               className="button is-primary mb-16"
-              onClick={() => router.push("")}
+              onClick={() => router.push("/correct-deposit")}
             >
               Siguiente
             </button>
