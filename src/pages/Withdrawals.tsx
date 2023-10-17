@@ -48,7 +48,7 @@ const Withdrawals: React.FC = () => {
           <div className="mb-7">
             <button
               className="button is-primary mb-8"
-              onClick={() => router.push("/verification-email")}
+              onClick={() => setShowModal(true)}
             >
               Siguiente
             </button>
@@ -111,7 +111,7 @@ const Withdrawals: React.FC = () => {
           <Modal.Footer>
             <button
               className="button is-secondary mb-8"
-              onClick={() => setShowModal(false)}
+              onClick={() => router.push("/firma-page")}
             >
               Siguiente
             </button>
