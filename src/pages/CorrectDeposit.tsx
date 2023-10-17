@@ -9,8 +9,8 @@ const CorrectDeposit: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading--sky-blue pt-10">
-          <div>
-            <h3 className="font-bold text-4xl text-center py-8">¡Gracias!</h3>
+          <div className="text-center">
+            <h1 className="heading-2 py-8">¡Gracias!</h1>
           </div>
 
           <div className="content">
@@ -22,9 +22,11 @@ const CorrectDeposit: React.FC = () => {
             />
 
             <div className="text-center mb-10">
-              <h3 className="font-bold text-2xl leading-7 mb-7">
-                ¡Gracias por confiar <br /> en nosotros!
-              </h3>
+              <div className="mb-10">
+                <h1 className="heading-4">
+                  ¡Gracias por confiar <br /> en nosotros!
+                </h1>
+              </div>
               <p className="text-lg px-5 mb-10">
                 El dinero ya está en tu cuenta. Recuerda que al terminar de
                 pagar el total de las rentas adelantadas podrás solicitar un

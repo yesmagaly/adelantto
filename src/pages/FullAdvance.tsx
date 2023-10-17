@@ -26,10 +26,10 @@ const FullAdvance: React.FC = () => {
 
             <Icon name="bell" className="mr-6 text-2xl bg-blue-900" />
           </div>
-          <h4 className="text-3xl py-7 px-7">
+          <h1 className="heading-3 py-7 px-7">
             ¡Hola, <br />
             <strong>Alexander Cruz!</strong>{" "}
-          </h4>
+          </h1>
         </div>
         <div className="px-8">
           <div className="heading heading--blue heading--compact mb-7">

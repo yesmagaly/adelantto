@@ -15,7 +15,7 @@ const Withdrawals: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue text-center heading--compact mb-2">
-          <h3 className="text-3xl py-5">
+          <h3 className="heading-3 py-5">
             ¿Dónde quieres <br />
             <strong>tu dinero?</strong>
           </h3>

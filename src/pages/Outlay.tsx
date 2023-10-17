@@ -19,9 +19,9 @@ const Outlay: React.FC = () => {
         <Page.Root>
           <Page.Header>
             <div className="heading heading--blue heading--center">
-              <h3 className="heading-3">
+              <h1 className="heading-3">
                 <strong>Desembolso</strong>
-              </h3>
+              </h1>
               <p>Conoce el desglose de tu servicio</p>
             </div>
           </Page.Header>
@@ -60,8 +60,6 @@ const Outlay: React.FC = () => {
               </div>
 
               <div className="content"></div>
-
-              <div className="border-bottom border-primary-blue" />
             </div>
           </Page.Body>
           <Page.Footer>
@@ -71,6 +69,7 @@ const Outlay: React.FC = () => {
             >
               Siguiente
             </button>
+            <div className="border-bottom border-primary-blue" />
           </Page.Footer>
         </Page.Root>
 

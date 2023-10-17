@@ -12,7 +12,7 @@ const Signature: React.FC = () => {
           <div className="bg-white py-5 shadow-2xl w-96 border border-gray-200">
             <form className="form">
               <div className="pt-10">
-                <h3 className="font-bold text-4xl">¡Firma y recibe!</h3>
+                <h3 className="heading-2">¡Firma y recibe!</h3>
                 <Lottie
                   animationData={singAnimation}
                   style={{ width: 300, height: 300 }}

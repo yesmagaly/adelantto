@@ -30,7 +30,7 @@ const Summary: React.FC = () => {
         </div>
 
         <div className="h-90 bg-cover text-white px-9 py-10 heading--blue">
-          <h5 className="font-bold text-2xl leading-6">Adelantto 00001</h5>
+          <h1 className="heading-4">Adelantto 00001</h1>
           <p className="mb-6">Calle 17 Sur 13-22</p>
           <div className="border-full" />
           <div>
