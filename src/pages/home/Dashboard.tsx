@@ -41,7 +41,10 @@ const Dashboard: React.FC = () => {
           <Page.Header>Dahsboard</Page.Header>
           <Page.Body></Page.Body>
           <Page.Footer>
-            <button onClick={() => router.push("/correct-data")}>
+            <button
+              className="button is-primary mb-6"
+              onClick={() => router.push("/correct-data")}
+            >
               Siguiente
             </button>
           </Page.Footer>
