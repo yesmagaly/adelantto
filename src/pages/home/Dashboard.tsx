@@ -16,7 +16,10 @@ const Dashboard: React.FC = () => {
       const response = await applications.list();
       const data = await response.json();
 
-      setItems(data);
+      if (response.status === 200) {
+        setItems(data);
+      }
+
     };
 
     fetchData();
