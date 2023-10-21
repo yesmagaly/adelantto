@@ -29,6 +29,17 @@ export const authentication = {
       },
       body: JSON.stringify({ email, password }),
     }),
+
+  updateProfile: async ({ name, last_name }) =>
+    await fetch(`${API_SERVER_URL}/api/user/update-profile`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getToken(),
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ name, last_name }),
+    }),
 };
 
 export const applications = {

@@ -3,6 +3,7 @@ import Lottie from "react-lottie-player";
 
 import homeAnimation from "../assets/animations/home.json";
 import { ellipse } from "ionicons/icons";
+import * as Page from "../components/page";
 
 const AdvanceImmediately: React.FC = () => {
   const router = useIonRouter();
@@ -10,55 +11,42 @@ const AdvanceImmediately: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="content">
-          <div className="bg-white py-3 shadow-2xl w-96 border border-gray-200 mb-7">
-            <div className="h-60 px-9 py-6">
-              <div className="heading__pager text-gray-300 text-right">
-                1 de 3
-              </div>
-              <h1 className="heading__title text-center pt-20">
-                <strong>Adelanto</strong> <br /> de inmediato
-              </h1>
-            </div>
-
-            <div className="content">
-              <Lottie
-                animationData={homeAnimation}
-                style={{ width: 294, height: 294 }}
-                loop
-                play
-              />
-              <div className="mb-14 mt-10">
-                <p className="help-text">
-                  Recibe un adelanto de tus rentas <br />
-                  <strong className="text-xl">en tan solo 72 horas.</strong>
-                </p>
-              </div>
+        <Page.Root variant="compact">
+          <Page.Body>
+            <div className="">
               <div>
-                <button onClick={() => router.push("/advance-immediately")}>
-                  <IonIcon
-                    className="w-3 mr-3 text-gray-300"
-                    icon={ellipse}
-                  ></IonIcon>
-                </button>
+                <div className="heading__pager text-right">1 de 3</div>
+                <h1 className="heading__title text-center pt-16">
+                  <strong>Adelanto</strong> de inmediato
+                </h1>
+              </div>
 
-                <button onClick={() => router.push("/create-profile")}>
-                  <IonIcon
-                    className="w-3 mr-3 text-gray-300"
-                    icon={ellipse}
-                  ></IonIcon>
-                </button>
+              <div className="content">
+                <Lottie
+                  animationData={homeAnimation}
+                  style={{ width: 280, height: 280 }}
+                  loop
+                  play
+                />
+                <div className="mb-14">
+                  <p className="help-text">
+                    Recibe un adelanto de tus rentas{" "}
+                    <strong className="text-lg">en tan solo 72 horas.</strong>
+                  </p>
+                </div>
 
-                <button onClick={() => router.push("")}>
-                  <IonIcon
-                    className="w-3 text-gray-300"
-                    icon={ellipse}
-                  ></IonIcon>
-                </button>
+                <div>
+                  <button
+                    onClick={() => router.push("/create-profile")}
+                    className="button is-primary"
+                  >
+                    Continuar
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </Page.Body>
+        </Page.Root>
       </IonContent>
     </IonPage>
   );

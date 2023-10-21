@@ -1,12 +1,16 @@
 .button {
   @apply font-semibold px-6 py-4 rounded leading-5 bg-gray-100;
+
+  min-width: 190px;
 }
 
-.button-primary, .button.is-primary {
+.button-primary,
+.button.is-primary {
   @apply bg-primary-green text-white;
 }
 
-.button-secondary, .button.is-secondary {
+.button-secondary,
+.button.is-secondary {
   @apply bg-primary-blue-light text-white;
 }
 

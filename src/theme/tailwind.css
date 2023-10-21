@@ -11,7 +11,7 @@
   --font-lg: 18px;
 
   --color-neutral-50: #fafafa;
-  --color-neutral-100: #f5f5f5;
+  --color-neutral-100: #f4f4f4;
   --color-neutral-200: #e5e5e5;
   --color-neutral-300: #d4d4d4;
   --color-neutral-400: #a3a3a3;
@@ -94,7 +94,8 @@
   font-weight: 700;
 }
 
-.heading-3 strong, .heading-2 strong {
+.heading-3 strong,
+.heading-2 strong {
   font-weight: 600;
 }
 
@@ -114,7 +115,6 @@
 }
 
 .help-text {
-
   @apply max-w-xs font-semibold leading-5;
 }
 

@@ -34,7 +34,7 @@ const Login: React.FC<LoginProps> = () => {
     const password = data.password;
 
     try {
-      await logIn(email, password);
+      const user = await logIn(email, password);
       router.push("/dashboard");
     } catch (error) {
       setIsOpen(true);

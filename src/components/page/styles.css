@@ -18,3 +18,12 @@
 .page-footer.has-divider {
   border-top: 1px solid #cdcdcd;
 }
+
+.page.is-compact {
+  background: var(--color-neutral-100);
+  padding: 1.5rem;
+}
+
+.page.is-compact .page-body {
+  background-color: white;
+}
