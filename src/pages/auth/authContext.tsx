@@ -1,10 +1,11 @@
 import React from "react";
 import { API_SERVER_URL } from "../../config";
+import { authentication } from "../../api";
 
 type UserDataInterface = {
   initialized: boolean;
   loggedIn: boolean;
-  user: any
+  user: any;
 };
 
 type MyContextInterface = {
@@ -29,27 +30,15 @@ export const AuthProvider: React.FC = (props: any) => {
   // the reactive values
   const [authInfo, setAuthInfo] = React.useState<UserDataInterface>();
 
-  const logOut = () => {
-    return new Promise((resolve) => {
-      window.localStorage.removeItem("AUTH");
-      setAuthInfo({ initialized: true, loggedIn: false, user: null });
-      setTimeout(() => {
-        return resolve(true);
-      }, 1000);
-    });
+  const logOut = async () => {
+    window.localStorage.removeItem("AUTH");
+    setAuthInfo({ initialized: true, loggedIn: false, user: null });
+    await authentication.logout();
   };
 
   const logIn = async (email: string, password: string) => {
     // Send phone request.
-    const response = await fetch(`${API_SERVER_URL}/api/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
+    const response = await authentication.login({ email, password });
     const json = await response.json();
 
     if (response.status === 200) {
@@ -59,7 +48,7 @@ export const AuthProvider: React.FC = (props: any) => {
         user: {
           token: json.token,
           is_verified: json.is_verified,
-          id: new Date().getTime() + ""
+          id: new Date().getTime() + "",
         },
       };
 

@@ -35,7 +35,7 @@ const Login: React.FC<LoginProps> = () => {
 
     try {
       await logIn(email, password);
-      router.push("/welcome");
+      router.push("/dashboard");
     } catch (error) {
       setIsOpen(true);
       setError("password", { message: error?.message, type: "server" });

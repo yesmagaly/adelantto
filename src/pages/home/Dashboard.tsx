@@ -2,22 +2,33 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useState, useEffect } from "react";
 
 import * as Page from "../../components/page";
+import * as Modal from "../../components/modal";
 
-import { applications } from "../../api";
+import { UnauthorizedError, applications } from "../../api";
 import { nextStepUrl } from "../../utils/steps";
 import { formatCurrency } from "../../utils";
+import { useAuth } from "../auth/authContext";
 
 const Dashboard: React.FC = () => {
+  const { logOut } = useAuth()!;
   const router = useIonRouter();
   const [items, setItems] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await applications.list();
-      const data = await response.json();
+      try {
+        const data = (await applications.list()) ?? [];
 
-      if (response.status === 200) {
+        if (data.length === 0) {
+          router.push("/advance-immediately");
+        }
+
         setItems(data);
+      } catch (error) {
+        if (error instanceof UnauthorizedError) {
+          setError(error.message);
+        }
       }
     };
 
@@ -85,6 +96,19 @@ const Dashboard: React.FC = () => {
             </button>
           </Page.Footer>
         </Page.Root>
+
+        {error && (
+          <Modal.Root isOpen={!!error}>
+            <Modal.Body>
+              <p>Error message</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={logOut} className="button is-primary">
+                Okay
+              </button>
+            </Modal.Footer>
+          </Modal.Root>
+        )}
       </IonContent>
     </IonPage>
   );

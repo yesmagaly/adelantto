@@ -31,14 +31,16 @@ const Register: React.FC = () => {
         type: "required",
         message: "The cellphone number is required.",
       };
-    } else if (
-      !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g.test(values.phone)
-    ) {
-      errors.phone = {
-        type: "pattern",
-        message: "Invalid cellphone number.",
-      };
     }
+
+    // else if (
+    //   !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g.test(values.phone)
+    // ) {
+    //   errors.phone = {
+    //     type: "pattern",
+    //     message: "Invalid cellphone number.",
+    //   };
+    // }
 
     return errors;
   };
@@ -114,7 +116,7 @@ const Register: React.FC = () => {
                     className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format="+57 (###) ###-####"
+                    format="+## (###) ###-###"
                     allowEmptyFormatting
                     mask="_"
                     required

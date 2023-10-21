@@ -58,7 +58,6 @@ const AdvanceImmediately: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>
