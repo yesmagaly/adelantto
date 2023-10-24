@@ -43,7 +43,6 @@ const Dashboard: React.FC = () => {
             <h2 className="heading-3 !mb-0">Dahsboard</h2>
           </Page.Header>
           <Page.Body>
-            <h3 className="heading-5 text-2xl mb-2">Solicitudes:</h3>
             <div className="flex gap-2 flex-col">
               {items.map((item) => (
                 <div

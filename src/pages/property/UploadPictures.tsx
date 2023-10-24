@@ -37,13 +37,13 @@ const UploadPictures: React.FC = ({ match }) => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
-            <PhotoInputItem control={control} name="property_house_from" rules={{ required: "Imagen obligatoria" }}>
+            <PhotoInputItem control={control} name="property_house_front" rules={{ required: "Imagen obligatoria" }}>
               <label className="font-bold text-sm leading-3 is-required">Frente de la casa</label>
 
               <p className="text-sm">Toma una foto del frente de tu casa</p>
-              {errors?.house_from && (
+              {errors?.property_house_front && (
                 <span className="message is-small is-danger">
-                  {errors?.house_from?.message}
+                  {errors?.property_house_front?.message}
                 </span>
               )}
             </PhotoInputItem>
