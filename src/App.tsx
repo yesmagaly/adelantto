@@ -105,12 +105,14 @@ const App: React.FC = () => {
               <Route exact path="/applications/:id/privacy-policy" component={ConfirmationData} />
               <Route exact path="/applications/:id/policy-notifications" component={DataValidation} />
 
+              <Route exact path="/applications/:id/success" component={CorrectData} />
+              <Route exact path="/applications/:id/account-statement" component={Withdrawals} />
+
+
               <Route exact path="/bug" component={Bug} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/biometric-validation" component={BiometricValidation} />
               <Route exact path="/validation-error" component={ValidationError} />
-              <Route exact path="/correct-data" component={CorrectData} />
-              <Route exact path="/withdrawals" component={Withdrawals} />
               <Route exact path="/signature" component={Signature} />
               <Route exact path="/outlay" component={Outlay} />
               <Route exact path="/correct-deposit" component={CorrectDeposit} />
@@ -123,9 +125,9 @@ const App: React.FC = () => {
             </IonReactRouter>
           ) : (
             <IonReactRouter>
-              <Route exact path="/create-account" component={Register}  />
-              <Route exact path="/login" component={Login}  />
-              <Route exact path="/register" component={Register}  />
+              <Route exact path="/create-account" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
               <Route path="/verification-code/:phone" component={VerificationCode} />
               <Route path="/verification-email/:phone" component={VerificationEmail} />
               <Route exact path="/terms-and-conditions" component={TermsAndConditions} />

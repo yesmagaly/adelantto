@@ -1,7 +1,6 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 
-import { API_SERVER_URL } from "../../config";
 import FileInputItem from "../../components/FileInputItem";
 import { useAuth } from "../auth/authContext";
 import { applications } from "../../api";

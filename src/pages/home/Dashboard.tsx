@@ -79,6 +79,15 @@ const Dashboard: React.FC = () => {
                     </button>
                   )}
 
+                  {item.status === "approved" && (
+                    <button
+                      className="button is-small !py-2"
+                      onClick={() => router.push(`/applications/${item.id}/success`)}
+                    >
+                      Continuar
+                    </button>
+                  )}
+
                   {item.status !== "uncompleted" && (
                     <div className="">{item.status}</div>
                   )}

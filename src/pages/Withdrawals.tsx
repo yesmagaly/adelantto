@@ -1,23 +1,39 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
+import { useForm } from "react-hook-form";
 
 import * as Modal from "../components/modal";
 import walletAnimation from "../assets/animations/wallet.json";
 import lensAnimation from "../assets/animations/lens.json";
 import { useState } from "react";
-import { fastFoodOutline } from "ionicons/icons";
+import FileInput from "../components/FileInput";
+import { applications } from "../api";
 
-const Withdrawals: React.FC = () => {
+const Withdrawals: React.FC = ({ match }) => {
   const [open, setOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const router = useIonRouter();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const response = await applications.accountStatement(match.params.id, data);
+    await response.json();
+
+    if (response.status === 200) {
+      setShowModal(true)
+    }
+  }
+
   return (
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue text-center heading--compact mb-2">
           <h3 className="heading-3 py-5">
-            ¿Dónde quieres <br />
-            <strong>tu dinero?</strong>
+            ¿Dónde quieres <strong>tu dinero?</strong>
           </h3>
         </div>
         <div className="content">
@@ -28,33 +44,38 @@ const Withdrawals: React.FC = () => {
               loop
               play
             />
-            <form className="form mb-7">
-              <input
-                type="text"
-                placeholder="Subir carátula de tu estado de cuenta"
-              />
+            <form className="form w-full" onSubmit={handleSubmit(onSubmit)}>
+              <FileInput
+                name="account_statement"
+                control={control}
+                rules={{ required: "Documento obligatorio" }}
+              >
+                <h5 className="font-bold text-sm leading-4">
+                  Subir carátula de tu estado de cuenta
+                </h5>
+
+                {errors?.account_statement && (
+                  <span className="message is-small is-danger">
+                    {errors?.account_statement?.message}
+                  </span>
+                )}
+              </FileInput>
+
+              <div className="mb-16 mt-4">
+                <a onClick={() => setOpen(true)} className="underline leading-10">
+                  Términos interbancarios
+                </a>
+                <p>
+                  A continuación encontrarás el contrato relacionado a tu
+                  solicitud.
+                </p>
+              </div>
+
+              <button className="button is-primary mb-8">
+                Siguiente
+              </button>
             </form>
-            <div className="mb-16">
-              <a onClick={() => setOpen(true)} className="underline leading-10">
-                Términos interbancarios
-              </a>
-              <p>
-                A continuación encontrarás el contrato <br /> relacionado a tu
-                solicitud.
-              </p>
-            </div>
           </div>
-
-          <div className="mb-7">
-            <button
-              className="button is-primary mb-8"
-              onClick={() => setShowModal(true)}
-            >
-              Siguiente
-            </button>
-          </div>
-
-          <div className="border-bottom border-primary-blue" />
         </div>
 
         <Modal.Root isOpen={open}>
@@ -102,22 +123,19 @@ const Withdrawals: React.FC = () => {
               play
             />
             <p className="text-[16px] mb-6 leading-5">
-              En este punto estamos validando <br />
-              el convenio con tu entidad bancaria,
-              <br />
-              para cualquier disposición de <br /> efectivo necesaria.
+              En este punto estamos validando el convenio con tu entidad bancaria,
+              para cualquier disposición de efectivo necesaria.
             </p>
           </Modal.Body>
           <Modal.Footer>
             <button
               className="button is-secondary mb-8"
-              onClick={() => router.push("/signature")}
+              onClick={() => router.push("/dashboard")}
             >
               Siguiente
             </button>
           </Modal.Footer>
         </Modal.Root>
-        <div className="content"></div>
       </IonContent>
     </IonPage>
   );

@@ -3,7 +3,7 @@ import Lottie from "react-lottie-player";
 
 import walletAnimation from "../assets/animations/wallet.json";
 
-const CorrectData: React.FC = () => {
+const CorrectData: React.FC = ({ match }) => {
   const router = useIonRouter();
   return (
     <IonPage>
@@ -29,7 +29,7 @@ const CorrectData: React.FC = () => {
           <div className="text-center">
             <button
               className="button is-secondary mb-20"
-              onClick={() => router.push("/withdrawals")}
+              onClick={() => router.push(`/applications/${match.params.id}/account-statement`)}
             >
               Datos bancarios
             </button>

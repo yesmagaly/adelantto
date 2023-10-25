@@ -10,7 +10,7 @@ import { loanAgreements, applications } from "../../api";
 interface PreOfferProps
   extends RouteComponentProps<{
     id: string;
-  }> {}
+  }> { }
 
 interface LoanContract {
   desired_loan: number;

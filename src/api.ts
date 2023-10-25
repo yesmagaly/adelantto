@@ -1,7 +1,7 @@
 import { API_SERVER_URL } from "./config";
 
-export class UnauthorizedError extends Error {}
-export class HttpError extends Error {}
+export class UnauthorizedError extends Error { }
+export class HttpError extends Error { }
 
 function getToken() {
   const userString = localStorage.getItem("AUTH");
@@ -160,6 +160,20 @@ export const applications = {
       `${API_SERVER_URL}/api/applications/${id}/policy-notifications`,
       {
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: getToken(),
+          Accept: "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    ),
+
+  accountStatement: async (id: number, body = {}) =>
+    await fetch(
+      `${API_SERVER_URL}/api/applications/${id}/account-statement`,
+      {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: getToken(),
