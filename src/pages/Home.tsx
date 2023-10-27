@@ -7,22 +7,24 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="flex items-center flex-col justify-center text-center h-full">
-          <img className="mb-24" src={logo} />
-          <h1 className="font-semibold text-[40px]">¡Hola!</h1>
-          <p className="w-44 mb-14 leading-5">
-            ¿Estás listo para anticipar tus rentas?
-          </p>
+        <div className="flex items-center flex-col justify-center h-full">
+          <div className="mb-14 text-center">
+            <img className="mb-16 w-44 inline-block" src={logo} />
+            <h1 className="font-semibold leading-normal text-5xl">¡Hola!</h1>
+            <p className="text-xl leading-5 max-w-xs">
+              ¿Estás listo para anticipar tus rentas?
+            </p>
+          </div>
 
           <button
-            className="button is-primary mb-4"
+            className="button is-primary mb-6"
             onClick={() => router.push("/register")}
           >
             Crear cuenta
           </button>
 
-          <p>
-            <a href="/terms-and-conditions" className="text-sm">
+          <p className="text-base">
+            <a onClick={() => router.push("/terms-and-conditions?redirect=/start")}>
               Términos y condiciones
             </a>
           </p>

@@ -31,7 +31,7 @@ export const AuthProvider: React.FC = (props: any) => {
   const [authInfo, setAuthInfo] = React.useState<UserDataInterface>();
 
   const logOut = async () => {
-    window.localStorage.removeItem("AUTH");
+    window.sessionStorage.removeItem("AUTH");
     setAuthInfo({ initialized: true, loggedIn: false, user: null });
     await authentication.logout();
   };
@@ -53,7 +53,7 @@ export const AuthProvider: React.FC = (props: any) => {
       };
 
       setAuthInfo(v);
-      window.localStorage.setItem("AUTH", JSON.stringify(v.user));
+      window.sessionStorage.setItem("AUTH", JSON.stringify(v.user));
     } else {
       throw new Error(json.message);
     }
@@ -62,7 +62,7 @@ export const AuthProvider: React.FC = (props: any) => {
   };
 
   const initialize = () => {
-    let response = window.localStorage.getItem("AUTH") || null;
+    let response = window.sessionStorage.getItem("AUTH") || null;
 
     if (response !== null) {
       setAuthInfo({
