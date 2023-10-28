@@ -116,7 +116,7 @@ const Register: React.FC = () => {
                     className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format="+## (###) ###-###"
+                    format="+## (###) ###-####"
                     allowEmptyFormatting
                     mask="_"
                     required
