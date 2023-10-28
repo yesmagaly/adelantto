@@ -11,7 +11,7 @@ import { useAuth } from "./authContext";
 interface LoginProps
   extends RouteComponentProps<{
     phone: string;
-  }> {}
+  }> { }
 
 type FormValues = {
   email: number;
@@ -35,7 +35,12 @@ const Login: React.FC<LoginProps> = () => {
 
     try {
       const user = await logIn(email, password);
-      router.push("/dashboard");
+
+      if (!user?.is_verified) {
+        router.push('/update-temporary-password')
+      } else {
+        router.push("/dashboard");
+      }
     } catch (error) {
       setIsOpen(true);
       setError("password", { message: error?.message, type: "server" });
@@ -70,15 +75,15 @@ const Login: React.FC<LoginProps> = () => {
             <button className="button is-primary w-full">Iniciar sesión</button>
           </form>
 
-          <p className="leading-5 mb-4">
-            ¿Eres nuevo?{" "}
-            <a className="font-semibold" href="/register">
-              Registrate aquí
+          <p className="leading-5 mb-8">
+            ¿Olvidaste tu contrasena?<br />
+            <a className="font-semibold" onClick={() => router.push("/forgot-password")}>
+              Recuperar aquí
             </a>
           </p>
 
           <p>
-            <a href="/terms-and-conditions" className="text-sm">
+            <a onClick={() => router.push("/terms-and-conditions?redirect=/login")} className="text-sm">
               Términos y condiciones
             </a>
           </p>
@@ -90,7 +95,8 @@ const Login: React.FC<LoginProps> = () => {
           <h3 className="font-semibold text-lg mb-5 text-center">
             Lo sentimos
           </h3>
-          {<p>{errors?.password?.message}</p>}
+
+          {errors?.password && <p>{errors?.password?.message}</p>}
           <button
             onClick={() => setIsOpen(false)}
             className="button is-secondary"

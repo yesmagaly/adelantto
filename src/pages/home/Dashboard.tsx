@@ -55,6 +55,13 @@ const Dashboard: React.FC = () => {
                       <h3 className="text-xl heading-5 mb-2">
                         {formatCurrency(item.lease_monthly_income)}
                       </h3>
+
+                      <button
+                        className="button is-small !py-2"
+                        onClick={() => router.push(nextStepUrl(item))}
+                      >
+                        Continuar
+                      </button>
                     </>
                   )}
 
@@ -67,19 +74,11 @@ const Dashboard: React.FC = () => {
                       <div className="text-base mb-4">
                         x {item.pre_offer_term_frame} meses
                       </div>
+                      <div>{item.status !== 'approved' && item.status}</div>
                     </>
                   )}
 
-                  {item.status === "uncompleted" && (
-                    <button
-                      className="button is-small !py-2"
-                      onClick={() => router.push(nextStepUrl(item))}
-                    >
-                      Continuar
-                    </button>
-                  )}
-
-                  {item.status === "approved" && (
+                  {item.status === "approved" && !item?.loan_agreement && (
                     <button
                       className="button is-small !py-2"
                       onClick={() => router.push(`/applications/${item.id}/success`)}
@@ -88,21 +87,16 @@ const Dashboard: React.FC = () => {
                     </button>
                   )}
 
-                  {item.status !== "uncompleted" && (
-                    <div className="">{item.status}</div>
+                  {item.status === "approved" && item?.loan_agreement && (
+                    <p>
+                      {item.loan_agreement.status === 'awaiting_account_statement_check' && 'Your account statement is awaiting for review.'}
+                    </p>
                   )}
+
                 </div>
               ))}
             </div>
           </Page.Body>
-          <Page.Footer>
-            <button
-              className="button is-primary mb-6"
-              onClick={() => router.push("/correct-data")}
-            >
-              Siguiente
-            </button>
-          </Page.Footer>
         </Page.Root>
 
         {error && (

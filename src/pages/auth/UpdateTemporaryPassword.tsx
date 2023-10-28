@@ -7,6 +7,7 @@ import { useAuth } from "./authContext";
 
 import logo from "../../assets/icons/alternative-logo.svg";
 import { API_SERVER_URL } from "../../config";
+import { authentication } from "../../api";
 
 type FormValues = {
   password: string | undefined;
@@ -42,7 +43,6 @@ const validate = function (values: FormValues) {
 };
 
 const UpdateTemporaryPassword: React.FC = () => {
-  const { authInfo } = useAuth()!;
   const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -73,19 +73,14 @@ const UpdateTemporaryPassword: React.FC = () => {
     const password = data.password;
     const password_confirmation = data.password_confirmation;
 
+    console.log("Opa");
+
+
+
     // Send phone request.
-    const response = await fetch(`${API_SERVER_URL}/api/user/update-password`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${authInfo.user.token}`,
-      },
-      body: JSON.stringify({
-        password,
-        password_confirmation,
-        email: authInfo.user.email,
-      }),
+    const response = await authentication.updateTempPassword({
+      password,
+      password_confirmation,
     });
 
     const json = await response.json();
@@ -120,32 +115,37 @@ const UpdateTemporaryPassword: React.FC = () => {
                 type="password"
                 required
                 placeholder="Nueva contraseña"
+                className="mb-6"
               />
               <input
                 {...register("password_confirmation")}
                 type="password"
                 required
                 placeholder="Repite tu nueva contraseña"
+                className="mb-6"
               />
-              <p className="mb-12 mt-4">
+
+              {/* <p className="mb-12 mt-4">
                 <a className="font-semibold text-primary-green text-sm underline mb-10">
-                  {" "}
                   Validación de password*
                 </a>
-              </p>
-              <button className="button is-primary">Cambiar contraseña</button>
+              </p> */}
+
+              <button className="button is-secondary">Cambiar contraseña</button>
             </form>
             <div className="border-bottom border-white" />
           </div>
         </div>
 
         <Loader isOpen={isSubmitting} />
-        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+
+        <Modal isOpen={isOpen}>
           <h3 className="font-semibold text-lg mb-5 text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.password?.message}</p>}
           {<p>{errors?.password_confirmation?.message}</p>}
+          <button className="button is-primary" onClick={() => setIsOpen(false)}>Aceptar</button>
         </Modal>
       </IonContent>
     </IonPage>

@@ -4,7 +4,7 @@ export class UnauthorizedError extends Error { }
 export class HttpError extends Error { }
 
 function getToken() {
-  const userString = localStorage.getItem("AUTH");
+  const userString = sessionStorage.getItem("AUTH");
   const user = JSON.parse(userString);
 
   return `Bearer ${user.token}`;
@@ -40,6 +40,31 @@ export const authentication = {
       },
       body: JSON.stringify({ name, last_name }),
     }),
+
+  updateTempPassword: async ({
+    password,
+    password_confirmation,
+  }) => await fetch(`${API_SERVER_URL}/api/user/update-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: getToken(),
+    },
+    body: JSON.stringify({
+      password,
+      password_confirmation,
+    }),
+  }),
+
+  forgotPassword: async ({ email }) => await fetch(`${API_SERVER_URL}/api/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({ email }),
+  }),
 };
 
 export const applications = {

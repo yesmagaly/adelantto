@@ -118,16 +118,12 @@
   @apply max-w-xs font-semibold leading-5;
 }
 
-.terms-label {
-  @apply font-bold leading-4 mb-3 text-xs;
+.prose-sm p {
+  @apply text-sm mb-4;
 }
 
-.terms-body {
-  @apply leading-[13px] text-xs mb-4;
-}
-
-.border-bottom {
-  @apply border-[3px] border-b w-[138px] my-0 mx-auto;
+.prose-sm h2 {
+  @apply text-base font-semibold mb-2 leading-tight;
 }
 
 .border-full {

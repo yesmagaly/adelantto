@@ -43,6 +43,8 @@ import Summary from "./pages/Summary";
 import Profile from "./pages/Profile";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -86,9 +88,7 @@ const App: React.FC = () => {
             <IonReactRouter>
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/welcome" component={Welcome} />
-              <Route exact path="/update-temporary-password"
-                render={() => authInfo.user?.is_verified ? <Welcome /> : <UpdateTemporaryPassword />}
-              />
+              <Route exact path="/update-temporary-password" component={UpdateTemporaryPassword} />
               <Route
                 exact
                 path="/advance-immediately"
@@ -125,13 +125,17 @@ const App: React.FC = () => {
             </IonReactRouter>
           ) : (
             <IonReactRouter>
+              <Route exact path="/start" component={Home} />
               <Route exact path="/create-account" component={Register} />
-              <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
               <Route path="/verification-code/:phone" component={VerificationCode} />
               <Route path="/verification-email/:phone" component={VerificationEmail} />
               <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
-              <Route exact path="/"><Redirect to="/login" /></Route>
+
+              <Route exact path="/forgot-password" component={ForgotPassword} />
+
+              <Route exact path="/"><Redirect to="/start" /></Route>
             </IonReactRouter>
           )}
         </>
