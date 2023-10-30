@@ -13,9 +13,13 @@ type FormValues = {
   phone: string | undefined;
 };
 
+const PHONE_FORMAT_10 = "+## (###) ###-####";
+const PHONE_FORMAT_9 = "+## (###) ###-####";
+
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
+
   const {
     control,
     handleSubmit,
@@ -57,7 +61,8 @@ const Register: React.FC = () => {
     }
 
     // Clean up phone number.
-    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
+    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "")
+      .replaceAll(" ", "");
 
     // Send phone request.
     const response = await fetch(
@@ -116,7 +121,7 @@ const Register: React.FC = () => {
                     className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format="+## (###) ###-####"
+                    format={PHONE_FORMAT_9}
                     allowEmptyFormatting
                     mask="_"
                     required
