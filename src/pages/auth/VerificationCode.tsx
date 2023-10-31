@@ -24,7 +24,7 @@ const COUNT_DOWN_TIME = 60 * 3;
 const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [countDown, setCountDown] = useState(0);
-  const [runTimer, setRunTimer] = useState(false);
+  const [runTimer, setRunTimer] = useState(true);
   const [isExpired, setIsExpired] = useState(false);
   const router = useIonRouter();
 
@@ -63,6 +63,8 @@ const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
 
 
   const onSubmit = async function (data: FormValues) {
+    setRunTimer(false);
+
     const code = data.code;
     const phone = match.params.phone;
 
@@ -79,7 +81,6 @@ const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
     const json = await response.json();
 
     if (json.status === "success") {
-      setRunTimer(true);
       router.push(`/verification-email/${phone}`);
     } else {
       // Show server errors.
@@ -118,11 +119,11 @@ const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
             />
 
             <div className="mb-24">
-              <p className="text-primary-green mb-4">
+              <p className="text-primary-green mt-1">
                 {minutes}:{seconds}
               </p>
-              {isExpired && <p className="text-red-500 mb-6">El código ha expirado.</p>}
-              <p className="help-text mb-4">
+              {isExpired && <p className="text-orange-500">El código ha expirado.</p>}
+              <p className="help-text mt-4 mb-4">
                 Si no recibiste el código, envíalo nuevamente desde{" "}
                 <a onClick={() => router.push('/register')} className="underline">
                   aquí
