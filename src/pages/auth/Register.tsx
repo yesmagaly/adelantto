@@ -13,7 +13,7 @@ type FormValues = {
   phone: string | undefined;
 };
 
-const PHONE_FORMAT_10 = "+## (###) ###-####";
+const PHONE_FORMAT_10 = "+57 (###) ###-####";
 const PHONE_FORMAT_9 = "+## (###) ###-###";
 
 const Register: React.FC = () => {
@@ -119,7 +119,7 @@ const Register: React.FC = () => {
                     className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format={PHONE_FORMAT_9}
+                    format={PHONE_FORMAT_10}
                     allowEmptyFormatting
                     mask="_"
                     required
