@@ -43,9 +43,8 @@ const ForgotPassword: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--green">
-          <div className="heading__pager text-right">Paso 1 de 4</div>
           <h1 className="heading__title">
-            Recuperar <strong>Contrasena</strong>
+            Recuperar <strong>contraseña</strong>
           </h1>
         </div>
 
@@ -63,7 +62,7 @@ const ForgotPassword: React.FC = () => {
             </div>
 
             <p className="help-text mb-28">
-              Enviaremos una password temporal a su correo electronico.
+              Enviaremos una contraseña temporal a su correo electrónico.
             </p>
 
             <button className="button is-primary">Enviar</button>
@@ -75,8 +74,8 @@ const ForgotPassword: React.FC = () => {
           <h3 className="font-semibold text-lg mb-5 text-center">
             Success
           </h3>
-          <p>Su password temporal fue enviado a correo electronico.</p>
-          <button onClick={() => router.push(`/login`)}>
+          <p>Su contraseña temporal fue enviada a correo electrónico.</p>
+          <button className="button is-primary" onClick={() => router.push(`/login`)}>
             Continuar
           </button>
         </Modal>
@@ -88,7 +87,7 @@ const ForgotPassword: React.FC = () => {
 
           {errors?.email && <p>{errors?.email?.message}</p>}
 
-          <button onClick={() => setErrorModal(false)}>
+          <button className="button is-primary" onClick={() => setErrorModal(false)}>
             Cerrar
           </button>
         </Modal>

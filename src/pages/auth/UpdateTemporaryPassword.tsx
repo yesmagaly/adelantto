@@ -73,10 +73,6 @@ const UpdateTemporaryPassword: React.FC = () => {
     const password = data.password;
     const password_confirmation = data.password_confirmation;
 
-    console.log("Opa");
-
-
-
     // Send phone request.
     const response = await authentication.updateTempPassword({
       password,

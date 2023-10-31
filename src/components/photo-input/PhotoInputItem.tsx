@@ -88,7 +88,7 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
         <div className="my-4 basis-full leading-3">{props?.children}</div>
       </div>
 
-      <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+      <Modal isOpen={isOpen}>
         <div className="p-2 flex items-center justify-center bg-slate-200 rounded text-slate-800 text-center h-52">
           {photoUrl && <img src={photoUrl}></img>}
           {!loading && !value?.id && (

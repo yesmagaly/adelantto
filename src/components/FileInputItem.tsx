@@ -75,7 +75,7 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
         </div>
       </div>
 
-      <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+      <Modal isOpen={isOpen}>
         <Lottie
           animationData={documentsAnimation}
           style={{ width: '100%', height: 180 }}

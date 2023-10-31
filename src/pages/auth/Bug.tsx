@@ -33,8 +33,6 @@ const Bug: React.FC = () => {
           >
             Enviar código
           </button>
-
-          <div className="border-bottom border-primary-blue" />
         </div>
       </IonContent>
     </IonPage>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
@@ -12,14 +12,20 @@ import { API_SERVER_URL } from "../../config";
 interface VerificationCodeProps
   extends RouteComponentProps<{
     phone: string;
-  }> {}
+  }> { }
 
 type FormValues = {
   code: number;
 };
 
-const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
+// 3 Minutes
+const COUNT_DOWN_TIME = 60 * 3;
+
+const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [countDown, setCountDown] = useState(0);
+  const [runTimer, setRunTimer] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
   const router = useIonRouter();
 
   const {
@@ -28,6 +34,33 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
     setError,
     formState: { isSubmitting, errors },
   } = useForm();
+
+  useEffect(() => {
+    let timerId;
+
+    if (runTimer) {
+      setCountDown(COUNT_DOWN_TIME);
+      timerId = setInterval(() => {
+        setCountDown((countDown) => countDown - 1);
+      }, 1000);
+    } else {
+      clearInterval(timerId);
+    }
+
+    return () => clearInterval(timerId);
+  }, [runTimer]);
+
+  useEffect(() => {
+    if (countDown < 0 && runTimer) {
+      setIsExpired(true);
+      setRunTimer(false);
+      setCountDown(0);
+    }
+  }, [countDown, runTimer]);
+
+  const seconds = String(countDown % 60).padStart(2, 0);
+  const minutes = String(Math.floor(countDown / 60)).padStart(2, 0);
+
 
   const onSubmit = async function (data: FormValues) {
     const code = data.code;
@@ -46,6 +79,7 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
     const json = await response.json();
 
     if (json.status === "success") {
+      setRunTimer(true);
       router.push(`/verification-email/${phone}`);
     } else {
       // Show server errors.
@@ -84,14 +118,13 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
             />
 
             <div className="mb-24">
-              <p className="text-primary-green mb-4">03:00</p>
+              <p className="text-primary-green mb-4">
+                {minutes}:{seconds}
+              </p>
+              {isExpired && <p className="text-red-500 mb-6">El código ha expirado.</p>}
               <p className="help-text mb-4">
                 Si no recibiste el código, envíalo nuevamente desde{" "}
-                <a
-                  href="#"
-                  onClick={() => router.goBack()}
-                  className="underline"
-                >
+                <a onClick={() => router.push('/register')} className="underline">
                   aquí
                 </a>
               </p>
@@ -99,17 +132,19 @@ const VerificationCode: React.FC<VerificationCodeProps> = ({ match }) => {
 
             <button className="button is-primary">Enviar código</button>
           </form>
-
-          <div className="border-bottom border-primary-blue" />
         </div>
 
         <Loader isOpen={isSubmitting} />
 
-        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
+        <Modal isOpen={isOpen}>
           <h3 className="font-semibold text-lg mb-5 text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.code?.message}</p>}
+
+          <button className="button is-primary" onClick={() => setIsOpen(false)}>
+            Aceptar
+          </button>
         </Modal>
       </IonContent>
     </IonPage>

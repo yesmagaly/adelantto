@@ -14,7 +14,7 @@ type FormValues = {
 };
 
 const PHONE_FORMAT_10 = "+## (###) ###-####";
-const PHONE_FORMAT_9 = "+## (###) ###-####";
+const PHONE_FORMAT_9 = "+## (###) ###-###";
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,16 +66,14 @@ const Register: React.FC = () => {
 
     // Send phone request.
     const response = await fetch(
-      `${API_SERVER_URL}/api/send-verification-code`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ phone }),
-      }
-    );
+      `${API_SERVER_URL}/api/send-verification-code`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ phone }),
+    });
 
     const json = await response.json();
 
@@ -143,11 +141,15 @@ const Register: React.FC = () => {
         </div>
 
         <Loader isOpen={isSubmitting} />
-        <Modal handleClose={() => setIsOpen(false)} isOpen={isOpen}>
-          <h3 className="font-semibold text-lg mb-5 text-center">
+
+        <Modal isOpen={isOpen}>
+          <h3 className="font-semibold text-lg text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.phone?.message}</p>}
+          <button className="button is-primary" onClick={() => setIsOpen(false)}>
+            Aceptar
+          </button>
         </Modal>
       </IonContent>
     </IonPage>
