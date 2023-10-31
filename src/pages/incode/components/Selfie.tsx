@@ -124,9 +124,8 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
               <div
-                className={`income-photo ${
-                  status === REJECTED_STATUS ? "is-danger" : ""
-                } ${status === APPROVED_STATUS ? "is-success" : ""}`}
+                className={`income-photo ${status === REJECTED_STATUS ? "is-danger" : ""
+                  } ${status === APPROVED_STATUS ? "is-success" : ""}`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
@@ -148,7 +147,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
               {status === REJECTED_STATUS && (
                 <>
                   <p className="message is-danger text-center">
-                    Fallo la verificación del reverso de tu identificación.
+                    Fallo la verificación su biométrica.
                     <span>({error})</span>
                   </p>
                   <button onClick={tryAgain} className="button">
@@ -165,9 +164,8 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Header>
             <Modal.Body className="flex items-center">
               <div
-                className={`income-photo ${
-                  status === REJECTED_STATUS ? "is-danger" : ""
-                }`}
+                className={`income-photo ${status === REJECTED_STATUS ? "is-danger" : ""
+                  }`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}

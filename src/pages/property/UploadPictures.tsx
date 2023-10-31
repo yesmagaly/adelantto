@@ -24,7 +24,7 @@ const UploadPictures: React.FC = ({ match }) => {
     if (response.status === 200) {
       router.push(`/applications/${match.params.id}/privacy-policy`);
     }
-  };
+  }
 
   return (
     <IonPage>
@@ -66,7 +66,7 @@ const UploadPictures: React.FC = ({ match }) => {
           </div>
 
           <div className="text-center mb-7">
-            <p className="font-semibold text-[10px] leading-3 mb-4">
+            <p className="font-semibold text-xs leading-3 mb-4">
               Los documentos deberán ser escaneados en alta resolución <br /> y
               en formato PDF, de lo contrario declinaremos el proceso.
             </p>

@@ -74,7 +74,7 @@ const ForgotPassword: React.FC = () => {
           <h3 className="font-semibold text-lg mb-5 text-center">
             Success
           </h3>
-          <p>Su contraseña temporal fue enviada a correo electrónico.</p>
+          <p>Una contraseña temporal fue enviada a su correo electrónico.</p>
           <button className="button is-primary" onClick={() => router.push(`/login`)}>
             Continuar
           </button>

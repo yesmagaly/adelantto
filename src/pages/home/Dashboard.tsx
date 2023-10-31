@@ -90,6 +90,7 @@ const Dashboard: React.FC = () => {
                   {item.status === "approved" && item?.loan_agreement && (
                     <p>
                       {item.loan_agreement.status === 'awaiting_account_statement_check' && 'Your account statement is awaiting for review.'}
+                      {item.loan_agreement.status === 'awaiting_client_signature' && 'We are waiting for you to sign the contract. Please check your email.'}
                     </p>
                   )}
 
