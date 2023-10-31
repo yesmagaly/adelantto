@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Grupo_44"
+   data-name="Grupo 44"
+   width="251"
+   height="251"
+   viewBox="0 0 251 251"
+   version="1.1"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview155"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.4324169"
+     inkscape:cx="138.33977"
+     inkscape:cy="142.86202"
+     inkscape:window-width="1872"
+     inkscape:window-height="1016"
+     inkscape:window-x="48"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Grupo_44"
+     showguides="true">
+    <sodipodi:guide
+       position="140.46063,102.16951"
+       orientation="1,0"
+       id="guide417"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="246.52797,123.54743"
+       orientation="0,-1"
+       id="guide419"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs150">
+    <clipPath
+       id="clip-path">
+      <rect
+         id="Rectángulo_43"
+         data-name="Rectángulo 43"
+         width="177.963"
+         height="219.23399"
+         fill="none"
+         x="0"
+         y="0" />
+    </clipPath>
+  </defs>
+  <g
+     id="Grupo_43"
+     data-name="Grupo 43"
+     clip-path="url(#clip-path)"
+     transform="translate(34.494147,41.941129)">
+    <path
+       id="Trazado_69"
+       data-name="Trazado 69"
+       d="m 94.551,103.326 -39.594,63.36 -0.05,0.089 v 0 a 21.319,21.319 0 0 1 -29.241,6.686 l -0.088,-0.052 v 0 0 a 21.321,21.321 0 0 1 -6.687,-29.242 l 0.866,-1.387 a 26.083,26.083 0 0 0 2.687,2.028 3.342,3.342 0 0 0 0.3,0.217 v 0 0 c 0.1,0.066 0.2,0.125 0.3,0.185 l 0.087,0.049 q 0.94,0.578 1.912,1.069 l -0.753,1.2 a 14.947,14.947 0 0 0 4.73,20.53 l 0.087,0.049 v 0 0 a 14.952,14.952 0 0 0 20.442,-4.782 l 0.05,-0.089 v 0 0 l 42.242,-67.6 2.7,-4.323 2.7,4.323 42.087,67.355 0.207,0.333 a 14.951,14.951 0 0 0 20.518,4.735 l 0.013,-0.007 a 14.947,14.947 0 0 0 4.73,-20.53 L 107.323,55.53 a 14.734,14.734 0 0 0 -5.377,-5.1 15.122,15.122 0 0 0 -7.275,-1.889 h -0.009 v 0.012 H 94.438 V 48.541 H 94.43 a 15.111,15.111 0 0 0 -7.275,1.889 14.738,14.738 0 0 0 -5.379,5.1 l -47.865,76.6 a 9.986,9.986 0 0 1 -1.969,-0.894 v 0 0 l -0.107,-0.064 c -0.063,-0.038 -0.126,-0.078 -0.192,-0.114 l -0.059,-0.035 a 9.618,9.618 0 0 1 -2.626,-2.506 l -0.15,-0.22 47.566,-76.129 a 21.125,21.125 0 0 1 7.719,-7.315 21.471,21.471 0 0 1 10.2,-2.659 v 0 H 94.3 l 0.136,-0.014 h 0.224 l 0.138,0.014 h 0.007 v 0 a 21.469,21.469 0 0 1 10.2,2.659 21.129,21.129 0 0 1 7.721,7.315 l 57.483,92 a 21.321,21.321 0 0 1 -6.425,29.073 l -0.016,0.012 -0.332,0.21 a 21.32,21.32 0 0 1 -29.074,-6.426 l -0.013,-0.015 -0.207,-0.332 z"
+       transform="translate(-3.55,-9.551)"
+       fill="#081b3d" />
+    <path
+       id="Trazado_70"
+       data-name="Trazado 70"
+       d="m 94.551,61.146 -39.594,63.359 -0.05,0.089 v 0 a 21.321,21.321 0 0 1 -29.241,6.686 l -0.088,-0.05 v 0 0 A 21.321,21.321 0 0 1 18.891,101.988 L 76.374,9.989 a 21.125,21.125 0 0 1 7.719,-7.315 21.482,21.482 0 0 1 10.2,-2.661 H 94.3 L 94.439,0 h 0.224 L 94.8,0.013 h 0.007 a 21.479,21.479 0 0 1 10.2,2.661 21.129,21.129 0 0 1 7.721,7.315 l 57.483,91.995 a 21.171,21.171 0 0 1 2.66,16.031 21.415,21.415 0 0 1 -2.825,6.729 l -3.93,-6.292 a 15.156,15.156 0 0 0 0.555,-1.855 14.872,14.872 0 0 0 -1.864,-11.251 L 107.323,13.351 a 14.721,14.721 0 0 0 -5.377,-5.1 15.131,15.131 0 0 0 -7.275,-1.889 H 94.662 V 6.374 H 94.438 V 6.363 H 94.43 a 15.119,15.119 0 0 0 -7.275,1.889 14.725,14.725 0 0 0 -5.379,5.1 l -57.483,91.994 a 14.945,14.945 0 0 0 4.73,20.529 l 0.087,0.052 v 0 0 a 14.94,14.94 0 0 0 20.442,-4.783 l 0.05,-0.086 v 0 0 L 91.85,53.46 l 2.7,-4.325 2.7,4.325 42.087,67.351 0.207,0.335 a 14.867,14.867 0 0 0 9.278,6.6 15.343,15.343 0 0 0 3.823,0.381 l 3.726,5.962 a 21.372,21.372 0 0 1 -22.01,-9.232 l -0.013,-0.014 -0.207,-0.334 z"
+       transform="translate(-3.55)"
+       fill="#00c997" />
+  </g>
+</svg>
