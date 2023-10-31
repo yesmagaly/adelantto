@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'adelantto',
+  appId: 'com.adelantto.app',
+  appName: 'Adelantto',
   webDir: 'dist',
   server: {
     androidScheme: 'https'
