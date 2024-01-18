@@ -67,7 +67,7 @@ const Login: React.FC<LoginProps> = () => {
                 type="password"
                 placeholder="Password"
                 required
-                maxLength={8}
+                maxLength={20}
                 {...register("password")}
               />
             </div>
