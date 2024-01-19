@@ -29,7 +29,7 @@ const CorrectData: React.FC = ({ match }) => {
           <div className="text-center">
             <button
               className="button is-secondary mb-20"
-              onClick={() => router.push(`/applications/${match.params.id}/account-statement`)}
+              onClick={() => router.push(`/loans/${match.params.id}/account-statement`)}
             >
               Datos bancarios
             </button>

@@ -8,6 +8,7 @@ export const ACCEPT_PRIVACY_POLICY_STEP = 'accept_privacy_policy';
 export const ACCEPT_POLICY_NOTIFICATIONS_STEP = 'accept_policy_notifications';
 
 interface Application {
+  id: string,
   status: string,
   step: string
 }

@@ -196,7 +196,7 @@ export const applications = {
 
   accountStatement: async (id: number, body = {}) =>
     await fetch(
-      `${API_SERVER_URL}/api/applications/${id}/account-statement`,
+      `${API_SERVER_URL}/api/loans/${id}/account-statement`,
       {
         method: "POST",
         headers: {
@@ -220,17 +220,27 @@ export const loanContracts = {
   },
 };
 
-export const loanAgreements = {
-  get: async () => {
-    return fetch(`${API_SERVER_URL}/api/loan-agreements`, {
+export const loans = {
+  list: async () => {
+    return fetch(`${API_SERVER_URL}/api/loans`, {
       headers: {
         Authorization: getToken(),
         Accept: "application/json",
       },
     });
   },
+
+  get: async (id: number) =>
+    await fetch(`${API_SERVER_URL}/api/loans/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getToken(),
+        Accept: "application/json",
+      },
+    }),
+
   create: async ({ body }) => {
-    return fetch(`${API_SERVER_URL}/api/loan-agreements`, {
+    return fetch(`${API_SERVER_URL}/api/loans`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

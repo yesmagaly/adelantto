@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
-import { calculator, loanContracts } from "../../api";
+import { calculator, applications } from "../../api";
 
 import * as Page from "../../components/page";
-import { formatCurrency } from "../../utils";
-import { loanAgreements, applications } from "../../api";
+import { formatCurrency } from "@adelantto/utils";
 
 interface PreOfferProps
   extends RouteComponentProps<{

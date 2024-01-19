@@ -39,11 +39,13 @@ import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
-import Summary from "./pages/Summary";
+// import Summary from "./pages/Summary";
 import Profile from "./pages/Profile";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+
+import Summary from "./pages/loan/Summary";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -105,9 +107,10 @@ const App: React.FC = () => {
               <Route exact path="/applications/:id/privacy-policy" component={ConfirmationData} />
               <Route exact path="/applications/:id/policy-notifications" component={DataValidation} />
 
-              <Route exact path="/applications/:id/success" component={CorrectData} />
-              <Route exact path="/applications/:id/account-statement" component={Withdrawals} />
-
+              <Route exact path="/loans/:id/success" component={CorrectData} />
+              <Route exact path="/loans/:id/account-statement" component={Withdrawals} />
+              <Route exact path="/loans/:id/disbursement" component={Outlay} />
+              <Route exact path="/loans/:id" component={Summary} />
 
               <Route exact path="/bug" component={Bug} />
               <Route exact path="/search" component={Search} />

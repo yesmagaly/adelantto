@@ -1,18 +1,22 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useState, useEffect } from "react";
 
+import * as api from "../../api";
 import * as Page from "../../components/page";
 import * as Modal from "../../components/modal";
 
+import TotalCard from "../../components/TotalCard";
+import LoanCard from "../../components/LoanCard"
+import ApplicationCard from "../../components/ApplicationCard"
+
 import { UnauthorizedError, applications } from "../../api";
-import { nextStepUrl } from "../../utils/steps";
-import { formatCurrency } from "../../utils";
 import { useAuth } from "../auth/authContext";
 
 const Dashboard: React.FC = () => {
   const { logOut } = useAuth()!;
   const router = useIonRouter();
   const [items, setItems] = useState([]);
+  const [loans, setLoans] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -35,68 +39,46 @@ const Dashboard: React.FC = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.loans.list();
+        const data = await response.json();
+
+        setLoans(data);
+      } catch (error) {
+        if (error instanceof UnauthorizedError) {
+          setError(error.message);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <IonPage>
       <IonContent fullscreen>
         <Page.Root>
-          <Page.Header className="px-6 py-8">
-            <h2 className="heading-3 !mb-0">Dahsboard</h2>
+          <Page.Header className="px-6 pt-8">
+            <h1 className="heading-3">
+              ¡Hola, <br />
+              <strong>Alexander Cruz!</strong>
+            </h1>
           </Page.Header>
           <Page.Body>
-            <div className="flex gap-2 flex-col">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="border rounded-md border-solid border-gray-300 p-4"
-                >
-                  {item.status === "uncompleted" && (
-                    <>
-                      <div className="text-sm">Renta mensual:</div>
-                      <h3 className="text-xl heading-5 mb-2">
-                        {formatCurrency(item.lease_monthly_income)}
-                      </h3>
+            {loans.length === 0  && (
+              <div className="flex gap-2 flex-col">
+                {items.filter(item => item.status === 'awaiting_validation').map((item) => <ApplicationCard item={item} className="mb-4" />)}
+              </div>
+            )}
 
-                      <button
-                        className="button is-small !py-2"
-                        onClick={() => router.push(nextStepUrl(item))}
-                      >
-                        Continuar
-                      </button>
-                    </>
-                  )}
-
-                  {item.status !== "uncompleted" && (
-                    <>
-                      <div className="text-sm">Adelanto:</div>
-                      <h3 className="text-xl heading-5">
-                        {formatCurrency(item.pre_offer_amount)}
-                      </h3>
-                      <div className="text-base mb-4">
-                        x {item.pre_offer_term_frame} meses
-                      </div>
-                      <div>{item.status !== 'approved' && item.status}</div>
-                    </>
-                  )}
-
-                  {item.status === "approved" && !item?.loan_agreement && (
-                    <button
-                      className="button is-small !py-2"
-                      onClick={() => router.push(`/applications/${item.id}/success`)}
-                    >
-                      Continuar
-                    </button>
-                  )}
-
-                  {item.status === "approved" && item?.loan_agreement && (
-                    <p>
-                      {item.loan_agreement.status === 'awaiting_account_statement_check' && 'Your account statement is awaiting for review.'}
-                      {item.loan_agreement.status === 'awaiting_client_signature' && 'We are waiting for you to sign the contract. Please check your email.'}
-                    </p>
-                  )}
-
-                </div>
-              ))}
-            </div>
+            {loans.length > 0 && (
+              <>
+                <TotalCard amount={loans.reduce((acc, loan) => acc + loan.amount, 0)} />
+                {loans.map(loan => <LoanCard key={loan.id} url={`/loans/${loan.id}`} {...loan} />)}
+              </>
+            )}
           </Page.Body>
         </Page.Root>
 
