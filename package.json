@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "workspaces": [
+    "./packages/*",
+    "./packages/utils/*"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
