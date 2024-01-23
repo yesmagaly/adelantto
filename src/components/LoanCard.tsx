@@ -1,8 +1,14 @@
 import { useIonRouter } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils";
 import masterCardIcon from "../assets/icons/master-card.png";
+import { LoanType } from "../types";
 
-export default function LoanCard({ amount, url, status, application, id }) {
+
+interface ComponentProps extends LoanType {
+  url: string
+}
+
+export default function LoanCard({ amount, url, status, application, id }: ComponentProps) {
   const router = useIonRouter();
   const showMore = () => router.push(url);
 

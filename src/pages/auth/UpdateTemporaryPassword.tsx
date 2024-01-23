@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
@@ -10,12 +10,12 @@ import { API_SERVER_URL } from "../../config";
 import { authentication } from "../../api";
 
 type FormValues = {
-  password: string | undefined;
-  password_confirmation: string | undefined;
+  password: string;
+  password_confirmation: string;
 };
 
 const validate = function (values: FormValues) {
-  const errors = {};
+  const errors = {} as FieldErrors;
 
   if (!values.password) {
     errors.password = {
@@ -53,12 +53,12 @@ const UpdateTemporaryPassword: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = async function (data: FormValues) {
+  const onSubmit = async function (data: any) {
     // Make validaions.
     const errors = validate(data);
 
     // Show phone errors.
-    if (errors.password) {
+    if (errors?.password) {
       setError("password", errors.password);
       setIsOpen(true);
       return;
@@ -127,7 +127,9 @@ const UpdateTemporaryPassword: React.FC = () => {
                 </a>
               </p> */}
 
-              <button className="button is-secondary">Cambiar contraseña</button>
+              <button className="button is-secondary">
+                Cambiar contraseña
+              </button>
             </form>
             <div className="border-bottom border-white" />
           </div>
@@ -141,7 +143,12 @@ const UpdateTemporaryPassword: React.FC = () => {
           </h3>
           {<p>{errors?.password?.message}</p>}
           {<p>{errors?.password_confirmation?.message}</p>}
-          <button className="button is-primary" onClick={() => setIsOpen(false)}>Aceptar</button>
+          <button
+            className="button is-primary"
+            onClick={() => setIsOpen(false)}
+          >
+            Aceptar
+          </button>
         </Modal>
       </IonContent>
     </IonPage>

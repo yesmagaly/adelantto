@@ -1,10 +1,10 @@
 import { API_SERVER_URL } from "./config";
 
-export class UnauthorizedError extends Error { }
-export class HttpError extends Error { }
+export class UnauthorizedError extends Error {}
+export class HttpError extends Error {}
 
 function getToken() {
-  const userString = sessionStorage.getItem("AUTH");
+  const userString = sessionStorage.getItem("AUTH") ?? "{}";
   const user = JSON.parse(userString);
 
   return `Bearer ${user.token}`;
@@ -20,7 +20,7 @@ export const authentication = {
       },
     }),
 
-  login: async ({ email, password }) =>
+  login: async ({ email, password }: { email: string; password: string }) =>
     await fetch(`${API_SERVER_URL}/api/login`, {
       method: "POST",
       headers: {
@@ -30,7 +30,7 @@ export const authentication = {
       body: JSON.stringify({ email, password }),
     }),
 
-  updateProfile: async ({ name, last_name }) =>
+  updateProfile: async ({ name, last_name }: { name: string, last_name: string }) =>
     await fetch(`${API_SERVER_URL}/api/user/update-profile`, {
       method: "PUT",
       headers: {
@@ -41,30 +41,29 @@ export const authentication = {
       body: JSON.stringify({ name, last_name }),
     }),
 
-  updateTempPassword: async ({
-    password,
-    password_confirmation,
-  }) => await fetch(`${API_SERVER_URL}/api/user/update-password`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: getToken(),
-    },
-    body: JSON.stringify({
-      password,
-      password_confirmation,
+  updateTempPassword: async ({ password, password_confirmation }: { password: string, password_confirmation: string }) =>
+    await fetch(`${API_SERVER_URL}/api/user/update-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: getToken(),
+      },
+      body: JSON.stringify({
+        password,
+        password_confirmation,
+      }),
     }),
-  }),
 
-  forgotPassword: async ({ email }) => await fetch(`${API_SERVER_URL}/api/forgot-password`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({ email }),
-  }),
+  forgotPassword: async ({ email }: { email: string }) =>
+    await fetch(`${API_SERVER_URL}/api/forgot-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ email }),
+    }),
 };
 
 export const applications = {
@@ -79,7 +78,7 @@ export const applications = {
           Accept: "application/json",
         },
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new HttpError("HTTP: Something went wrong.");
     }
 
@@ -94,7 +93,7 @@ export const applications = {
     }
   },
 
-  get: async (id: number) =>
+  get: async (id: string) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -114,7 +113,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  desiredLoan: async (id: number, body = {}) =>
+  desiredLoan: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/desired-loan`, {
       method: "PUT",
       headers: {
@@ -125,7 +124,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  preOffer: async (id: number, body = {}) =>
+  preOffer: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/pre-offer`, {
       method: "PUT",
       headers: {
@@ -136,7 +135,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  identityCheck: async (id: number, body = {}) =>
+  identityCheck: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/identity-check`, {
       method: "PUT",
       headers: {
@@ -147,7 +146,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  propertyDocuments: async (id: number, body = {}) =>
+  propertyDocuments: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/property-documents`, {
       method: "PUT",
       headers: {
@@ -158,7 +157,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  propertyPictures: async (id: number, body = {}) =>
+  propertyPictures: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/property-pictures`, {
       method: "PUT",
       headers: {
@@ -169,7 +168,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  privacyPolicy: async (id: number, body = {}) =>
+  privacyPolicy: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/privacy-policy`, {
       method: "PUT",
       headers: {
@@ -180,7 +179,7 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  policyNotifications: async (id: number, body = {}) =>
+  policyNotifications: async (id: string, body = {}) =>
     await fetch(
       `${API_SERVER_URL}/api/applications/${id}/policy-notifications`,
       {
@@ -194,23 +193,20 @@ export const applications = {
       }
     ),
 
-  accountStatement: async (id: number, body = {}) =>
-    await fetch(
-      `${API_SERVER_URL}/api/loans/${id}/account-statement`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: getToken(),
-          Accept: "application/json",
-        },
-        body: JSON.stringify(body),
-      }
-    ),
+  accountStatement: async (id: string, body = {}) =>
+    await fetch(`${API_SERVER_URL}/api/loans/${id}/account-statement`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getToken(),
+        Accept: "application/json",
+      },
+      body: JSON.stringify(body),
+    }),
 };
 
 export const loanContracts = {
-  load: async ({ id }) => {
+  load: async ({ id }: { id: string }) => {
     return fetch(`${API_SERVER_URL}/api/leasing-contracts/${id}`, {
       headers: {
         Authorization: getToken(),
@@ -239,7 +235,7 @@ export const loans = {
       },
     }),
 
-  create: async ({ body }) => {
+  create: async ({ body }: { body: object }) => {
     return fetch(`${API_SERVER_URL}/api/loans`, {
       method: "POST",
       headers: {
@@ -253,7 +249,7 @@ export const loans = {
 };
 
 export const properties = {
-  update: ({ id, body }) => {
+  update: ({ id, body }: { id: string, body: string }) => {
     return fetch(`${API_SERVER_URL}/api/properties/${id}`, {
       method: "PUT",
       headers: {
@@ -267,7 +263,7 @@ export const properties = {
 };
 
 export const calculator = {
-  calc: async ({ principal, months }) => {
+  calc: async ({ principal, months }: { principal: number, months: number }) => {
     return fetch(
       `${API_SERVER_URL}/api/calc?principal=${principal}&months=${months}`,
       {

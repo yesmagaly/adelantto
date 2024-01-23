@@ -30,7 +30,7 @@ const Passport: React.FC = ({ match }) => {
           const session = await initSession();
           localStorage.setItem("incode_session", JSON.stringify(session));
           setSession(session);
-        } catch (error) {
+        } catch (error: any) {
           alert(error);
         }
       }
@@ -39,7 +39,7 @@ const Passport: React.FC = ({ match }) => {
     syncSession();
   }, []);
 
-  const successFrontCallback = async (data) => {
+  const successFrontCallback = async (data: any) => {
     if (data.skipBackIdCapture) {
       setStep(2);
     } else {

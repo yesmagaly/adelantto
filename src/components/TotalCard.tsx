@@ -1,9 +1,12 @@
 import { useIonRouter } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils"
 
-export default function TotalCard({ amount, url }) {
+interface ComponentProps {
+  amount: number;
+}
+
+export default function TotalCard({ amount }: ComponentProps) {
   const router = useIonRouter();
-  const showMore = () => router.push(url)
 
   return (
     <div className="heading heading--blue heading--compact">

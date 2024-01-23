@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { Camera, CameraResultType, CameraSource, Photo } from "@capacitor/camera";
 
 import * as Modal from "../../../components/modal";
 import {
@@ -25,7 +25,7 @@ const flushPromise = () =>
   });
 
 export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState<Photo | null>();
   const [error, setError] = useState(null);
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState<null | string>();
@@ -50,7 +50,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
     try {
       const data = await addFrontId({
         session,
-        body: { base64Image: photo.base64String },
+        body: { base64Image: photo?.base64String },
       });
 
       if (data.skipBackIdCapture) {
@@ -62,7 +62,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
       await flushPromise();
 
       props.onSuccess(data);
-    } catch (error) {
+    } catch (error: any) {
       setStatus(REJECTED_STATUS);
       setError(error?.message);
     }

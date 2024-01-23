@@ -2,8 +2,13 @@ import { useIonRouter } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils"
 import { useState } from "react";
 import * as Modal from "../components/modal";
+import { InstallmentType } from "../types";
 
-export default function InstallmentCard({ index, amount, status, due_date }) {
+interface ComponentProps extends InstallmentType {
+  index: number;
+}
+
+export default function InstallmentCard({ index, amount, status, due_date }: ComponentProps) {
   const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,6 +1,12 @@
 import "./styles.css";
 
-export function Root({ className = "", variant, ...props }) {
+interface ComponentProps {
+  variant: string;
+  className: string;
+  children: string | JSX.Element | JSX.Element[]
+}
+
+export function Root({ className = "", variant = "", ...props }) {
   return <div className={`page is-${variant} ${className}`} {...props} />;
 }
 

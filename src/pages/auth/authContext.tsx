@@ -12,21 +12,18 @@ type MyContextInterface = {
   authInfo: UserDataInterface;
   initialize: () => Promise<boolean>;
   logOut: () => Promise<boolean>;
-  logIn: () => Promise<boolean>;
+  logIn: (email: string, password: string) => Promise<any>;
 };
 
-// create the context
 export const AuthContext = React.createContext<MyContextInterface | undefined>(
   undefined
 );
 
-// create the context provider, we are using use state to ensure that
-// we get reactive values from the context...
-type Props = {
-  children: React.ReactNode;
+interface ComponentProps {
+  children: string | JSX.Element | JSX.Element[]
 };
 
-export const AuthProvider: React.FC = (props: any) => {
+export const AuthProvider = (props: ComponentProps) => {
   // the reactive values
   const [authInfo, setAuthInfo] = React.useState<UserDataInterface>();
 

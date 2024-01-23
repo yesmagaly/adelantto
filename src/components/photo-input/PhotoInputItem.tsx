@@ -28,7 +28,7 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
       quality: 100
     });
 
-    if (photo.webPath) {
+    if (photo?.webPath) {
       const fileName = `${new Date().getTime()}.${photo.format}`;
 
       setPhotoUrl(photo.webPath);
@@ -55,7 +55,7 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
         } else {
           setError({ message: data.message })
         }
-      } catch (errorFetch) {
+      } catch (errorFetch: any) {
         setError({ message: errorFetch?.message })
       }
 

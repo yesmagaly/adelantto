@@ -59,7 +59,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
       await flushPromise();
 
       props.onSuccess(data);
-    } catch (error) {
+    } catch (error: any) {
       setStatus(REJECTED_STATUS);
       setError(error?.message);
     }

@@ -11,12 +11,13 @@ import ApplicationCard from "../../components/ApplicationCard"
 
 import { UnauthorizedError, applications } from "../../api";
 import { useAuth } from "../auth/authContext";
+import { ApplicationType, LoanType } from "../../types";
 
 const Dashboard: React.FC = () => {
   const { logOut } = useAuth()!;
   const router = useIonRouter();
-  const [items, setItems] = useState([]);
-  const [loans, setLoans] = useState([]);
+  const [items, setItems] = useState<Array<ApplicationType>>([]);
+  const [loans, setLoans] = useState<Array<LoanType>>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const Dashboard: React.FC = () => {
         }
 
         setItems(data);
-      } catch (error) {
+      } catch (error: any) {
         if (error instanceof UnauthorizedError) {
           setError(error.message);
         }
@@ -46,7 +47,7 @@ const Dashboard: React.FC = () => {
         const data = await response.json();
 
         setLoans(data);
-      } catch (error) {
+      } catch (error: any) {
         if (error instanceof UnauthorizedError) {
           setError(error.message);
         }

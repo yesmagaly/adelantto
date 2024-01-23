@@ -11,14 +11,15 @@ function removeNumericFormat(value: string) {
   return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
 }
 
-function addMonths(date, months) {
+function addMonths(date: any, months: number) {
   date.setMonth(date.getMonth() + months);
 
   return date;
 }
 
 function parseDate(str: string) {
-  const [year, month, day] = str.split("-");
+  const [year, month, day] = str.split("-").map(i => Number.parseInt(i));
+  
   return new Date(+year, month - 1, +day);
 }
 
@@ -44,7 +45,7 @@ const LeaseContract: React.FC = () => {
     control,
   } = useForm();
 
-  const onSubmit = async ({ lease_monthly_income, ...data }) => {
+  const onSubmit = async ({ lease_monthly_income, ...data }: any) => {
     // Validate minimum period of contract time
     if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
       return setError("lease_end_date", {
@@ -126,7 +127,7 @@ const LeaseContract: React.FC = () => {
 
                 {errors?.lease_end_date && (
                   <div className="description is-danger">
-                    {errors?.lease_end_date?.message}
+                    {errors.lease_end_date?.message}
                   </div>
                 )}
               </div>

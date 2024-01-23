@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldErrors } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
@@ -10,7 +10,7 @@ import registerAnimation from "../../assets/animations/register.json";
 import { API_SERVER_URL } from "../../config";
 
 type FormValues = {
-  phone: string | undefined;
+  phone: string;
 };
 
 const PHONE_FORMAT_10 = "+57 (###) ###-####";
@@ -28,7 +28,7 @@ const Register: React.FC = () => {
   } = useForm();
 
   const validate = function (values: FormValues) {
-    const errors = {};
+    const errors = {} as FieldErrors;
 
     if (!values.phone) {
       errors.phone = {
@@ -49,7 +49,7 @@ const Register: React.FC = () => {
     return errors;
   };
 
-  const onSubmit = async function (data: FormValues) {
+  const onSubmit = async function (data: any) {
     // Make validaions.
     const errors = validate(data);
 
@@ -146,7 +146,7 @@ const Register: React.FC = () => {
           <h3 className="font-semibold text-lg text-center">
             Lo sentimos
           </h3>
-          {<p>{errors?.phone?.message}</p>}
+          { errors?.phone && <p>{errors?.phone?.message}</p>}
           <button className="button is-primary" onClick={() => setIsOpen(false)}>
             Aceptar
           </button>

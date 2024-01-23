@@ -1,27 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import { calculator, applications } from "../../api";
 
 import * as Page from "../../components/page";
 import { formatCurrency } from "@adelantto/utils";
+import { OfferType } from "../../types";
 
-interface PreOfferProps
-  extends RouteComponentProps<{
-    id: string;
-  }> { }
-
-interface LoanContract {
-  desired_loan: number;
-}
+interface PreOfferProps extends RouteComponentProps<{ id: string }> {}
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const [loading, setLoading] = useState(true);
-  const [months, setMonths] = useState(params.get("months"));
-  const [offer, setOffer] = useState()!;
-  const [income, setIncome] = useState()!;
+  const [months, setMonths] = useState<number>(Number.parseInt(params.get("months")));
+  const [offer, setOffer] = useState<OfferType>()!;
+  const [income, setIncome] = useState<number>()!;
 
   // GET with fetch API
   useEffect(() => {
@@ -32,7 +26,9 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
         principal: application.lease_monthly_income * months,
         months: months,
       });
+
       const data = await calcResponse.json();
+      
       setOffer(data);
       setLoading(false);
       setIncome(application.lease_monthly_income);
@@ -41,8 +37,8 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
     fetchLoanContract();
   }, []);
 
-  const handleMothsChange = async (event) => {
-    const newMonths = parseInt(event.target.value);
+  const handleMothsChange = async (event: ChangeEvent) => {
+    const newMonths = parseInt((event.target as HTMLSelectElement)?.value);
     setMonths(newMonths);
 
     const calcResponse = await calculator.calc({
@@ -54,19 +50,21 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   };
 
   const handleSubmit = async () => {
-    const body = {
-      pre_offer_amount: offer.principal,
-      pre_offer_fees: offer.fees,
-      pre_offer_commissions: offer.commission,
-      pre_offer_term_frame: months,
-      step: 'pre_offer'
-    };
-
-    const response = await applications.preOffer(match.params.id, body);
-    await response.json();
-
-    if (response.status === 200) {
-      router.push(`/applications/${match.params.id}/identity-check`);
+    if (offer) {
+      const body = {
+        pre_offer_amount: offer.principal,
+        pre_offer_fees: offer.fees,
+        pre_offer_commissions: offer.commission,
+        pre_offer_term_frame: months,
+        step: 'pre_offer'
+      };
+  
+      const response = await applications.preOffer(match.params.id, body);
+      await response.json();
+  
+      if (response.status === 200) {
+        router.push(`/applications/${match.params.id}/identity-check`);
+      }
     }
   };
 

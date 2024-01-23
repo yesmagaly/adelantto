@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useController, UseControllerProps } from 'react-hook-form'
 
 import { API_SERVER_URL } from "../config";
+import { ErrorType } from "../types";
 
 export interface ComponentProp extends UseControllerProps {
   children: string | JSX.Element | JSX.Element[]
@@ -9,7 +10,7 @@ export interface ComponentProp extends UseControllerProps {
 
 const UploadDocuments: React.FC<ComponentProp> = (props) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({ message: null });
+  const [error, setError] = useState<ErrorType>();
   const { field: { onChange, value, ...field }, fieldState } = useController(props);
 
   const handleChange = async (event: { target: { files: any; }; }) => {
@@ -33,11 +34,9 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
         if (response.status === 200) {
           const data = await response.json();
           onChange(data);
-        } else {
-
         }
-      } catch (errorFetch) {
-        setError({ message: errorFetch?.message })
+      } catch (errorFetch: any) {
+        setError({ message: errorFetch.message })
       }
 
       // Stop loading.
@@ -65,7 +64,7 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
       </div>
 
       <input {...field} className="hidden" id={props.name} onChange={handleChange} accept="application/pdf" type="file" placeholder="Buscar" />
-      {error.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
+      {error?.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
     </div>
   );
 };

@@ -2,8 +2,9 @@ import { useIonRouter } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils";
 
 import { nextStepUrl } from "../utils/steps";
+import { ApplicationType } from "../types"
 
-export default function ApplicationCard({ item, className }) {
+export default function ApplicationCard({ item, className }: { item: ApplicationType, className: string }) {
   const router = useIonRouter();
   const redirectTo = nextStepUrl(item);
 

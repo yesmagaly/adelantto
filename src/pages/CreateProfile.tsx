@@ -9,8 +9,8 @@ import * as Page from "../components/page";
 import { authentication } from "../api";
 
 type FormValues = {
-  name: string | undefined;
-  last_name: string | undefined;
+  name: string;
+  last_name: string;
 };
 
 const CreateProfile: React.FC = () => {

@@ -34,7 +34,12 @@ export function createSession() {
   });
 }
 
-export async function addDevicefingerPrint({ session }) {
+interface SessionType {
+  clientId: string;
+  token: string
+}
+
+export async function addDevicefingerPrint({ session }: { session: SessionType }) {
   const response = await fetch("https://api.ipify.org")
   const ip = await response.text();
   const deviceType = "WEBAPP";
@@ -60,7 +65,7 @@ export async function addDevicefingerPrint({ session }) {
   });
 }
 
-export async function addFrontId({ session, body }) {
+export async function addFrontId({ session, body }: { session: SessionType, body: any }) {
   try {
     const response = await fetch(`${VITE_INCODE_API_URL}/omni/add/front-id/v2?onlyFront=false`, {
       method: "POST",
@@ -84,12 +89,12 @@ export async function addFrontId({ session, body }) {
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
 
-export async function addBackId({ session, body }) {
+export async function addBackId({ session, body }: { session: SessionType, body: any }) {
   try {
     const response = await fetch(`${VITE_INCODE_API_URL}/omni/add/back-id/v2?retry=false`, {
       method: "POST",
@@ -113,7 +118,7 @@ export async function addBackId({ session, body }) {
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
@@ -141,12 +146,12 @@ export async function processId({ session }) {
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
 
-export async function addFaceSelfie({ session, body }) {
+export async function addFaceSelfie({ session, body }: { session: SessionType, body: any }) {
   try {
     const response = await fetch(`${VITE_INCODE_API_URL}/omni/add/face/third-party?imageType=selfie`, {
       method: "POST",
@@ -191,12 +196,12 @@ export async function addFaceSelfie({ session, body }) {
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
 
-export async function processFace({ session }) {
+export async function processFace({ session }: { session: SessionType }) {
   try {
     const response = await fetch(`${VITE_INCODE_API_URL}/omni/process/face?imageType=selfie`, {
       method: "POST",
@@ -215,7 +220,7 @@ export async function processFace({ session }) {
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
@@ -243,7 +248,7 @@ export async function finishStatus({ session }) {
     } else {
       throw new Error(data.error, { cause: INCODE_ERROR });
     }
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message, { cause: HTTP_ERROR });
   }
 }
@@ -255,7 +260,7 @@ export async function initSession() {
     await addDevicefingerPrint({ session });
 
     return session;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error?.message);
   }
 }

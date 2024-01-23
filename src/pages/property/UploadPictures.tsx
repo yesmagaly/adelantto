@@ -1,10 +1,16 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
+import { RouteComponentProps } from "react-router";
 
 import PhotoInputItem from "../../components/photo-input/PhotoInputItem";
 import { applications } from "../../api";
 
-const UploadPictures: React.FC = ({ match }) => {
+interface ComponentProps
+  extends RouteComponentProps<{
+    id: string;
+  }> { }
+
+const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
   const router = useIonRouter();
 
   const {
@@ -13,7 +19,7 @@ const UploadPictures: React.FC = ({ match }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<any> = async (data) => {
     const response = await applications.propertyPictures(match.params.id, {
       ...data,
       step: 'property_pictures'
@@ -43,7 +49,7 @@ const UploadPictures: React.FC = ({ match }) => {
               <p className="text-sm">Toma una foto del frente de tu casa</p>
               {errors?.property_house_front && (
                 <span className="message is-small is-danger">
-                  {errors?.property_house_front?.message}
+                  {errors.property_house_front?.message}
                 </span>
               )}
             </PhotoInputItem>

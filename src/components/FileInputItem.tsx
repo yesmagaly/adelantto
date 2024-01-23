@@ -7,6 +7,7 @@ import { API_SERVER_URL } from "../config";
 import Icon from "../components/Icon/Icon";
 import Modal from "../components/modal";
 import documentsAnimation from "../assets/animations/documents.json";
+import { ErrorType } from "../types";
 
 export interface ComponentProp extends UseControllerProps {
   children: string | JSX.Element | JSX.Element[]
@@ -15,7 +16,7 @@ export interface ComponentProp extends UseControllerProps {
 const UploadDocuments: React.FC<ComponentProp> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({ message: null });
+  const [error, setError] = useState<ErrorType>();
   const { field: { onChange, value, ...field }, fieldState } = useController(props);
 
   const handleChange = async (event: { target: { files: any; }; }) => {
@@ -42,8 +43,8 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
         } else {
 
         }
-      } catch (errorFetch) {
-        setError({ message: errorFetch?.message })
+      } catch (errorFetch: any) {
+        setError({ message: errorFetch.message })
       }
 
       // Stop loading.
@@ -95,7 +96,7 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
           <input {...field} className="hidden" id={props.name} onChange={handleChange} accept="application/pdf" type="file" placeholder="Buscar" />
         </label>
 
-        {error.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
+        {error?.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
 
         <button onClick={() => setIsOpen(false)} className="button button-secondary" disabled={loading}>
           Continuar

@@ -14,7 +14,7 @@ interface LoginProps
   }> { }
 
 type FormValues = {
-  email: number;
+  email: string;
   password: string;
 };
 
@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = () => {
     formState: { isSubmitting, errors },
   } = useForm();
 
-  const onSubmit = async function (data: FormValues) {
+  const onSubmit = async function (data: any) {
     const email = data.email;
     const password = data.password;
 
@@ -41,7 +41,7 @@ const Login: React.FC<LoginProps> = () => {
       } else {
         router.push("/dashboard");
       }
-    } catch (error) {
+    } catch (error: any) {
       setIsOpen(true);
       setError("password", { message: error?.message, type: "server" });
     }

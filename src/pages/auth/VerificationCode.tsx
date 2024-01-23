@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import verificationCodeAnimation from "../../assets/animations/verification-code.json";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 import { API_SERVER_URL } from "../../config";
 
-interface VerificationCodeProps
+interface ComponentProps
   extends RouteComponentProps<{
     phone: string;
   }> { }
@@ -21,7 +21,7 @@ type FormValues = {
 // 3 Minutes
 const COUNT_DOWN_TIME = 60 * 3;
 
-const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
+const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [countDown, setCountDown] = useState(0);
   const [runTimer, setRunTimer] = useState(true);
@@ -36,7 +36,7 @@ const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
   } = useForm();
 
   useEffect(() => {
-    let timerId;
+    let timerId: any;
 
     if (runTimer) {
       setCountDown(COUNT_DOWN_TIME);
@@ -58,11 +58,10 @@ const VerificationCode: FC<VerificationCodeProps> = ({ match }) => {
     }
   }, [countDown, runTimer]);
 
-  const seconds = String(countDown % 60).padStart(2, 0);
-  const minutes = String(Math.floor(countDown / 60)).padStart(2, 0);
+  const seconds = String(countDown % 60).padStart(2, "0");
+  const minutes = String(Math.floor(countDown / 60)).padStart(2, "0");
 
-
-  const onSubmit = async function (data: FormValues) {
+  const onSubmit: SubmitHandler<FormValues> = async function (data) {
     setRunTimer(false);
 
     const code = data.code;
