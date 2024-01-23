@@ -1,7 +1,7 @@
 import ReactPortal from "../ReactPortal";
 import "./styles.css";
 
-export function Root({ isOpen, variant = 'compact', ...props }) {
+export function Root({ isOpen = false, variant = 'compact', ...props }) {
   if (!isOpen) return null;
 
   return (
@@ -15,7 +15,7 @@ export function Root({ isOpen, variant = 'compact', ...props }) {
   );
 }
 
-export function Header({className, ...props}) {
+export function Header({className = '', ...props}) {
   return <div className={`modal-header ${className}`} {...props} />
 }
 
@@ -26,6 +26,5 @@ export function Body({ className = '', ...props}) {
 export function Footer({ className = '', ...props}) {
   return <div  className={`modal-footer ${className}`} {...props} />
 }
-
 
 export default Root;
