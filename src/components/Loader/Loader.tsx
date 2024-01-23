@@ -1,7 +1,12 @@
-import ReactPortal from "../ReactPortal";
+import ReactPortal from "../ReactPortal"
 import "./loaderStyles.css";
 
-function Loader({ children, isOpen }) {
+interface ComponentProp {
+  children: string | JSX.Element | JSX.Element[];
+  isOpen: boolean;
+}
+
+const Loader: React.FC<ComponentProp> = ({ children, isOpen }) => {
   if (!isOpen) return null;
 
   return (
@@ -11,6 +16,6 @@ function Loader({ children, isOpen }) {
       </div>
     </ReactPortal>
   );
-}
+};
 
 export default Loader;
