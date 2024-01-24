@@ -6,8 +6,8 @@ import * as Page from "../../components/page";
 import * as Modal from "../../components/modal";
 
 import TotalCard from "../../components/TotalCard";
-import LoanCard from "../../components/LoanCard"
-import ApplicationCard from "../../components/ApplicationCard"
+import LoanCard from "../../components/LoanCard";
+import ApplicationCard from "../../components/ApplicationCard";
 
 import { UnauthorizedError, applications } from "../../api";
 import { useAuth } from "../auth/authContext";
@@ -68,20 +68,24 @@ const Dashboard: React.FC = () => {
             </h1>
           </Page.Header>
           <Page.Body>
-            {loans.length === 0  && (
+            {loans.length === 0 && (
               <div className="flex gap-2 flex-col">
-                {
-                  items
-                    .filter(item => item.status !== 'approved')
-                    .map(item => <ApplicationCard item={item} className="mb-4" />)
-                }
+                {items
+                  .filter((item) => item.status !== "approved")
+                  .map((item) => (
+                    <ApplicationCard item={item} className="mb-4" />
+                  ))}
               </div>
             )}
 
             {loans.length > 0 && (
               <>
-                <TotalCard amount={loans.reduce((acc, loan) => acc + loan.amount, 0)} />
-                {loans.map(loan => <LoanCard key={loan.id} url={`/loans/${loan.id}`} {...loan} />)}
+                <TotalCard
+                  amount={loans.reduce((acc, loan) => acc + loan.amount, 0)}
+                />
+                {loans.map((loan) => (
+                  <LoanCard key={loan.id} url={`/loans/${loan.id}`} {...loan} />
+                ))}
               </>
             )}
           </Page.Body>
