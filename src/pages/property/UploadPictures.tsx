@@ -47,6 +47,7 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
               <label className="font-bold text-sm leading-3 is-required">Frente de la casa</label>
 
               <p className="text-sm">Toma una foto del frente de tu casa</p>
+
               {errors?.property_house_front && (
                 <span className="message is-small is-danger">
                   {errors.property_house_front?.message}

@@ -13,13 +13,12 @@ export interface ComponentProp extends UseControllerProps {
 
 const PhotoInputItem: React.FC<ComponentProp> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState();
+  const [photoUrl, setPhotoUrl] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ message: null });
   const { field: { onChange, value }, fieldState } = useController(props);
 
-
-  const takePhoto = async (event) => {
+  const takePhoto = async (event: Event) => {
     event.preventDefault();
 
     const photo = await Camera.getPhoto({
