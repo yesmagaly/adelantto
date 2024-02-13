@@ -13,7 +13,9 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const [loading, setLoading] = useState(true);
-  const [months, setMonths] = useState<number>(Number.parseInt(params.get("months")));
+  const [months, setMonths] = useState<number>(
+    Number.parseInt(params.get("months"))
+  );
   const [offer, setOffer] = useState<OfferType>()!;
   const [income, setIncome] = useState<number>()!;
 
@@ -28,7 +30,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
       });
 
       const data = await calcResponse.json();
-      
+
       setOffer(data);
       setLoading(false);
       setIncome(application.lease_monthly_income);
@@ -56,12 +58,12 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
         pre_offer_fees: offer.fees,
         pre_offer_commissions: offer.commission,
         pre_offer_term_frame: months,
-        step: 'pre_offer'
+        step: "pre_offer",
       };
-  
+
       const response = await applications.preOffer(match.params.id, body);
       await response.json();
-  
+
       if (response.status === 200) {
         router.push(`/applications/${match.params.id}/identity-check`);
       }
@@ -129,7 +131,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
             </button>
 
             <p className="text-xs text-center leading-4">
-              Al aceptar estas aprovando el uso de tus datos para validaciones
+              Al aceptar estas aprobando el uso de tus datos para validaciones
               de identificación.{" "}
               <a className="underline" href="">
                 Ver detalle
