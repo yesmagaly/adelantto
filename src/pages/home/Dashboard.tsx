@@ -14,7 +14,7 @@ import { useAuth } from "../auth/authContext";
 import { ApplicationType, LoanType } from "../../types";
 
 const Dashboard: React.FC = () => {
-  const { logOut } = useAuth()!;
+  const { authInfo, logOut } = useAuth()!;
   const router = useIonRouter();
   const [items, setItems] = useState<Array<ApplicationType>>([]);
   const [loans, setLoans] = useState<Array<LoanType>>([]);
@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
           <Page.Header className="px-6 pt-8">
             <h1 className="heading-3">
               ¡Hola, <br />
-              <strong>Alexander Cruz!</strong>
+              <strong>{authInfo.user.full_name}!</strong>
             </h1>
           </Page.Header>
           <Page.Body>
