@@ -1,5 +1,4 @@
 import React from "react";
-import { API_SERVER_URL } from "../../config";
 import { authentication } from "../../api";
 
 type UserDataInterface = {
@@ -36,26 +35,22 @@ export const AuthProvider = (props: ComponentProps) => {
   const logIn = async (email: string, password: string) => {
     // Send phone request.
     const response = await authentication.login({ email, password });
-    const json = await response.json();
+    const data = await response.json();
 
     if (response.status === 200) {
       let v = {
         initialized: true,
         loggedIn: true,
-        user: {
-          token: json.token,
-          is_verified: json.is_verified,
-          id: new Date().getTime() + "",
-        },
+        user: data,
       };
 
       setAuthInfo(v);
       window.sessionStorage.setItem("AUTH", JSON.stringify(v.user));
     } else {
-      throw new Error(json.message);
+      throw new Error(data.message);
     }
 
-    return json;
+    return data;
   };
 
   const initialize = () => {
