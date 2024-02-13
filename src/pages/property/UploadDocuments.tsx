@@ -16,11 +16,6 @@ interface FormData {
   leasing_contract_id: number;
 }
 
-type Inputs = {
-  property_deed_of_ownership: string;
-};
-
-
 const UploadDocuments: React.FC = ({ match }) => {
   const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
@@ -30,7 +25,7 @@ const UploadDocuments: React.FC = ({ match }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm();
 
   const onSubmit = async (data: FormData) => {
     const response = await applications.propertyDocuments(match.params.id, {
@@ -74,44 +69,61 @@ const UploadDocuments: React.FC = ({ match }) => {
               )}
             </FileInputItem>
 
-
-            <FileInputItem name="property_lease_agreement" control={control}>
+            <FileInputItem name="property_lease_agreement" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
                 Contrato de arrendamiento
               </h5>
               <p className="text-xs">Firmado por ambas partes</p>
+              {errors.property_lease_agreement && (
+                <ErrorMessage error={errors.property_lease_agreement} />
+              )}
             </FileInputItem>
 
-            <FileInputItem name="property_latest_tax_receipt" control={control}>
+            <FileInputItem name="property_latest_tax_receipt" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
                 Copia del último pago predial del inmueble
               </h5>
+              {errors.property_latest_tax_receipt && (
+                <ErrorMessage error={errors.property_latest_tax_receipt} />
+              )}
             </FileInputItem>
 
-            <FileInputItem name="property_proof_of_income" control={control}>
+            <FileInputItem name="property_proof_of_income" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
                 Comprobante de ingresos
               </h5>
               <p className="text-xs">Útimos tres meses (Nómina o bancarios)</p>
+              {errors.property_proof_of_income && (
+                <ErrorMessage error={errors.property_proof_of_income} />
+              )}
             </FileInputItem>
 
-            <FileInputItem name="property_rpp_certificate" control={control}>
+            <FileInputItem name="property_rpp_certificate" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
                 Certificado de finalización en el RPP
               </h5>
               <p className="text-xs">Registro Público de la Propiedad</p>
+              {errors.property_rpp_certificate && (
+                <ErrorMessage error={errors.property_rpp_certificate} />
+              )}
             </FileInputItem>
 
-            <FileInputItem name="property_rfc" control={control}>
+            <FileInputItem name="property_rfc" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">RFC</h5>
               <p className="text-xs">
                 Constancia de situación fiscal con antigüedad no mayor a 3 meses
               </p>
+              {errors.property_rfc && (
+                <ErrorMessage error={errors.property_rfc} />
+              )}
             </FileInputItem>
 
-            <FileInputItem name="property_curp" control={control}>
+            <FileInputItem name="property_curp" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">CURP</h5>
               <p className="text-xs">Certificada y emitida por la RENAPO</p>
+              {errors.property_curp && (
+                <ErrorMessage error={errors.property_curp} />
+              )}
             </FileInputItem>
           </div>
 
@@ -124,7 +136,6 @@ const UploadDocuments: React.FC = ({ match }) => {
             <button className="button is-primary">Siguiente</button>
           </div>
         </form>
-        <div className="border-bottom border-primary-blue" />
       </IonContent>
     </IonPage>
   );
