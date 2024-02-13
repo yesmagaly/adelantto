@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useController, UseControllerProps } from 'react-hook-form'
 
 import { API_SERVER_URL } from "../config";
 import { ErrorType } from "../types";
 
 export interface ComponentProp extends UseControllerProps {
-  children: string | JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 const UploadDocuments: React.FC<ComponentProp> = (props) => {

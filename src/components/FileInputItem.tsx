@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Lottie from "react-lottie-player";
 import { useController, UseControllerProps } from 'react-hook-form'
 
@@ -10,7 +10,7 @@ import documentsAnimation from "../assets/animations/documents.json";
 import { ErrorType } from "../types";
 
 export interface ComponentProp extends UseControllerProps {
-  children: string | JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 const UploadDocuments: React.FC<ComponentProp> = (props) => {

@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 
 function createWrapperAndAppendToBody(wrapperId: string) {
@@ -9,7 +9,7 @@ function createWrapperAndAppendToBody(wrapperId: string) {
   return wrapperElement;
 }
 
-interface ComponentProp { children: string | JSX.Element | JSX.Element[], wrapperId: string }
+interface ComponentProp { children: React.ReactNode, wrapperId: string }
 
 
 function ReactPortal({ children, wrapperId = "react-portal-wrapper" }: ComponentProp) {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useController, UseControllerProps } from 'react-hook-form'
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 
@@ -8,7 +8,7 @@ import Icon from "../Icon/Icon";
 import Modal from "../modal";
 
 export interface ComponentProp extends UseControllerProps {
-  children: string | JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 const PhotoInputItem: React.FC<ComponentProp> = (props) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Camera, CameraResultType, CameraSource, Photo } from "@capacitor/camera";
 
 import * as Modal from "../../../components/modal";
@@ -15,7 +15,7 @@ import "../styles.css";
 import selfie from "../../../assets/video/selfie.mp4"
 
 export interface ComponentProp {
-  children: string | JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   session: any;
   onSuccess: any;
 }

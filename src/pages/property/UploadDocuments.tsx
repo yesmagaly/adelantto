@@ -1,5 +1,5 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm } from "react-hook-form";
+import { useForm, ErrorOption } from "react-hook-form";
 
 import FileInputItem from "../../components/FileInputItem";
 import { useAuth } from "../auth/authContext";
@@ -11,12 +11,32 @@ interface File {
 }
 
 interface FormData {
-  deed_of_ownership?: File
-  leasing_contract_id: number
+  deed_of_ownership?: File;
+  leasing_contract_id: number;
 }
 
+type Inputs = {
+  property_deed_of_ownership: string;
+};
+
+interface ComponentProps {
+  error: ErrorOption;
+}
+
+const ErrorMessage: React.FC<ComponentProps> = ({ error }) => {
+  if (!error) {
+    return null;
+  }
+
+  return (
+    <span className="message is-small is-danger mt-2 inline-block">
+      {error.message}
+    </span>
+  );
+};
+
 const UploadDocuments: React.FC = ({ match }) => {
-  const params = new URLSearchParams(window.location.search)
+  const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const { authInfo } = useAuth()!;
 
@@ -24,12 +44,12 @@ const UploadDocuments: React.FC = ({ match }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<Inputs>();
 
   const onSubmit = async (data: FormData) => {
     const response = await applications.propertyDocuments(match.params.id, {
       ...data,
-      step: 'property_documents'
+      step: "property_documents",
     });
 
     const property = await response.json();
@@ -60,17 +80,14 @@ const UploadDocuments: React.FC = ({ match }) => {
               <h5 className="font-bold text-sm leading-4">
                 Carátula de tu escritura
               </h5>
-
-              {errors?.deed_of_ownership && (
-                <span className="message is-small is-danger">
-                  {errors?.deed_of_ownership?.message}
-                </span>
-              )}
-
               <p className="text-xs">
                 Con sello de inscripción del Registro Público de la Propiedad
               </p>
+              {errors.property_deed_of_ownership && (
+                <ErrorMessage error={errors.property_deed_of_ownership} />
+              )}
             </FileInputItem>
+
 
             <FileInputItem name="property_lease_agreement" control={control}>
               <h5 className="font-bold text-sm leading-4">

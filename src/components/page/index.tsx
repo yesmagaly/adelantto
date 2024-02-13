@@ -1,9 +1,10 @@
+import React from "react";
 import "./styles.css";
 
 interface ComponentProps {
   variant: string;
   className: string;
-  children: string | JSX.Element | JSX.Element[]
+  children: React.ReactNode;
 }
 
 export function Root({ className = "", variant = "", ...props }) {

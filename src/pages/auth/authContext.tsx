@@ -20,7 +20,7 @@ export const AuthContext = React.createContext<MyContextInterface | undefined>(
 );
 
 interface ComponentProps {
-  children: string | JSX.Element | JSX.Element[]
+  children: React.ReactNode
 };
 
 export const AuthProvider = (props: ComponentProps) => {

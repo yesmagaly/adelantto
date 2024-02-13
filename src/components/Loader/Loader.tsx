@@ -2,7 +2,7 @@ import ReactPortal from "../ReactPortal"
 import "./loaderStyles.css";
 
 interface ComponentProp {
-  children: string | JSX.Element | JSX.Element[];
+  children: React.ReactNode;
   isOpen: boolean;
 }
 
