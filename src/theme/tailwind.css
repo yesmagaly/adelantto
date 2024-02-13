@@ -26,7 +26,14 @@
 /** other custom global styles can go here */
 
 .heading {
-  @apply h-60 bg-cover text-white px-9 py-6 flex flex-col justify-end;
+  @apply gap-4
+    bg-cover
+    text-white
+    px-9
+    py-6
+    flex
+    flex-col
+    justify-end;
 }
 
 .heading--green {

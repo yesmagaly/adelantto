@@ -1,5 +1,5 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { RouteComponentProps } from "react-router";
 
 import PhotoInputItem from "../../components/photo-input/PhotoInputItem";
@@ -45,26 +45,24 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
           <div className="py-6 mb-40">
             <PhotoInputItem control={control} name="property_house_front" rules={{ required: "Imagen obligatoria" }}>
               <label className="font-bold text-sm leading-3 is-required">Frente de la casa</label>
-
               <p className="text-sm">Toma una foto del frente de tu casa</p>
-
-              {errors?.property_house_front && (
+              {errors.property_house_front && (
                 <span className="message is-small is-danger">
-                  {errors.property_house_front?.message}
+                  {errors.property_house_front.message}
                 </span>
               )}
             </PhotoInputItem>
-            <PhotoInputItem control={control} name="property_electricity_meter">
+            <PhotoInputItem control={control} name="property_electricity_meter" rules={{ required: "Imagen obligatoria" }}>
               <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
               <p className="text-[10px]">Toma una foto del medidor de luz</p>
             </PhotoInputItem>
-            <PhotoInputItem control={control} name="property_water_meter">
+            <PhotoInputItem control={control} name="property_water_meter" rules={{ required: "Imagen obligatoria" }}>
               <h5 className="font-bold text-xs leading-3">Toma de agua</h5>
               <p className="text-[10px]">
                 Toma una foto de la toma de agua principal
               </p>
             </PhotoInputItem>
-            <PhotoInputItem control={control} name="property_street">
+            <PhotoInputItem control={control} name="property_street" rules={{ required: "Imagen obligatoria" }}>
               <h5 className="font-bold text-xs leading-3">Calle</h5>
               <p className="text-[10px]">
                 Toma una foto de la vista de la calle

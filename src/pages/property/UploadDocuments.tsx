@@ -1,9 +1,10 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import { useForm, ErrorOption } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import FileInputItem from "../../components/FileInputItem";
 import { useAuth } from "../auth/authContext";
 import { applications } from "../../api";
+import ErrorMessage from "../../components/ErrorMessage";
 
 interface File {
   id: number;
@@ -19,21 +20,6 @@ type Inputs = {
   property_deed_of_ownership: string;
 };
 
-interface ComponentProps {
-  error: ErrorOption;
-}
-
-const ErrorMessage: React.FC<ComponentProps> = ({ error }) => {
-  if (!error) {
-    return null;
-  }
-
-  return (
-    <span className="message is-small is-danger mt-2 inline-block">
-      {error.message}
-    </span>
-  );
-};
 
 const UploadDocuments: React.FC = ({ match }) => {
   const params = new URLSearchParams(window.location.search);
