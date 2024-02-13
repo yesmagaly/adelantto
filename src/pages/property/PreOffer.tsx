@@ -132,7 +132,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
 
             <p className="text-xs text-center leading-4">
               Al aceptar estas aprobando el uso de tus datos para validaciones
-              de identificación.{" "}
+              de identificación.
               <a className="underline" href="">
                 Ver detalle
               </a>
