@@ -51,21 +51,33 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
                 <ErrorMessage error={errors.property_house_front} />
               )}
             </PhotoInputItem>
+
             <PhotoInputItem control={control} name="property_electricity_meter" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold text-xs leading-3">Medidor de luz</h5>
-              <p className="text-[10px]">Toma una foto del medidor de luz</p>
+              <h5 className="font-bold text-sm leading-3">Medidor de luz</h5>
+              <p className="text-sm">Toma una foto del medidor de luz</p>
+              {errors.property_electricity_meter && (
+                <ErrorMessage error={errors.property_electricity_meter} />
+              )}
             </PhotoInputItem>
+
             <PhotoInputItem control={control} name="property_water_meter" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold text-xs leading-3">Toma de agua</h5>
-              <p className="text-[10px]">
+              <h5 className="font-bold text-sm leading-3">Toma de agua</h5>
+              <p className="text-sm">
                 Toma una foto de la toma de agua principal
               </p>
+              {errors.property_water_meter && (
+                <ErrorMessage error={errors.property_water_meter} />
+              )}
             </PhotoInputItem>
+
             <PhotoInputItem control={control} name="property_street" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold text-xs leading-3">Calle</h5>
-              <p className="text-[10px]">
+              <h5 className="font-bold text-sm leading-3">Calle</h5>
+              <p className="text-sm">
                 Toma una foto de la vista de la calle
               </p>
+              {errors.property_street && (
+                <ErrorMessage error={errors.property_street} />
+              )}
             </PhotoInputItem>
           </div>
 
