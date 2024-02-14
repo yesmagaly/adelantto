@@ -19,7 +19,7 @@ function addMonths(date: any, months: number) {
 
 function parseDate(str: string) {
   const [year, month, day] = str.split("-").map(i => Number.parseInt(i));
-  
+
   return new Date(+year, month - 1, +day);
 }
 

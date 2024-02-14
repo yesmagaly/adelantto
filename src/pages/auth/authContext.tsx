@@ -23,7 +23,6 @@ interface ComponentProps {
 };
 
 export const AuthProvider = (props: ComponentProps) => {
-  // the reactive values
   const [authInfo, setAuthInfo] = React.useState<UserDataInterface>();
 
   const logOut = async () => {
@@ -33,7 +32,6 @@ export const AuthProvider = (props: ComponentProps) => {
   };
 
   const logIn = async (email: string, password: string) => {
-    // Send phone request.
     const response = await authentication.login({ email, password });
     const data = await response.json();
 

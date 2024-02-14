@@ -63,7 +63,7 @@
 }
 
 .heading__pager {
-  @apply text-xs mb-2;
+  @apply text-xs;
 }
 
 .heading__title {
@@ -83,27 +83,20 @@
 }
 
 .heading-2 {
-  @apply text-4xl leading-none;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  @apply text-4xl leading-none mb-4 font-bold;
 }
 
 .heading-3 {
-  @apply text-3xl leading-none;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
+  @apply text-3xl leading-none mb-3 font-semibold;
 }
 
 .heading-4 {
-  @apply text-2xl leading-none;
-  margin-bottom: 0.75rem;
-  font-size: 1.5rem;
-  font-weight: 700;
+  @apply text-2xl leading-none mb-3 font-bold;
 }
 
 .heading-3 strong,
 .heading-2 strong {
-  font-weight: 600;
+  @apply font-semibold;
 }
 
 .blue-bg {
