@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
   IonApp,
-  IonRouterOutlet,
   setupIonicReact,
-  IonLoading,
-  IonSplitPane,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
@@ -39,7 +36,6 @@ import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import FullAdvance from "./pages/FullAdvance";
-// import Summary from "./pages/Summary";
 import Profile from "./pages/Profile";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
@@ -97,7 +93,6 @@ const App: React.FC = () => {
                 component={AdvanceImmediately}
               />
               <Route exact path="/create-profile" component={CreateProfile} />
-
               <Route exact path="/applications/lease-contract" component={LeaseContract} />
               <Route exact path="/applications/:id/desired-loan" component={DesiredLoan} />
               <Route exact path="/applications/:id/pre-offer" component={PreOffer} />
@@ -106,7 +101,6 @@ const App: React.FC = () => {
               <Route exact path="/applications/:id/property-pictures" component={UploadPictures} />
               <Route exact path="/applications/:id/privacy-policy" component={ConfirmationData} />
               <Route exact path="/applications/:id/policy-notifications" component={DataValidation} />
-
               <Route exact path="/loans/:id/success" component={CorrectData} />
               <Route exact path="/loans/:id/account-statement" component={Withdrawals} />
               <Route exact path="/loans/:id/disbursement" component={Outlay} />
@@ -117,13 +111,11 @@ const App: React.FC = () => {
               <Route exact path="/biometric-validation" component={BiometricValidation} />
               <Route exact path="/validation-error" component={ValidationError} />
               <Route exact path="/signature" component={Signature} />
-              <Route exact path="/outlay" component={Outlay} />
               <Route exact path="/correct-deposit" component={CorrectDeposit} />
               <Route exact path="/full-advance" component={FullAdvance} />
-              <Route exact path="/summary" component={Summary} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/succesful-transaction" component={SuccesfulTransaction} />
-              {/* <Route exact path="/"><Redirect to="/welcome" /></Route> */}
+
               <Route exact path="/"><Redirect to="/dashboard" /></Route>
             </IonReactRouter>
           ) : (
@@ -135,9 +127,7 @@ const App: React.FC = () => {
               <Route path="/verification-code/:phone" component={VerificationCode} />
               <Route path="/verification-email/:phone" component={VerificationEmail} />
               <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
-
               <Route exact path="/forgot-password" component={ForgotPassword} />
-
               <Route exact path="/"><Redirect to="/start" /></Route>
             </IonReactRouter>
           )}
