@@ -61,7 +61,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               <h5 className="font-bold text-sm leading-4">
                 Carátula de tu escritura
               </h5>
-              <p className="text-xs">
+              <p className="text-sm">
                 Con sello de inscripción del Registro Público de la Propiedad
               </p>
               {errors.property_deed_of_ownership && (
@@ -73,7 +73,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               <h5 className="font-bold text-sm leading-4">
                 Contrato de arrendamiento
               </h5>
-              <p className="text-xs">Firmado por ambas partes</p>
+              <p className="text-sm">Firmado por ambas partes</p>
               {errors.property_lease_agreement && (
                 <ErrorMessage error={errors.property_lease_agreement} />
               )}
@@ -92,7 +92,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               <h5 className="font-bold text-sm leading-4">
                 Comprobante de ingresos
               </h5>
-              <p className="text-xs">Útimos tres meses (Nómina o bancarios)</p>
+              <p className="text-sm">Útimos tres meses (Nómina o bancarios)</p>
               {errors.property_proof_of_income && (
                 <ErrorMessage error={errors.property_proof_of_income} />
               )}
@@ -102,7 +102,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               <h5 className="font-bold text-sm leading-4">
                 Certificado de finalización en el RPP
               </h5>
-              <p className="text-xs">Registro Público de la Propiedad</p>
+              <p className="text-sm">Registro Público de la Propiedad</p>
               {errors.property_rpp_certificate && (
                 <ErrorMessage error={errors.property_rpp_certificate} />
               )}
@@ -110,7 +110,7 @@ const UploadDocuments: React.FC = ({ match }) => {
 
             <FileInputItem name="property_rfc" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">RFC</h5>
-              <p className="text-xs">
+              <p className="text-sm">
                 Constancia de situación fiscal con antigüedad no mayor a 3 meses
               </p>
               {errors.property_rfc && (
@@ -120,7 +120,7 @@ const UploadDocuments: React.FC = ({ match }) => {
 
             <FileInputItem name="property_curp" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">CURP</h5>
-              <p className="text-xs">Certificada y emitida por la RENAPO</p>
+              <p className="text-sm">Certificada y emitida por la RENAPO</p>
               {errors.property_curp && (
                 <ErrorMessage error={errors.property_curp} />
               )}
