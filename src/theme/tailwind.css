@@ -67,7 +67,7 @@
 }
 
 .heading__title {
-  @apply text-[44px] mb-2 leading-none;
+  @apply text-[44px] leading-none;
 }
 
 .heading__title strong {
@@ -83,7 +83,7 @@
 }
 
 .heading-2 {
-  @apply text-4xl leading-none mb-4 font-bold;
+  @apply text-4xl leading-none font-bold;
 }
 
 .heading-3 {

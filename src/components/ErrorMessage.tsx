@@ -10,9 +10,9 @@ const ErrorMessage: React.FC<ComponentProps> = ({ error }) => {
   }
 
   return (
-    <span className="message is-small is-danger mt-2 inline-block">
+    <div className="message is-small is-danger">
       {error.message}
-    </span>
+    </div>
   );
 };
 

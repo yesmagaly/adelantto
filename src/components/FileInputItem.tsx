@@ -79,12 +79,12 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
       <Modal isOpen={isOpen}>
         <Lottie
           animationData={documentsAnimation}
-          style={{ width: '100%', height: 180 }}
+          style={{ width: '100%', height: 160 }}
           loop
           play
         />
 
-        <label className="mb-4 p-2 flex items-center justify-center bg-slate-200 rounded text-slate-900 text-center min-h-[120px]" htmlFor={props.name}>
+        <label className="p-2 flex items-center justify-center bg-slate-200 rounded text-slate-900 text-center min-h-[120px]" htmlFor={props.name}>
           {!loading && value?.id && (
             <div>
               <div className="mb-3">{value?.name}</div>
@@ -96,11 +96,13 @@ const UploadDocuments: React.FC<ComponentProp> = (props) => {
           <input {...field} className="hidden" id={props.name} onChange={handleChange} accept="application/pdf" type="file" placeholder="Buscar" />
         </label>
 
-        {error?.message && <p className="text-sm text-red-500 mb-4">{error.message}</p>}
+        {error?.message && <p className="text-sm text-red-500">{error.message}</p>}
 
-        <button onClick={() => setIsOpen(false)} className="button button-secondary" disabled={loading}>
-          Continuar
-        </button>
+        <div className="flex flex-col gap-2">
+          <button onClick={() => setIsOpen(false)} className="button button-secondary" disabled={loading}>
+            Continuar
+          </button>
+        </div>
       </Modal>
     </>
   );
