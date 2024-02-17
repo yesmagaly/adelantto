@@ -3,7 +3,7 @@ import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
 import userAnimation from "../assets/animations/user.json";
-import { ellipse } from "ionicons/icons";
+import { useAuth } from "../pages/auth/authContext";
 
 import * as Page from "../components/page";
 import { authentication } from "../api";
@@ -14,6 +14,7 @@ type FormValues = {
 };
 
 const CreateProfile: React.FC = () => {
+  const { setUserInfo } = useAuth()!;
   const router = useIonRouter();
 
   const {
@@ -26,6 +27,7 @@ const CreateProfile: React.FC = () => {
     const response = await authentication.updateProfile(data);
 
     if (response.status === 200) {
+      setUserInfo('full_name', `${data.name} ${data.last_name}`);
       router.push(`/applications/lease-contract`);
     }
   };

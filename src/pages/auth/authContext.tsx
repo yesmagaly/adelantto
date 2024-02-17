@@ -11,6 +11,7 @@ type MyContextInterface = {
   authInfo: UserDataInterface;
   initialize: () => Promise<boolean>;
   logOut: () => Promise<boolean>;
+  setUserInfo: (key: string, value: any) => null;
   logIn: (email: string, password: string) => Promise<any>;
 };
 
@@ -51,6 +52,16 @@ export const AuthProvider = (props: ComponentProps) => {
     return data;
   };
 
+  const setUserInfo = (key: string, value: any) => {
+    const encodedUser = window.sessionStorage.getItem("AUTH") || null;
+
+    if (encodedUser) {
+      const user = JSON.parse(encodedUser);
+      user[key] = value;
+      window.sessionStorage.setItem("AUTH", JSON.stringify(user));
+    }
+  }
+
   const initialize = () => {
     let response = window.sessionStorage.getItem("AUTH") || null;
 
@@ -71,8 +82,9 @@ export const AuthProvider = (props: ComponentProps) => {
 
   let v = {
     authInfo,
-    logOut: logOut,
-    logIn: logIn,
+    logOut,
+    logIn,
+    setUserInfo,
     initialize,
   };
 
