@@ -1,8 +1,20 @@
 import { useIonRouter } from "@ionic/react";
-import { formatCurrency } from "@adelantto/utils";
 import masterCardIcon from "../assets/icons/master-card.png";
 import { LoanType } from "../types";
 
+
+function trans(key: string) {
+  const mapper = {
+    'awaiting_account_statement_upload': 'Esperando la carga de estado de cuenta',
+    'awaiting_account_statement_check': 'Su estado de cuenta esta a la espera de revisión',
+    'awaiting_client_signature': 'Estamos esperamos su firma digital del contrato. Por favor revise el correo electrónico de Weetrust.',
+    'signature_document_completed': 'Firma de documento completado',
+    'pending_disbursement': 'En espera de desembolso',
+    'active': 'Activo',
+  }
+
+  return mapper[key] ?? key;
+}
 
 interface ComponentProps extends LoanType {
   url: string
@@ -43,16 +55,12 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
         )}
       </div>
 
-      <div className="pt-4">
-        <p className="leading-tight">
-          {status === "awaiting_account_statement_check" &&
-            "Your account statement is awaiting for review."}
-          {status === "awaiting_client_signature" &&
-            "We are waiting for you to sign the contract. Please check your email."}
-          {status === "signature_document_completed" &&
-            "We are waiting to execute the disbursement."}
-        </p>
-      </div>
+      {status !== 'active' && (
+        <div className="pt-4">
+          <p className="leading-tight">{trans(status)}</p>
+        </div>
+      )}
+
     </div>
   );
 }

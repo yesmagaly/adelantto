@@ -4,6 +4,19 @@ import { formatCurrency } from "@adelantto/utils";
 import { nextStepUrl } from "../utils/steps";
 import { ApplicationType } from "../types"
 
+
+export const trans = function (key: string) {
+  const mapper = {
+    'uncompleted': 'Incompleto',
+    'awaiting_validation': 'Esperando validación',
+    'validating': 'Validando',
+    'approved': 'Aceptado',
+    'rejected': 'Rechazado',
+  }
+
+  return mapper[key] ?? key;
+}
+
 export default function ApplicationCard({ item, className }: { item: ApplicationType, className: string }) {
   const router = useIonRouter();
   const redirectTo = nextStepUrl(item);
@@ -37,7 +50,7 @@ export default function ApplicationCard({ item, className }: { item: Application
           <div className="text-base mb-4">
             x {item.pre_offer_term_frame} meses
           </div>
-          <div>{item.status !== "approved" && item.status}</div>
+          <div>{item.status !== "approved" && trans(item.status)}</div>
         </>
       )}
 
