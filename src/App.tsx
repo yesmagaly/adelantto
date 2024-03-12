@@ -25,7 +25,6 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import Bug from "./pages/auth/Bug";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import Welcome from "./pages/Welcome";
-import Search from "./pages/Search";
 import PreOffer from "./pages/property/PreOffer";
 import BiometricValidation from "./pages/identity/BiometricValidation";
 import DataValidation from "./pages/DataValidation";
@@ -35,7 +34,6 @@ import Withdrawals from "./pages/Withdrawals";
 import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
 import CorrectDeposit from "./pages/CorrectDeposit";
-import FullAdvance from "./pages/FullAdvance";
 import Profile from "./pages/Profile";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
@@ -107,12 +105,10 @@ const App: React.FC = () => {
               <Route exact path="/loans/:id" component={Summary} />
 
               <Route exact path="/bug" component={Bug} />
-              <Route exact path="/search" component={Search} />
               <Route exact path="/biometric-validation" component={BiometricValidation} />
               <Route exact path="/validation-error" component={ValidationError} />
               <Route exact path="/signature" component={Signature} />
               <Route exact path="/correct-deposit" component={CorrectDeposit} />
-              <Route exact path="/full-advance" component={FullAdvance} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/succesful-transaction" component={SuccesfulTransaction} />
 
