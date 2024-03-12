@@ -77,7 +77,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
           <Page.Header className="text-center">
             <div className="heading heading--blue heading--compact">
               <h1 className="heading-3">
-                Pre<strong>-Oferta Adelantto</strong>
+                Pre<strong> - oferta</strong>
               </h1>
             </div>
           </Page.Header>

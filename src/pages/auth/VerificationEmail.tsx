@@ -84,7 +84,7 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
 
             <div className="mb-24 mt-9">
               <p className="help-text mb-4">
-                Enviaremos una contraseña tu cuenta de correo para que puedas.
+                Enviaremos una contraseña a tu cuenta de correo para que puedas {" "}
                 <a className="underline">iniciar sesión.</a>
               </p>
             </div>

@@ -67,7 +67,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
             <div className="heading heading--blue">
               <h1 className="heading-3">
                 Selecciona el monto <br />
-                <strong>que te gustaría que adelantemos de rentas</strong>
+                <strong>que te gustaría recibir</strong>
               </h1>
             </div>
           </Page.Header>

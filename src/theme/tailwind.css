@@ -67,7 +67,7 @@
 }
 
 .heading__title {
-  @apply text-[44px] leading-none;
+  @apply text-[44px] leading-none text-balance;
 }
 
 .heading__title strong {

@@ -12,7 +12,7 @@ const Home: React.FC = () => {
             <img className="mb-16 w-44 inline-block" src={logo} />
             <h1 className="font-semibold leading-normal text-5xl">¡Hola!</h1>
             <p className="text-xl leading-5 max-w-xs">
-              ¿Estás listo para anticipar tus rentas?
+              ¿Estás listo para recibir el pago de tus rentas por anticipado?
             </p>
           </div>
 
