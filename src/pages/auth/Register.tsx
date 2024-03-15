@@ -7,14 +7,14 @@ import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 
 import registerAnimation from "../../assets/animations/register.json";
-import { API_SERVER_URL } from "../../config";
+import { API_SERVER_URL, PROD_MODE } from "../../config";
+import { t } from "@adelantto/utils";
 
 type FormValues = {
   phone: string;
 };
 
-const PHONE_FORMAT_10 = "+## (###) ###-####";
-const PHONE_FORMAT_9 = "+## (###) ###-###";
+const PHONE_FORMAT = PROD_MODE ? "+57 (###) ###-####" : "+## (###) ###-###";
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,10 +30,19 @@ const Register: React.FC = () => {
   const validate = function (values: FormValues) {
     const errors = {} as FieldErrors;
 
+    const pattern = PROD_MODE
+      ? /^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g
+      : /^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{3}$/g;
+
     if (!values.phone) {
       errors.phone = {
         type: "required",
-        message: "The cellphone number is required.",
+        message: t("Your cellphone number is required."),
+      };
+    } else if (!pattern.test(values.phone)) {
+      errors.phone = {
+        type: "pattern",
+        message: t("Your cellphone number is invalid."),
       };
     }
 
@@ -52,26 +61,26 @@ const Register: React.FC = () => {
     }
 
     // Clean up phone number.
-    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "")
-      .replaceAll(" ", "");
+    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
     // Send phone request.
     const response = await fetch(
-      `${API_SERVER_URL}/api/send-verification-code`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ phone }),
-    });
+      `${API_SERVER_URL}/api/send-verification-code`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ phone }),
+      }
+    );
 
     const json = await response.json();
 
     if (json.status === "success") {
       router.push(`/verification-code/${phone}`);
     } else {
-      // Show server errors.
       setError("phone", { message: json.message, type: "server" });
       setIsOpen(true);
     }
@@ -110,7 +119,7 @@ const Register: React.FC = () => {
                     className="pattern-format"
                     placeholder="Número de Celular"
                     type="tel"
-                    format={PHONE_FORMAT_10}
+                    format={PHONE_FORMAT}
                     allowEmptyFormatting
                     mask="_"
                     required
@@ -134,11 +143,12 @@ const Register: React.FC = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="font-semibold text-lg text-center">
-            Lo sentimos
-          </h3>
-          { errors?.phone && <p>{errors?.phone?.message}</p>}
-          <button className="button is-primary" onClick={() => setIsOpen(false)}>
+          <h3 className="font-semibold text-lg text-center">Lo sentimos</h3>
+          {errors?.phone && <p>{errors.phone?.message}</p>}
+          <button
+            className="button is-primary"
+            onClick={() => setIsOpen(false)}
+          >
             Aceptar
           </button>
         </Modal>

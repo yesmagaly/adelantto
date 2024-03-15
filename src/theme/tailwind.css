@@ -115,7 +115,7 @@
 }
 
 .help-text {
-  @apply max-w-xs font-semibold leading-5;
+  @apply max-w-xs font-medium leading-5;
 }
 
 .prose-sm p {
