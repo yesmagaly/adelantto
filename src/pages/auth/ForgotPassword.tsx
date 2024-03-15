@@ -56,9 +56,9 @@ const ForgotPassword: React.FC = () => {
             play
           />
 
-          <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-7">
-              <input type="email" placeholder="Email" {...register('email')} />
+          <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-6">
+              <input type="email" required placeholder="Email" {...register('email')} />
             </div>
 
             <p className="help-text mb-28">
@@ -70,6 +70,7 @@ const ForgotPassword: React.FC = () => {
         </div>
 
         <Loader isOpen={isSubmitting} />
+
         <Modal isOpen={showSuccessModal}>
           <h3 className="font-semibold text-lg mb-5 text-center">
             Success

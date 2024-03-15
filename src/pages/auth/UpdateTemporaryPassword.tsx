@@ -9,6 +9,14 @@ import logo from "../../assets/icons/alternative-logo.svg";
 import { API_SERVER_URL } from "../../config";
 import { authentication } from "../../api";
 
+const t = (text: string) => {
+  const trans = {
+    "The confirmation password should be equal to your new password.": "Tu contraseña de confirmación debe ser igual a tu nueva contraseña."
+  }
+
+  return trans[text] ?? text;
+}
+
 type FormValues = {
   password: string;
   password_confirmation: string;
@@ -34,8 +42,7 @@ const validate = function (values: FormValues) {
   if (values.password !== values.password_confirmation) {
     errors.password_confirmation = {
       type: "be_equal",
-      message:
-        "The confirmation password should be equal to your new password.",
+      message: t("The confirmation password should be equal to your new password."),
     };
   }
 

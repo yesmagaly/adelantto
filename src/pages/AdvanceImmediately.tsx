@@ -2,7 +2,6 @@ import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 
 import homeAnimation from "../assets/animations/home.json";
-import { ellipse } from "ionicons/icons";
 import * as Page from "../components/page";
 
 const AdvanceImmediately: React.FC = () => {

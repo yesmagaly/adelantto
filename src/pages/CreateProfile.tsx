@@ -47,7 +47,9 @@ const CreateProfile: React.FC = () => {
             />
 
             <div className="mb-8 text-center">
-              <h1 className="heading-2">Crea tu perfil</h1>
+              <h1 className="heading-3 mb-4">
+                <strong>Crea tu perfil</strong>
+              </h1>
               <p className="headline">
                 Tu nombre deberá registrarse del mismo modo en que aparece en tu
                 identificación oficial

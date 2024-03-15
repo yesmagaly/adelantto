@@ -9,9 +9,9 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <div className="flex items-center flex-col justify-center h-full px-6">
           <div className="mb-14 text-center">
-            <img className="mb-16 w-44 inline-block" src={logo} />
-            <h1 className="font-semibold leading-normal text-5xl">¡Hola!</h1>
-            <p className="text-xl leading-5 max-w-xs">
+            <img className="mb-16 h-40 inline-block" src={logo} />
+            <h1 className="font-semibold leading-normal text-5xl mb-4">¡Hola!</h1>
+            <p className="text-xl leading-tight max-w-xs">
               ¿Estás listo para recibir el pago de tus rentas por anticipado?
             </p>
           </div>
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
               </a>
             </p>
 
-            <p className="mt-8 text-sm">
+            <p className="mt-8">
               <a onClick={() => router.push("/terms-and-conditions?redirect=/start")}>
                 Términos y condiciones
               </a>

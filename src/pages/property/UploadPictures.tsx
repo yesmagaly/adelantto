@@ -38,14 +38,14 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
       <IonContent fullscreen>
         <div className="heading heading--blue flex flex-col justify-center">
           <div className="heading__pager text-right">Paso 3 de 3</div>
-          <h4 className="text-xl">
+          <h4 className="text-2xl">
             A continuación <strong>sube algunas fotografías</strong> para validar tu propiedad
           </h4>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
             <PhotoInputItem control={control} name="property_house_front" rules={{ required: "Imagen obligatoria" }}>
-              <label className="font-bold text-sm leading-3 is-required">Frente de la casa</label>
+              <label className="font-bold leading-4 is-required">Frente de la casa</label>
               <p className="text-sm">Toma una foto del frente de tu casa</p>
               {errors.property_house_front && (
                 <ErrorMessage error={errors.property_house_front} />
@@ -53,7 +53,7 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
             </PhotoInputItem>
 
             <PhotoInputItem control={control} name="property_electricity_meter" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold text-sm leading-3">Medidor de luz</h5>
+              <h5 className="font-bold leading-4">Medidor de luz</h5>
               <p className="text-sm">Toma una foto del medidor de luz</p>
               {errors.property_electricity_meter && (
                 <ErrorMessage error={errors.property_electricity_meter} />
@@ -61,7 +61,7 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
             </PhotoInputItem>
 
             <PhotoInputItem control={control} name="property_water_meter" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold text-sm leading-3">Toma de agua</h5>
+              <h5 className="font-bold leading-4">Toma de agua</h5>
               <p className="text-sm">
                 Toma una foto de la toma de agua principal
               </p>
@@ -71,7 +71,7 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
             </PhotoInputItem>
 
             <PhotoInputItem control={control} name="property_street" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold text-sm leading-3">Calle</h5>
+              <h5 className="font-bold leading-4">Calle</h5>
               <p className="text-sm">
                 Toma una foto de la vista de la calle
               </p>
@@ -81,9 +81,9 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
             </PhotoInputItem>
           </div>
 
-          <div className="text-center mb-7">
-            <p className="font-semibold text-xs leading-3 mb-4">
-              Los documentos deberán ser escaneados en alta resolución <br /> y
+          <div className="text-center mb-4">
+            <p className="font-medium text-sm leading-none text-balance mb-4 w-[80%] mx-auto">
+              Los documentos deberán ser escaneados en alta resolución y
               en formato PDF, de lo contrario declinaremos el proceso.
             </p>
             <button className="button is-primary">Siguiente</button>

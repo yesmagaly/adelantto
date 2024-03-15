@@ -37,15 +37,6 @@ const Register: React.FC = () => {
       };
     }
 
-    // else if (
-    //   !/^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g.test(values.phone)
-    // ) {
-    //   errors.phone = {
-    //     type: "pattern",
-    //     message: "Invalid cellphone number.",
-    //   };
-    // }
-
     return errors;
   };
 

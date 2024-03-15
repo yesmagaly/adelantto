@@ -27,7 +27,7 @@ const ConfirmationData: React.FC = ({ match }) => {
       <IonContent fullscreen>
         <div className="heading heading--blue flex flex-col justify-center mb-10">
           <div className="heading__pager text-right"> Paso 3 de 3</div>
-          <h4 className="text-xl">
+          <h4 className="text-2xl">
             Autorización para solicitar reportes de crédito, informes buró y reportes de crédito especiales
           </h4>
         </div>

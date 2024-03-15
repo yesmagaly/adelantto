@@ -26,7 +26,7 @@
 /** other custom global styles can go here */
 
 .heading {
-  @apply gap-4
+  @apply gap-2
     bg-cover
     text-white
     px-9
@@ -67,7 +67,7 @@
 }
 
 .heading__title {
-  @apply text-[44px] leading-none text-balance;
+  @apply text-4xl leading-none text-balance;
 }
 
 .heading__title strong {
@@ -79,19 +79,19 @@
 }
 
 .heading-1 {
-  @apply text-5xl mb-2 leading-none;
+  @apply text-5xl leading-none;
 }
 
 .heading-2 {
-  @apply text-4xl leading-none font-bold;
+  @apply text-4xl leading-none;
 }
 
 .heading-3 {
-  @apply text-3xl leading-none mb-3 font-semibold;
+  @apply text-3xl;
 }
 
 .heading-4 {
-  @apply text-2xl leading-none mb-3 font-bold;
+  @apply text-2xl;
 }
 
 .heading-3 strong,
