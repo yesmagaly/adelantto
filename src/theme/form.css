@@ -48,6 +48,14 @@ form .form-control:last-child {
   border-radius: 0.25rem;
 }
 
+.form .pattern-format {
+  background-image: url('../assets/icons/mx.svg');
+  background-size: 2rem 2rem;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+
 .form-control.is-center {
   display: flex;
   flex-direction: column;
