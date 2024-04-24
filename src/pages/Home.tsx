@@ -32,8 +32,19 @@ const Home: React.FC = () => {
             </p>
 
             <p className="mt-8">
-              <a onClick={() => router.push("/terms-and-conditions?redirect=/start")}>
+              <a
+                className="block mb-2"
+                href="https://adelantto.com/terminos-y-condiciones"
+                target="_blank"
+              >
                 Términos y condiciones
+              </a>
+              <a
+                className="block"
+                href="https://adelantto.com/aviso-privacidad"
+                target="_blank"
+              >
+                Aviso de privacidad
               </a>
             </p>
           </div>
