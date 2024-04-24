@@ -51,13 +51,9 @@ const DataValidation: React.FC = ({ match }) => {
                 <div className="flex items-center mb-6">
                   <input {...register('accept_buro_policy')} defaultValue="1" type="checkbox" id="buro_policy" className="w-5 h-5 shrink-0" />
                   <label htmlFor="buro_policy" className="main ml-4">
-                    Acepto que “S.A. de C.V.” consulte mi buró de crédito
-                  </label>
-                </div>
-                <div className="flex items-center mb-6">
-                  <input {...register('accept_sms_notifications')} defaultValue="1" type="checkbox" id="sms_notification" className="w-5 h-5 shrink-0" />
-                  <label htmlFor="sms_notification" className="ml-4">
-                    SMS
+                    <a href="https://adelantto.com/terminos-y-condiciones" target="_blank">
+                      Acepto los términos y condiciones legales de Adelantto
+                    </a>
                   </label>
                 </div>
               </div>
