@@ -70,9 +70,100 @@ const CreateProfile: React.FC = () => {
                 <input
                   type="text"
                   id="last_name"
-                  placeholder="Apellido"
+                  placeholder="Apellidos"
                   className="min-w-full"
                   {...register("last_name", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="identification_number"
+                  placeholder="Número de identificación"
+                  className="min-w-full"
+                  {...register("identification_number", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="rfc"
+                  placeholder="RFC (Registro Federal de Contribuyentes)"
+                  className="min-w-full"
+                  {...register("rfc", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="curp"
+                  placeholder="CURP (Clave Única de Registro de Población)"
+                  className="min-w-full"
+                  {...register("curp", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="address"
+                  placeholder="Domicilio"
+                  className="min-w-full"
+                  {...register("address", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="colony"
+                  placeholder="Colonia"
+                  className="min-w-full"
+                  {...register("colony", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="municipality"
+                  placeholder="Municipio"
+                  className="min-w-full"
+                  {...register("municipality", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="state"
+                  placeholder="Estado"
+                  className="min-w-full"
+                  value='Ciudad de México'
+                  {...register("state", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="zip_code"
+                  placeholder="Código postal"
+                  className="min-w-full"
+                  {...register("zip_code", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <input
+                  type="text"
+                  id="ine"
+                  placeholder="INE"
+                  className="min-w-full"
+                  {...register("ine", { required: true })}
                 />
               </div>
 
