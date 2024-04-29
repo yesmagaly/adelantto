@@ -10,6 +10,12 @@ function getToken() {
   return `Bearer ${user.token}`;
 }
 
+export type UserProfile = {
+  name: string;
+  last_name: string;
+  colony: string;
+}
+
 export const authentication = {
   logout: async () =>
     await fetch(`${API_SERVER_URL}/api/logout`, {
@@ -30,7 +36,7 @@ export const authentication = {
       body: JSON.stringify({ email, password }),
     }),
 
-  updateProfile: async ({ name, last_name }: { name: string, last_name: string }) =>
+  updateProfile: async (data: UserProfile) =>
     await fetch(`${API_SERVER_URL}/api/user/update-profile`, {
       method: "PUT",
       headers: {
@@ -38,7 +44,7 @@ export const authentication = {
         Authorization: getToken(),
         Accept: "application/json",
       },
-      body: JSON.stringify({ name, last_name }),
+      body: JSON.stringify(data),
     }),
 
   updateTempPassword: async ({ password, password_confirmation }: { password: string, password_confirmation: string }) =>

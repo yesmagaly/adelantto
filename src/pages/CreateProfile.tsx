@@ -11,6 +11,7 @@ import { authentication } from "../api";
 type FormValues = {
   name: string;
   last_name: string;
+  colony: string;
 };
 
 const CreateProfile: React.FC = () => {
@@ -24,6 +25,9 @@ const CreateProfile: React.FC = () => {
   } = useForm();
 
   const onSubmit = async (data: FormValues) => {
+
+    console.log(data);
+
     const response = await authentication.updateProfile(data);
 
     if (response.status === 200) {
@@ -41,106 +45,107 @@ const CreateProfile: React.FC = () => {
 
             <Lottie
               animationData={userAnimation}
-              style={{ width: 280, height: 280 }}
+              style={{ width: 280, height: 280, margin: "0 auto" }}
               loop
               play
             />
 
-            <div className="mb-8 text-center">
-              <h1 className="heading-3 mb-4">
+            <div className="mb-8">
+              <h1 className="heading-3 mb-4 text-center">
                 <strong>Crea tu perfil</strong>
               </h1>
-              <p className="headline">
-                Tu nombre deberá registrarse del mismo modo en que aparece en tu
-                identificación oficial
+              <p className="headline text-balance text-center">
+                Tu información personal deberá registrarse del mismo modo en que aparece en tu identificación oficial
               </p>
             </div>
 
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
+                <label htmlFor="name">Nombre (s)</label>
                 <input
                   type="text"
                   id="name"
-                  placeholder="Nombre (s)"
                   className="min-w-full"
                   {...register("name", { required: true })}
                 />
               </div>
               <div className="form-control">
+                <label htmlFor="last_name">Apellidos</label>
                 <input
                   type="text"
                   id="last_name"
-                  placeholder="Apellidos"
                   className="min-w-full"
                   {...register("last_name", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="identification_number">Número de identificación</label>
                 <input
                   type="text"
                   id="identification_number"
-                  placeholder="Número de identificación"
                   className="min-w-full"
                   {...register("identification_number", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="rfc">Registro Federal de Contribuyentes</label>
                 <input
                   type="text"
                   id="rfc"
-                  placeholder="RFC (Registro Federal de Contribuyentes)"
+                  placeholder="RFC"
                   className="min-w-full"
                   {...register("rfc", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="curp">Clave Única de Registro de Población</label>
                 <input
                   type="text"
                   id="curp"
-                  placeholder="CURP (Clave Única de Registro de Población)"
+                  placeholder="CURP"
                   className="min-w-full"
                   {...register("curp", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="address">Domicilio</label>
                 <input
                   type="text"
                   id="address"
-                  placeholder="Domicilio"
                   className="min-w-full"
                   {...register("address", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="colony">Colonia</label>
                 <input
                   type="text"
                   id="colony"
-                  placeholder="Colonia"
                   className="min-w-full"
                   {...register("colony", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="municipality">Municipio</label>
                 <input
                   type="text"
                   id="municipality"
-                  placeholder="Municipio"
                   className="min-w-full"
                   {...register("municipality", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="state">Estado</label>
                 <input
                   type="text"
                   id="state"
-                  placeholder="Estado"
                   className="min-w-full"
                   value='Ciudad de México'
                   {...register("state", { required: true })}
@@ -148,20 +153,20 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
+                <label htmlFor="zip_code">Código postal</label>
                 <input
                   type="text"
                   id="zip_code"
-                  placeholder="Código postal"
                   className="min-w-full"
                   {...register("zip_code", { required: true })}
                 />
               </div>
 
               <div className="form-control">
+                <label htmlFor="ine">INE</label>
                 <input
                   type="text"
                   id="ine"
-                  placeholder="INE"
                   className="min-w-full"
                   {...register("ine", { required: true })}
                 />
