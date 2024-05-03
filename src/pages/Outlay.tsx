@@ -1,5 +1,4 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Icon from "../components/Icon/Icon";
 import IconItem from "../components/IconItem";
 import * as Page from "../components/page";
 
