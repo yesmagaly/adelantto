@@ -10,16 +10,12 @@ const DataValidation: React.FC = ({ match }) => {
   const router = useIonRouter();
   const {
     handleSubmit,
-    register,
-    formState: { },
+    formState: {},
   } = useForm();
 
 
-  const onSubmit = async (data) => {
-    const response = await applications.policyNotifications(match.params.id, {
-      ...data,
-      step: 'accept_policy_notifications'
-    });
+  const onSubmit = async () => {
+    const response = await applications.finalAnnouncement(match.params.id, {});
 
     if (response.status === 200) {
       router.push(`/dashboard`);
@@ -47,16 +43,6 @@ const DataValidation: React.FC = ({ match }) => {
                 Te enviaremos un correo electrónico en las próximas <strong>
                   72 horas con el resultado de la validación.</strong>
               </p>
-              <div>
-                <div className="flex items-center mb-6">
-                  <input {...register('accept_buro_policy')} defaultValue="1" type="checkbox" id="buro_policy" className="w-5 h-5 shrink-0" />
-                  <label htmlFor="buro_policy" className="main ml-4">
-                    <a href="https://adelantto.com/terminos-y-condiciones" target="_blank">
-                      Acepto los términos y condiciones legales de Adelantto
-                    </a>
-                  </label>
-                </div>
-              </div>
             </Page.Body>
             <Page.Footer className="text-center">
               <h4 className="font-bold text-xl mb-10">¡Hasta pronto!</h4>

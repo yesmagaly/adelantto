@@ -16,17 +16,14 @@ import CreateProfile from "./pages/CreateProfile";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";
-import ConfirmationData from "./pages/property/ConfirmationData";
 
 import LeaseContract from "./pages/property/LeaseContract";
 import DesiredLoan from "./pages/property/DesiredLoan";
 import Passport from "./pages/identity/Passport";
 import TermsAndConditions from "./pages/TermsAndConditions";
-import Bug from "./pages/auth/Bug";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import Welcome from "./pages/Welcome";
 import PreOffer from "./pages/property/PreOffer";
-import BiometricValidation from "./pages/identity/BiometricValidation";
 import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
@@ -40,6 +37,10 @@ import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 
 import Summary from "./pages/loan/Summary";
+
+import PrivacyPolicy from "./pages/property/PrivacyPolicy";
+import ConfirmPrivacyPolicy from "./pages/property/ConfirmPrivacyPolicy";
+import FailBuroScore from "./pages/property/FailBuroScore";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -94,18 +95,22 @@ const App: React.FC = () => {
               <Route exact path="/applications/lease-contract" component={LeaseContract} />
               <Route exact path="/applications/:id/desired-loan" component={DesiredLoan} />
               <Route exact path="/applications/:id/pre-offer" component={PreOffer} />
+
+              <Route exact path="/applications/:id/privacy-policy" component={PrivacyPolicy} />
+              <Route exact path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} />
+              <Route exact path="/applications/:id/fail-buro-score" component={FailBuroScore} />
+
               <Route exact path="/applications/:id/identity-check" component={Passport} />
               <Route exact path="/applications/:id/property-documents" component={UploadDocuments} />
               <Route exact path="/applications/:id/property-pictures" component={UploadPictures} />
-              <Route exact path="/applications/:id/privacy-policy" component={ConfirmationData} />
-              <Route exact path="/applications/:id/policy-notifications" component={DataValidation} />
+
+              <Route exact path="/applications/:id/final-announcement" component={DataValidation} />
+
               <Route exact path="/loans/:id/success" component={CorrectData} />
               <Route exact path="/loans/:id/account-statement" component={Withdrawals} />
               <Route exact path="/loans/:id/disbursement" component={Outlay} />
               <Route exact path="/loans/:id" component={Summary} />
 
-              <Route exact path="/bug" component={Bug} />
-              <Route exact path="/biometric-validation" component={BiometricValidation} />
               <Route exact path="/validation-error" component={ValidationError} />
               <Route exact path="/signature" component={Signature} />
               <Route exact path="/correct-deposit" component={CorrectDeposit} />

@@ -29,7 +29,7 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
     const json = await response.json();
 
     if (response.status === 200) {
-      router.push(`/applications/${match.params.id}/privacy-policy`);
+      router.push(`/applications/${match.params.id}/final-announcement`);
     }
   }
 

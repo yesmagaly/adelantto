@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import Lottie from "react-lottie-player";
+
 
 import { FrontId } from "../incode/components/FrontId";
 import { BackId } from "../incode/components/BackId";
@@ -11,6 +13,7 @@ import * as Modal from "../../components/modal";
 import * as Page from "../../components/page";
 import check from "../../assets/icons/check.png";
 import close from "../../assets/icons/close.png";
+import photographyAnimation from "../../assets/animations/photography.json";
 import { applications } from "../../api";
 
 const Passport: React.FC = ({ match }) => {
@@ -78,6 +81,14 @@ const Passport: React.FC = ({ match }) => {
             </div>
           </Page.Header>
           <Page.Body>
+
+            <Lottie
+              animationData={photographyAnimation}
+              style={{ width: 250, height: 250, marginInline: 'auto', marginTop: '5rem' }}
+              loop
+              play
+            />
+
             {session && step === 0 && (
               <FrontId session={session} onSuccess={successFrontCallback} />
             )}
