@@ -86,24 +86,17 @@ const App: React.FC = () => {
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/welcome" component={Welcome} />
               <Route exact path="/update-temporary-password" component={UpdateTemporaryPassword} />
-              <Route
-                exact
-                path="/advance-immediately"
-                component={AdvanceImmediately}
-              />
+              <Route exact path="/advance-immediately" component={AdvanceImmediately} />
               <Route exact path="/create-profile" component={CreateProfile} />
               <Route exact path="/applications/lease-contract" component={LeaseContract} />
               <Route exact path="/applications/:id/desired-loan" component={DesiredLoan} />
               <Route exact path="/applications/:id/pre-offer" component={PreOffer} />
-
               <Route exact path="/applications/:id/privacy-policy" component={PrivacyPolicy} />
               <Route exact path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} />
               <Route exact path="/applications/:id/fail-buro-score" component={FailBuroScore} />
-
               <Route exact path="/applications/:id/identity-check" component={Passport} />
               <Route exact path="/applications/:id/property-documents" component={UploadDocuments} />
               <Route exact path="/applications/:id/property-pictures" component={UploadPictures} />
-
               <Route exact path="/applications/:id/final-announcement" component={DataValidation} />
 
               <Route exact path="/loans/:id/success" component={CorrectData} />
