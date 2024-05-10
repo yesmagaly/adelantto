@@ -11,7 +11,7 @@ form .form-control:last-child {
 .form-control:not(.is-inline) label {
   font-weight: 500;
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-control .description {

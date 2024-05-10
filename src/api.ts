@@ -185,9 +185,20 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  policyNotifications: async (id: string, body = {}) =>
+  confirmPrivacyPolicy: async (id: string, body = {}) =>
+    await fetch(`${API_SERVER_URL}/api/applications/${id}/confirm-privacy-policy`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getToken(),
+        Accept: "application/json",
+      },
+      body: JSON.stringify(body),
+    }),
+
+  finalAnnouncement: async (id: string, body = {}) =>
     await fetch(
-      `${API_SERVER_URL}/api/applications/${id}/policy-notifications`,
+      `${API_SERVER_URL}/api/applications/${id}/final-announcement`,
       {
         method: "PUT",
         headers: {

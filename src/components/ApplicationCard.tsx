@@ -6,7 +6,7 @@ import { ApplicationType } from "../types"
 
 
 export const trans = function (key: string) {
-  const mapper = {
+  const mapper: { [key: string]: string } = {
     'uncompleted': 'Incompleto',
     'awaiting_validation': 'Esperando validación',
     'validating': 'Validando',
