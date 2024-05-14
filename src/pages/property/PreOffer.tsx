@@ -65,7 +65,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
       await response.json();
 
       if (response.status === 200) {
-        router.push(`/applications/${match.params.id}/identity-check`);
+        router.push(`/applications/${match.params.id}/privacy-policy`);
       }
     }
   };
@@ -127,7 +127,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
             </div>
 
             <button onClick={handleSubmit} className="button is-secondary mb-7">
-              Iniciar proceso de Validación de documentos
+              Continuar
             </button>
 
             <p className="text-xs text-center leading-4">
