@@ -82,9 +82,20 @@ const Login: React.FC<LoginProps> = () => {
             </a>
           </p>
 
-          <p>
-            <a onClick={() => router.push("/terms-and-conditions?redirect=/login")} className="text-sm">
+          <p className="mt-8">
+            <a
+              className="block mb-2"
+              href="https://adelantto.com/terminos-y-condiciones"
+              target="_blank"
+            >
               Términos y condiciones
+            </a>
+            <a
+              className="block"
+              href="https://adelantto.com/aviso-privacidad"
+              target="_blank"
+            >
+              Aviso de privacidad
             </a>
           </p>
         </div>
