@@ -14,7 +14,7 @@ type FormValues = {
   phone: string;
 };
 
-const PHONE_FORMAT = PROD_MODE ? "+57 (###) ###-####" : "+## (###) ###-###";
+const PHONE_FORMAT = PROD_MODE ? "+52 (###) ###-####" : "+## (###) ###-###";
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
