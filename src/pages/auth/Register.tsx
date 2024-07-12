@@ -14,7 +14,7 @@ type FormValues = {
   phone: string;
 };
 
-const PHONE_FORMAT = PROD_MODE ? "+52 (###) ###-####" : "+## (###) ###-####";
+const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (##) ####-####";
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,10 +93,10 @@ const Register: React.FC = () => {
           <div className="heading__pager text-right">Paso 1 de 4</div>
           <h1 className="heading__title">
             Registra <br />
-            <strong>tu número</strong>
+            <strong>tu número celular</strong>
           </h1>
           <p className="heading__headline">
-            Regálanos tu número para validar tu identidad
+            Esto nos ayudará a validar tu identidad
           </p>
         </div>
 
