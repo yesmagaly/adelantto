@@ -12,7 +12,7 @@ import { API_SERVER_URL } from "../../config";
 interface VerificationEmailProps
   extends RouteComponentProps<{
     phone: string;
-  }> { }
+  }> {}
 
 type FormValues = {
   email: number;
@@ -84,8 +84,11 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
 
             <div className="mb-24 mt-9">
               <p className="help-text mb-4">
-                Enviaremos una contraseña a tu cuenta de correo para que puedas {" "}
-                <a className="underline">iniciar sesión.</a>
+                Enviaremos una contraseña a tu cuenta de correo para que puedas
+                {"  "}
+                <a href="/login" className="underline">
+                  iniciar sesión.
+                </a>
               </p>
             </div>
 
@@ -98,11 +101,14 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="font-semibold text-lg mb-5 text-center">
+          <h3 className="mb-5 text-center text-lg font-semibold">
             Lo sentimos
           </h3>
           {<p>{errors?.email?.message}</p>}
-          <button className="button is-primary" onClick={() => setIsOpen(false)}>
+          <button
+            className="button is-primary"
+            onClick={() => setIsOpen(false)}
+          >
             Aceptar
           </button>
         </Modal>

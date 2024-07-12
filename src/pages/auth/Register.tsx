@@ -143,7 +143,7 @@ const Register: React.FC = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="font-semibold text-lg text-center">Lo sentimos</h3>
+          <h3 className="text-center text-lg font-semibold">Lo sentimos</h3>
           {errors?.phone && <p>{errors.phone?.message}</p>}
           <button
             className="button is-primary"
