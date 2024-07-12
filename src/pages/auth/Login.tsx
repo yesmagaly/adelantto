@@ -112,7 +112,7 @@ const Login: React.FC<LoginProps> = () => {
             onClick={() => setIsOpen(false)}
             className="button is-secondary"
           >
-            Close
+            Cerrar
           </button>
         </Modal>
       </IonContent>

@@ -108,7 +108,7 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
               </p>
             </div>
 
-            <button className="button is-primary">Enviar código</button>
+            <button className="button is-primary">Validar código</button>
           </form>
         </div>
 

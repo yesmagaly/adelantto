@@ -14,7 +14,7 @@ type FormValues = {
   phone: string;
 };
 
-const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (##) ####-####";
+const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +31,8 @@ const Register: React.FC = () => {
     const errors = {} as FieldErrors;
 
     const pattern = PROD_MODE
-      ? /^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g
-      : /^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/g;
+      ? /^\+[0-9]{2}\s\([0-9]{2}\)\s[0-9]{4}-[0-9]{4}$/g
+      : /^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{3}$/g;
 
     if (!values.phone) {
       errors.phone = {
