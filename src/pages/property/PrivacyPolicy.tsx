@@ -27,7 +27,7 @@ const PrivacyPolicy: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue flex flex-col justify-center mb-10">
+        <div className="heading heading--blue mb-10 flex flex-col justify-center">
           <div className="heading__pager text-right"> Paso 3 de 3</div>
           <h4 className="text-2xl">
             Autorización para solicitar reportes de crédito, informes buró y
@@ -35,7 +35,7 @@ const PrivacyPolicy: React.FC = ({ match }) => {
           </h4>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-7 px-9 &_p:mb-4 flex flex-col gap-4">
+          <div className="&_p:mb-4 mb-7 flex flex-col gap-4 px-9">
             <p>
               Por este conducto autorizo expresamente a{" "}
               <strong>SOLUCIONES INTEGRALES TAFS, SAPI DE C.V.</strong> para que
@@ -73,7 +73,7 @@ const PrivacyPolicy: React.FC = ({ match }) => {
             </p>
           </div>
 
-          <div className="text-center mb-7">
+          <div className="mb-7 text-center">
             <button className="button is-primary">Aceptar</button>
           </div>
         </form>
