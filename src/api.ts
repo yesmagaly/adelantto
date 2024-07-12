@@ -14,7 +14,7 @@ export type UserProfile = {
   name: string;
   last_name: string;
   colony: string;
-}
+};
 
 export const authentication = {
   logout: async () =>
@@ -47,7 +47,13 @@ export const authentication = {
       body: JSON.stringify(data),
     }),
 
-  updateTempPassword: async ({ password, password_confirmation }: { password: string, password_confirmation: string }) =>
+  updateTempPassword: async ({
+    password,
+    password_confirmation,
+  }: {
+    password: string;
+    password_confirmation: string;
+  }) =>
     await fetch(`${API_SERVER_URL}/api/user/update-password`, {
       method: "POST",
       headers: {
@@ -186,19 +192,8 @@ export const applications = {
     }),
 
   confirmPrivacyPolicy: async (id: string, body = {}) =>
-    await fetch(`${API_SERVER_URL}/api/applications/${id}/confirm-privacy-policy`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-      body: JSON.stringify(body),
-    }),
-
-  finalAnnouncement: async (id: string, body = {}) =>
     await fetch(
-      `${API_SERVER_URL}/api/applications/${id}/final-announcement`,
+      `${API_SERVER_URL}/api/applications/${id}/confirm-privacy-policy`,
       {
         method: "PUT",
         headers: {
@@ -209,6 +204,17 @@ export const applications = {
         body: JSON.stringify(body),
       }
     ),
+
+  finalAnnouncement: async (id: string, body = {}) =>
+    await fetch(`${API_SERVER_URL}/api/applications/${id}/final-announcement`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getToken(),
+        Accept: "application/json",
+      },
+      body: JSON.stringify(body),
+    }),
 
   accountStatement: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/loans/${id}/account-statement`, {
@@ -266,7 +272,7 @@ export const loans = {
 };
 
 export const properties = {
-  update: ({ id, body }: { id: string, body: string }) => {
+  update: ({ id, body }: { id: string; body: string }) => {
     return fetch(`${API_SERVER_URL}/api/properties/${id}`, {
       method: "PUT",
       headers: {
@@ -280,7 +286,13 @@ export const properties = {
 };
 
 export const calculator = {
-  calc: async ({ principal, months }: { principal: number, months: number }) => {
+  calc: async ({
+    principal,
+    months,
+  }: {
+    principal: number;
+    months: number;
+  }) => {
     return fetch(
       `${API_SERVER_URL}/api/calc?principal=${principal}&months=${months}`,
       {
@@ -291,4 +303,17 @@ export const calculator = {
       }
     );
   },
+};
+
+export const resendPrivacyPolicyVerificationCode = async () => {
+  return fetch(
+    `${API_SERVER_URL}/api/verification-code/privacy-policy/resend`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: getToken(),
+        Accept: "application/json",
+      },
+    }
+  );
 };
