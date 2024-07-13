@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
   IonApp,
@@ -67,6 +67,20 @@ import { useAuth } from "./pages/auth/authContext";
 
 setupIonicReact();
 
+const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children, ...rest }) => {
+  const { authInfo } = useAuth()!;
+
+  return (
+    <Route {...rest}
+      render={({ location }) =>
+        authInfo?.loggedIn
+          ? children
+          : <Redirect to={{ pathname: "/login", state: { from: location } }} />
+      }
+    />
+  );
+}
+
 const App: React.FC = () => {
   const { authInfo, initialize } = useAuth()!;
 
@@ -80,52 +94,44 @@ const App: React.FC = () => {
   } else {
     return (
       <IonApp>
-        <>
-          {authInfo?.loggedIn === true ? (
-            <IonReactRouter>
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/welcome" component={Welcome} />
-              <Route exact path="/update-temporary-password" component={UpdateTemporaryPassword} />
-              <Route exact path="/advance-immediately" component={AdvanceImmediately} />
-              <Route exact path="/create-profile" component={CreateProfile} />
-              <Route exact path="/applications/lease-contract" component={LeaseContract} />
-              <Route exact path="/applications/:id/desired-loan" component={DesiredLoan} />
-              <Route exact path="/applications/:id/pre-offer" component={PreOffer} />
-              <Route exact path="/applications/:id/privacy-policy" component={PrivacyPolicy} />
-              <Route exact path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} />
-              <Route exact path="/applications/:id/fail-buro-score" component={FailBuroScore} />
-              <Route exact path="/applications/:id/identity-check" component={Passport} />
-              <Route exact path="/applications/:id/property-documents" component={UploadDocuments} />
-              <Route exact path="/applications/:id/property-pictures" component={UploadPictures} />
-              <Route exact path="/applications/:id/final-announcement" component={DataValidation} />
+        <IonReactRouter>
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/welcome" component={Welcome} />
+          <PrivateRoute path="/update-temporary-password" component={UpdateTemporaryPassword} />
+          <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
+          <PrivateRoute path="/create-profile" component={CreateProfile} />
+          <PrivateRoute path="/applications/lease-contract" component={LeaseContract} />
+          <PrivateRoute path="/applications/:id/desired-loan" component={DesiredLoan} />
+          <PrivateRoute path="/applications/:id/pre-offer" component={PreOffer} />
+          <PrivateRoute path="/applications/:id/privacy-policy" component={PrivacyPolicy} />
+          <PrivateRoute path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} />
+          <PrivateRoute path="/applications/:id/fail-buro-score" component={FailBuroScore} />
+          <PrivateRoute path="/applications/:id/identity-check" component={Passport} />
+          <PrivateRoute path="/applications/:id/property-documents" component={UploadDocuments} />
+          <PrivateRoute path="/applications/:id/property-pictures" component={UploadPictures} />
+          <PrivateRoute path="/applications/:id/final-announcement" component={DataValidation} />
 
-              <Route exact path="/loans/:id/success" component={CorrectData} />
-              <Route exact path="/loans/:id/account-statement" component={Withdrawals} />
-              <Route exact path="/loans/:id/disbursement" component={Outlay} />
-              <Route exact path="/loans/:id" component={Summary} />
+          <PrivateRoute path="/loans/:id/success" component={CorrectData} />
+          <PrivateRoute path="/loans/:id/account-statement" component={Withdrawals} />
+          <PrivateRoute path="/loans/:id/disbursement" component={Outlay} />
+          <PrivateRoute path="/loans/:id" component={Summary} />
 
-              <Route exact path="/validation-error" component={ValidationError} />
-              <Route exact path="/signature" component={Signature} />
-              <Route exact path="/correct-deposit" component={CorrectDeposit} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/succesful-transaction" component={SuccesfulTransaction} />
+          <PrivateRoute path="/validation-error" component={ValidationError} />
+          <PrivateRoute path="/signature" component={Signature} />
+          <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/succesful-transaction" component={SuccesfulTransaction} />
 
-              <Route exact path="/"><Redirect to="/dashboard" /></Route>
-            </IonReactRouter>
-          ) : (
-            <IonReactRouter>
-              <Route exact path="/start" component={Home} />
-              <Route exact path="/create-account" component={Register} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route path="/verification-code/:phone" component={VerificationCode} />
-              <Route path="/verification-email/:phone" component={VerificationEmail} />
-              <Route exact path="/terms-and-conditions" component={TermsAndConditions} />
-              <Route exact path="/forgot-password" component={ForgotPassword} />
-              <Route exact path="/"><Redirect to="/start" /></Route>
-            </IonReactRouter>
-          )}
-        </>
+          <Route path="/start" component={Home} />
+          <Route path="/create-account" component={Register} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/verification-code/:phone" component={VerificationCode} />
+          <Route path="/verification-email/:phone" component={VerificationEmail} />
+          <Route path="/terms-and-conditions" component={TermsAndConditions} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <Route exact path="/"><Redirect to="/start" /></Route>
+        </IonReactRouter>
       </IonApp>
     );
   }
