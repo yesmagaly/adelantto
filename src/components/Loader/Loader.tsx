@@ -3,7 +3,7 @@ import "./loaderStyles.css";
 
 interface ComponentProp {
   children: React.ReactNode;
-  isOpen: boolean;
+  isOpen?: boolean;
 }
 
 const Loader: React.FC<ComponentProp> = ({ children, isOpen }) => {
