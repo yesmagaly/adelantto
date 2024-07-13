@@ -59,6 +59,15 @@ export const AuthProvider = (props: ComponentProps) => {
       const user = JSON.parse(encodedUser);
       user[key] = value;
       window.sessionStorage.setItem("AUTH", JSON.stringify(user));
+
+      if (authInfo) {
+        const updatedAuthInfo = {
+          ...authInfo,
+          user
+        };
+
+        setAuthInfo(updatedAuthInfo);
+      }
     }
   }
 

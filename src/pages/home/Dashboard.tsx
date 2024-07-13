@@ -69,14 +69,14 @@ const Dashboard: React.FC = () => {
         <Page.Root>
           <Page.Header className="px-6 pt-8">
             <h1 className="heading-3">
-              {authInfo.user?.is_verified && (
+              {authInfo.user?.full_name && (
                 <>
                   ¡Hola, <br />
                   <strong>{authInfo.user.full_name}!</strong>
                 </>
               )}
 
-              {!authInfo.user?.is_verified && (
+              {!authInfo.user?.full_name && (
                 <strong>¡Hola!</strong>
               )}
             </h1>

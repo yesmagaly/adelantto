@@ -50,6 +50,7 @@ const validate = function (values: FormValues) {
 };
 
 const UpdateTemporaryPassword: React.FC = () => {
+  const { setUserInfo } = useAuth();
   const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
   const {
@@ -89,7 +90,8 @@ const UpdateTemporaryPassword: React.FC = () => {
     const json = await response.json();
 
     if (response.status === 200) {
-      router.push(`/advance-immediately`);
+      setUserInfo('is_verified', json.is_verified);
+      router.push(`/dashboard`);
     } else {
       // Show server errors.
       setError("password", { message: json.message, type: "server" });
@@ -100,18 +102,18 @@ const UpdateTemporaryPassword: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="blue-bg flex items-center flex-col justify-center text-center h-full">
+        <div className="blue-bg flex h-full flex-col items-center justify-center text-center">
           <img className="mb-5" src={logo} />
           <div className="text-white">
-            <h1 className="font-semibold text-4xl mb-5">¡Bienvenido!</h1>
-            <p className="text-xl leading-6 mb-12">
+            <h1 className="mb-5 text-4xl font-semibold">¡Bienvenido!</h1>
+            <p className="mb-12 text-xl leading-6">
               Ahora eres parte <br />
               <strong> de Adelantto </strong>
             </p>
           </div>
 
           <div>
-            <p className="text-white mb-5">Actualiza tu contraseña</p>
+            <p className="mb-5 text-white">Actualiza tu contraseña</p>
             <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
               <input
                 {...register("password")}
@@ -129,7 +131,7 @@ const UpdateTemporaryPassword: React.FC = () => {
               />
 
               {/* <p className="mb-12 mt-4">
-                <a className="font-semibold text-primary-green text-sm underline mb-10">
+                <a className="mb-10 text-sm font-semibold text-primary-green underline">
                   Validación de password*
                 </a>
               </p> */}
@@ -145,7 +147,7 @@ const UpdateTemporaryPassword: React.FC = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="font-semibold text-lg mb-5 text-center">
+          <h3 className="mb-5 text-center text-lg font-semibold">
             Lo sentimos
           </h3>
           {<p>{errors?.password?.message}</p>}

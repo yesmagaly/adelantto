@@ -67,16 +67,52 @@ import { useAuth } from "./pages/auth/authContext";
 
 setupIonicReact();
 
-const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children, ...rest }) => {
+const PrivateRoute: React.FC<{
+  path: string,
+  component?: React.FC<any>
+  children: React.ReactNode,
+  exact?: boolean
+}> = ({ children, component: Component, ...rest }) => {
   const { authInfo } = useAuth()!;
 
   return (
     <Route {...rest}
-      render={({ location }) =>
-        authInfo?.loggedIn
-          ? children
-          : <Redirect to={{ pathname: "/login", state: { from: location } }} />
-      }
+      render={(props) => {
+        if (authInfo.loggedIn) {
+          if (Component) {
+            return <Component {...props} />
+          }
+
+          return children
+        }
+
+        return <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+      }}
+    />
+  );
+}
+
+const PublicRoute: React.FC<{
+  path: string,
+  component?: React.FC<any>
+  children: React.ReactNode,
+  exact?: boolean
+}> = ({ children, component: Component, ...rest }) => {
+  const { authInfo } = useAuth()!;
+
+  return (
+    <Route {...rest}
+      render={(props) => {
+        if (!authInfo.loggedIn) {
+          if (Component) {
+            return <Component {...props} />
+          }
+
+          return children
+        }
+
+        return <Redirect to={{ pathname: "/dashboard", state: { from: props.location } }} />
+      }}
     />
   );
 }
@@ -122,15 +158,15 @@ const App: React.FC = () => {
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/succesful-transaction" component={SuccesfulTransaction} />
 
-          <Route path="/start" component={Home} />
-          <Route path="/create-account" component={Register} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/verification-code/:phone" component={VerificationCode} />
-          <Route path="/verification-email/:phone" component={VerificationEmail} />
-          <Route path="/terms-and-conditions" component={TermsAndConditions} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route exact path="/"><Redirect to="/start" /></Route>
+          <PublicRoute path="/start" component={Home} />
+          <PublicRoute path="/create-account" component={Register} />
+          <PublicRoute path="/register" component={Register} />
+          <PublicRoute path="/login" component={Login} />
+          <PublicRoute path="/verification-code/:phone" component={VerificationCode} />
+          <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
+          <PublicRoute path="/terms-and-conditions" component={TermsAndConditions} />
+          <PublicRoute path="/forgot-password" component={ForgotPassword} />
+          <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
         </IonReactRouter>
       </IonApp>
     );

@@ -20,7 +20,6 @@ const ForgotPassword: React.FC = () => {
   const router = useIonRouter();
   const {
     register,
-    control,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
@@ -72,7 +71,7 @@ const ForgotPassword: React.FC = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={showSuccessModal}>
-          <h3 className="font-semibold text-lg mb-5 text-center">
+          <h3 className="mb-5 text-center text-lg font-semibold">
             Success
           </h3>
           <p>Una contraseña temporal fue enviada a su correo electrónico.</p>
@@ -82,7 +81,7 @@ const ForgotPassword: React.FC = () => {
         </Modal>
 
         <Modal isOpen={showErrorModal}>
-          <h3 className="font-semibold text-lg mb-5 text-center">
+          <h3 className="mb-5 text-center text-lg font-semibold">
             Lo sentimos
           </h3>
 
