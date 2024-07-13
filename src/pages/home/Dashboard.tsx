@@ -21,23 +21,29 @@ const Dashboard: React.FC = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = (await applications.list()) ?? [];
+    if (!authInfo.user?.is_verified) {
+      router.push("/update-temporary-password");
+    } else {
 
-        if (data.length === 0) {
-          router.push("/advance-immediately");
+      const fetchData = async () => {
+        try {
+          const data = (await applications.list()) ?? [];
+
+          if (data.length === 0) {
+            router.push("/advance-immediately");
+          }
+
+          setItems(data);
+        } catch (error: any) {
+          if (error instanceof UnauthorizedError) {
+            setError(error.message);
+          }
         }
+      };
 
-        setItems(data);
-      } catch (error: any) {
-        if (error instanceof UnauthorizedError) {
-          setError(error.message);
-        }
-      }
-    };
+      fetchData();
+    }
 
-    fetchData();
   }, []);
 
   useEffect(() => {
@@ -63,13 +69,21 @@ const Dashboard: React.FC = () => {
         <Page.Root>
           <Page.Header className="px-6 pt-8">
             <h1 className="heading-3">
-              ¡Hola, <br />
-              <strong>{authInfo.user.full_name}!</strong>
+              {authInfo.user?.is_verified && (
+                <>
+                  ¡Hola, <br />
+                  <strong>{authInfo.user.full_name}!</strong>
+                </>
+              )}
+
+              {!authInfo.user?.is_verified && (
+                <strong>¡Hola!</strong>
+              )}
             </h1>
           </Page.Header>
           <Page.Body>
             {loans.length === 0 && (
-              <div className="flex gap-2 flex-col">
+              <div className="flex flex-col gap-2">
                 {items
                   .filter((item) => item.status !== "approved")
                   .map((item) => (
