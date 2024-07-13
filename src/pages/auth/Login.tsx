@@ -36,9 +36,7 @@ const Login: React.FC<LoginProps> = () => {
     try {
       const user = await logIn(email, password);
 
-      if (!user?.is_verified) {
-        router.push('/update-temporary-password')
-      } else {
+      if (user) {
         router.push("/dashboard");
       }
     } catch (error: any) {
@@ -50,8 +48,8 @@ const Login: React.FC<LoginProps> = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="flex items-center flex-col justify-center text-center h-full">
-          <img className="h-40 mb-20" src={logo} />
+        <div className="flex h-full flex-col items-center justify-center text-center">
+          <img className="mb-20 h-40" src={logo} />
 
           <form className="form mb-14" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
@@ -75,7 +73,7 @@ const Login: React.FC<LoginProps> = () => {
             <button className="button is-primary w-full">Iniciar sesión</button>
           </form>
 
-          <p className="leading-5 mb-8">
+          <p className="mb-8 leading-5">
             ¿Olvidaste tu contrasena?<br />
             <a className="font-semibold" onClick={() => router.push("/forgot-password")}>
               Recuperar aquí
@@ -84,7 +82,7 @@ const Login: React.FC<LoginProps> = () => {
 
           <p className="mt-8">
             <a
-              className="block mb-2"
+              className="mb-2 block"
               href="https://adelantto.com/terminos-y-condiciones"
               target="_blank"
             >
@@ -103,7 +101,7 @@ const Login: React.FC<LoginProps> = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="font-semibold text-lg mb-5 text-center">
+          <h3 className="mb-5 text-center text-lg font-semibold">
             Lo sentimos
           </h3>
 
