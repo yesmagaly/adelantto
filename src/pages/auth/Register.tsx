@@ -2,6 +2,8 @@ import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm, Controller, FieldErrors } from "react-hook-form";
+import parsePhoneNumber from "libphonenumber-js";
+
 import { PatternFormat } from "react-number-format";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
@@ -15,6 +17,7 @@ type FormValues = {
 };
 
 const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
+const cleanUpPhone = (phone = "") => phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,16 +33,15 @@ const Register: React.FC = () => {
   const validate = function (values: FormValues) {
     const errors = {} as FieldErrors;
 
-    const pattern = PROD_MODE
-      ? /^\+[0-9]{2}\s\([0-9]{2}\)\s[0-9]{4}-[0-9]{4}$/g
-      : /^\+[0-9]{2}\s\([0-9]{3}\)\s[0-9]{3}-[0-9]{3}$/g;
+
+    const phoneNumber = parsePhoneNumber(values.phone);
 
     if (!values.phone) {
       errors.phone = {
         type: "required",
         message: t("Your cellphone number is required."),
       };
-    } else if (!pattern.test(values.phone)) {
+    } else if (values.phone && !parsePhoneNumber(cleanUpPhone(values.phone))?.isValid()) {
       errors.phone = {
         type: "pattern",
         message: t("Your cellphone number is invalid."),
@@ -61,7 +63,7 @@ const Register: React.FC = () => {
     }
 
     // Clean up phone number.
-    const phone = data?.phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
+    const phone = cleanUpPhone(data?.phone);
 
     // Send phone request.
     const response = await fetch(
