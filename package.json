@@ -30,6 +30,7 @@
     "clsx": "^2.0.0",
     "ionicons": "^7.0.0",
     "js-sha1": "^0.6.0",
+    "libphonenumber-js": "^1.11.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
