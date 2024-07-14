@@ -112,7 +112,7 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="address">Domicilio</label>
+                <label htmlFor="address">Calle y número</label>
                 <input
                   type="text"
                   id="address"
