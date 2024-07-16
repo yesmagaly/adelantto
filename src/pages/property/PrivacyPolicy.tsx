@@ -7,7 +7,7 @@ import * as Modal from "../../components/modal";
 
 const PrivacyPolicy: React.FC = ({ match }) => {
   const router = useIonRouter();
-  const [isOpen, setOpen] = useState(false);
+  // const [isOpen, setOpen] = useState(false);
 
   const {
     handleSubmit,
@@ -20,7 +20,10 @@ const PrivacyPolicy: React.FC = ({ match }) => {
     });
 
     if (response.status === 200) {
-      setOpen(true);
+      // setOpen(true);
+      router.push(
+        `/applications/${match.params.id}/identity-check`
+      )
     }
   };
 
@@ -78,7 +81,7 @@ const PrivacyPolicy: React.FC = ({ match }) => {
           </div>
         </form>
 
-        <Modal.Root isOpen={isOpen}>
+        {/* <Modal.Root isOpen={isOpen}>
           <Modal.Body>
             <p>
               Se ha enviado un SMS con el código de confirmación a su número de
@@ -98,7 +101,7 @@ const PrivacyPolicy: React.FC = ({ match }) => {
               Continuar
             </button>
           </Modal.Footer>
-        </Modal.Root>
+        </Modal.Root> */}
       </IonContent>
     </IonPage>
   );
