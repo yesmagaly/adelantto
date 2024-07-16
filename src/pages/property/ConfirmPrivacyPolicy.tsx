@@ -58,7 +58,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
       } else if (response.status === 429) {
         setErrorModal(true);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (

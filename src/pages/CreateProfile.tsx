@@ -21,7 +21,7 @@ const CreateProfile: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: {},
+    formState: { },
   } = useForm();
 
   const onSubmit = async (data: FormValues) => {

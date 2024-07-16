@@ -16,7 +16,7 @@ type FormValues = {
   phone: string;
 };
 
-const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
+const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-####";
 const cleanUpPhone = (phone = "") => phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
 const Register: React.FC = () => {
