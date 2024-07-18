@@ -19,12 +19,13 @@ interface Application {
 interface DesiredLoanProps
   extends RouteComponentProps<{
     id: string;
-  }> {}
+  }> { }
 
 const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const router = useIonRouter();
+  const [error, setError] = useState<string>()!;
   const [loading, setLoading] = useState(true);
-  const [months, setMonths] = useState();
+  const [months, setMonths] = useState<number>()!;
   const [application, setApplication] = useState(null);
 
   // GET with fetch API
@@ -40,21 +41,25 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
     fetchData();
   }, []);
 
-  const handleOptionClick = (option: number) => () => {
-    setMonths(option);
+  const handleOptionClick = (value: number) => () => {
+    setMonths(value);
   };
 
   const handleClick = async () => {
-    await applications.desiredLoan(match.params.id, {
-      desired_loan_amount: application.lease_monthly_income * months,
-      desired_loan_term_frame: months,
+    if (months) {
+      await applications.desiredLoan(match.params.id, {
+        desired_loan_amount: application.lease_monthly_income * months,
+        desired_loan_term_frame: months,
 
-      step: 'desired_loan'
-    });
+        step: 'desired_loan'
+      });
 
-    router.push(
-      `/applications/${match.params.id}/pre-offer?months=${months}`
-    );
+      router.push(
+        `/applications/${match.params.id}/pre-offer?months=${months}`
+      );
+    } else {
+      setError("Por favor, selecciona un monto para continuar");
+    }
   };
 
   const allowedMonths = [3, 4, 5, 6];
@@ -88,7 +93,10 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   <div className="font-normal">x {value} meses</div>
                 </button>
               ))}
+
+            {error && !months && <p className="text-center font-medium mt-4 text-primary-blue-light">{error}</p>}
           </Page.Body>
+
           <Page.Footer>
             <button className="button is-primary" onClick={handleClick}>
               Siguiente
