@@ -45,7 +45,7 @@ form .form-control:last-child {
 }
 
 .form .pattern-format {
-  background-image: url('../assets/icons/mx.svg');
+  background-image: url("../assets/icons/mx.svg");
   background-size: 2rem 2rem;
   background-position: 15px center;
   background-repeat: no-repeat;
@@ -63,12 +63,28 @@ form .form-control:last-child {
   text-align: center;
 }
 
+.form-password {
+  position: relative;
+}
+
+.form-password button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+}
+
+.form-password button img {
+  opacity: 0.65;
+}
 
 .dislay-control {
   border-radius: 0.25rem;
   @apply bg-gray-100 py-3 px-4 text-center;
 }
-
 
 .dislay-control .number {
   @apply font-medium text-2xl;

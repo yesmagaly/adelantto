@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
@@ -5,6 +6,7 @@ import { useForm } from "react-hook-form";
 
 import logo from "../../assets/icons/logo.svg";
 import Modal from "../../components/modal";
+import InputPassword from "../../components/InputPassword";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
@@ -61,8 +63,7 @@ const Login: React.FC<LoginProps> = () => {
               />
             </div>
             <div className="form-control">
-              <input
-                type="password"
+              <InputPassword
                 placeholder="Password"
                 required
                 maxLength={20}
