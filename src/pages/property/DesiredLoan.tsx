@@ -94,7 +94,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                 </button>
               ))}
 
-            {error && !months && <p className="text-center font-medium mt-4 text-primary-blue-light">{error}</p>}
+            {error && !months && <p className="text-center font-medium mt-4 text-orange-500">{error}</p>}
           </Page.Body>
 
           <Page.Footer>
