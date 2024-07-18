@@ -169,16 +169,6 @@ const CreateProfile: React.FC = () => {
                 />
               </div>
 
-              <div className="form-control">
-                <label htmlFor="ine">INE</label>
-                <input
-                  type="text"
-                  id="ine"
-                  className="min-w-full"
-                  {...register("ine", { required: true })}
-                />
-              </div>
-
               <div className="form-actions text-center">
                 <button className="button is-primary">Guardar</button>
               </div>
