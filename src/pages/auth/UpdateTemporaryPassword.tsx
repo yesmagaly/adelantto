@@ -98,28 +98,31 @@ const UpdateTemporaryPassword: React.FC = () => {
         <div className="blue-bg flex h-full flex-col items-center justify-center text-center">
           <img className="mb-5" src={logo} />
           <div className="text-white">
-            <h1 className="mb-5 text-4xl font-semibold">¡Bienvenido!</h1>
-            <p className="mb-12 text-xl leading-6">
+            <h1 className="mb-4 text-4xl font-semibold">¡Bienvenido!</h1>
+            <p className="mb-8 text-lg leading-6">
               Ahora eres parte <br />
               <strong> de Adelantto </strong>
             </p>
           </div>
 
           <div>
-            <p className="mb-5 text-white">Actualiza tu contraseña</p>
-            <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
-              <InputPassword
-                {...register("password")}
-                required
-                placeholder="Nueva contraseña"
-                className="mb-6"
-              />
-              <InputPassword
-                {...register("password_confirmation")}
-                required
-                placeholder="Repite tu nueva contraseña"
-                className="mb-6"
-              />
+            <p className="mb-8 text-white text-xl font-medium">Actualiza tu contraseña</p>
+
+            <form className="form flex flex-col mb-16" onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-control">
+                <label className="text-white !font-normal">Nueva contraseña</label>
+                <InputPassword
+                  {...register("password")}
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="text-white !font-normal">Repite tu nueva contraseña</label>
+                <InputPassword
+                  {...register("password_confirmation")}
+                  required
+                />
+              </div>
 
               {/* <p className="mb-12 mt-4">
                 <a className="mb-10 text-sm font-semibold text-primary-green underline">
