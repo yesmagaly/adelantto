@@ -6,16 +6,8 @@ import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
 import logo from "../../assets/icons/alternative-logo.svg";
-import { API_SERVER_URL } from "../../config";
 import { authentication } from "../../api";
-
-const t = (text: string) => {
-  const trans = {
-    "The confirmation password should be equal to your new password.": "Tu contraseña de confirmación debe ser igual a tu nueva contraseña."
-  }
-
-  return trans[text] ?? text;
-}
+import { t } from "@adelantto/utils";
 
 type FormValues = {
   password: string;

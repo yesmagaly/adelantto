@@ -9,8 +9,10 @@ export const t = function (text: string) {
   const map = {
     "Your cellphone number is required.": "Tu número de celular es requerido",
     "Your cellphone number is invalid.": "Tu número de celular no es válido",
-    "Your confirmation code is incorect.":
-      "Su código de confirmación es incorrecto",
+    "Your confirmation code is incorect.": "Su código de confirmación es incorrecto",
+    "The confirmation password should be equal to your new password.": "Tu contraseña de confirmación debe ser igual a tu nueva contraseña.",
+    "Lenses detected": "Lentes detectadas",
+    "Something went wrong": "Algo salio mal",
   };
 
   return map[text] ?? text;

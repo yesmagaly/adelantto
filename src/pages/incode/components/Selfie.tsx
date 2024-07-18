@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Camera, CameraResultType, CameraSource, Photo } from "@capacitor/camera";
-
+import { t } from "@adelantto/utils";
 import * as Modal from "../../../components/modal";
 
 import {
@@ -149,7 +149,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
                 <>
                   <p className="message is-danger text-center">
                     Fallo la verificación su biométrica.
-                    <span>({error})</span>
+                    {error && <span>({t(error)})</span>}
                   </p>
                   <button onClick={tryAgain} className="button">
                     Capturar otra vez
