@@ -101,8 +101,8 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
             <Modal.Header className="text-center">
               <h2 className="heading-3">Revisa tu foto</h2>
               <p>
-                Mantenga una expresión neutra, busque una luz equilibrada y
-                quítese las gafas y los sombreros.
+                Manten una expresión neutra, busca una luz equilibrada,
+                retire gafas, gorra o sombrero.
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">
@@ -117,7 +117,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
                 Continuar
               </button>
               <button onClick={takePhoto} className="button">
-                volver a Capturar
+                Volver a capturar
               </button>
             </Modal.Footer>
           </Modal.Root>

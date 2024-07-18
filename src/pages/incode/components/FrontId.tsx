@@ -120,7 +120,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
                 Continuar
               </button>
               <button onClick={takePhoto} className="button">
-                Volver a Capturar
+                Volver a capturar
               </button>
             </Modal.Footer>
           </Modal.Root>

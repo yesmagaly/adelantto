@@ -132,7 +132,7 @@ const LeaseContract: React.FC = () => {
                 )}
               </div>
               <div className="form-control is-center">
-                <label>Código postal de tu inmueble</label>
+                <label>Código postal de tu bien inmueble en renta</label>
                 <input
                   {...register("property_zip_code")}
                   type="text"

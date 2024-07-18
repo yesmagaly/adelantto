@@ -117,7 +117,7 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
                 Continuar
               </button>
               <button onClick={takePhoto} className="button">
-                volver a Capturar
+                Volver a capturar
               </button>
             </Modal.Footer>
           </Modal.Root>

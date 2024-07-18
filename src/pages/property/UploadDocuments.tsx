@@ -59,7 +59,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               rules={{ required: "Documento obligatorio" }}
             >
               <h5 className="font-bold text-sm leading-4">
-                Carátula de tu escritura
+                Escritura de la propiedad
               </h5>
               <p className="text-sm">
                 Con sello de inscripción del Registro Público de la Propiedad
@@ -71,7 +71,7 @@ const UploadDocuments: React.FC = ({ match }) => {
 
             <FileInputItem name="property_lease_agreement" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
-                Contrato de arrendamiento
+                Contrato de arrendamiento vigente
               </h5>
               <p className="text-sm">Firmado por ambas partes</p>
               {errors.property_lease_agreement && (
@@ -81,7 +81,7 @@ const UploadDocuments: React.FC = ({ match }) => {
 
             <FileInputItem name="property_latest_tax_receipt" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
-                Copia del último pago predial del inmueble
+                Boleta predial del último bimestre
               </h5>
               {errors.property_latest_tax_receipt && (
                 <ErrorMessage error={errors.property_latest_tax_receipt} />
@@ -90,7 +90,7 @@ const UploadDocuments: React.FC = ({ match }) => {
 
             <FileInputItem name="property_proof_of_income" control={control} rules={{ required: "Documento obligatorio" }}>
               <h5 className="font-bold text-sm leading-4">
-                Comprobante de ingresos
+                Recibo de nómina o estados de cuenta bancarios de los 3 últimos meses
               </h5>
               <p className="text-sm">Útimos tres meses (Nómina o bancarios)</p>
               {errors.property_proof_of_income && (

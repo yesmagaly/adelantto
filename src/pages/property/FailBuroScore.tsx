@@ -10,7 +10,7 @@ const FailBuroScore: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="content heading-light-green">
-          <h1 className="font-bold text-4xl text-center mt-16">¡Ups!</h1>
+          <h1 className="font-bold text-4xl text-center mt-16">¡Lo sentimos!</h1>
           <div className="flex items-center">
             <Lottie
               animationData={closeHomeAnimation}
@@ -20,8 +20,9 @@ const FailBuroScore: React.FC = () => {
             />
           </div>
           <p className="help-text border-y border-solid border-primary-blue py-6 mb-28 text-balance">
-            Por el momento no cumples los requisitos de Adelantto, te recomendamos intentarlo en {" "}
-            <strong>3</strong> meses nuevamente.
+            La puntuación de Buró es baja.<br />
+            Te recomendamos intentarlo nuevamente en {" "}
+            <strong>6</strong> meses.
           </p>
 
           <button

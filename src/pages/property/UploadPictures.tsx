@@ -83,8 +83,8 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
 
           <div className="text-center mb-4">
             <p className="font-medium text-sm leading-none text-balance mb-4 w-[80%] mx-auto">
-              Los documentos deberán ser escaneados en alta resolución y
-              en formato PDF, de lo contrario declinaremos el proceso.
+              Las fotografías deberán ser tomadas en alta resolución,
+              de lo contrario declinaremos el proceso.
             </p>
             <button className="button is-primary">Siguiente</button>
           </div>
