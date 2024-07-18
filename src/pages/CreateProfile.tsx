@@ -1,8 +1,10 @@
+import { useState, useRef, useEffect } from "react";
 import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
 import userAnimation from "../assets/animations/user.json";
+import CircleInfoUrl from "../assets/icons/circle-info.svg";
 import { useAuth } from "../pages/auth/authContext";
 
 import * as Page from "../components/page";
@@ -15,6 +17,9 @@ type FormValues = {
 };
 
 const CreateProfile: React.FC = () => {
+  const tooltipRef = useRef(null);
+  const buttonRef = useRef(null);
+  const [showTooltip, setShowTooltip] = useState(false);
   const { setUserInfo } = useAuth()!;
   const router = useIonRouter();
 
@@ -24,11 +29,33 @@ const CreateProfile: React.FC = () => {
     formState: { },
   } = useForm();
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        showTooltip &&
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setShowTooltip(false);
+      }
+    }
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [tooltipRef, showTooltip]);
+
   const onSubmit = async (data: FormValues) => {
     const response = await authentication.updateProfile(data);
 
     if (response.status === 200) {
-      setUserInfo('full_name', `${data.name} ${data.last_name}`);
+      setUserInfo("full_name", `${data.name} ${data.last_name}`);
       router.push(`/applications/lease-contract`);
     }
   };
@@ -52,7 +79,8 @@ const CreateProfile: React.FC = () => {
                 <strong>Crea tu perfil</strong>
               </h1>
               <p className="headline text-balance text-center">
-                Tu información personal deberá registrarse del mismo modo en que aparece en tu identificación oficial
+                Tu información personal deberá registrarse del mismo modo en que
+                aparece en tu identificación oficial
               </p>
             </div>
 
@@ -76,8 +104,45 @@ const CreateProfile: React.FC = () => {
                 />
               </div>
 
-              <div className="form-control">
-                <label htmlFor="identification_number">Número de identificación</label>
+              <div className="form-control relative">
+                <label
+                  htmlFor="identification_number"
+                  className="!inline-flex items-center"
+                >
+                  INE / Passport
+                  <button
+                    ref={buttonRef}
+                    aria-label="Más información"
+                    className="ml-2 inline-flex w-4 h-4"
+                    type="button"
+                    onClick={() => setShowTooltip(!showTooltip)}
+                  >
+                    <img
+                      src={CircleInfoUrl}
+                      className={`w-full h-full ${showTooltip ? "opacity-90" : "opacity-60"
+                        }`}
+                    />
+                  </button>
+                </label>
+
+                <div
+                  ref={tooltipRef}
+                  className={`flex flex-col gap-2 absolute left-0 top-7 bg-white p-2 border rounded border-slate-400 ${!showTooltip ? "hidden" : ""
+                    }`}
+                >
+                  <p className="text-sm font-normal text-left">
+                    <span className="font-medium">INE:</span> Número ubicado
+                    después de 'IDMEX' en la parte posterior de la credencial.
+                    Omite el último dígito.
+                  </p>
+
+                  <p className="text-sm font-normal text-left">
+                    <span className="font-medium">Pasaporte:</span> "Ubicado en
+                    la esquina superior derecha de la página de información
+                    personal"
+                  </p>
+                </div>
+
                 <input
                   type="text"
                   id="identification_number"
@@ -108,7 +173,9 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="curp">Clave Única de Registro de Población</label>
+                <label htmlFor="curp">
+                  Clave Única de Registro de Población
+                </label>
                 <input
                   type="text"
                   id="curp"
@@ -154,7 +221,7 @@ const CreateProfile: React.FC = () => {
                   type="text"
                   id="state"
                   className="min-w-full"
-                  value='Ciudad de México'
+                  value="Ciudad de México"
                   {...register("state", { required: true })}
                 />
               </div>
