@@ -39,7 +39,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import Summary from "./pages/loan/Summary";
 
 import PrivacyPolicy from "./pages/property/PrivacyPolicy";
-// import ConfirmPrivacyPolicy from "./pages/property/ConfirmPrivacyPolicy";
+import ConfirmPrivacyPolicy from "./pages/property/ConfirmPrivacyPolicy";
 import FailBuroScore from "./pages/property/FailBuroScore";
 
 /* Core CSS required for Ionic components to work properly */
@@ -140,7 +140,7 @@ const App: React.FC = () => {
           <PrivateRoute path="/applications/:id/desired-loan" component={DesiredLoan} />
           <PrivateRoute path="/applications/:id/pre-offer" component={PreOffer} />
           <PrivateRoute path="/applications/:id/privacy-policy" component={PrivacyPolicy} />
-          {/* <PrivateRoute path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} /> */}
+          <PrivateRoute path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} />
           <PrivateRoute path="/applications/:id/fail-buro-score" component={FailBuroScore} />
           <PrivateRoute path="/applications/:id/identity-check" component={Passport} />
           <PrivateRoute path="/applications/:id/property-documents" component={UploadDocuments} />
