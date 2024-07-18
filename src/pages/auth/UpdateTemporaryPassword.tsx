@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { FieldErrors, useForm } from "react-hook-form";
 import Modal from "../../components/modal";
+import InputPassword from "../../components/InputPassword";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
@@ -107,16 +108,14 @@ const UpdateTemporaryPassword: React.FC = () => {
           <div>
             <p className="mb-5 text-white">Actualiza tu contraseña</p>
             <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
-              <input
+              <InputPassword
                 {...register("password")}
-                type="password"
                 required
                 placeholder="Nueva contraseña"
                 className="mb-6"
               />
-              <input
+              <InputPassword
                 {...register("password_confirmation")}
-                type="password"
                 required
                 placeholder="Repite tu nueva contraseña"
                 className="mb-6"
