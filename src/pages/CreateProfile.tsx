@@ -25,9 +25,6 @@ const CreateProfile: React.FC = () => {
   } = useForm();
 
   const onSubmit = async (data: FormValues) => {
-
-    console.log(data);
-
     const response = await authentication.updateProfile(data);
 
     if (response.status === 200) {

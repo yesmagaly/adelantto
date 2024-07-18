@@ -12,7 +12,7 @@ import { API_SERVER_URL } from "../../config";
 interface VerificationEmailProps
   extends RouteComponentProps<{
     phone: string;
-  }> {}
+  }> { }
 
 type FormValues = {
   email: number;
@@ -51,8 +51,6 @@ const VerificationEmail: React.FC<VerificationEmailProps> = ({ match }) => {
       setError("email", { message: json.message, type: "server" });
       setIsOpen(true);
     }
-
-    console.log(data);
   };
 
   return (
