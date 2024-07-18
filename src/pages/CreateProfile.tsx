@@ -90,6 +90,16 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
+                <label htmlFor="birthdate">Fecha de nacimiento</label>
+                <input
+                  type="date"
+                  id="birthdate"
+                  className="min-w-full"
+                  {...register("birthdate", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
                 <label htmlFor="rfc">Registro Federal de Contribuyentes</label>
                 <input
                   type="text"
