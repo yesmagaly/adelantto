@@ -29,7 +29,7 @@ const AdvanceImmediately: React.FC = () => {
                 />
                 <div className="mb-14">
                   <p className="help-text">
-                    Recibe un adelanto de tus rentas{" "}
+                    Recibe un adelantto de tus rentas{" "}
                     <strong className="text-lg">en tan solo 72 horas.</strong>
                   </p>
                 </div>

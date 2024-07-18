@@ -56,14 +56,13 @@ const ForgotPassword: React.FC = () => {
           />
 
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
+            <p className="help-text mb-10">
+              Enviaremos una contraseña temporal a tu correo electrónico.
+            </p>
+
             <div className="mb-6">
               <input type="email" required placeholder="Email" {...register('email')} />
             </div>
-
-            <p className="help-text mb-28">
-              Enviaremos una contraseña temporal a su correo electrónico.
-            </p>
-
             <button className="button is-primary">Enviar</button>
           </form>
         </div>
