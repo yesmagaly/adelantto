@@ -185,6 +185,7 @@ const CreateProfile: React.FC = () => {
                   className="min-w-full"
                   minLength={18}
                   maxLength={18}
+                  autoCapitalize="characters"
                   {...register("curp", { required: true })}
                 />
               </div>
