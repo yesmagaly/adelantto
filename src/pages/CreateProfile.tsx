@@ -162,12 +162,14 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="rfc">Registro Federal de Contribuyentes</label>
+                <label htmlFor="rfc">Registro Federal de Contribuyentes (con homoclave)</label>
                 <input
                   type="text"
                   id="rfc"
                   placeholder="RFC"
                   className="min-w-full"
+                  minLength={11}
+                  maxLength={11}
                   {...register("rfc", { required: true })}
                 />
               </div>
@@ -181,6 +183,8 @@ const CreateProfile: React.FC = () => {
                   id="curp"
                   placeholder="CURP"
                   className="min-w-full"
+                  minLength={18}
+                  maxLength={18}
                   {...register("curp", { required: true })}
                 />
               </div>
