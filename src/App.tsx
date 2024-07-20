@@ -70,7 +70,7 @@ setupIonicReact();
 const PrivateRoute: React.FC<{
   path: string,
   component?: React.FC<any>
-  children: React.ReactNode,
+  children?: React.ReactNode,
   exact?: boolean
 }> = ({ children, component: Component, ...rest }) => {
   const { authInfo } = useAuth()!;
@@ -95,7 +95,7 @@ const PrivateRoute: React.FC<{
 const PublicRoute: React.FC<{
   path: string,
   component?: React.FC<any>
-  children: React.ReactNode,
+  children?: React.ReactNode,
   exact?: boolean
 }> = ({ children, component: Component, ...rest }) => {
   const { authInfo } = useAuth()!;
@@ -147,10 +147,10 @@ const App: React.FC = () => {
           <PrivateRoute path="/applications/:id/property-pictures" component={UploadPictures} />
           <PrivateRoute path="/applications/:id/final-announcement" component={DataValidation} />
 
+          <PrivateRoute path="/loans/:id" component={Summary} />
           <PrivateRoute path="/loans/:id/success" component={CorrectData} />
           <PrivateRoute path="/loans/:id/account-statement" component={Withdrawals} />
           <PrivateRoute path="/loans/:id/disbursement" component={Outlay} />
-          <PrivateRoute path="/loans/:id" component={Summary} />
 
           <PrivateRoute path="/validation-error" component={ValidationError} />
           <PrivateRoute path="/signature" component={Signature} />

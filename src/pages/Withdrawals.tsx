@@ -78,7 +78,7 @@ const Withdrawals: React.FC = ({ match }) => {
           </div>
         </div>
 
-        <Modal.Root isOpen={open}>
+        <Modal.Root isOpen={open} variant="fully">
           <Modal.Header>
             <h2>
               <strong>
@@ -109,7 +109,9 @@ const Withdrawals: React.FC = ({ match }) => {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={() => setOpen(false)}>Cerrar</button>
+            <button className="font-semibold" onClick={() => setOpen(false)}>
+              Cerrar
+            </button>
           </Modal.Footer>
         </Modal.Root>
 

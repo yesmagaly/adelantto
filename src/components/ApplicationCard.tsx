@@ -53,15 +53,6 @@ export default function ApplicationCard({ item, className }: { item: Application
           <div>{item.status !== "approved" && trans(item.status)}</div>
         </>
       )}
-
-      {item.status === "approved" && item?.loan && (
-        <button
-          className="button is-small !py-2"
-          onClick={() => router.push(`/loans/${item.loan?.id}/success`)}
-        >
-          Continuar
-        </button>
-      )}
     </div>
   );
 }

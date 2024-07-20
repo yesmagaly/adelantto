@@ -5,6 +5,7 @@ import walletAnimation from "../assets/animations/wallet.json";
 
 const CorrectData: React.FC = ({ match }) => {
   const router = useIonRouter();
+
   return (
     <IonPage>
       <IonContent fullscreen>
