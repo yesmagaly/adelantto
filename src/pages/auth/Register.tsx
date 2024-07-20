@@ -28,13 +28,10 @@ const Register: React.FC = () => {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<FormValues>();
 
   const validate = function (values: FormValues) {
     const errors = {} as FieldErrors;
-
-
-    const phoneNumber = parsePhoneNumber(values.phone);
 
     if (!values.phone) {
       errors.phone = {

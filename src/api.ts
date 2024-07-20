@@ -317,3 +317,12 @@ export const resendPrivacyPolicyVerificationCode = async () => {
     }
   );
 };
+
+export const checkZipCode = async (zipCode: string) => {
+  return fetch(`${API_SERVER_URL}/api/zip-codes/${zipCode}`, {
+    headers: {
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+  });
+};

@@ -8,12 +8,20 @@ import CircleInfoUrl from "../assets/icons/circle-info.svg";
 import { useAuth } from "../pages/auth/authContext";
 
 import * as Page from "../components/page";
-import { authentication } from "../api";
+import { authentication, checkZipCode } from "../api";
 
 type FormValues = {
   name: string;
   last_name: string;
   colony: string;
+  municipality: string;
+  zip_code: string;
+  state: string;
+  address: string;
+  curp: string;
+  rfc: string;
+  birthdate: string;
+  identification_number: string;
 };
 
 const CreateProfile: React.FC = () => {
@@ -26,8 +34,9 @@ const CreateProfile: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { },
-  } = useForm();
+    setValue,
+    formState: { errors },
+  } = useForm<FormValues>();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -59,6 +68,22 @@ const CreateProfile: React.FC = () => {
       router.push(`/applications/lease-contract`);
     }
   };
+
+  const handleBlurZipCode = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value) {
+      try {
+        const response = await checkZipCode(event.target.value);
+        if (response.status === 200) {
+          const data = await response.json();
+          setValue('municipality', data.municipality);
+          setValue('state', data.state);
+          setValue('colony', data.place);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 
   return (
     <IonPage>
@@ -201,6 +226,17 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
+                <label htmlFor="zip_code">Código postal</label>
+                <input
+                  type="text"
+                  id="zip_code"
+                  className="min-w-full"
+                  {...register("zip_code", { required: true })}
+                  onBlur={handleBlurZipCode}
+                />
+              </div>
+
+              <div className="form-control">
                 <label htmlFor="colony">Colonia</label>
                 <input
                   type="text"
@@ -226,20 +262,10 @@ const CreateProfile: React.FC = () => {
                   type="text"
                   id="state"
                   className="min-w-full"
-                  value="Ciudad de México"
                   {...register("state", { required: true })}
                 />
               </div>
 
-              <div className="form-control">
-                <label htmlFor="zip_code">Código postal</label>
-                <input
-                  type="text"
-                  id="zip_code"
-                  className="min-w-full"
-                  {...register("zip_code", { required: true })}
-                />
-              </div>
 
               <div className="form-actions text-center">
                 <button className="button is-primary">Guardar</button>
