@@ -79,7 +79,7 @@ const LeaseContract: React.FC = () => {
             </Page.Header>
             <Page.Body>
               <div className="form-control is-center">
-                <label>Valor de tu renta mensual antes de cuota de administración</label>
+                <label>Valor de renta mensual antes de cuota de mantenimiento</label>
                 <Controller
                   rules={{
                     validate: {

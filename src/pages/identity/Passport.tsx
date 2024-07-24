@@ -116,11 +116,11 @@ const Passport: React.FC = ({ match }) => {
                 <div className="heading--center">
                   <img className="h-12 mb-8" src={close} />
                 </div>
-                <h5 className="font-bold text-[30px]">¡Ups!</h5>
+                <h5 className="font-bold text-[30px]">¡Lo sentimos!</h5>
                 <p>
-                  Por el momento no cumples los requisitos Adelantto, te
-                  recomendamos intentarlo en
-                  <strong>3 meses nuevamente</strong>
+                  La puntuación de Buró es baja.<br />
+                  Te recomendamos intentarlo nuevamente en {" "}
+                  <strong>3</strong> meses.
                 </p>
               </Modal.Root>
             )}

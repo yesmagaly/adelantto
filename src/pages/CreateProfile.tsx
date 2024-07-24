@@ -134,7 +134,7 @@ const CreateProfile: React.FC = () => {
                   htmlFor="identification_number"
                   className="!inline-flex items-center"
                 >
-                  INE / Passport
+                  INE / Pasaporte
                   <button
                     ref={buttonRef}
                     aria-label="Más información"
@@ -216,7 +216,7 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="address">Calle, número interior / número exterior</label>
+                <label htmlFor="address">Calle, número exterior / interior</label>
                 <input
                   type="text"
                   id="address"
@@ -247,7 +247,7 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="municipality">Municipio</label>
+                <label htmlFor="municipality">Alcaldía</label>
                 <input
                   type="text"
                   id="municipality"
