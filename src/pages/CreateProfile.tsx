@@ -138,7 +138,7 @@ const CreateProfile: React.FC = () => {
                   <button
                     ref={buttonRef}
                     aria-label="Más información"
-                    className="ml-2 inline-flex w-4 h-4"
+                    className="ml-2 inline-flex h-4 w-4"
                     type="button"
                     onClick={() => setShowTooltip(!showTooltip)}
                   >
@@ -155,13 +155,13 @@ const CreateProfile: React.FC = () => {
                   className={`flex flex-col gap-2 absolute left-0 top-7 bg-white p-2 border rounded border-slate-400 ${!showTooltip ? "hidden" : ""
                     }`}
                 >
-                  <p className="text-sm font-normal text-left">
+                  <p className="text-left text-sm font-normal">
                     <span className="font-medium">INE:</span> Número ubicado
                     después de 'IDMEX' en la parte posterior de la credencial.
                     Omite el último dígito.
                   </p>
 
-                  <p className="text-sm font-normal text-left">
+                  <p className="text-left text-sm font-normal">
                     <span className="font-medium">Pasaporte:</span> "Ubicado en
                     la esquina superior derecha de la página de información
                     personal"
@@ -193,8 +193,8 @@ const CreateProfile: React.FC = () => {
                   id="rfc"
                   placeholder="RFC"
                   className="min-w-full"
-                  minLength={11}
-                  maxLength={11}
+                  minLength={13}
+                  maxLength={13}
                   {...register("rfc", { required: true })}
                 />
               </div>
