@@ -7,7 +7,7 @@ import { FrontId } from "../incode/components/FrontId";
 import { BackId } from "../incode/components/BackId";
 import { Selfie } from "../incode/components/Selfie";
 
-import {initSession} from "../incode/client";
+import { initSession } from "../incode/client";
 
 import * as Modal from "../../components/modal";
 import * as Page from "../../components/page";
@@ -17,7 +17,6 @@ import photographyAnimation from "../../assets/animations/photography.json";
 import { applications } from "../../api";
 
 const Passport: React.FC = ({ match }) => {
-  const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const [session, setSession] = useState();
   const [step, setStep] = useState(-1);
@@ -59,7 +58,7 @@ const Passport: React.FC = ({ match }) => {
     await applications.identityCheck(match.params.id, {
       identity_checked: true,
       step: 'identity_check'
-     });
+    });
 
     router.push(
       `/applications/${match.params.id}/property-documents`
@@ -101,27 +100,14 @@ const Passport: React.FC = ({ match }) => {
             {step === 3 && (
               <Modal.Root isOpen={true}>
                 <div className="text-center">
-                  <img className="h-10 mb-4 inline-block" src={check} />
-                  <p className="text-[20px] mb-4">Datos correctos</p>
+                  <img className="mb-4 inline-block h-10" src={check} />
+                  <p className="mb-4 text-[20px]">Datos correctos</p>
                 </div>
                 <Modal.Footer>
                   <button className="button is-primary" onClick={finalCallback}>
                     Continuar
                   </button>
                 </Modal.Footer>
-              </Modal.Root>
-            )}
-            {step === 4 && (
-              <Modal.Root isOpen={true}>
-                <div className="heading--center">
-                  <img className="h-12 mb-8" src={close} />
-                </div>
-                <h5 className="font-bold text-[30px]">¡Lo sentimos!</h5>
-                <p>
-                  La puntuación de Buró es baja.<br />
-                  Te recomendamos intentarlo nuevamente en {" "}
-                  <strong>3</strong> meses.
-                </p>
               </Modal.Root>
             )}
           </Page.Body>
