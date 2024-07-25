@@ -51,7 +51,7 @@ const Withdrawals: React.FC = ({ match }) => {
                 rules={{ required: "Documento obligatorio" }}
               >
                 <h5 className="font-bold text-sm leading-4">
-                  Subir carátula de tu estado de cuenta
+                  Subir estado de cuenta bancario completo (con QR)
                 </h5>
 
                 {errors?.account_statement && (
@@ -66,8 +66,7 @@ const Withdrawals: React.FC = ({ match }) => {
                   Términos interbancarios
                 </a>
                 <p>
-                  A continuación encontrarás el contrato relacionado a tu
-                  solicitud.
+                  Enviaremos el contrato de tu Adelantto a tu correo electrónico, por favor, ayudanos a revisarlo y firmarlo de manera digital.
                 </p>
               </div>
 
@@ -125,8 +124,7 @@ const Withdrawals: React.FC = ({ match }) => {
               play
             />
             <p className="text-[16px] mb-6 leading-5">
-              En este punto estamos validando el convenio con tu entidad bancaria,
-              para cualquier disposición de efectivo necesaria.
+              En este momento validaremos la información bancaria que nos proporcionaste. Este proceso llevará máximo 24 hrs hábiles.
             </p>
           </Modal.Body>
           <Modal.Footer>
