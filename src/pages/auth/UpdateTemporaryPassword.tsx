@@ -39,7 +39,7 @@ const validate = function (values: FormValues) {
     };
   }
 
-  if (values.password.length >= 8) {
+  if (values.password.length < 8) {
     errors.password = {
       type: "at_least_eight_characters_required",
       message: t("At least eight characters are required."),
