@@ -21,14 +21,35 @@ const validate = function (values: FormValues) {
   if (!values.password) {
     errors.password = {
       type: "required",
-      message: "The password is required.",
+      message: t("The password is required."),
+    };
+  }
+
+  if (values.password.match(/\d+/) === null) {
+    errors.password = {
+      type: "at_least_one_number_missing",
+      message: t("At least one number is missing."),
+    };
+  }
+
+  if (values.password.match(/[A-Z]/) === null) {
+    errors.password = {
+      type: "at_least_one_uppercase_character_missing",
+      message: t("At least one uppercase character is missing."),
+    };
+  }
+
+  if (values.password.length >= 8) {
+    errors.password = {
+      type: "at_least_eight_characters_required",
+      message: t("At least eight characters are required."),
     };
   }
 
   if (!values.password_confirmation) {
     errors.password_confirmation = {
       type: "required",
-      message: "The password is required.",
+      message: t("The password is required."),
     };
   }
 

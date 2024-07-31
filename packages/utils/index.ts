@@ -12,7 +12,11 @@ export const t = function (text: string) {
     "Your confirmation code is incorect.": "Su código de confirmación es incorrecto",
     "The confirmation password should be equal to your new password.": "Tu contraseña de confirmación debe ser igual a tu nueva contraseña.",
     "Lenses detected": "Lentes detectadas",
-    "Something went wrong": "Algo salio mal",
+    "Something went wrong": "Algo salió mal.",
+    "The password is required.": "La contraseña es obligatoria.",
+    "At least one number is missing.": "Se requieren al menos un número.",
+    "At least one uppercase character is missing.": "Se requieren al menos un carácter en mayúscula.",
+    "At least eight characters are required.": "Se requieren al menos ocho caracteres."
   };
 
   return map[text] ?? text;
