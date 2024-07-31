@@ -90,8 +90,6 @@ const CreateProfile: React.FC = () => {
       <IonContent fullscreen>
         <Page.Root variant="compact">
           <Page.Body>
-            <div className="heading__pager text-right">1 de 3</div>
-
             <Lottie
               animationData={userAnimation}
               style={{ width: 280, height: 280, margin: "0 auto" }}

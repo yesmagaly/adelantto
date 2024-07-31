@@ -14,8 +14,7 @@ const AdvanceImmediately: React.FC = () => {
           <Page.Body>
             <div className="">
               <div>
-                <div className="heading__pager text-right">1 de 3</div>
-                <h1 className="heading__title text-center pt-16">
+                <h1 className="heading__title pt-16 text-center">
                   <strong>Adelantto</strong> de inmediato
                 </h1>
               </div>
@@ -29,7 +28,7 @@ const AdvanceImmediately: React.FC = () => {
                 />
                 <div className="mb-14">
                   <p className="help-text">
-                    Recibe un adelantto de tus rentas{" "}
+                    Recibe un adelantto de tus rentas
                     <strong className="text-lg">en tan solo 72 horas.</strong>
                   </p>
                 </div>
