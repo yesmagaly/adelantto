@@ -71,6 +71,7 @@ const Passport: React.FC = ({ match }) => {
         <Page.Root>
           <Page.Header>
             <div className="heading heading--green">
+              <div className="heading__pager text-right">Paso 5 de 7</div>
               <h1 className="heading-2">
                 Captura tu <strong>INE o Pasaporte</strong>
               </h1>

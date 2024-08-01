@@ -65,7 +65,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue mb-10 flex flex-col justify-center">
-          <div className="heading__pager text-right"> Paso 3 de 3</div>
+          <div className="heading__pager text-right">Paso 4 de 7</div>
           <h4 className="text-2xl">
             Autorización para solicitar reportes de crédito, informes buró y
             reportes de crédito especiales

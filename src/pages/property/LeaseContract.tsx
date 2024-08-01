@@ -90,6 +90,7 @@ const LeaseContract: React.FC = () => {
           <Page.Root>
             <Page.Header className="text-center">
               <div className="heading heading--blue">
+                <div className="heading__pager text-right">Paso 1 de 7</div>
                 <h1 className="heading-3">
                   Datos de contrato <strong>de arrendamiento</strong>
                 </h1>

@@ -44,7 +44,7 @@ const UploadDocuments: React.FC = ({ match }) => {
     <IonPage>
       <IonContent fullscreen>
         <div className="heading heading--blue flex flex-col justify-center">
-          <div className="heading__pager text-right">Paso 3 de 3</div>
+          <div className="heading__pager text-right">Paso 6 de 7</div>
           <h4 className="text-2xl">
             A continuación <strong>sube los siguientes documentos</strong> para
             validar tu propiedad
