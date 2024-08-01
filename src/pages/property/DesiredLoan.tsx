@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router";
 
 import { applications } from "../../api";
 import * as Page from "../../components/page";
+import { atLeastThreeMonths } from "./LeaseContract";
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("es-MX", {
@@ -12,8 +13,9 @@ function formatCurrency(value: number) {
   }).format(value);
 }
 
-interface Application {
-  lease_monthly_income: number,
+export interface Application {
+  lease_monthly_income: number;
+  lease_end_date: string;
 }
 
 interface DesiredLoanProps
@@ -26,7 +28,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const [error, setError] = useState<string>()!;
   const [loading, setLoading] = useState(true);
   const [months, setMonths] = useState<number>()!;
-  const [application, setApplication] = useState(null);
+  const [application, setApplication] = useState<Application>();
 
   // GET with fetch API
   useEffect(() => {
@@ -61,9 +63,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
       setError("Por favor, selecciona un monto para continuar");
     }
   };
-
-  const allowedMonths = [3, 4, 5, 6];
-
+    
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -79,8 +79,8 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
           <Page.Body className="flex flex-col gap-2">
             {loading && <div>Loading</div>}
 
-            {!loading &&
-              allowedMonths.map((value) => (
+            {!loading && application &&
+              [3, 4, 5, 6].filter(value => atLeastThreeMonths(application?.lease_end_date, value)).map((value) => (
                 <button
                   key={`dl-${value}`}
                   id={`desired-loan-${value}`}

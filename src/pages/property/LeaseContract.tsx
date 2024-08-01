@@ -33,6 +33,18 @@ function validateMinContractTime(startDateStr: string, endDateStr: string) {
   return minEndDate.getTime() - oneDayTimestamp <= endDate.getTime();
 }
 
+export function atLeastThreeMonths(end_date, months_number) {
+  const date1 = new Date();
+  const date2 = new Date(end_date);
+
+  const diffTime = Math.abs(date2 - date1);
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+  const diffMonths = diffDays / 30.44;
+
+  return diffMonths >= months_number;
+}
+
 const LeaseContract: React.FC = () => {
   const router = useIonRouter();
   const { authInfo } = useAuth()!;
@@ -50,6 +62,12 @@ const LeaseContract: React.FC = () => {
     if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
       return setError("lease_end_date", {
         message: "El contrato mínimo es de 6 meses",
+      });
+    }
+
+    if (!atLeastThreeMonths(data.lease_end_date, 3)) {
+      return setError("lease_end_date", {
+        message: "El tiempo restante del contrato debe ser mayor o igual a 3 meses",
       });
     }
 

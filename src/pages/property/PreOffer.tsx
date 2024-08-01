@@ -6,10 +6,13 @@ import { calculator, applications } from "../../api";
 import * as Page from "../../components/page";
 import { formatCurrency } from "@adelantto/utils";
 import { OfferType } from "../../types";
+import { atLeastThreeMonths } from "./LeaseContract";
+import { Application } from "./DesiredLoan";
 
 interface PreOfferProps extends RouteComponentProps<{ id: string }> {}
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
+  const [application, setApplication] = useState<Application>();
   const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
   const [loading, setLoading] = useState(true);
@@ -34,6 +37,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
       setOffer(data);
       setLoading(false);
       setIncome(application.lease_monthly_income);
+      setApplication(application);
     };
 
     fetchLoanContract();
@@ -116,15 +120,22 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
           </Page.Body>
 
           <Page.Footer className="has-divider">
-            <div className="form-control is-center">
-              <label>¿Te interesa ver el resumen para otros meses?</label>
-              <select defaultValue={months} onChange={handleMothsChange}>
-                <option value={3}>3 meses</option>
-                <option value={4}>4 meses</option>
-                <option value={5}>5 meses</option>
-                <option value={6}>6 meses</option>
-              </select>
-            </div>
+            {application && (
+              <div className="form-control is-center">
+                <label>¿Te interesa ver el resumen para otros meses?</label>
+                <select defaultValue={months} onChange={handleMothsChange}>
+                  {[3, 4, 5, 6]
+                    .filter((value) =>
+                      atLeastThreeMonths(application?.lease_end_date, value)
+                    )
+                    .map((value) => (
+                      <option key={value} value={value}>
+                        {value} meses
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
 
             <button onClick={handleSubmit} className="button is-secondary mb-7">
               Continuar
