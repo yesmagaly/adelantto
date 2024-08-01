@@ -62,9 +62,6 @@ const Withdrawals: React.FC = ({ match }) => {
               </FileInput>
 
               <div className="mb-16 mt-4">
-                <a onClick={() => setOpen(true)} className="underline leading-10">
-                  Términos interbancarios
-                </a>
                 <p>
                   Enviaremos el contrato de tu Adelantto a tu correo electrónico, por favor, ayudanos a revisarlo y firmarlo de manera digital.
                 </p>
@@ -76,43 +73,6 @@ const Withdrawals: React.FC = ({ match }) => {
             </form>
           </div>
         </div>
-
-        <Modal.Root isOpen={open} variant="fully">
-          <Modal.Header>
-            <h2>
-              <strong>
-                Términos <br /> interbancarios
-              </strong>
-            </h2>
-          </Modal.Header>
-          <Modal.Body>
-            <h5>
-              <strong>
-                1. Lorem ipsum dolor sit amet,
-                <br /> consectetuer adipiscing elit, sed
-              </strong>
-            </h5>
-            <p>
-              diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-              aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
-              exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-              commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
-              vulputate velit esse molestie consequat, vel illum dolore eu
-              feugiat nulla facilisis at vero eros et accumsan et iusto odio
-              dignissim qui blandit praesent luptatum zzril delenit augue duis
-              dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, cons
-              ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-              ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-              minim veniam, quis nostrud exerci tation ullamcorper suscipit
-              lobortis nisl ut aliquip ex ea commodo consequat.
-            </p>
-          </Modal.Body>
-          <Modal.Footer>
-            <button className="font-semibold" onClick={() => setOpen(false)}>
-              Cerrar
-            </button>
-          </Modal.Footer>
-        </Modal.Root>
 
         <Modal.Root isOpen={showModal}>
           <Modal.Header></Modal.Header>
