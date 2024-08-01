@@ -28,11 +28,7 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
     <div className="p-4 border-b">
       <div className="flex justify-between items-center">
         <div className="flex gap-6 items-center">
-          <img src={masterCardIcon} className="w-5 h-4" />
-          <div>
-            <h4 className="font-bold text-lx leading-5">Adelantto 00001</h4>
-            <p className="text-xs">Calle 17 Sur 13-22</p>
-          </div>
+          <h4 className="font-bold text-lx leading-5">Adelantto 00001</h4>
         </div>
 
         {status === "awaiting_account_statement_upload" &&
