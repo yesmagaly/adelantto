@@ -190,7 +190,7 @@ const CreateProfile: React.FC = () => {
                   type="text"
                   id="rfc"
                   placeholder="RFC"
-                  className="min-w-full, uppercase"
+                  className="min-w-full uppercase"
                   minLength={13}
                   maxLength={13}
                   {...register("rfc", { required: true })}
@@ -205,7 +205,7 @@ const CreateProfile: React.FC = () => {
                   type="text"
                   id="curp"
                   placeholder="CURP"
-                  className="min-w-full, uppercase"
+                  className="min-w-full uppercase"
                   minLength={18}
                   maxLength={18}
                   autoCapitalize="characters"
