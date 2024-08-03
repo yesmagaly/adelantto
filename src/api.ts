@@ -12,7 +12,7 @@ function getToken() {
 
 export type UserProfile = {
   name: string;
-  last_name: string;
+  first_last_name: string;
   colony: string;
 };
 

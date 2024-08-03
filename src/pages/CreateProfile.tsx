@@ -12,7 +12,8 @@ import { authentication, checkZipCode } from "../api";
 
 type FormValues = {
   name: string;
-  last_name: string;
+  first_last_name: string;
+  second_last_name: string;
   colony: string;
   municipality: string;
   zip_code: string;
@@ -64,7 +65,7 @@ const CreateProfile: React.FC = () => {
     const response = await authentication.updateProfile(data);
 
     if (response.status === 200) {
-      setUserInfo("full_name", `${data.name} ${data.last_name}`);
+      setUserInfo("full_name", `${data.name} ${data.first_last_name} ${data.second_last_name}`);
       router.push(`/applications/lease-contract`);
     }
   };
@@ -118,12 +119,22 @@ const CreateProfile: React.FC = () => {
                 />
               </div>
               <div className="form-control">
-                <label htmlFor="last_name">Apellidos</label>
+                <label htmlFor="first_last_name">Apellido Paterno</label>
                 <input
                   type="text"
-                  id="last_name"
+                  id="first_last_name"
                   className="min-w-full"
-                  {...register("last_name", { required: true })}
+                  {...register("first_last_name", { required: true })}
+                />
+              </div>
+
+              <div className="form-control">
+                <label htmlFor="second_last_name">Apellido Materno</label>
+                <input
+                  type="text"
+                  id="second_last_name"
+                  className="min-w-full"
+                  {...register("second_last_name", { required: true })}
                 />
               </div>
 
