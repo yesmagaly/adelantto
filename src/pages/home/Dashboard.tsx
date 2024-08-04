@@ -87,7 +87,7 @@ const Dashboard: React.FC = () => {
                 {items
                   .filter((item) => item.status !== "approved")
                   .map((item) => (
-                    <ApplicationCard item={item} className="mb-4" />
+                    <ApplicationCard key={item.id} item={item} className="mb-4" />
                   ))}
               </div>
             )}

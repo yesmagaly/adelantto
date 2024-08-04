@@ -57,13 +57,13 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
       });
 
       router.push(
-        `/applications/${match.params.id}/pre-offer?months=${months}`
+        `/applications/${match.params.id}/pre-offer`
       );
     } else {
       setError("Por favor, selecciona un monto para continuar");
     }
   };
-    
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -95,7 +95,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                 </button>
               ))}
 
-            {error && !months && <p className="text-center font-medium mt-4 text-orange-500">{error}</p>}
+            {error && !months && <p className="mt-4 text-center font-medium text-orange-500">{error}</p>}
           </Page.Body>
 
           <Page.Footer>

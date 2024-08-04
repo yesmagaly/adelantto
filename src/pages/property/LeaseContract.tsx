@@ -36,10 +36,8 @@ function validateMinContractTime(startDateStr: string, endDateStr: string) {
 export function atLeastThreeMonths(end_date, months_number) {
   const date1 = new Date();
   const date2 = new Date(end_date);
-
   const diffTime = Math.abs(date2 - date1);
   const diffDays = diffTime / (1000 * 60 * 60 * 24);
-
   const diffMonths = diffDays / 30.44;
 
   return diffMonths >= months_number;
@@ -164,7 +162,7 @@ const LeaseContract: React.FC = () => {
                 <h4 className="mb-2 font-medium">
                   ¿Cómo recibes el pago de tu renta?
                 </h4>
-                <div className="flex items-center justify-between w-full">
+                <div className="flex w-full items-center justify-between">
                   <div>
                     <input
                       {...register("lease_payment_method")}

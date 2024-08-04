@@ -9,35 +9,31 @@ import { OfferType } from "../../types";
 import { atLeastThreeMonths } from "./LeaseContract";
 import { Application } from "./DesiredLoan";
 
-interface PreOfferProps extends RouteComponentProps<{ id: string }> {}
+interface PreOfferProps extends RouteComponentProps<{ id: string }> { }
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
   const [application, setApplication] = useState<Application>();
-  const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
-  const [loading, setLoading] = useState(true);
-  const [months, setMonths] = useState<number>(
-    Number.parseInt(params.get("months"))
-  );
+  const [months, setMonths] = useState<number>();
   const [offer, setOffer] = useState<OfferType>()!;
   const [income, setIncome] = useState<number>()!;
 
-  // GET with fetch API
   useEffect(() => {
     const fetchLoanContract = async () => {
       const response = await applications.get(match.params.id);
       const application = await response.json();
+      const defaultMonths = application?.desired_loan_term_frame;
       const calcResponse = await calculator.calc({
-        principal: application.lease_monthly_income * months,
-        months: months,
+        principal: application.lease_monthly_income * defaultMonths,
+        months: defaultMonths,
       });
 
       const data = await calcResponse.json();
 
       setOffer(data);
-      setLoading(false);
       setIncome(application.lease_monthly_income);
       setApplication(application);
+      setMonths(defaultMonths);
     };
 
     fetchLoanContract();
@@ -87,7 +83,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
             </div>
           </Page.Header>
           <Page.Body>
-            <h3 className="mb-6 leading-5 text-center">
+            <h3 className="mb-6 text-center leading-5">
               <strong className="text-lg">Seleccionaste {months} meses,</strong>
               <br />a continuación te presentamos el resumen de nuestra oferta.
             </h3>
@@ -142,7 +138,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
               Continuar
             </button>
 
-            <p className="text-xs text-center leading-4">
+            <p className="text-center text-xs leading-4">
               Al aceptar estas aprobando el uso de tus datos para validaciones
               de identificación.
               <a className="underline" href="">
