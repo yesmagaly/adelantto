@@ -31,13 +31,13 @@ const Withdrawals: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue text-center heading--compact mb-2">
+        <div className="heading heading--blue heading--compact mb-2 text-center">
           <h3 className="heading-3 py-5">
             ¿Dónde quieres <strong>tu dinero?</strong>
           </h3>
         </div>
         <div className="content">
-          <div className="content bg-white py-5 shadow-2xl w-full border border-gray-200 mb-5">
+          <div className="content mb-5 w-full border border-gray-200 bg-white py-5 shadow-2xl">
             <Lottie
               animationData={walletAnimation}
               style={{ width: 251, height: 251 }}
@@ -50,7 +50,7 @@ const Withdrawals: React.FC = ({ match }) => {
                 control={control}
                 rules={{ required: "Documento obligatorio" }}
               >
-                <h5 className="font-bold text-sm leading-4">
+                <h5 className="text-sm font-bold leading-4">
                   Subir estado de cuenta bancario completo (con QR)
                 </h5>
 
@@ -83,7 +83,7 @@ const Withdrawals: React.FC = ({ match }) => {
               loop
               play
             />
-            <p className="text-[16px] mb-6 leading-5">
+            <p className="mb-6 text-[16px] leading-5">
               En este momento validaremos la información bancaria que nos proporcionaste. Este proceso llevará máximo 24 hrs hábiles.
             </p>
           </Modal.Body>

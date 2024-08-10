@@ -20,7 +20,6 @@ import UploadPictures from "./pages/property/UploadPictures";
 import LeaseContract from "./pages/property/LeaseContract";
 import DesiredLoan from "./pages/property/DesiredLoan";
 import Passport from "./pages/identity/Passport";
-import TermsAndConditions from "./pages/TermsAndConditions";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import Welcome from "./pages/Welcome";
 import PreOffer from "./pages/property/PreOffer";
@@ -164,7 +163,6 @@ const App: React.FC = () => {
           <PublicRoute path="/login" component={Login} />
           <PublicRoute path="/verification-code/:phone" component={VerificationCode} />
           <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
-          <PublicRoute path="/terms-and-conditions" component={TermsAndConditions} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
           <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
         </IonReactRouter>
