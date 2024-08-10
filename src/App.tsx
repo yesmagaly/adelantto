@@ -27,10 +27,8 @@ import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
 import Withdrawals from "./pages/Withdrawals";
-import Signature from "./pages/Signature";
 import Outlay from "./pages/Outlay";
 import CorrectDeposit from "./pages/CorrectDeposit";
-import Profile from "./pages/Profile";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -152,9 +150,7 @@ const App: React.FC = () => {
           <PrivateRoute path="/loans/:id/disbursement" component={Outlay} />
 
           <PrivateRoute path="/validation-error" component={ValidationError} />
-          <PrivateRoute path="/signature" component={Signature} />
           <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
-          <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/succesful-transaction" component={SuccesfulTransaction} />
 
           <PublicRoute path="/start" component={Home} />
