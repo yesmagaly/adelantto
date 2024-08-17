@@ -4,10 +4,10 @@ import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
 import userAnimation from "../assets/animations/user.json";
-import CircleInfoUrl from "../assets/icons/circle-info.svg";
 import { useAuth } from "../pages/auth/authContext";
 
 import * as Page from "../components/page";
+import * as Tooltip from "../components/Tooltip";
 import { authentication, checkZipCode } from "../api";
 
 type FormValues = {
@@ -144,26 +144,11 @@ const CreateProfile: React.FC = () => {
                   className="!inline-flex items-center"
                 >
                   INE / Pasaporte
-                  <button
-                    ref={buttonRef}
-                    aria-label="Más información"
-                    className="ml-2 inline-flex h-4 w-4"
-                    type="button"
-                    onClick={() => setShowTooltip(!showTooltip)}
-                  >
-                    <img
-                      src={CircleInfoUrl}
-                      className={`w-full h-full ${showTooltip ? "opacity-90" : "opacity-60"
-                        }`}
-                    />
-                  </button>
+
+                  <Tooltip.Trigger aria-label="Más información" value="identification-number-tooltip" />
                 </label>
 
-                <div
-                  ref={tooltipRef}
-                  className={`flex flex-col gap-2 absolute left-0 top-7 bg-white p-2 border rounded border-slate-400 ${!showTooltip ? "hidden" : ""
-                    }`}
-                >
+                <Tooltip.Content value="identification-number-tooltip">
                   <p className="text-left text-sm font-normal">
                     <span className="font-medium">INE:</span> Número ubicado
                     después de 'IDMEX' en la parte posterior de la credencial.
@@ -175,7 +160,8 @@ const CreateProfile: React.FC = () => {
                     la esquina superior derecha de la página de información
                     personal"
                   </p>
-                </div>
+
+                </Tooltip.Content>
 
                 <input
                   type="text"

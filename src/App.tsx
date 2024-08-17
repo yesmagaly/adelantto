@@ -129,10 +129,11 @@ const App: React.FC = () => {
       <IonApp>
         <IonReactRouter>
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute path="/update-temporary-password" component={UpdateTemporaryPassword} />
+          <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
           <PrivateRoute path="/create-profile" component={CreateProfile} />
+
           <PrivateRoute path="/applications/lease-contract" component={LeaseContract} />
           <PrivateRoute path="/applications/:id/desired-loan" component={DesiredLoan} />
           <PrivateRoute path="/applications/:id/pre-offer" component={PreOffer} />
