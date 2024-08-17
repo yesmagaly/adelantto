@@ -105,7 +105,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
                 </div>
 
                 <div className="dislay-control">
-                  <div className="number">{formatCurrency(offer.fees)} MXN</div>
+                  <div className="number">{formatCurrency(offer.commission)} MXN</div>
                   <span>Comisión por apertura</span>
                 </div>
 
