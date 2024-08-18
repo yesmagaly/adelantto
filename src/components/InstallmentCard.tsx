@@ -9,19 +9,22 @@ interface ComponentProps extends InstallmentType {
 }
 
 export default function InstallmentCard({ index, amount, status, due_date }: ComponentProps) {
-  const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <div className="flex justify-between items-center p-4">
+      <div className="flex items-center justify-between">
         <div>
-          <h6 className="font-bold uppercase leading-6">MES {index + 1} - {status === 'paid' ? 'Pagado' : 'Pendiente por pagar'}</h6>
-          <p className="text-xs">{due_date}</p>
+          <h6 className="font-semibold leading-6">
+            Mes {index + 1}: {status === 'paid' ? 'Pagado' : 'Pendiente por pagar'}
+          </h6>
+          <p className="text-sm">Fecha limite de pago:
+            <span className="block font-medium">{due_date}</span>
+          </p>
         </div>
 
         <button
-          className="font-regular px-3 py-1 rounded text-white bg-blue-900"
+          className="font-regular rounded bg-blue-900 px-3 py-1 text-white"
           onClick={() => setIsOpen(true)}
         >
           Ver
@@ -30,11 +33,13 @@ export default function InstallmentCard({ index, amount, status, due_date }: Com
 
       <Modal.Root isOpen={isOpen}>
         <Modal.Header>
-          <h6 className="text-blue-700 mb-6">CUOTA A PAGAR</h6>
-          <p className="text-3xl font-bold mb-6">{formatCurrency(amount)}</p>
+          <h6 className="mb-6 text-blue-700">CUOTA A PAGAR</h6>
+          <p className="mb-6 text-3xl font-bold">{formatCurrency(amount)}</p>
         </Modal.Header>
         <Modal.Body>
-          <h4 className="font-bold text-lg text-blue-900 mb-4">MEDIOS DE PAGO</h4>
+          <h4 className="mb-4 text-lg font-bold text-blue-900">
+            MEDIOS DE PAGO
+          </h4>
 
           <div className="flex justify-center">
             Master Card

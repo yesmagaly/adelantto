@@ -23,7 +23,7 @@ const Summary: React.FC = ({ match }) => {
         const residue =
           data.amount -
           data.installments
-            .filter((installment) => installment.status === "paid")
+            .filter((installment) => installment.status === "approved")
             .reduce((acc, installment) => acc + installment.amount, 0);
 
         const installment = data.installments.find(
@@ -39,9 +39,6 @@ const Summary: React.FC = ({ match }) => {
 
         setLoan(data);
       } catch (error: any) {
-        // if (error instanceof UnauthorizedError) {
-        //   setError(error.message);
-        // }
       }
     };
 
@@ -55,22 +52,21 @@ const Summary: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="h-90 bg-cover text-white px-9 py-10 heading--blue">
-          <h1 className="heading-4">Adelantto 00001</h1>
-          <p className="mb-6">Calle 17 Sur 13-22</p>
+        <div className="h-90 heading--blue bg-cover px-8 py-10 text-white">
+          <h1 className="heading-4">Adelantto {(loan.id).toString().padStart(5, '0')}</h1>
 
           <div className="border-full" />
 
           <div>
-            <h6 className="mb-4 mt-5 text-primary-green">CUOTA A PAGAR</h6>
+            <h6 className="mb-1 mt-5 text-sm">CUOTA A PAGAR</h6>
             {detail && (
-              <p className="font-bold text-2xl mb-8">
+              <p className="mb-4 text-2xl font-bold">
                 {formatCurrency(detail.installment.amount)}
               </p>
             )}
-            <h6 className="text-primary-green mb-4">Saldo</h6>
+            <h6 className="mb-1">SALDO</h6>
             {detail && (
-              <p className="font-bold text-2xl">
+              <p className="text-2xl font-bold">
                 {formatCurrency(detail.residue)}
               </p>
             )}
@@ -78,17 +74,16 @@ const Summary: React.FC = ({ match }) => {
         </div>
 
         <div className="px-7 py-8">
-          <h4 className="font-bold text-xl mb-4">RESUMEN</h4>
+          <h4 className="mb-2 text-xl font-semibold">RESUMEN</h4>
 
           {detail && (
-            <div className="flex gap-3 mb-8">
+            <div className="mb-8 flex gap-3">
               {loan?.installments.map((installment, key) => (
                 <div
-                  className={`px-4 py-2 rounded-md ${
-                    installment.id === detail.installment.id
-                      ? "bg-primary-green"
-                      : "bg-gray-200"
-                  }`}
+                  className={`border w-20 text-center py-1 rounded-md text-xs font-medium ${installment.id === detail.installment.id
+                    ? "bg-primary-green"
+                    : "bg-gray-200"
+                    }`}
                 >
                   MES {key + 1}
                 </div>
@@ -96,23 +91,22 @@ const Summary: React.FC = ({ match }) => {
             </div>
           )}
 
-          {loan?.installments.map((installment, key) => (
-            <InstallmentCard
-              key={installment.id}
-              index={key}
-              {...installment}
-            />
-          ))}
+          <div className="flex flex-col gap-6">
+            {loan?.installments.map((installment, key) => (
+              <InstallmentCard
+                key={installment.id}
+                index={key}
+                {...installment}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="bg-gray-100 py-4">
-          <div className="flex justify-between px-10 mb-5">
+        <div className="bg-gray-100 px-4 py-2">
+          <div className="flex justify-between">
             <button onClick={() => router.push("/")}>
-              <Icon name="home" className="text-6xl bg-black" />
+              <Icon name="home" className="bg-black text-6xl" />
             </button>
-            <Icon name="world" className="text-6xl bg-black" />
-            <Icon name="location" className="text-6xl bg-black" />
-            <Icon name="search" className="text-6xl bg-black" />
           </div>
         </div>
       </IonContent>
