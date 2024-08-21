@@ -5,6 +5,7 @@ import { useAuth } from "../auth/authContext";
 import { NumericFormat } from "react-number-format";
 import * as Page from "../../components/page";
 
+import { checkZipCode } from "../../api";
 import { applications } from "../../api";
 
 function removeNumericFormat(value: string) {
@@ -66,6 +67,22 @@ const LeaseContract: React.FC = () => {
     if (!atLeastThreeMonths(data.lease_end_date, 3)) {
       return setError("lease_end_date", {
         message: "El tiempo restante del contrato debe ser mayor o igual a 3 meses",
+      });
+    }
+
+    const zipCodeResponse = await checkZipCode(data.property_zip_code);
+    
+    if (zipCodeResponse.status === 200) {
+      const data = await zipCodeResponse.json();
+      
+      if (data.state !== "Ciudad de México") {
+        return setError("property_zip_code", {
+          message: "El código postal no pertenece al estado de Ciudad de México.",
+        });
+      }
+    } else {
+      return setError("property_zip_code", {
+        message: "No es un código postal válido.",
       });
     }
 
@@ -156,6 +173,11 @@ const LeaseContract: React.FC = () => {
                   placeholder=""
                   required
                 />
+                {errors?.property_zip_code && (
+                  <div className="description">
+                    {errors?.property_zip_code?.message}
+                  </div>
+                )}
               </div>
 
               <div className="form-control is-center is-inline">
