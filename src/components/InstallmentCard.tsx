@@ -8,6 +8,8 @@ import FileInputItem from "../components/FileInputItem";
 import ErrorMessage from "../components/ErrorMessage";
 import { useForm } from "react-hook-form";
 import Tag from "./Tag";
+import { uploadInstallmentFile } from "../api";
+
 interface ComponentProps extends InstallmentType {
   index: number;
 }
@@ -20,6 +22,7 @@ function capitalizeFirstLetter(string: string) {
 }
 
 export default function InstallmentCard({
+  id,
   index,
   amount,
   status,
@@ -33,8 +36,15 @@ export default function InstallmentCard({
   } = useForm();
 
   const onSubmit = async (data: any) => {
+    const response = await uploadInstallmentFile(id, data);
 
+    if (response.status === 200) {
+      setIsOpen(false);
+    }
   };
+
+  console.log(status);
+
 
   return (
     <>
@@ -56,8 +66,9 @@ export default function InstallmentCard({
         </div>
 
         <button
-          className="font-regular rounded bg-blue-900 px-3 py-1 text-white"
+          className="font-regular rounded bg-blue-900 px-3 py-1 text-white disabled:opacity-75"
           onClick={() => setIsOpen(true)}
+          disabled={status === "paid" || status === "in_validation"}
         >
           Ver
         </button>

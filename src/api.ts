@@ -326,3 +326,14 @@ export const checkZipCode = async (zipCode: string) => {
     },
   });
 };
+
+export const uploadInstallmentFile = async (id: string, body = {}) =>
+  await fetch(`${API_SERVER_URL}/api/installments/${id}/upload-file`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+    body: JSON.stringify(body),
+  });
