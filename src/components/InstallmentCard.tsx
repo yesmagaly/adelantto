@@ -33,7 +33,7 @@ export default function InstallmentCard({
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+
   };
 
   return (
@@ -90,27 +90,27 @@ export default function InstallmentCard({
           </div>
         </Modal.Header>
         <Modal.Body>
-          <form
-            className="flex h-full flex-col gap-4"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <p className="mb-1 text-start">Realiza tu pago por transferencia</p>
+          <form className="flex h-full flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <p className="text-start">Realiza tu pago por transferencia</p>
 
-            <ul className="mb-4 bg-blue-700 p-2 text-start text-white">
-              <li>
-                Banco: <strong>BBVA</strong>
-              </li>
-              <li>
-                Beneficiario:{" "}
-                <strong>Soluciones integrales TAFS SAPI de CV</strong>
-              </li>
-              <li>
-                CLABE: <strong>1234567890123456789</strong>
-              </li>
-              <li>
-                Referencia: <strong>Tu número de contrato</strong>
-              </li>
-            </ul>
+              <ul className="bg-blue-700 p-2 text-start text-white">
+                <li>
+                  Banco: <strong>BBVA</strong>
+                </li>
+                <li>
+                  Beneficiario:{" "}
+                  <strong>Soluciones integrales TAFS SAPI de CV</strong>
+                </li>
+                <li>
+                  CLABE: <strong>1234567890123456789</strong>
+                </li>
+                <li>
+                  Referencia: <strong>Tu número de contrato</strong>
+                </li>
+              </ul>
+            </div>
+
             <FileInputItem
               name="file"
               control={control}
@@ -131,9 +131,13 @@ export default function InstallmentCard({
 
             <div className="flex-1"></div>
 
-            <div>
+            <div className="flex flex-col gap-4">
+              <button className="button is-primary" type="submit">
+                Continuar
+              </button>
+
               <button className="button" onClick={() => setIsOpen(false)}>
-                cerrar
+                Salir
               </button>
             </div>
           </form>
