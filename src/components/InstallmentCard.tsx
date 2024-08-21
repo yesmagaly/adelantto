@@ -7,7 +7,7 @@ import { t } from "@adelantto/utils";
 import FileInputItem from "../components/FileInputItem";
 import ErrorMessage from "../components/ErrorMessage";
 import { useForm } from "react-hook-form";
-
+import Tag from "./Tag";
 interface ComponentProps extends InstallmentType {
   index: number;
 }
@@ -85,12 +85,15 @@ export default function InstallmentCard({
             {formatCurrency(amount)}
           </p>
 
-          <p className="rounded bg-blue-700 py-1 text-sm font-semibold text-white">
-            {t(status)}
-          </p>
+          <div className="flex justify-center">
+            <Tag status={status}>{t(status)}</Tag>
+          </div>
         </Modal.Header>
         <Modal.Body>
-          <form className="flex h-full flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="flex h-full flex-col gap-4"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <p className="mb-1 text-start">Realiza tu pago por transferencia</p>
 
             <ul className="mb-4 bg-blue-700 p-2 text-start text-white">
@@ -123,7 +126,7 @@ export default function InstallmentCard({
             <p className="text-start">
               Una vez realizado el pago se reflejará en un máximo de 72 hrs
               hábiles. Si tienes alguna duda puedes escribirnos a:{" "}
-              <a className="text-blue-700">contacto@adelantto.com</a>
+              <a className="text-blue-700" href="mailto:contacto@adelantto.com">contacto@adelantto.com</a>
             </p>
 
             <div className="flex-1"></div>
