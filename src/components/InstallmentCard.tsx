@@ -3,9 +3,14 @@ import { formatCurrency } from "@adelantto/utils"
 import { useState } from "react";
 import * as Modal from "../components/modal";
 import { InstallmentType } from "../types";
+import { DateTime } from "luxon";
 
 interface ComponentProps extends InstallmentType {
   index: number;
+}
+
+function capitalizeFirstLetter(string: string) {
+  return string.split(' ').map((i) => i.charAt(0).toUpperCase() + i.slice(1)).join(' ');
 }
 
 export default function InstallmentCard({ index, amount, status, due_date }: ComponentProps) {
@@ -19,7 +24,9 @@ export default function InstallmentCard({ index, amount, status, due_date }: Com
             Mes {index + 1}: {status === 'paid' ? 'Pagado' : 'Pendiente por pagar'}
           </h6>
           <p className="text-sm">Fecha limite de pago:
-            <span className="block font-medium">{due_date}</span>
+            <span className="block font-medium">
+              {capitalizeFirstLetter(DateTime.fromISO(due_date).setLocale("es").toFormat("dd LLL yyyy"))}
+            </span>
           </p>
         </div>
 

@@ -38,8 +38,7 @@ const Summary: React.FC = ({ match }) => {
         }
 
         setLoan(data);
-      } catch (error: any) {
-      }
+      } catch (error: any) { }
     };
 
     fetchData();
@@ -52,24 +51,30 @@ const Summary: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="h-90 heading--blue bg-cover px-8 py-10 text-white">
-          <h1 className="heading-4">Adelantto {(loan.id).toString().padStart(5, '0')}</h1>
+        <div className="heading--blue bg-cover px-8 py-8 text-white">
+          <h1 className="heading-4">
+            Adelantto {loan.id.toString().padStart(5, "0")}
+          </h1>
 
-          <div className="border-full" />
+          <div className="border-full mb-4 block" />
 
-          <div>
-            <h6 className="mb-1 mt-5 text-sm">CUOTA A PAGAR</h6>
-            {detail && (
-              <p className="mb-4 text-2xl font-bold">
-                {formatCurrency(detail.installment.amount)}
-              </p>
-            )}
-            <h6 className="mb-1">SALDO</h6>
-            {detail && (
-              <p className="text-2xl font-bold">
-                {formatCurrency(detail.residue)}
-              </p>
-            )}
+          <div className="flex flex-col gap-4">
+            <div>
+              <h6 className="text-sm">CUOTA A PAGAR</h6>
+              {detail && (
+                <p className="text-2xl font-semibold">
+                  {formatCurrency(detail.installment.amount)}
+                </p>
+              )}
+            </div>
+            <div>
+              <h6 className="text-sm">SALDO</h6>
+              {detail && (
+                <p className="text-2xl font-semibold">
+                  {formatCurrency(detail.residue)}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
