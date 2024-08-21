@@ -4,6 +4,7 @@ import { useState } from "react";
 import * as Modal from "../components/modal";
 import { InstallmentType } from "../types";
 import { DateTime } from "luxon";
+import { t } from "@adelantto/utils";
 
 interface ComponentProps extends InstallmentType {
   index: number;
@@ -21,7 +22,7 @@ export default function InstallmentCard({ index, amount, status, due_date }: Com
       <div className="flex items-center justify-between">
         <div>
           <h6 className="font-semibold leading-6">
-            Mes {index + 1}: {status === 'paid' ? 'Pagado' : 'Pendiente por pagar'}
+            Mes {index + 1}: {t(status)}
           </h6>
           <p className="text-sm">Fecha limite de pago:
             <span className="block font-medium">

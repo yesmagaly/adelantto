@@ -16,7 +16,12 @@ export const t = function (text: string) {
     "The password is required.": "La contraseña es obligatoria.",
     "At least one number is missing.": "Se requieren al menos un número.",
     "At least one uppercase character is missing.": "Se requieren al menos un carácter en mayúscula.",
-    "At least eight characters are required.": "Se requieren al menos ocho caracteres."
+    "At least eight characters are required.": "Se requieren al menos ocho caracteres.",
+    "approved": "Aprobado",
+    "overdue": "Vencido",
+    "rejected": "Rechazado",
+    "in_validation": "En validación",
+    "pending": "Pendiente",
   };
 
   return map[text] ?? text;
