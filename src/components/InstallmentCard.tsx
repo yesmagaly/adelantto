@@ -52,10 +52,11 @@ export default function InstallmentCard({
         </button>
       </div>
 
-      <Modal.Root isOpen={isOpen}>
+      <Modal.Root isOpen={isOpen} variant="fully">
         <Modal.Header>
-          <h6 className="mb-6 text-blue-700">CUOTA A PAGAR</h6>
-          <p className="text-sm mb-4">
+          <h6 className="mb-6 text-center font-bold text-blue-700">CUOTA A PAGAR</h6>
+
+          <p className="mb-4 text-center">
             Fecha limite de pago:
             <span className="block font-medium">
               {capitalizeFirstLetter(
@@ -65,23 +66,23 @@ export default function InstallmentCard({
               )}
             </span>
           </p>
-          <p className="mb-4 text-3xl font-bold">
-            <span className="text-sm block font-normal">Monto:</span>
+
+          <p className="mb-4 text-center text-3xl font-bold">
+            <span className="block text-sm font-normal">Monto:</span>
             {formatCurrency(amount)}
           </p>
-          <p className="text-sm bg-blue-700 text-white font-semibold rounded py-1">
+
+          <p className="rounded bg-blue-700 py-1 text-sm font-semibold text-white">
             {t(status)}
           </p>
         </Modal.Header>
         <Modal.Body>
-          <p className="text-sm text-start mb-1">
+
+          <p className="mb-1 text-start">
             Realiza tu pago por transferencia
           </p>
-          {/* <h4 className="mb-4 text-lg font-bold text-blue-900">
-            MEDIOS DE PAGO
-          </h4> */}
 
-          <ul className="text-start bg-blue-700 text-white p-2 mb-4">
+          <ul className="mb-4 bg-blue-700 p-2 text-start text-white">
             <li>
               Banco: <strong>BBVA</strong>
             </li>
@@ -98,7 +99,7 @@ export default function InstallmentCard({
           </ul>
 
           <form className="mb-5">
-            <label htmlFor="voucher" className="text-start font-semibold text-lg">
+            <label htmlFor="voucher" className="mb-1 block text-start text-lg font-semibold">
               Sube tu comprobante
             </label>
             <input
@@ -109,7 +110,7 @@ export default function InstallmentCard({
             />
           </form>
 
-          <p className="text-xs text-start">
+          <p className="text-start">
             Una vez realizado el pago se reflejará en un máximo de 72 hrs
             hábiles. Si tienes alguna duda puedes escribirnos a:{" "}
             <a className="text-blue-700">contacto@adelantto.com</a>
