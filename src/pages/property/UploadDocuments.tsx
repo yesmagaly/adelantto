@@ -58,7 +58,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               control={control}
               rules={{ required: "Documento obligatorio" }}
             >
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="text-sm font-bold leading-4">
                 Escritura de la propiedad
               </h5>
               <p className="text-sm">
@@ -70,7 +70,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
 
             <FileInputItem name="property_lease_agreement" control={control} rules={{ required: "Documento obligatorio" }}>
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="text-sm font-bold leading-4">
                 Contrato de arrendamiento vigente
               </h5>
               <p className="text-sm">Firmado por ambas partes</p>
@@ -80,7 +80,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
 
             <FileInputItem name="property_latest_tax_receipt" control={control} rules={{ required: "Documento obligatorio" }}>
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="text-sm font-bold leading-4">
                 Boleta predial del último bimestre
               </h5>
               {errors.property_latest_tax_receipt && (
@@ -89,7 +89,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
 
             <FileInputItem name="property_proof_of_income" control={control} rules={{ required: "Documento obligatorio" }}>
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="text-sm font-bold leading-4">
                 Recibo de nómina o estados de cuenta bancarios de los 3 últimos meses
               </h5>
               <p className="text-sm">Útimos tres meses (Nómina o bancarios)</p>
@@ -99,7 +99,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
 
             <FileInputItem name="property_rpp_certificate" control={control} rules={{ required: "Documento obligatorio" }}>
-              <h5 className="font-bold text-sm leading-4">
+              <h5 className="text-sm font-bold leading-4">
                 Certificado de finalización en el RPP
               </h5>
               <p className="text-sm">Registro Público de la Propiedad</p>
@@ -109,7 +109,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
 
             <FileInputItem name="property_rfc" control={control} rules={{ required: "Documento obligatorio" }}>
-              <h5 className="font-bold text-sm leading-4">RFC</h5>
+              <h5 className="text-sm font-bold leading-4">RFC</h5>
               <p className="text-sm">
                 Constancia de situación fiscal con antigüedad no mayor a 3 meses
               </p>
@@ -119,7 +119,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
 
             <FileInputItem name="property_curp" control={control} rules={{ required: "Documento obligatorio" }}>
-              <h5 className="font-bold text-sm leading-4">CURP</h5>
+              <h5 className="text-sm font-bold leading-4">CURP</h5>
               <p className="text-sm">Certificada y emitida por la RENAPO</p>
               {errors.property_curp && (
                 <ErrorMessage error={errors.property_curp} />
@@ -127,8 +127,8 @@ const UploadDocuments: React.FC = ({ match }) => {
             </FileInputItem>
           </div>
 
-          <div className="text-center mb-7">
-            <p className="font-medium text-sm leading-4 mb-6">
+          <div className="mb-7 text-center">
+            <p className="mb-6 text-sm font-medium leading-4">
               Los documentos deberán ser escaneados en alta resolución y en
               formato PDF, de lo contrario declinaremos el proceso.
             </p>
