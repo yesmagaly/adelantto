@@ -1,12 +1,17 @@
+import { cn } from "../utils";
 import "./styles.css";
 
-interface IconProps {
+interface T_props {
   name: string;
   className?: string;
 }
 
-const Icon: React.FC<IconProps> = (props) => {
-  return <i className={`icon icon-${props.name} ${props.className ?? ''}`}></i>;
+export const Icon: React.FC<T_props> = ({ className, ...props }) => {
+  return (
+    <i
+      className={cn(`icon`, props.name && `icon-${props.name}`, className)}
+    ></i>
+  );
 };
 
 export default Icon;

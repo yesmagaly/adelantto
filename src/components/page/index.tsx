@@ -1,24 +1,33 @@
 import React from "react";
+import { clsx } from "clsx";
 import "./styles.css";
 
-interface ComponentProps {
-  variant: string;
-  className: string;
-  children: React.ReactNode;
+interface T_props {
+  className?: string;
+  children?: React.ReactNode;
 }
 
-export function Root({ className = "", variant = "", ...props }) {
-  return <div className={`page is-${variant} ${className}`} {...props} />;
-}
+export const Root: React.FC<
+  T_props & { as?: keyof JSX.IntrinsicElements; variant?: string }
+> = ({ as, className, variant, ...props }) => {
+  const Tag = as || "div";
 
-export function Header({ className = "", ...props }) {
-  return <div className={`page-header ${className}`} {...props} />;
-}
+  return (
+    <Tag
+      className={clsx(`page`, variant && `is-${variant}`, className)}
+      {...props}
+    />
+  );
+};
 
-export function Body({ className = "", ...props }) {
-  return <div className={`page-body ${className}`} {...props} />;
-}
+export const Header: React.FC<T_props> = ({ className, ...props }) => {
+  return <div className={clsx(`page-header`, className)} {...props} />;
+};
 
-export function Footer({ className = "", ...props }) {
-  return <div className={`page-footer ${className}`} {...props} />;
-}
+export const Body: React.FC<T_props> = ({ className, ...props }) => {
+  return <div className={clsx(`page-body`, className)} {...props} />;
+};
+
+export const Footer: React.FC<T_props> = ({ className, ...props }) => {
+  return <div className={clsx(`page-footer`, className)} {...props} />;
+};

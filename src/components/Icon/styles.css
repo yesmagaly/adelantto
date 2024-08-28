@@ -5,7 +5,7 @@
   display: inline-block;
   mask-size: 100%;
   mask-position: center;
-  background-color: #0D1B3B;
+  background-color: #0d1b3b;
 }
 
 .icon-bell {
@@ -66,4 +66,8 @@
 
 .icon-square-check {
   mask-image: url(../../assets/icons/square-check.svg);
+}
+
+.icon-trash-can {
+  mask-image: url(../../assets/icons/trash-can.svg);
 }

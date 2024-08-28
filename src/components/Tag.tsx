@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 
-interface ComponentProps {
-  status: "overdue" | "pending" | "approved" | "rejected" | "in_validation";
+export type T_status_type = "overdue" | "pending" | "approved" | "rejected" | "in_validation";
+
+interface T_props {
+  status: T_status_type;
   children: React.ReactNode;
 }
 
-export default function Tag({ children, status }: ComponentProps) {
+export default function Tag({ children, status }: T_props) {
   return (
     <div
       className={clsx(

@@ -1,3 +1,4 @@
+import { useIonRouter } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils";
 import { useState } from "react";
 import * as Modal from "../components/modal";
@@ -12,6 +13,7 @@ import { uploadInstallmentFile } from "../api";
 
 interface ComponentProps extends InstallmentType {
   index: number;
+  loanId: number;
 }
 
 function capitalizeFirstLetter(string: string) {
@@ -22,12 +24,14 @@ function capitalizeFirstLetter(string: string) {
 }
 
 export default function InstallmentCard({
+  loanId,
   id,
   index,
   amount,
   status,
   due_date,
 }: ComponentProps) {
+  const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
   const {
     control,
@@ -42,9 +46,6 @@ export default function InstallmentCard({
       setIsOpen(false);
     }
   };
-
-  console.log(status);
-
 
   return (
     <>
@@ -67,93 +68,12 @@ export default function InstallmentCard({
 
         <button
           className="font-regular rounded bg-blue-900 px-3 py-1 text-white disabled:opacity-75"
-          onClick={() => setIsOpen(true)}
+          onClick={() => router.push(`/loans/${loanId}/installments/${id}`)}
           disabled={status === "paid" || status === "in_validation"}
         >
           Ver
         </button>
       </div>
-
-      <Modal.Root isOpen={isOpen} variant="fully">
-        <Modal.Header>
-          <h6 className="mb-6 text-center font-bold text-blue-700">
-            CUOTA A PAGAR
-          </h6>
-
-          <p className="mb-4 text-center">
-            Fecha limite de pago:
-            <span className="block font-medium">
-              {capitalizeFirstLetter(
-                DateTime.fromISO(due_date)
-                  .setLocale("es")
-                  .toFormat("dd / LLL / yyyy")
-              )}
-            </span>
-          </p>
-
-          <p className="mb-4 text-center text-3xl font-bold">
-            <span className="block text-sm font-normal">Monto:</span>
-            {formatCurrency(amount)}
-          </p>
-
-          <div className="flex justify-center">
-            <Tag status={status}>{t(status)}</Tag>
-          </div>
-        </Modal.Header>
-        <Modal.Body>
-          <form className="flex h-full flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <p className="text-start">Realiza tu pago por transferencia</p>
-
-              <ul className="bg-blue-700 p-2 text-start text-white">
-                <li>
-                  Banco: <strong>BBVA</strong>
-                </li>
-                <li>
-                  Beneficiario:{" "}
-                  <strong>Soluciones integrales TAFS SAPI de CV</strong>
-                </li>
-                <li>
-                  CLABE: <strong>1234567890123456789</strong>
-                </li>
-                <li>
-                  Referencia: <strong>Tu número de contrato</strong>
-                </li>
-              </ul>
-            </div>
-
-            <FileInputItem
-              name="file"
-              control={control}
-              rules={{ required: "Documento obligatorio" }}
-              className="flex-row-reverse"
-            >
-              <h5 className="text-xl font-bold leading-4">
-                Sube tu comprobante
-              </h5>
-              {errors.file && <ErrorMessage error={errors.file} />}
-            </FileInputItem>
-
-            <p className="text-start">
-              Una vez realizado el pago se reflejará en un máximo de 72 hrs
-              hábiles. Si tienes alguna duda puedes escribirnos a:{" "}
-              <a className="text-blue-700" href="mailto:contacto@adelantto.com">contacto@adelantto.com</a>
-            </p>
-
-            <div className="flex-1"></div>
-
-            <div className="flex flex-col gap-4">
-              <button className="button is-primary" type="submit">
-                Continuar
-              </button>
-
-              <button className="button" onClick={() => setIsOpen(false)}>
-                Salir
-              </button>
-            </div>
-          </form>
-        </Modal.Body>
-      </Modal.Root>
     </>
   );
 }
