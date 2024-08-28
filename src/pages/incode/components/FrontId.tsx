@@ -128,9 +128,8 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
               <div
-                className={`income-document ${
-                  status === REJECTED_STATUS ? "is-danger" : ""
-                } ${status === APPROVED_STATUS ? "is-success" : ""}`}
+                className={`income-document ${status === REJECTED_STATUS ? "is-danger" : ""
+                  } ${status === APPROVED_STATUS ? "is-success" : ""}`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}

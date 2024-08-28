@@ -337,3 +337,13 @@ export const uploadInstallmentFile = async (id: string, body = {}) =>
     },
     body: JSON.stringify(body),
   });
+
+export const getInstallment = async (id: string) =>
+  await fetch(`${API_SERVER_URL}/api/installments/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getToken(),
+      Accept: "application/json",
+    },
+  });

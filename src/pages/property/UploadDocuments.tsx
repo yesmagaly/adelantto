@@ -17,9 +17,7 @@ interface FormData {
 }
 
 const UploadDocuments: React.FC = ({ match }) => {
-  const params = new URLSearchParams(window.location.search);
   const router = useIonRouter();
-  const { authInfo } = useAuth()!;
 
   const {
     control,
@@ -32,8 +30,6 @@ const UploadDocuments: React.FC = ({ match }) => {
       ...data,
       step: "property_documents",
     });
-
-    const property = await response.json();
 
     if (response.status === 200) {
       router.push(`/applications/${match.params.id}/property-pictures`);

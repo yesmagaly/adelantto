@@ -71,10 +71,10 @@ const LeaseContract: React.FC = () => {
     }
 
     const zipCodeResponse = await checkZipCode(data.property_zip_code);
-    
+
     if (zipCodeResponse.status === 200) {
       const data = await zipCodeResponse.json();
-      
+
       if (data.state !== "Ciudad de México") {
         return setError("property_zip_code", {
           message: "El código postal no pertenece al estado de Ciudad de México.",

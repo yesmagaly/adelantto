@@ -6,7 +6,7 @@ import { formatCurrency } from "@adelantto/utils";
 import InstallmentCard from "../../components/InstallmentCard";
 import { InstallmentType, LoanType } from "../../types";
 
-const Summary: React.FC = ({ match }) => {
+const Summary: React.FC<{ match: any }> = ({ match }) => {
   const router = useIonRouter();
   const [loan, setLoan] = useState<LoanType>();
   const [detail, setDetail] = useState<{
@@ -101,6 +101,7 @@ const Summary: React.FC = ({ match }) => {
               <InstallmentCard
                 key={installment.id}
                 index={key}
+                loanId={match.params.id}
                 {...installment}
               />
             ))}

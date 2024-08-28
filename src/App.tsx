@@ -61,6 +61,7 @@ import "./theme/variables.css";
 /* Tailwind styles */
 import "./theme/tailwind.css";
 import { useAuth } from "./pages/auth/authContext";
+import { InstallmentDetail } from "./pages/loan/InstallmentDetail";
 
 setupIonicReact();
 
@@ -145,10 +146,11 @@ const App: React.FC = () => {
           <PrivateRoute path="/applications/:id/property-pictures" component={UploadPictures} />
           <PrivateRoute path="/applications/:id/final-announcement" component={DataValidation} />
 
-          <PrivateRoute path="/loans/:id" component={Summary} />
+          <PrivateRoute exact path="/loans/:id" component={Summary} />
           <PrivateRoute path="/loans/:id/success" component={CorrectData} />
           <PrivateRoute path="/loans/:id/account-statement" component={Withdrawals} />
-          <PrivateRoute path="/loans/:id/disbursement" component={Outlay} />
+          {/* <PrivateRoute path="/loans/:id/disbursement" component={Outlay} /> */}
+          <PrivateRoute path="/loans/:id/installments/:installment_id" component={InstallmentDetail} />
 
           <PrivateRoute path="/validation-error" component={ValidationError} />
           <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
