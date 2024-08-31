@@ -7,7 +7,6 @@ import { t } from "@adelantto/utils";
 
 import { InstallmentType } from "../../types";
 import FileInput from "../../components/FileInput";
-import PhotoInputItem from "../../components/photo-input/PhotoInputItem";
 import Icon from "../../components/Icon/Icon";
 import ErrorMessage from "../../components/ErrorMessage";
 import Tag from "../../components/Tag";
@@ -98,12 +97,12 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
                     </li>
                     <li>
                       CLABE: <strong className="font-medium">
-                        1234567890123456789
+                        012180001208318320
                       </strong>
                     </li>
                     <li>
                       Referencia: <strong className="font-medium">
-                        Tu número de contrato
+                        Contrato {match.params.id.toString().padStart(5, "0")}
                       </strong>
                     </li>
                   </ul>
