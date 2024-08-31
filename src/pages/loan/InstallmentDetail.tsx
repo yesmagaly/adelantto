@@ -142,8 +142,7 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
                 </p>
               </Modal.Body>
               <Modal.Footer>
-
-                <button className="button" onClick={() => setIsOpen(false)}>
+                <button className="button" onClick={() => router.push(`/loans/${match.params.id}`)}>
                   Continuar
                 </button>
               </Modal.Footer>
