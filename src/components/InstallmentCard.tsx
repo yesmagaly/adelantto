@@ -32,20 +32,6 @@ export default function InstallmentCard({
   due_date,
 }: ComponentProps) {
   const router = useIonRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-
-  const onSubmit = async (data: any) => {
-    const response = await uploadInstallmentFile(id, data);
-
-    if (response.status === 200) {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <>
@@ -69,7 +55,7 @@ export default function InstallmentCard({
         <button
           className="font-regular rounded bg-blue-900 px-3 py-1 text-white disabled:opacity-75"
           onClick={() => router.push(`/loans/${loanId}/installments/${id}`)}
-          disabled={status === "paid" || status === "in_validation"}
+          disabled={status === "approved" || status === "in_validation"}
         >
           Ver
         </button>

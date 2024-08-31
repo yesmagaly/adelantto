@@ -19,7 +19,6 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
       try {
         const response = await api.loans.get(match.params.id);
         const data = (await response.json()) as LoanType;
-
         const residue =
           data.amount -
           data.installments
