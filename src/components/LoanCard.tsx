@@ -25,16 +25,16 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
   const showMore = () => router.push(url);
 
   return (
-    <div className="p-4 border-b">
-      <div className="flex justify-between items-center">
-        <div className="flex gap-6 items-center">
-          <h4 className="font-bold text-lx leading-5">Adelantto 00001</h4>
+    <div className="border-b p-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <h4 className="text-lx font-bold leading-5">Adelantto {id.toString().padStart(5, "0")}</h4>
         </div>
 
         {status === "awaiting_account_statement_upload" &&
           application.status === "approved" && (
             <button
-              className="font-regular px-3 py-1 rounded text-white leading-5 bg-green-500"
+              className="font-regular rounded bg-green-500 px-3 py-1 leading-5 text-white"
               onClick={() => router.push(`/loans/${id}/success`)}
             >
               Continuar
@@ -43,7 +43,7 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
 
         {status === "active" && (
           <button
-            className="font-regular px-3 py-1 rounded text-white leading-5 bg-blue-900"
+            className="font-regular rounded bg-blue-900 px-3 py-1 leading-5 text-white"
             onClick={showMore}
           >
             Ver
