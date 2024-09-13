@@ -27,7 +27,6 @@ import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
 import Withdrawals from "./pages/Withdrawals";
-import Outlay from "./pages/Outlay";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
