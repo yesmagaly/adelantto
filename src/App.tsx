@@ -31,6 +31,7 @@ import CorrectDeposit from "./pages/CorrectDeposit";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import Info from "./pages/Info";
 
 import Summary from "./pages/loan/Summary";
 
@@ -162,6 +163,7 @@ const App: React.FC = () => {
           <PublicRoute path="/verification-code/:phone" component={VerificationCode} />
           <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
+          <PublicRoute path="/info" component={Info} />
           <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
         </IonReactRouter>
       </IonApp>
