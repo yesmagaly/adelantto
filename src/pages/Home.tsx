@@ -40,11 +40,17 @@ const Home: React.FC = () => {
                 Términos y condiciones
               </a>
               <a
-                className="block"
+                className="block mb-2"
                 href="https://adelantto.com/aviso-privacidad"
                 target="_blank"
               >
                 Aviso de privacidad
+              </a>
+              <a
+                className="block"
+                href="/info"
+              >
+                Información sobre la documentación requerida
               </a>
             </p>
           </div>
