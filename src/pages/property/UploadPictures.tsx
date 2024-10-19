@@ -44,6 +44,14 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-6 mb-40">
+          <PhotoInputItem control={control} name="address_proof" rules={{ required: "Imagen obligatoria" }}>
+              <h5 className="font-bold leading-4">Comprobante de domicilio</h5>
+              <p className="text-sm">No mayor a 3 meses. Solo agua, luz o telefonía fija</p>
+              {errors.address_proof && (
+                <ErrorMessage error={errors.address_proof} />
+              )}
+            </PhotoInputItem>
+
             <PhotoInputItem control={control} name="property_house_front" rules={{ required: "Imagen obligatoria" }}>
               <label className="font-bold leading-4 is-required">Frente de la casa</label>
               <p className="text-sm">Toma una foto del frente de tu casa</p>
@@ -52,28 +60,10 @@ const UploadPictures: React.FC<ComponentProps> = ({ match }) => {
               )}
             </PhotoInputItem>
 
-            <PhotoInputItem control={control} name="property_electricity_meter" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold leading-4">Medidor de luz</h5>
-              <p className="text-sm">Toma una foto del medidor de luz</p>
-              {errors.property_electricity_meter && (
-                <ErrorMessage error={errors.property_electricity_meter} />
-              )}
-            </PhotoInputItem>
-
-            <PhotoInputItem control={control} name="property_water_meter" rules={{ required: "Imagen obligatoria" }}>
-              <h5 className="font-bold leading-4">Toma de agua</h5>
-              <p className="text-sm">
-                Toma una foto de la toma de agua principal
-              </p>
-              {errors.property_water_meter && (
-                <ErrorMessage error={errors.property_water_meter} />
-              )}
-            </PhotoInputItem>
-
             <PhotoInputItem control={control} name="property_street" rules={{ required: "Imagen obligatoria" }}>
               <h5 className="font-bold leading-4">Calle</h5>
               <p className="text-sm">
-                Toma una foto de la vista de la calle
+                Toma una foto de la vista de tu calle
               </p>
               {errors.property_street && (
                 <ErrorMessage error={errors.property_street} />
