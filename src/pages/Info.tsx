@@ -1,51 +1,7 @@
-// import { IonContent, IonPage } from "@ionic/react";
-
-// const Info: React.FC = () => {
-
-//   return (
-//     <IonPage>
-//       <IonContent fullscreen>
-//         <div className="heading heading--green">
-//           <h1 className="heading__title">
-//             Documentación <br />
-//             <strong>requerida</strong>
-//           </h1>
-//         </div>
-
-//         <div className="content">
-//           <p className="text-left font-medium">
-//             Los siguiente documentos son necesarios para continuar con el proceso:
-//           </p>
-
-//           <ul className="m-6 mb-12 list-disc text-left">
-//             <li>Identificación oficial</li>
-//             <li>Contrato de arrendamiento</li>
-//             <li>Boleta predial</li>
-//             <li>Comprobantes de ingresos (nómina o estados de cuenta)</li>
-//             <li>Certificado de finalización en el registro público de la propiedad</li>
-//             <li>RFC</li>
-//             <li>CURP</li>
-//             <li>Comprobante de domicilio</li>
-//           </ul>
-
-//           <a href="/start" className="button is-primary">Regresar a la página de inicio</a>
-//         </div>
-
-//       </IonContent>
-//     </IonPage>
-//   );
-// };
-
-// export default Info;
-
-
-import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
-
-import homeAnimation from "../assets/animations/home.json";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import * as Page from "../components/page";
 
-const Info: React.FC = () => {
+const Info: React.FC = ({ cta }: { cta?: { url: string, label: string } }) => {
   const router = useIonRouter();
 
   return (
@@ -79,14 +35,16 @@ const Info: React.FC = () => {
                   </ul>
                 </div>
 
-                <div>
-                  <button
-                    onClick={() => router.push("/create-profile")}
-                    className="button is-primary"
-                  >
-                    Continuar
-                  </button>
-                </div>
+                {cta && (
+                  <div>
+                    <button
+                      onClick={() => router.push(cta.url)}
+                      className="button is-primary"
+                    >
+                      {cta.label}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </Page.Body>

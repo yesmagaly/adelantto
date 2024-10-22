@@ -7,11 +7,11 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="flex items-center justify-center flex-col h-full px-6 py-8">
+        <div className="flex h-full flex-col items-center justify-center px-6 py-8">
           <div className="mb-14 text-center">
-            <img className="mb-16 h-40 inline-block" src={logo} />
-            <h1 className="font-semibold leading-normal text-5xl mb-4">¡Hola!</h1>
-            <p className="text-xl leading-tight max-w-xs">
+            <img className="mb-16 inline-block h-40" src={logo} />
+            <h1 className="mb-4 text-5xl font-semibold leading-normal">¡Hola!</h1>
+            <p className="max-w-xs text-xl leading-tight">
               ¿Estás listo para recibir el pago de tus rentas por anticipado?
             </p>
           </div>
@@ -45,7 +45,7 @@ const Home: React.FC = () => {
                 Aviso de privacidad
               </a>
               <a
-                className="block text-balance"
+                className="block text-balance leading-tight"
                 href="/info"
               >
                 Información sobre la documentación requerida

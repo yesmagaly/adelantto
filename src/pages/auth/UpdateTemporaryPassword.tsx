@@ -105,7 +105,7 @@ const UpdateTemporaryPassword: React.FC = () => {
 
     if (response.status === 200) {
       setUserInfo('is_verified', json.is_verified);
-      router.push(`/dashboard`);
+      router.push(`/documents-required`);
     } else {
       // Show server errors.
       setError("password", { message: json.message, type: "server" });
@@ -127,29 +127,23 @@ const UpdateTemporaryPassword: React.FC = () => {
           </div>
 
           <div>
-            <p className="mb-8 text-white text-xl font-medium">Actualiza tu contraseña</p>
+            <p className="mb-8 text-xl font-medium text-white">Actualiza tu contraseña</p>
 
-            <form className="form flex flex-col mb-16" onSubmit={handleSubmit(onSubmit)}>
+            <form className="form mb-16 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
-                <label className="text-white !font-normal">Nueva contraseña</label>
+                <label className="!font-normal text-white">Nueva contraseña</label>
                 <InputPassword
                   {...register("password")}
                   required
                 />
               </div>
               <div className="form-control">
-                <label className="text-white !font-normal">Repite tu nueva contraseña</label>
+                <label className="!font-normal text-white">Repite tu nueva contraseña</label>
                 <InputPassword
                   {...register("password_confirmation")}
                   required
                 />
               </div>
-
-              {/* <p className="mb-12 mt-4">
-                <a className="mb-10 text-sm font-semibold text-primary-green underline">
-                  Validación de password*
-                </a>
-              </p> */}
 
               <button className="button is-secondary">
                 Cambiar contraseña

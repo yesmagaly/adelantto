@@ -131,6 +131,7 @@ const App: React.FC = () => {
         <IonReactRouter>
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/update-temporary-password" component={UpdateTemporaryPassword} />
+          <PrivateRoute path="/documents-required" children={<Info cta={{ url: "/dashboard", label: "Continuar" }} />} />
           <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
           <PrivateRoute path="/create-profile" component={CreateProfile} />
@@ -149,7 +150,6 @@ const App: React.FC = () => {
           <PrivateRoute exact path="/loans/:id" component={Summary} />
           <PrivateRoute path="/loans/:id/success" component={CorrectData} />
           <PrivateRoute path="/loans/:id/account-statement" component={Withdrawals} />
-          {/* <PrivateRoute path="/loans/:id/disbursement" component={Outlay} /> */}
           <PrivateRoute path="/loans/:id/installments/:installment_id" component={InstallmentDetail} />
 
           <PrivateRoute path="/validation-error" component={ValidationError} />
@@ -163,7 +163,7 @@ const App: React.FC = () => {
           <PublicRoute path="/verification-code/:phone" component={VerificationCode} />
           <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
-          <PublicRoute path="/info" component={Info} />
+          <PublicRoute path="/info" children={<Info cta={{ url: "/start", label: "Regresar" }} />} />
           <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
         </IonReactRouter>
       </IonApp>
