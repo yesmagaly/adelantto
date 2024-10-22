@@ -11,19 +11,18 @@ const Info: React.FC = ({ cta }: { cta?: { url: string, label: string } }) => {
           <Page.Body>
             <div className="">
               <div>
-                <h1 className="heading__title mt-20 text-center">
-                  Documentación <br />
-                  <strong>requerida</strong>
+                <h1 className="heading__title mt-20 text-center !text-3xl !leading-none">
+                  Documentación <strong>requerida</strong>
                 </h1>
               </div>
 
-              <div className="content">
+              <div className="content !px-0">
                 <div className="mb-14">
                   <p className="help-text mb-4">
                     Los siguiente documentos serán necesarios:
                   </p>
 
-                  <ul className="mx-2 mb-12 list-disc text-left">
+                  <ul className="mx-2 mb-12 list-disc pl-4 text-left">
                     <li>Identificación oficial</li>
                     <li>Contrato de arrendamiento</li>
                     <li>Boleta predial</li>
