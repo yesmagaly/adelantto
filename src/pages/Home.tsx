@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="flex items-center flex-col justify-center h-full px-6">
+        <div className="flex items-center justify-center flex-col h-full px-6 py-8">
           <div className="mb-14 text-center">
             <img className="mb-16 h-40 inline-block" src={logo} />
             <h1 className="font-semibold leading-normal text-5xl mb-4">¡Hola!</h1>
@@ -31,30 +31,27 @@ const Home: React.FC = () => {
               </a>
             </p>
 
-            <p className="mt-8">
+            <p className="mt-10 flex flex-col gap-2">
               <a
-                className="block mb-2"
                 href="https://adelantto.com/terminos-y-condiciones"
                 target="_blank"
               >
                 Términos y condiciones
               </a>
               <a
-                className="block mb-2"
                 href="https://adelantto.com/aviso-privacidad"
                 target="_blank"
               >
                 Aviso de privacidad
               </a>
               <a
-                className="block"
+                className="block text-balance"
                 href="/info"
               >
                 Información sobre la documentación requerida
               </a>
             </p>
           </div>
-
         </div>
       </IonContent>
     </IonPage>

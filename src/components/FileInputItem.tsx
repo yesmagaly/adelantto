@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { HTMLAttributes, useState } from "react";
 import Lottie from "react-lottie-player";
 import { useController, UseControllerProps } from "react-hook-form";
 
@@ -11,43 +11,64 @@ import { ErrorType } from "../types";
 
 export interface ComponentProp extends UseControllerProps {
   children: React.ReactNode;
-  className: string;
+  className?: string;
+  multiple?: boolean;
+  accept?: string;
+  name: string;
 }
 
-const UploadDocuments: React.FC<ComponentProp> = ({ className, ...props }) => {
+const addFile = (body: FormData) => {
+  return fetch(`${API_SERVER_URL}/api/files`, {
+    method: "POST",
+    headers: { Accept: "application/json" },
+    body,
+  });
+};
+
+const FileInputItem: React.FC<ComponentProp> = ({
+  className,
+  children,
+  ...props
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType>();
   const {
-    field: { onChange, value, ...field },
-    fieldState,
+    field: { onChange, value },
   } = useController(props);
 
-  const handleChange = async (event: { target: { files: any } }) => {
+  const handleChange = async (event: { target: { files: Array<File> } }) => {
     const { files } = event.target;
 
     // Start Loading.
     setLoading(true);
 
-    if (files.length) {
-      const file = files[0];
-      const body = new FormData();
-      body.append("file", file);
-
-      try {
-        const response = await fetch(`${API_SERVER_URL}/api/files`, {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          body,
+    if (files.length > 0) {
+      if (props.multiple) {
+        const newFiles = [...files].map(async (file) => {
+          const body = new FormData();
+          body.append(`file`, file);
+          const response = await addFile(body);
+          return await response.json();
         });
 
-        if (response.status === 200) {
-          const data = await response.json();
-          onChange(data);
-        } else {
+        const allNewFiles = await Promise.all(newFiles);
+        const previusValue = Array.isArray(value) ? value : [];
+        onChange([...previusValue, ...allNewFiles]);
+      } else {
+        const body = new FormData();
+        body.append("file", files[0]);
+
+        try {
+          const response = await addFile(body);
+
+          if (response.status === 200) {
+            const data = await response.json();
+            onChange(data);
+          }
+        } catch (errorFetch: any) {
+          setError({ message: errorFetch.message });
         }
-      } catch (errorFetch: any) {
-        setError({ message: errorFetch.message });
       }
 
       // Stop loading.
@@ -55,9 +76,14 @@ const UploadDocuments: React.FC<ComponentProp> = ({ className, ...props }) => {
     }
   };
 
-  const handleRemove = (event: { preventDefault: () => void }) => {
+  const handleRemove = (fileId) => (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    onChange({});
+
+    if (props.multiple) {
+      onChange(value.filter((file) => file.id != fileId));
+    } else {
+      onChange(undefined);
+    }
   };
 
   const openModal = (event: { preventDefault: () => void }) => {
@@ -65,11 +91,13 @@ const UploadDocuments: React.FC<ComponentProp> = ({ className, ...props }) => {
     setIsOpen(true);
   };
 
+  const displayFiles = props.multiple ? value ?? [] : value ? [value] : [];
+
   return (
     <>
       <div className={`flex gap-4 ${className}`}>
         <div className="flex basis-32 items-center justify-center gap-5 border-b border-r border-solid border-[#D8D8D8]">
-          {value?.id ? (
+          {displayFiles.length > 0 ? (
             <Icon name="square-check" className="bg-green-400" />
           ) : (
             <Icon name="square" className="bg-slate-300" />
@@ -79,7 +107,7 @@ const UploadDocuments: React.FC<ComponentProp> = ({ className, ...props }) => {
           </button>
         </div>
 
-        <div className="my-4 basis-full leading-3">{props?.children}</div>
+        <div className="my-4 basis-full leading-3">{children}</div>
       </div>
 
       <Modal isOpen={isOpen}>
@@ -91,29 +119,34 @@ const UploadDocuments: React.FC<ComponentProp> = ({ className, ...props }) => {
         />
 
         <label
-          className="flex min-h-[120px] items-center justify-center rounded bg-slate-200 p-2 text-center text-slate-900"
+          className="flex min-h-20 items-center justify-center rounded bg-slate-200 p-2 text-center text-slate-900"
           htmlFor={props.name}
         >
-          {!loading && value?.id && (
-            <div>
-              <div className="mb-3">{value?.name}</div>
-              <button className="button is-small" onClick={handleRemove}>
-                Borrar
-              </button>
-            </div>
-          )}
-          {!loading && !value?.id && <span>Buscar</span>}
+          {!loading && <span className="font-medium">Buscar</span>}
           {loading && <span>Loading ...</span>}
           <input
-            {...field}
+            {...props}
             className="hidden"
             id={props.name}
             onChange={handleChange}
-            accept="application/pdf"
             type="file"
             placeholder="Buscar"
           />
         </label>
+
+        <div className="flex flex-col gap-2">
+          {displayFiles.map((file) => (
+            <div className="flex items-center justify-between">
+              <div className="w-48 overflow-hidden text-ellipsis text-nowrap">{file.name}</div>
+              <button
+                className="text-sm font-medium"
+                onClick={handleRemove(file.id)}
+              >
+                Borrar
+              </button>
+            </div>
+          ))}
+        </div>
 
         {error?.message && (
           <p className="text-sm text-red-500">{error.message}</p>
@@ -133,4 +166,4 @@ const UploadDocuments: React.FC<ComponentProp> = ({ className, ...props }) => {
   );
 };
 
-export default UploadDocuments;
+export default FileInputItem;
