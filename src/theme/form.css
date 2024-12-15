@@ -63,6 +63,10 @@ form .form-control:last-child {
   text-align: center;
 }
 
+.form-control .help-text {
+  @apply text-sm font-normal mt-1;
+}
+
 .form-password {
   position: relative;
 }

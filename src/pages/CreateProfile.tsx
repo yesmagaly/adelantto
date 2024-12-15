@@ -23,6 +23,9 @@ type FormValues = {
   rfc: string;
   birthdate: string;
   identification_number: string;
+  linkedin?: string;
+  facebook?: string;
+  instagram?: string;
 };
 
 const CreateProfile: React.FC = () => {
@@ -65,26 +68,31 @@ const CreateProfile: React.FC = () => {
     const response = await authentication.updateProfile(data);
 
     if (response.status === 200) {
-      setUserInfo("full_name", `${data.name} ${data.first_last_name} ${data.second_last_name}`);
+      setUserInfo(
+        "full_name",
+        `${data.name} ${data.first_last_name} ${data.second_last_name}`
+      );
       router.push(`/applications/lease-contract`);
     }
   };
 
-  const handleBlurZipCode = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlurZipCode = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (event.target.value) {
       try {
         const response = await checkZipCode(event.target.value);
         if (response.status === 200) {
           const data = await response.json();
-          setValue('municipality', data.municipality);
-          setValue('state', data.state);
-          setValue('colony', data.place);
+          setValue("municipality", data.municipality);
+          setValue("state", data.state);
+          setValue("colony", data.place);
         }
       } catch (error) {
         console.error(error);
       }
     }
-  }
+  };
 
   return (
     <IonPage>
@@ -144,8 +152,10 @@ const CreateProfile: React.FC = () => {
                   className="!inline-flex items-center"
                 >
                   INE / Pasaporte
-
-                  <Tooltip.Trigger aria-label="Más información" value="identification-number-tooltip" />
+                  <Tooltip.Trigger
+                    aria-label="Más información"
+                    value="identification-number-tooltip"
+                  />
                 </label>
 
                 <Tooltip.Content value="identification-number-tooltip">
@@ -160,7 +170,6 @@ const CreateProfile: React.FC = () => {
                     la esquina superior derecha de la página de información
                     personal"
                   </p>
-
                 </Tooltip.Content>
 
                 <input
@@ -182,7 +191,9 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="rfc">Registro Federal de Contribuyentes (con homoclave)</label>
+                <label htmlFor="rfc">
+                  Registro Federal de Contribuyentes (con homoclave)
+                </label>
                 <input
                   type="text"
                   id="rfc"
@@ -211,7 +222,9 @@ const CreateProfile: React.FC = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="address">Calle, número exterior / interior</label>
+                <label htmlFor="address">
+                  Calle, número exterior / interior
+                </label>
                 <input
                   type="text"
                   id="address"
@@ -261,6 +274,40 @@ const CreateProfile: React.FC = () => {
                 />
               </div>
 
+              <div className="form-control">
+                <label htmlFor="linkedin">LinkedIn</label>
+                <input
+                  type="text"
+                  id="linkedin"
+                  className="min-w-full"
+                  {...register("linkedin")}
+                />
+                <p className="help-text">Use la URL de su perfil de LinkedIn</p>
+              </div>
+
+              <div className="form-control">
+                <label htmlFor="instagram">Instagram</label>
+                <input
+                  type="text"
+                  id="instagram"
+                  className="min-w-full"
+                  {...register("instagram")}
+                />
+                <p className="help-text">
+                  Use la URL de tu perfil de Instagram
+                </p>
+              </div>
+
+              <div className="form-control">
+                <label htmlFor="facebook">Facebook</label>
+                <input
+                  type="text"
+                  id="facebook"
+                  className="min-w-full"
+                  {...register("facebook")}
+                />
+                <p className="help-text">Use la URL de tu perfil de Facebook</p>
+              </div>
 
               <div className="form-actions text-center">
                 <button className="button is-primary">Guardar</button>
