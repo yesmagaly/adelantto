@@ -84,7 +84,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
     <div>
       <Modal.Root isOpen={step === 0} variant="fully">
         <Modal.Header className="text-center">
-          <h3 className="heading-4">
+          <h3 className="mb-2 text-xl font-semibold">
             Tome una fotografía clara, sin sombras ni reflejos.
           </h3>
         </Modal.Header>
@@ -102,8 +102,8 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
         <>
           <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
             <Modal.Header className="text-center">
-              <h2 className="heading-3">Revisa tu foto</h2>
-              <p>
+              <h2 className="mb-2 text-xl font-semibold">Revisa tu foto</h2>
+              <p className="leading-tight">
                 Asegúrate de que las letras sean claras y tenga buena
                 iluminación.
               </p>

@@ -36,7 +36,7 @@ form .form-control:last-child {
 .form input[type="email"],
 .form input[type="date"],
 .form .pattern-format {
-  @apply p-4 text-center opacity-100 bg-gradient-to-t bg-gray-100 from-gray-100 via-gray-100 to-gray-200;
+  @apply p-4 text-center opacity-100 bg-gradient-to-t bg-gray-100;
 }
 
 .form-control select {

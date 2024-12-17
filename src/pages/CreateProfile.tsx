@@ -97,7 +97,7 @@ const CreateProfile: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <Page.Root variant="compact">
+        <Page.Root>
           <Page.Body>
             <Lottie
               animationData={userAnimation}
@@ -221,92 +221,110 @@ const CreateProfile: React.FC = () => {
                 />
               </div>
 
-              <div className="form-control">
-                <label htmlFor="address">
-                  Calle, número exterior / interior
+              <div className="my-8">
+                <label className="mb-4 block text-xl font-normal">
+                  Domicilio personal
                 </label>
-                <input
-                  type="text"
-                  id="address"
-                  className="min-w-full"
-                  {...register("address", { required: true })}
-                />
+                <div>
+                  <div className="form-control">
+                    <label htmlFor="address">
+                      Calle, número exterior / interior
+                    </label>
+                    <input
+                      type="text"
+                      id="address"
+                      className="min-w-full"
+                      {...register("address", { required: true })}
+                    />
+                  </div>
+
+                  <div className="form-control">
+                    <label htmlFor="zip_code">Código postal</label>
+                    <input
+                      type="text"
+                      id="zip_code"
+                      className="min-w-full"
+                      {...register("zip_code", { required: true })}
+                      onBlur={handleBlurZipCode}
+                    />
+                  </div>
+
+                  <div className="form-control">
+                    <label htmlFor="colony">Colonia</label>
+                    <input
+                      type="text"
+                      id="colony"
+                      className="min-w-full"
+                      {...register("colony", { required: true })}
+                    />
+                  </div>
+
+                  <div className="form-control">
+                    <label htmlFor="municipality">Alcaldía</label>
+                    <input
+                      type="text"
+                      id="municipality"
+                      className="min-w-full"
+                      {...register("municipality", { required: true })}
+                    />
+                  </div>
+
+                  <div className="form-control">
+                    <label htmlFor="state">Estado</label>
+                    <input
+                      type="text"
+                      id="state"
+                      className="min-w-full"
+                      {...register("state", { required: true })}
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className="form-control">
-                <label htmlFor="zip_code">Código postal</label>
-                <input
-                  type="text"
-                  id="zip_code"
-                  className="min-w-full"
-                  {...register("zip_code", { required: true })}
-                  onBlur={handleBlurZipCode}
-                />
-              </div>
+              <div className="my-8">
+                <label className="mb-4 block text-xl font-normal">
+                  Redes sociales
+                </label>
+                <div>
+                  <div className="form-control">
+                    <label htmlFor="linkedin">LinkedIn</label>
+                    <input
+                      type="text"
+                      id="linkedin"
+                      className="min-w-full"
+                      {...register("linkedin")}
+                    />
+                    <p className="help-text">
+                      Use la URL de su perfil de LinkedIn
+                    </p>
+                  </div>
 
-              <div className="form-control">
-                <label htmlFor="colony">Colonia</label>
-                <input
-                  type="text"
-                  id="colony"
-                  className="min-w-full"
-                  {...register("colony", { required: true })}
-                />
-              </div>
+                  <div className="form-control">
+                    <label htmlFor="instagram">Instagram</label>
+                    <input
+                      type="text"
+                      id="instagram"
+                      className="min-w-full"
+                      {...register("instagram")}
+                    />
+                    <p className="help-text">
+                      Use la URL de tu perfil de Instagram
+                    </p>
+                  </div>
 
-              <div className="form-control">
-                <label htmlFor="municipality">Alcaldía</label>
-                <input
-                  type="text"
-                  id="municipality"
-                  className="min-w-full"
-                  {...register("municipality", { required: true })}
-                />
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="state">Estado</label>
-                <input
-                  type="text"
-                  id="state"
-                  className="min-w-full"
-                  {...register("state", { required: true })}
-                />
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="linkedin">LinkedIn</label>
-                <input
-                  type="text"
-                  id="linkedin"
-                  className="min-w-full"
-                  {...register("linkedin")}
-                />
-                <p className="help-text">Use la URL de su perfil de LinkedIn</p>
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="instagram">Instagram</label>
-                <input
-                  type="text"
-                  id="instagram"
-                  className="min-w-full"
-                  {...register("instagram")}
-                />
-                <p className="help-text">
-                  Use la URL de tu perfil de Instagram
-                </p>
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="facebook">Facebook</label>
-                <input
-                  type="text"
-                  id="facebook"
-                  className="min-w-full"
-                  {...register("facebook")}
-                />
-                <p className="help-text">Use la URL de tu perfil de Facebook</p>
+                  <div className="form-control">
+                    <label htmlFor="facebook">Facebook</label>
+                    <input
+                      type="text"
+                      id="facebook"
+                      className="min-w-full"
+                      {...register("facebook")}
+                    />
+                    <p className="help-text">
+                      Use la URL de tu perfil de Facebook
+                    </p>
+                  </div>
+                </div>
               </div>
 
               <div className="form-actions text-center">

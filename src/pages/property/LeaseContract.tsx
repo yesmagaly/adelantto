@@ -1,7 +1,5 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
-import { API_SERVER_URL } from "../../config";
-import { useAuth } from "../auth/authContext";
 import { NumericFormat } from "react-number-format";
 import * as Page from "../../components/page";
 
@@ -44,9 +42,18 @@ export function atLeastThreeMonths(end_date, months_number) {
   return diffMonths >= months_number;
 }
 
+type FormData  = {
+  lease_monthly_income: number;
+  maintenance_fee: number;
+  lease_start_date: string;
+  lease_end_date: string;
+  property_zip_code: string;
+  lease_payment_method: string;
+  renting_time: number;
+}
+
 const LeaseContract: React.FC = () => {
   const router = useIonRouter();
-  const { authInfo } = useAuth()!;
 
   const {
     handleSubmit,
@@ -54,7 +61,7 @@ const LeaseContract: React.FC = () => {
     setError,
     formState: { errors },
     control,
-  } = useForm();
+  } = useForm<FormData>();
 
   const onSubmit = async ({ lease_monthly_income, ...data }: any) => {
     // Validate minimum period of contract time
@@ -113,7 +120,7 @@ const LeaseContract: React.FC = () => {
             </Page.Header>
             <Page.Body>
               <div className="form-control is-center">
-                <label>Valor de renta mensual antes de cuota de mantenimiento</label>
+                <label>Valor de renta</label>
                 <Controller
                   rules={{
                     validate: {
@@ -132,7 +139,6 @@ const LeaseContract: React.FC = () => {
                       required
                       getInputRef={ref}
                       decimalScale={2}
-                      a
                       thousandSeparator=","
                       prefix={"$"}
                     />
@@ -141,6 +147,31 @@ const LeaseContract: React.FC = () => {
                 {errors?.lease_monthly_income && (
                   <div className="description">
                     {errors?.lease_monthly_income?.message}
+                  </div>
+                )}
+              </div>
+
+              <div className="form-control is-center">
+                <label>Cuota de mantenimiento</label>
+                <Controller
+                  control={control}
+                  name="maintenance_fee"
+                  render={({ field: { ref, ...field } }) => (
+                    <NumericFormat
+                      {...field}
+                      className="pattern-format"
+                      type="text"
+                      required
+                      getInputRef={ref}
+                      decimalScale={2}
+                      thousandSeparator=","
+                      prefix={"$"}
+                    />
+                  )}
+                />
+                {errors?.maintenance_fee && (
+                  <div className="description">
+                    {errors?.maintenance_fee?.message}
                   </div>
                 )}
               </div>
@@ -165,6 +196,7 @@ const LeaseContract: React.FC = () => {
                   </div>
                 )}
               </div>
+
               <div className="form-control is-center">
                 <label>Código postal de tu bien inmueble en renta</label>
                 <input
@@ -180,6 +212,23 @@ const LeaseContract: React.FC = () => {
                 )}
               </div>
 
+              <div className="form-control is-center">
+                <label>¿Cúanto tiempo llevas rentando tu inmueble?</label>
+                <select
+                  {...register("renting_time")}
+                  className="w-full"
+                  required
+                >
+                  <option value="1">Menos de 1 año</option>
+                  <option value="2">De 1 a 2 años</option>
+                  <option value="3">Más de 2 años</option>
+                  </select>
+                {errors?.property_zip_code && (
+                  <div className="description">
+                    {errors?.property_zip_code?.message}
+                  </div>
+                )}
+              </div>
               <div className="form-control is-center is-inline">
                 <h4 className="mb-2 font-medium">
                   ¿Cómo recibes el pago de tu renta?

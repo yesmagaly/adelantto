@@ -17,3 +17,7 @@
 .button.is-small {
   padding: 0.75rem 1rem;
 }
+
+.button:disabled {
+  @apply bg-gray-400 opacity-50;
+}

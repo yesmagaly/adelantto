@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Camera, CameraResultType, CameraSource, Photo } from "@capacitor/camera";
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from "@capacitor/camera";
 import { t } from "@adelantto/utils";
 import * as Modal from "../../../components/modal";
 
@@ -12,7 +17,7 @@ import {
 import { addFaceSelfie, processFace, finishStatus } from "../client";
 import "../styles.css";
 
-import selfie from "../../../assets/video/selfie.mp4"
+import selfie from "../../../assets/video/selfie.mp4";
 
 export interface ComponentProp {
   children: React.ReactNode;
@@ -27,11 +32,11 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
   const [status, setStatus] = useState<null | string>();
 
   const takePhoto = async () => {
-    const newPhoto = await Camera.getPhoto({
+    const newPhoto = (await Camera.getPhoto({
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
       quality: 100,
-    }) as Photo;
+    })) as Photo;
 
     if (newPhoto?.base64String) {
       setPhoto(newPhoto);
@@ -84,8 +89,11 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
     <div>
       <Modal.Root isOpen={step === 0} variant="fully">
         <Modal.Header className="text-center">
-          <h3 className="heading-3">Validación Biométrica</h3>
-          <p>¡Sonríe! Queremos conocerte</p>
+          <h3 className="mb-2 text-xl font-semibold">Validación Biométrica</h3>
+          <p className="leading-tight">
+            Manten una expresión neutra, busca una luz equilibrada, retire
+            gafas, gorra o sombrero.
+          </p>
         </Modal.Header>
         <Modal.Body className="flex items-center">
           <video src={selfie} autoPlay loop></video>
@@ -99,10 +107,10 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
         <>
           <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
             <Modal.Header className="text-center">
-              <h2 className="heading-3">Revisa tu foto</h2>
-              <p>
-                Manten una expresión neutra, busca una luz equilibrada,
-                retire gafas, gorra o sombrero.
+              <h2 className="mb-2 text-xl font-semibold">Revisa tu foto</h2>
+              <p className="leading-tight">
+                Manten una expresión neutra, busca una luz equilibrada, retire
+                gafas, gorra o sombrero.
               </p>
             </Modal.Header>
             <Modal.Body className="flex items-center">
@@ -125,8 +133,9 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
           <Modal.Root isOpen={Boolean(photo) && step === 2} variant="fully">
             <Modal.Body className="flex items-center">
               <div
-                className={`income-photo ${status === REJECTED_STATUS ? "is-danger" : ""
-                  } ${status === APPROVED_STATUS ? "is-success" : ""}`}
+                className={`income-photo ${
+                  status === REJECTED_STATUS ? "is-danger" : ""
+                } ${status === APPROVED_STATUS ? "is-success" : ""}`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
@@ -161,12 +170,13 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={Boolean(photo) && step === 3} variant="fully">
             <Modal.Header>
-              <h3 className="heading-3">Validando documento y photo</h3>
+              <h3 className="mb-2 text-xl font-semibold">Validando documento y photo</h3>
             </Modal.Header>
             <Modal.Body className="flex items-center">
               <div
-                className={`income-photo ${status === REJECTED_STATUS ? "is-danger" : ""
-                  }`}
+                className={`income-photo ${
+                  status === REJECTED_STATUS ? "is-danger" : ""
+                }`}
               >
                 <img
                   src={`data:image/${photo.format};base64,${photo.base64String}`}
