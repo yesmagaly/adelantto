@@ -1,95 +1,102 @@
-/** Form Styles **/
 
-form .form-control:last-child {
-  margin-bottom: 0;
-}
+@layer components {
+  form .form-control:last-child {
+    margin-bottom: 0;
+  }
 
-.form-control {
-  margin-bottom: 1.5rem;
-}
+  .form-control {
+    margin-bottom: 1.5rem;
+  }
 
-.form-control:not(.is-inline) label {
-  font-weight: 500;
-  display: block;
-  margin-bottom: 0.5rem;
-}
+  .form-control:not(.is-inline) label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 
-.form-control .description {
-  color: var(--color-danger);
-  font-size: 0.85rem;
-  margin-top: 0.125rem;
-}
+  .form-control .description {
+    color: var(--color-danger);
+    font-size: 0.85rem;
+    margin-top: 0.125rem;
+  }
 
-.form-control input[type="text"],
-.form-control input[type="numeric"],
-.form-control input[type="password"],
-.form-control input[type="email"],
-.form-control input[type="date"],
-.form-control .pattern-format {
-  width: 100%;
-  border-radius: 0.25rem;
-}
+  .form-control label + .form-help-text {
+    @apply -mt-1 mb-2;
+  }
 
-.form input[type="text"],
-.form input[type="numeric"],
-.form input[type="password"],
-.form input[type="email"],
-.form input[type="date"],
-.form .pattern-format {
-  @apply p-4 text-center opacity-100 bg-gradient-to-t bg-gray-100;
-}
+  .form-help-text {
+    @apply text-sm font-normal my-1;
+  }
 
-.form-control select {
-  padding: 1rem 1.25rem;
-  border-radius: 0.25rem;
-}
+  .form-control input[type="text"],
+  .form-control input[type="numeric"],
+  .form-control input[type="password"],
+  .form-control input[type="email"],
+  .form-control input[type="date"],
+  .form-control .pattern-format {
+    width: 100%;
+    border-radius: 0.25rem;
+  }
 
-.form .pattern-format {
-  background-image: url("../assets/icons/mx.svg");
-  background-size: 2rem 2rem;
-  background-position: 15px center;
-  background-repeat: no-repeat;
-  padding-left: 30px;
-}
+  .form input[type="text"],
+  .form input[type="numeric"],
+  .form input[type="password"],
+  .form input[type="email"],
+  .form input[type="date"],
+  .form .pattern-format {
+    @apply p-4 text-center opacity-100 bg-gradient-to-t bg-gray-100;
+  }
 
-.form-control.is-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .form-control select {
+    padding: 1rem 1.25rem;
+    border-radius: 0.25rem;
+  }
 
-.form-control.is-center label {
-  max-width: 90%;
-  text-align: center;
-}
+  .form .pattern-format {
+    background-image: url("../assets/icons/mx.svg");
+    background-size: 2rem 2rem;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+  }
 
-.form-control .help-text {
-  @apply text-sm font-normal mt-1;
-}
+  .form-control.is-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.form-password {
-  position: relative;
-}
+  .form-control.is-center label {
+    max-width: 90%;
+    text-align: center;
+  }
 
-.form-password button {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  padding: 3px;
-}
 
-.form-password button img {
-  opacity: 0.65;
-}
 
-.dislay-control {
-  border-radius: 0.25rem;
-  @apply bg-gray-100 py-3 px-4 text-center;
-}
+  .form-password {
+    position: relative;
+  }
 
-.dislay-control .number {
-  @apply font-medium text-2xl;
+  .form-password button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    padding: 3px;
+  }
+
+  .form-password button img {
+    opacity: 0.65;
+  }
+
+  .dislay-control {
+    border-radius: 0.25rem;
+    @apply bg-gray-100 py-3 px-4 text-center;
+  }
+
+  .dislay-control .number {
+    @apply font-medium text-2xl;
+  }
 }

@@ -159,13 +159,13 @@ const CreateProfile: React.FC = () => {
                 </label>
 
                 <Tooltip.Content value="identification-number-tooltip">
-                  <p className="text-left text-sm font-normal">
+                  <p>
                     <span className="font-medium">INE:</span> Número ubicado
                     después de 'IDMEX' en la parte posterior de la credencial.
                     Omite el último dígito.
                   </p>
 
-                  <p className="text-left text-sm font-normal">
+                  <p>
                     <span className="font-medium">Pasaporte:</span> "Ubicado en
                     la esquina superior derecha de la página de información
                     personal"
@@ -294,7 +294,7 @@ const CreateProfile: React.FC = () => {
                       className="min-w-full"
                       {...register("linkedin")}
                     />
-                    <p className="help-text">
+                    <p className="form-help-text">
                       Use la URL de su perfil de LinkedIn
                     </p>
                   </div>
@@ -307,7 +307,7 @@ const CreateProfile: React.FC = () => {
                       className="min-w-full"
                       {...register("instagram")}
                     />
-                    <p className="help-text">
+                    <p className="form-help-text">
                       Use la URL de tu perfil de Instagram
                     </p>
                   </div>
@@ -320,7 +320,7 @@ const CreateProfile: React.FC = () => {
                       className="min-w-full"
                       {...register("facebook")}
                     />
-                    <p className="help-text">
+                    <p className="form-help-text">
                       Use la URL de tu perfil de Facebook
                     </p>
                   </div>

@@ -44,12 +44,12 @@ export function atLeastThreeMonths(end_date, months_number) {
 
 type FormData  = {
   lease_monthly_income: number;
-  maintenance_fee: number;
+  lease_maintenance_fee: number;
   lease_start_date: string;
   lease_end_date: string;
-  property_zip_code: string;
   lease_payment_method: string;
-  renting_time: number;
+  lease_renting_time: number;
+  property_zip_code: string;
 }
 
 const LeaseContract: React.FC = () => {
@@ -155,7 +155,7 @@ const LeaseContract: React.FC = () => {
                 <label>Cuota de mantenimiento</label>
                 <Controller
                   control={control}
-                  name="maintenance_fee"
+                  name="lease_maintenance_fee"
                   render={({ field: { ref, ...field } }) => (
                     <NumericFormat
                       {...field}
@@ -215,14 +215,14 @@ const LeaseContract: React.FC = () => {
               <div className="form-control is-center">
                 <label>¿Cúanto tiempo llevas rentando tu inmueble?</label>
                 <select
-                  {...register("renting_time")}
+                  {...register("lease_renting_time")}
                   className="w-full"
                   required
                 >
                   <option value="1">Menos de 1 año</option>
                   <option value="2">De 1 a 2 años</option>
                   <option value="3">Más de 2 años</option>
-                  </select>
+                </select>
                 {errors?.property_zip_code && (
                   <div className="description">
                     {errors?.property_zip_code?.message}

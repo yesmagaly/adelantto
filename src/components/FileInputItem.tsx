@@ -10,7 +10,6 @@ import documentsAnimation from "../assets/animations/documents.json";
 import { ErrorType } from "../types";
 
 export interface ComponentProp extends UseControllerProps {
-  children: React.ReactNode;
   className?: string;
   multiple?: boolean;
   accept?: string;
@@ -27,7 +26,6 @@ const addFile = (body: FormData) => {
 
 const FileInputItem: React.FC<ComponentProp> = ({
   className,
-  children,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +74,7 @@ const FileInputItem: React.FC<ComponentProp> = ({
     }
   };
 
-  const handleRemove = (fileId) => (event: { preventDefault: () => void }) => {
+  const handleRemove = (fileId: number) => (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     if (props.multiple) {
@@ -95,49 +93,32 @@ const FileInputItem: React.FC<ComponentProp> = ({
 
   return (
     <>
-      <div className={`flex gap-4 ${className}`}>
-        <div className="flex basis-32 items-center justify-center gap-5 border-b border-r border-solid border-[#D8D8D8]">
-          {displayFiles.length > 0 ? (
-            <Icon name="square-check" className="bg-green-400" />
-          ) : (
-            <Icon name="square" className="bg-slate-300" />
-          )}
-          <button onClick={openModal} className="inline-flex">
-            <Icon name="upload" className="bg-gray-400 text-lg" />
-          </button>
-        </div>
-
-        <div className="my-4 basis-full leading-3">{children}</div>
-      </div>
-
-      <Modal isOpen={isOpen}>
-        <Lottie
-          animationData={documentsAnimation}
-          style={{ width: "100%", height: 160 }}
-          loop
-          play
+      <label
+        className="!flex flex-col items-center justify-center rounded border border-dashed border-slate-500 bg-slate-50 px-2 py-4 text-sm !font-normal text-slate-800"
+        htmlFor={props.name}
+      >
+        <Icon name="upload-cloud" className="mb-1 h-8 w-8 bg-slate-400" />
+        {!loading && <span>Cargar archivo</span>}
+        {loading && <span>Cargando ...</span>}
+        <input
+          {...props}
+          className="hidden"
+          id={props.name}
+          onChange={handleChange}
+          type="file"
+          placeholder="Buscar"
         />
+      </label>
 
-        <label
-          className="flex min-h-20 items-center justify-center rounded bg-slate-200 p-2 text-center text-slate-900"
-          htmlFor={props.name}
-        >
-          {!loading && <span className="font-medium">Buscar</span>}
-          {loading && <span>Loading ...</span>}
-          <input
-            {...props}
-            className="hidden"
-            id={props.name}
-            onChange={handleChange}
-            type="file"
-            placeholder="Buscar"
-          />
-        </label>
-
-        <div className="flex flex-col gap-2">
+      {displayFiles.length > 0 && (
+        <div className="my-3 flex flex-col gap-2">
           {displayFiles.map((file) => (
-            <div className="flex items-center justify-between">
-              <div className="w-48 overflow-hidden text-ellipsis text-nowrap">{file.name}</div>
+            <div key={file.id} className="flex items-center justify-between">
+              <div className="inline-flex w-52 items-center gap-1 overflow-hidden text-ellipsis text-nowrap text-sm">
+                <Icon name="attachment" className="h-5 w-5 flex-shrink-0" />
+                {file.name}
+              </div>
+
               <button
                 className="text-sm font-medium"
                 onClick={handleRemove(file.id)}
@@ -147,21 +128,11 @@ const FileInputItem: React.FC<ComponentProp> = ({
             </div>
           ))}
         </div>
+      )}
 
-        {error?.message && (
-          <p className="text-sm text-red-500">{error.message}</p>
-        )}
-
-        <div className="flex flex-col gap-2">
-          <button
-            onClick={() => setIsOpen(false)}
-            className="button button-secondary"
-            disabled={loading}
-          >
-            Continuar
-          </button>
-        </div>
-      </Modal>
+      {error?.message && (
+        <p className="text-sm text-red-500">{error.message}</p>
+      )}
     </>
   );
 };

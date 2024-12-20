@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import FileInputItem from "../../components/FileInputItem";
 import { applications } from "../../api";
 import ErrorMessage from "../../components/ErrorMessage";
+import * as Tooltip from "../../components/Tooltip";
 
 interface File {
   id: number;
@@ -21,6 +22,7 @@ const UploadDocuments: React.FC = ({ match }) => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm();
 
@@ -46,125 +48,149 @@ const UploadDocuments: React.FC = ({ match }) => {
           </h4>
         </div>
 
-        <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form p-5" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <FileInputItem
-              name="property_deeds"
-              control={control}
-              rules={{ required: "Documento obligatorio" }}
-              multiple
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">
-                Escritura de la propiedad
-              </h5>
-              <p className="text-sm">
-                Con sello de inscripción del Registro Público de la Propiedad. <br /> (Puedes incluir más de un archivo)
+            <div className="form-control">
+              <label>Escritura de la propiedad</label>
+              <p className="form-help-text">
+                Con sello de inscripción del Registro Público de la Propiedad.
+                (Puedes incluir más de un archivo)
               </p>
+
+              <FileInputItem
+                name="property_deeds"
+                control={control}
+                rules={{ required: "Documento obligatorio" }}
+                multiple
+                accept="application/pdf"
+              />
               {errors.property_deeds && (
                 <ErrorMessage error={errors.property_deeds} />
               )}
-            </FileInputItem>
+            </div>
 
-            <FileInputItem
-              name="property_lease_agreement"
-              control={control}
-              rules={{ required: "Documento obligatorio" }}
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">
-                Contrato de arrendamiento vigente
-              </h5>
-              <p className="text-sm">Firmado por ambas partes</p>
+            <div className="form-control">
+              <label>Contrato de arrendamiento vigente</label>
+              <p className="form-help-text">Firmado por ambas partes</p>
+
+              <FileInputItem
+                name="property_lease_agreement"
+                control={control}
+                rules={{ required: "Documento obligatorio" }}
+                accept="application/pdf"
+              />
               {errors.property_lease_agreement && (
                 <ErrorMessage error={errors.property_lease_agreement} />
               )}
-            </FileInputItem>
+            </div>
 
-            <FileInputItem
-              name="property_latest_tax_receipt"
-              control={control}
-              rules={{ required: "Documento obligatorio" }}
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">
-                Boleta predial del último bimestre
-              </h5>
+            <div className="form-control">
+              <label>Boleta predial del último bimestre</label>
+              <FileInputItem
+                name="property_latest_tax_receipt"
+                control={control}
+                rules={{ required: "Documento obligatorio" }}
+                accept="application/pdf"
+              />
               {errors.property_latest_tax_receipt && (
                 <ErrorMessage error={errors.property_latest_tax_receipt} />
               )}
-            </FileInputItem>
+            </div>
 
-            <FileInputItem
-              name="bank_statements"
-              control={control}
-              rules={{
-                required: "Documento obligatorio",
-                validate: {
-                  equalTo: (value = []) => value.length === 3 || "Debe inlcuir 3 documentos",
-                }
-              }}
-              multiple
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">
+            <div className="form-control">
+              <label>
                 Recibo de nómina o estados de cuenta bancarios de los 3 últimos
                 meses
-              </h5>
-              <p className="text-sm">(Incluir 3 archivos)</p>
+              </label>
+              <p className="form-help-text">(Incluir 3 archivos)</p>
+              <FileInputItem
+                name="bank_statements"
+                control={control}
+                rules={{
+                  required: "Documento obligatorio",
+                  validate: {
+                    equalTo: (value = []) =>
+                      value.length === 3 || "Debe inlcuir 3 documentos",
+                  },
+                }}
+                multiple
+                accept="application/pdf"
+              />
               {errors.bank_statements && (
                 <ErrorMessage error={errors.bank_statements} />
               )}
-            </FileInputItem>
+            </div>
 
-            <FileInputItem
-              name="property_rpp_certificate"
-              control={control}
-              rules={{ required: "Documento obligatorio" }}
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">
-                Certificado de finalización en el RPP
-              </h5>
-              <p className="text-sm">Registro Público de la Propiedad</p>
+            <div className="form-control relative">
+              <label className="!inline-flex items-center">
+                Folio real
+                <Tooltip.Trigger
+                  aria-label="Más información"
+                  value="property-rpp-id-tooltip"
+                />
+              </label>
+              <Tooltip.Content value="property-rpp-id-tooltip">
+                <p className="mb-2">
+                  El folio real es un número único que identifica tu propiedad
+                  en el Registro Público de la Propiedad.
+                </p>
+                <p>
+                  Generalmente, se encuentra en la primera página de la
+                  escritura, cerca del título o encabezado, y está precedido por
+                  las palabras.
+                </p>
+              </Tooltip.Content>
+
+              <input
+                {...register("property_rpp_id", {
+                  required: "Campo obligatorio",
+                })}
+                type="text"
+              />
+
               {errors.property_rpp_certificate && (
                 <ErrorMessage error={errors.property_rpp_certificate} />
               )}
-            </FileInputItem>
+            </div>
 
-            <FileInputItem
-              name="property_rfc"
-              control={control}
-              rules={{
-                required: "Documento obligatorio"
-              }}
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">RFC</h5>
-              <p className="text-sm">
+            <div className="form-control">
+              <label>RFC</label>
+              <p className="form-help-text">
                 Constancia de situación fiscal con antigüedad no mayor a 3 meses
               </p>
+              <FileInputItem
+                name="property_rfc"
+                control={control}
+                rules={{
+                  required: "Documento obligatorio",
+                }}
+                accept="application/pdf"
+              />
               {errors.property_rfc && (
                 <ErrorMessage error={errors.property_rfc} />
               )}
-            </FileInputItem>
+            </div>
 
-            <FileInputItem
-              name="property_curp"
-              control={control}
-              rules={{ required: "Documento obligatorio" }}
-              accept="application/pdf"
-            >
-              <h5 className="text-sm font-bold leading-4">CURP</h5>
-              <p className="text-sm">Certificada y emitida por la RENAPO</p>
+            <div className="form-control">
+              <label>CURP</label>
+              <p className="form-help-text">
+                Certificada y emitida por la RENAPO
+              </p>
+
+              <FileInputItem
+                name="property_curp"
+                control={control}
+                rules={{ required: "Documento obligatorio" }}
+                accept="application/pdf"
+              />
               {errors.property_curp && (
                 <ErrorMessage error={errors.property_curp} />
               )}
-            </FileInputItem>
+            </div>
           </div>
 
           <div className="mb-7 text-center">
-            <p className="mb-6 text-sm font-medium leading-4">
+            <p className="mb-6 text-sm font-medium leading-tight">
               Los documentos deberán ser escaneados en alta resolución y en
               formato PDF, de lo contrario declinaremos el proceso.
             </p>
@@ -173,7 +199,7 @@ const UploadDocuments: React.FC = ({ match }) => {
           </div>
         </form>
       </IonContent>
-    </IonPage >
+    </IonPage>
   );
 };
 
