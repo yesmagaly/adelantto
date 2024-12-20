@@ -71,3 +71,11 @@
 .icon-trash-can {
   mask-image: url(../../assets/icons/trash-can.svg);
 }
+
+.icon-attachment {
+  mask-image: url(../../assets/icons/attachment.svg);
+}
+
+.icon-upload-cloud {
+  mask-image: url(../../assets/icons/upload-cloud.svg);
+}
