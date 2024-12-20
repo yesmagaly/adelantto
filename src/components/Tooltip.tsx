@@ -73,23 +73,17 @@ const TooltipTrigger = ({ value }: { value: string }) => {
 };
 
 const TooltipContent = React.forwardRef(
-  ({ value, ...props }: { value: string }, ref) => {
+  (
+    { value, children, ...props }: { value: string; children: React.ReactNode },
+    ref
+  ) => {
     return (
       <div
         data-value={value}
         className="absolute left-0 top-7 hidden flex-col gap-2 rounded border border-slate-400 bg-white p-2"
         {...props}
       >
-        <p className="text-left text-sm font-normal">
-          <span className="font-medium">INE:</span> Número ubicado después de
-          'IDMEX' en la parte posterior de la credencial. Omite el último
-          dígito.
-        </p>
-
-        <p className="text-left text-sm font-normal">
-          <span className="font-medium">Pasaporte:</span> "Ubicado en la esquina
-          superior derecha de la página de información personal"
-        </p>
+        <div className="text-left text-sm font-normal">{children}</div>
       </div>
     );
   }
