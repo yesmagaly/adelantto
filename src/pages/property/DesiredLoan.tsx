@@ -13,22 +13,23 @@ function formatCurrency(value: number) {
   }).format(value);
 }
 
-export interface Application {
+export interface T_application {
   lease_monthly_income: number;
+  lease_maintenance_fee: number;
   lease_end_date: string;
 }
 
 interface DesiredLoanProps
   extends RouteComponentProps<{
     id: string;
-  }> { }
+  }> {}
 
 const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const router = useIonRouter();
   const [error, setError] = useState<string>()!;
   const [loading, setLoading] = useState(true);
   const [months, setMonths] = useState<number>()!;
-  const [application, setApplication] = useState<Application>();
+  const [application, setApplication] = useState<T_application>();
 
   // GET with fetch API
   useEffect(() => {
@@ -53,12 +54,10 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
         desired_loan_amount: application.lease_monthly_income * months,
         desired_loan_term_frame: months,
 
-        step: 'desired_loan'
+        step: "desired_loan",
       });
 
-      router.push(
-        `/applications/${match.params.id}/pre-offer`
-      );
+      router.push(`/applications/${match.params.id}/pre-offer`);
     } else {
       setError("Por favor, selecciona un monto para continuar");
     }
@@ -80,22 +79,37 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
           <Page.Body className="flex flex-col gap-2">
             {loading && <div>Loading</div>}
 
-            {!loading && application &&
-              [3, 4, 5, 6].filter(value => atLeastThreeMonths(application?.lease_end_date, value)).map((value) => (
-                <button
-                  key={`dl-${value}`}
-                  id={`desired-loan-${value}`}
-                  className={`button ${value === months ? "is-secondary" : ""}`}
-                  onClick={handleOptionClick(value)}
-                >
-                  <div className="w-full text-2xl">
-                    {formatCurrency(value * application.lease_monthly_income)}
-                  </div>
-                  <div className="font-normal">x {value} meses</div>
-                </button>
-              ))}
+            {!loading &&
+              application &&
+              [6, 9, 12]
+                .filter((value) =>
+                  atLeastThreeMonths(application?.lease_end_date, value)
+                )
+                .map((value) => (
+                  <button
+                    key={`dl-${value}`}
+                    id={`desired-loan-${value}`}
+                    className={`button ${
+                      value === months ? "is-secondary" : ""
+                    }`}
+                    onClick={handleOptionClick(value)}
+                  >
+                    <div className="w-full text-2xl">
+                      {formatCurrency(
+                        value *
+                          (application.lease_monthly_income -
+                            application.lease_maintenance_fee)
+                      )}
+                    </div>
+                    <div className="font-normal">x {value} meses</div>
+                  </button>
+                ))}
 
-            {error && !months && <p className="mt-4 text-center font-medium text-orange-500">{error}</p>}
+            {error && !months && (
+              <p className="mt-4 text-center font-medium text-orange-500">
+                {error}
+              </p>
+            )}
           </Page.Body>
 
           <Page.Footer>

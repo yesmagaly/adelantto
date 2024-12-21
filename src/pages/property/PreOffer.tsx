@@ -7,12 +7,12 @@ import * as Page from "../../components/page";
 import { formatCurrency } from "@adelantto/utils";
 import { OfferType } from "../../types";
 import { atLeastThreeMonths } from "./LeaseContract";
-import { Application } from "./DesiredLoan";
+import { T_application } from "./DesiredLoan";
 
 interface PreOfferProps extends RouteComponentProps<{ id: string }> { }
 
 const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
-  const [application, setApplication] = useState<Application>();
+  const [application, setApplication] = useState<T_application>();
   const router = useIonRouter();
   const [months, setMonths] = useState<number>();
   const [offer, setOffer] = useState<OfferType>()!;
@@ -24,14 +24,14 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
       const application = await response.json();
       const defaultMonths = application?.desired_loan_term_frame;
       const calcResponse = await calculator.calc({
-        principal: application.lease_monthly_income * defaultMonths,
+        principal: (application.lease_monthly_income - application.lease_maintenance_fee) * defaultMonths,
         months: defaultMonths,
       });
 
       const data = await calcResponse.json();
 
       setOffer(data);
-      setIncome(application.lease_monthly_income);
+      setIncome((application.lease_monthly_income - application.lease_maintenance_fee));
       setApplication(application);
       setMonths(defaultMonths);
     };
@@ -121,7 +121,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
               <div className="form-control is-center">
                 <label>¿Te interesa ver el resumen para otros meses?</label>
                 <select defaultValue={months} onChange={handleMothsChange}>
-                  {[3, 4, 5, 6]
+                  {[6, 9, 12]
                     .filter((value) =>
                       atLeastThreeMonths(application?.lease_end_date, value)
                     )

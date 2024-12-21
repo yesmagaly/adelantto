@@ -63,17 +63,10 @@ const LeaseContract: React.FC = () => {
     control,
   } = useForm<FormData>();
 
-  const onSubmit = async ({ lease_monthly_income, ...data }: any) => {
-    // Validate minimum period of contract time
-    if (!validateMinContractTime(data.lease_start_date, data.lease_end_date)) {
+  const onSubmit = async ({ lease_monthly_income, lease_maintenance_fee, ...data }: any) => {
+    if (!atLeastThreeMonths(data.lease_end_date, 6)) {
       return setError("lease_end_date", {
-        message: "El contrato mínimo es de 6 meses",
-      });
-    }
-
-    if (!atLeastThreeMonths(data.lease_end_date, 3)) {
-      return setError("lease_end_date", {
-        message: "El tiempo restante del contrato debe ser mayor o igual a 3 meses",
+        message: "El tiempo restante de su contrato debe ser mayor o igual a 6 meses",
       });
     }
 
@@ -95,6 +88,7 @@ const LeaseContract: React.FC = () => {
 
     const response = await applications.leaseContract({
       lease_monthly_income: removeNumericFormat(lease_monthly_income),
+      lease_maintenance_fee: removeNumericFormat(lease_maintenance_fee),
       ...data,
     });
 
@@ -169,9 +163,9 @@ const LeaseContract: React.FC = () => {
                     />
                   )}
                 />
-                {errors?.maintenance_fee && (
+                {errors?.lease_maintenance_fee && (
                   <div className="description">
-                    {errors?.maintenance_fee?.message}
+                    {errors.lease_maintenance_fee?.message}
                   </div>
                 )}
               </div>
