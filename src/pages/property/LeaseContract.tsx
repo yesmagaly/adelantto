@@ -17,7 +17,7 @@ function addMonths(date: any, months: number) {
 }
 
 function parseDate(str: string) {
-  const [year, month, day] = str.split("-").map(i => Number.parseInt(i));
+  const [year, month, day] = str.split("-").map((i) => Number.parseInt(i));
 
   return new Date(+year, month - 1, +day);
 }
@@ -42,7 +42,7 @@ export function atLeastThreeMonths(end_date, months_number) {
   return diffMonths >= months_number;
 }
 
-type FormData  = {
+type FormData = {
   lease_monthly_income: number;
   lease_maintenance_fee: number;
   lease_start_date: string;
@@ -50,7 +50,7 @@ type FormData  = {
   lease_payment_method: string;
   lease_renting_time: number;
   property_zip_code: string;
-}
+};
 
 const LeaseContract: React.FC = () => {
   const router = useIonRouter();
@@ -63,13 +63,11 @@ const LeaseContract: React.FC = () => {
     control,
   } = useForm<FormData>();
 
-  const onSubmit = async ({ lease_monthly_income, lease_maintenance_fee, ...data }: any) => {
-    if (!atLeastThreeMonths(data.lease_end_date, 6)) {
-      return setError("lease_end_date", {
-        message: "El tiempo restante de su contrato debe ser mayor o igual a 6 meses",
-      });
-    }
-
+  const onSubmit = async ({
+    lease_monthly_income,
+    lease_maintenance_fee,
+    ...data
+  }: any) => {
     const zipCodeResponse = await checkZipCode(data.property_zip_code);
 
     if (zipCodeResponse.status === 200) {
@@ -77,7 +75,8 @@ const LeaseContract: React.FC = () => {
 
       if (data.state !== "Ciudad de México") {
         return setError("property_zip_code", {
-          message: "El código postal no pertenece al estado de Ciudad de México.",
+          message:
+            "El código postal no pertenece al estado de Ciudad de México.",
         });
       }
     } else {
@@ -182,7 +181,17 @@ const LeaseContract: React.FC = () => {
 
               <div className="form-control is-center">
                 <label>Fecha de fin del contrato de arrendamiento</label>
-                <input {...register("lease_end_date")} type="date" required />
+                <input
+                  {...register("lease_end_date", {
+                    validate: {
+                      atLeastSixMonths: (v) =>
+                        atLeastThreeMonths(v, 6) ||
+                        "El tiempo restante de su contrato debe ser mayor o igual a 6 meses",
+                    },
+                  })}
+                  type="date"
+                  required
+                />
 
                 {errors?.lease_end_date && (
                   <div className="description is-danger">
@@ -252,7 +261,6 @@ const LeaseContract: React.FC = () => {
                       Transferencia
                     </label>
                   </div>
-
                 </div>
               </div>
             </Page.Body>
