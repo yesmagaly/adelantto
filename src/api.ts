@@ -191,9 +191,9 @@ export const applications = {
       body: JSON.stringify(body),
     }),
 
-  confirmPrivacyPolicy: async (id: string, body = {}) =>
-    await fetch(
-      `${API_SERVER_URL}/api/applications/${id}/confirm-privacy-policy`,
+  confirmPrivacyPolicy: async (id: string, body = {}) => {
+    return await fetch(
+      `${API_SERVER_URL}/api/applications/${id}/confirm-privacy-policy?time=${Date.now()}`,
       {
         method: "PUT",
         headers: {
@@ -203,8 +203,8 @@ export const applications = {
         },
         body: JSON.stringify(body),
       }
-    ),
-
+    );
+  },
   finalAnnouncement: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/final-announcement`, {
       method: "PUT",

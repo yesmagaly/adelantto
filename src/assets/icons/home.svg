@@ -1,16 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="82" height="37" viewBox="0 0 82 37">
-  <defs>
-    <clipPath id="clip-path">
-      <rect id="Rectángulo_24" data-name="Rectángulo 24" width="82" height="37" transform="translate(36 840)" fill="#fff"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 22 22"
+   version="1.1"
+   id="svg12"
+   width="22"
+   height="22"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6">
+    <clipPath
+       id="clip-path">
+      <rect
+         id="Rectángulo_24"
+         data-name="Rectángulo 24"
+         width="82"
+         height="37"
+         transform="translate(36,840)"
+         fill="#ffffff"
+         x="0"
+         y="0" />
     </clipPath>
-    <clipPath id="clip-path-2">
-      <rect id="Rectángulo_23" data-name="Rectángulo 23" width="20.321" height="21.731" transform="translate(0 0)" fill="#5bc79b"/>
+    <clipPath
+       id="clip-path-2">
+      <rect
+         id="Rectángulo_23"
+         data-name="Rectángulo 23"
+         width="20.320999"
+         height="21.731001"
+         fill="#5bc79b"
+         x="0"
+         y="0" />
     </clipPath>
   </defs>
-  <g id="Enmascarar_grupo_2" data-name="Enmascarar grupo 2" transform="translate(-36 -840)" clip-path="url(#clip-path)">
-    <g id="Grupo_18" data-name="Grupo 18" transform="translate(65.339 847.635)">
-      <g id="Grupo_17" data-name="Grupo 17" clip-path="url(#clip-path-2)">
-        <path id="Trazado_29" data-name="Trazado 29" d="M19.893,9.174,13.025,1.3A3.8,3.8,0,0,0,7.3,1.3L.429,9.174a1.722,1.722,0,0,0,.92,2.814v4.567a5.182,5.182,0,0,0,5.176,5.176H13.8a5.182,5.182,0,0,0,5.176-5.176V11.988a1.722,1.722,0,0,0,.92-2.814M9.03,2.814a1.5,1.5,0,0,1,2.261,0l6.037,6.919H2.993Zm7.643,13.741A2.878,2.878,0,0,1,13.8,19.43H6.525a2.878,2.878,0,0,1-2.876-2.875V12.034H16.673Z" fill="#5bc79b"/>
+  <g
+     id="Enmascarar_grupo_2"
+     data-name="Enmascarar grupo 2"
+     transform="translate(-67.621445,-847.05121)"
+     clip-path="url(#clip-path)">
+    <g
+       id="Grupo_18"
+       data-name="Grupo 18"
+       transform="translate(88.043533,846.81637)">
+      <g
+         id="Grupo_17"
+         data-name="Grupo 17"
+         clip-path="url(#clip-path-2)"
+         transform="translate(-19.576229,0.3733719)">
+        <path
+           id="Trazado_29"
+           data-name="Trazado 29"
+           d="M 19.893,9.174 13.025,1.3 A 3.8,3.8 0 0 0 7.3,1.3 L 0.429,9.174 a 1.722,1.722 0 0 0 0.92,2.814 v 4.567 a 5.182,5.182 0 0 0 5.176,5.176 H 13.8 a 5.182,5.182 0 0 0 5.176,-5.176 v -4.567 a 1.722,1.722 0 0 0 0.92,-2.814 M 9.03,2.814 a 1.5,1.5 0 0 1 2.261,0 l 6.037,6.919 H 2.993 Z m 7.643,13.741 A 2.878,2.878 0 0 1 13.8,19.43 H 6.525 A 2.878,2.878 0 0 1 3.649,16.555 v -4.521 h 13.024 z"
+           fill="#5bc79b" />
       </g>
     </g>
   </g>
