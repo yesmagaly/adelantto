@@ -55,7 +55,7 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
           <Page.Header>
             <div className="heading--blue bg-cover px-6 py-8 text-white">
               <h1 className="heading-4 font-medium">
-                Adelantto {loan.id.toString().padStart(5, "0")}
+                AdelanttoCash® {loan.id.toString().padStart(5, "0")}
               </h1>
 
               <div className="border-full mb-4 block" />

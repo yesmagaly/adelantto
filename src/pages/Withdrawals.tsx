@@ -63,7 +63,7 @@ const Withdrawals: React.FC = ({ match }) => {
 
               <div className="mb-16 mt-4">
                 <p>
-                  Enviaremos el contrato de tu Adelantto a tu correo electrónico, por favor, ayudanos a revisarlo y firmarlo de manera digital.
+                  Enviaremos el contrato de tu AdelanttoCash® a tu correo electrónico, por favor, ayudanos a revisarlo y firmarlo de manera digital.
                 </p>
               </div>
 

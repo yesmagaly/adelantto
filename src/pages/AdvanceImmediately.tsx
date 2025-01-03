@@ -17,7 +17,7 @@ const AdvanceImmediately: React.FC = () => {
             <div className="">
               <div>
                 <h1 className="heading__title pt-16 text-center">
-                  <strong>Adelantto</strong> de inmediato
+                  <strong>AdelanttoCash®</strong> de inmediato
                 </h1>
               </div>
 

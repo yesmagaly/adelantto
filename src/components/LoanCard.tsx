@@ -28,7 +28,7 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
     <div className="border-b p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <h4 className="text-lx font-bold leading-5">Adelantto {id.toString().padStart(5, "0")}</h4>
+          <h4 className="text-lx font-bold leading-5">AdelanttoCash® {id.toString().padStart(5, "0")}</h4>
         </div>
 
         {status === "awaiting_account_statement_upload" &&

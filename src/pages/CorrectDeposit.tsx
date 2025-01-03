@@ -21,16 +21,16 @@ const CorrectDeposit: React.FC = () => {
               play
             />
 
-            <div className="text-center mb-10">
+            <div className="mb-10 text-center">
               <div className="mb-10">
                 <h1 className="heading-4">
                   ¡Gracias por confiar <br /> en nosotros!
                 </h1>
               </div>
-              <p className="text-lg px-5 mb-10">
+              <p className="mb-10 px-5 text-lg">
                 El dinero ya está en tu cuenta. Recuerda que al terminar de
                 pagar el total de las rentas adelantadas podrás solicitar un
-                nuevo Adelantto.
+                nuevo AdelanttoCash®.
               </p>
               <button
                 className="button is-secondary"

@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.adelantto.app',
-  appName: 'Adelantto',
+  appName: 'AdelanttoCash',
   webDir: 'dist',
   server: {
     androidScheme: 'https'

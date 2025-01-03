@@ -6,7 +6,7 @@ import InputPassword from "../../components/InputPassword";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
-import logo from "../../assets/icons/alternative-logo.svg";
+import logo from "../../assets/icons/logo.svg";
 import { authentication } from "../../api";
 import { t } from "@adelantto/utils";
 
@@ -117,12 +117,12 @@ const UpdateTemporaryPassword: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <div className="blue-bg flex h-full flex-col items-center justify-center text-center">
-          <img className="mb-5" src={logo} />
+          <img className="mb-5 w-44" src={logo} />
           <div className="text-white">
             <h1 className="mb-4 text-4xl font-semibold">¡Bienvenido!</h1>
             <p className="mb-8 text-lg leading-6">
               Ahora eres parte <br />
-              <strong> de Adelantto </strong>
+              <strong> de AdelanttoCash® </strong>
             </p>
           </div>
 

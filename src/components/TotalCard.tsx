@@ -11,8 +11,8 @@ export default function TotalCard({ amount }: ComponentProps) {
   return (
     <div className="heading heading--blue heading--compact">
       <div>
-        <h5 className="text-xl mb-4 text-green-300">
-          Adelantto total
+        <h5 className="mb-4 text-xl text-green-300">
+          AdelanttoCash® total
         </h5>
         <p className="text-3xl font-bold">{formatCurrency(amount)}</p>
       </div>
