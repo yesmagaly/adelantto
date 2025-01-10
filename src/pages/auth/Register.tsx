@@ -17,7 +17,8 @@ type FormValues = {
 };
 
 const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
-const cleanUpPhone = (phone = "") => phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
+const cleanUpPhone = (phone = "") =>
+  phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,10 @@ const Register: React.FC = () => {
         type: "required",
         message: t("Your cellphone number is required."),
       };
-    } else if (values.phone && !parsePhoneNumber(cleanUpPhone(values.phone))?.isValid()) {
+    } else if (
+      values.phone &&
+      !parsePhoneNumber(cleanUpPhone(values.phone))?.isValid()
+    ) {
       errors.phone = {
         type: "pattern",
         message: t("Your cellphone number is invalid."),
@@ -62,25 +66,33 @@ const Register: React.FC = () => {
     // Clean up phone number.
     const phone = cleanUpPhone(data?.phone);
 
-    // Send phone request.
-    const response = await fetch(
-      `${API_SERVER_URL}/api/send-verification-code`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ phone }),
+    try {
+      // Send phone request.
+      const response = await fetch(
+        `${API_SERVER_URL}/api/send-verification-code`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ phone }),
+        }
+      );
+
+      const json = await response.json();
+
+      if (json.status === "success") {
+        router.push(`/verification-code/${phone}`);
+      } else {
+        setError("phone", { message: json.message, type: "server" });
+        setIsOpen(true);
       }
-    );
-
-    const json = await response.json();
-
-    if (json.status === "success") {
-      router.push(`/verification-code/${phone}`);
-    } else {
-      setError("phone", { message: json.message, type: "server" });
+    } catch (error) {
+      setError("phone", {
+        message: "Ups, algo salió mal. Inténtalo de nuevo más tarde.",
+        type: "server",
+      });
       setIsOpen(true);
     }
   };
