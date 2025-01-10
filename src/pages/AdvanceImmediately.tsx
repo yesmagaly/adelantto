@@ -46,7 +46,7 @@ const AdvanceImmediately: React.FC = () => {
                 />
                 <div className="leading-tight">
                   Acepto los{" "}
-                  <a href="https://adelantto.com/terminos-y-condiciones" target="_blank" className="font-medium underline">
+                  <a href="https://adelanttocash.com/terminos-y-condiciones" target="_blank" className="font-medium underline">
                     términos y condiciones
                   </a>
                 </div>

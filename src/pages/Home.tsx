@@ -33,13 +33,13 @@ const Home: React.FC = () => {
 
             <p className="mt-10 flex flex-col gap-2">
               <a
-                href="https://adelantto.com/terminos-y-condiciones"
+                href="https://adelanttocash.com/terminos-y-condiciones"
                 target="_blank"
               >
                 Términos y condiciones
               </a>
               <a
-                href="https://adelantto.com/aviso-privacidad"
+                href="https://adelanttocash.com/aviso-privacidad"
                 target="_blank"
               >
                 Aviso de privacidad

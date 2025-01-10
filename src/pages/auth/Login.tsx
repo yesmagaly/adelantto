@@ -84,14 +84,14 @@ const Login: React.FC<LoginProps> = () => {
           <p className="mt-8">
             <a
               className="mb-2 block"
-              href="https://adelantto.com/terminos-y-condiciones"
+              href="https://adelanttocash.com/terminos-y-condiciones"
               target="_blank"
             >
               Términos y condiciones
             </a>
             <a
               className="block"
-              href="https://adelantto.com/aviso-privacidad"
+              href="https://adelanttocash.com/aviso-privacidad"
               target="_blank"
             >
               Aviso de privacidad
