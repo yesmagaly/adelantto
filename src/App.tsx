@@ -124,7 +124,13 @@ const App: React.FC = () => {
 
 
   if (!authInfo || !authInfo.initialized) {
-    return <IonApp>Loading ...</IonApp>;
+    return <IonApp>
+      <div className="flex h-screen w-full items-center justify-center">
+        <span className="text-sm font-medium">
+          Cargando ...
+        </span>
+      </div>
+    </IonApp>;
   } else {
     return (
       <IonApp>

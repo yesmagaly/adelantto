@@ -75,7 +75,7 @@ const UploadDocuments: React.FC<T_props> = ({
         {!loading && !value?.id && (
           <label htmlFor={props.name}>{props?.children}</label>
         )}
-        {loading && <span>Loading ...</span>}
+        {loading && <span>Cargando ...</span>}
       </div>
 
       <input

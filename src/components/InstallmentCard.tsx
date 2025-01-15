@@ -41,8 +41,8 @@ export default function InstallmentCard({
             Mes {index + 1}: {t(status)}
           </h6>
           <p className="text-sm">
-            Fecha limite de pago:
-            <span className="block font-medium">
+            Fecha limite de pago: {" "}
+            <span className="font-medium">
               {capitalizeFirstLetter(
                 DateTime.fromISO(due_date)
                   .setLocale("es")
@@ -53,7 +53,7 @@ export default function InstallmentCard({
         </div>
 
         <button
-          className="font-regular rounded bg-blue-900 px-3 py-1 text-white disabled:opacity-75"
+          className="font-regular rounded bg-blue-900 px-3 py-1 text-sm text-white disabled:opacity-75"
           onClick={() => router.push(`/loans/${loanId}/installments/${id}`)}
           disabled={status === "approved" || status === "in_validation"}
         >

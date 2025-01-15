@@ -45,7 +45,11 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
   }, []);
 
   if (!loan) {
-    return <div>Loading ...</div>;
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <span className="text-sm font-medium">Cargando ...</span>
+      </div>
+    );
   }
 
   return (
@@ -81,25 +85,7 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
             </div>
           </Page.Header>
           <Page.Body className="flex-1">
-            <h4 className="mb-2 text-xl font-semibold">RESUMEN</h4>
-
-            {detail && (
-              <div className="mb-8 flex gap-3">
-                {loan?.installments.map((installment, key) => (
-                  <div
-                    className={`border w-20 text-center py-1 rounded-md text-xs font-medium ${
-                      installment.id === detail.installment.id
-                        ? "bg-primary-green"
-                        : "bg-gray-200"
-                    }`}
-                  >
-                    MES {key + 1}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               {loan?.installments.map((installment, key) => (
                 <InstallmentCard
                   key={installment.id}

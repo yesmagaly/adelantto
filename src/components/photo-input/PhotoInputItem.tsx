@@ -77,7 +77,7 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
   return (
     <>
       <div className="flex gap-4">
-        <div className="flex justify-center gap-5 items-center basis-32 border-b border-r border-[#D8D8D8] border-solid">
+        <div className="flex basis-32 items-center justify-center gap-5 border-b border-r border-solid border-[#D8D8D8]">
           {value?.id ? <Icon name="square-check" className="bg-green-400" /> : <Icon name="square" className="bg-slate-300" />}
 
           <button className="inline-flex" onClick={openModal}>
@@ -88,7 +88,7 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
       </div>
 
       <Modal isOpen={isOpen}>
-        <div className="p-2 flex items-center justify-center bg-slate-200 rounded text-slate-800 text-center h-52">
+        <div className="flex h-52 items-center justify-center rounded bg-slate-200 p-2 text-center text-slate-800">
           {photoUrl && <img src={photoUrl}></img>}
           {!loading && !value?.id && (
             <div onClick={takePhoto}>
@@ -98,7 +98,7 @@ const PhotoInputItem: React.FC<ComponentProp> = (props) => {
           )}
         </div>
 
-        {loading && <span>Loading ...</span>}
+        {loading && <span>Cargando ...</span>}
         {error.message && <p className="text-sm">{error.message}</p>}
 
         <button
