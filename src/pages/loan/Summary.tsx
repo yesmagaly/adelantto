@@ -21,13 +21,13 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
         const response = await api.loans.get(match.params.id);
         const data = (await response.json()) as LoanType;
         const residue =
-          data.amount -
+          data.amount + data.moratorium_amount -
           data.installments
             .filter((installment) => installment.status === "approved")
             .reduce((acc, installment) => acc + installment.amount, 0);
 
         const installment = data.installments.find(
-          (installment) => installment.status !== "paid"
+          (installment) => installment.status !== "approved"
         );
 
         if (installment) {
@@ -69,7 +69,7 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
                   <h6 className="text-sm">CUOTA A PAGAR</h6>
                   {detail && (
                     <p className="text-2xl font-semibold">
-                      {formatCurrency(detail.installment.amount)}
+                      {formatCurrency(detail.installment.total_amount)}
                     </p>
                   )}
                 </div>

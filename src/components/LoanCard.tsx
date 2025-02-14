@@ -1,26 +1,34 @@
 import { useIonRouter } from "@ionic/react";
-import masterCardIcon from "../assets/icons/master-card.png";
 import { LoanType } from "../types";
-
 
 function trans(key: string) {
   const mapper = {
-    'awaiting_account_statement_upload': 'Esperando la carga de estado de cuenta',
-    'awaiting_account_statement_check': 'Su estado de cuenta esta a la espera de revisión',
-    'awaiting_client_signature': 'Estamos esperamos su firma digital del contrato. Por favor revise el correo electrónico de Weetrust.',
-    'signature_document_completed': 'Firma de documento completado',
-    'pending_disbursement': 'En espera de desembolso',
-    'active': 'Activo',
-  }
+    awaiting_account_statement_upload: "Esperando la carga de estado de cuenta",
+    awaiting_account_statement_check:
+      "Su estado de cuenta esta a la espera de revisión",
+    awaiting_client_signature:
+      "Estamos esperamos su firma digital del contrato. Por favor revise el correo electrónico de Weetrust.",
+    signature_document_completed: "Firma de documento completado",
+    pending_disbursement: "En espera de desembolso",
+    approved: "Aprobado",
+    active: "Activo",
+    liquidated: "Liquidado",
+  };
 
   return mapper[key] ?? key;
 }
 
 interface ComponentProps extends LoanType {
-  url: string
+  url: string;
 }
 
-export default function LoanCard({ amount, url, status, application, id }: ComponentProps) {
+export default function LoanCard({
+  amount,
+  url,
+  status,
+  application,
+  id,
+}: ComponentProps) {
   const router = useIonRouter();
   const showMore = () => router.push(url);
 
@@ -28,7 +36,9 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
     <div className="border-b p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <h4 className="text-lx font-bold leading-5">AdelanttoCash® {id.toString().padStart(5, "0")}</h4>
+          <h4 className="text-lx font-bold leading-5">
+            AdelanttoCash® {id.toString().padStart(5, "0")}
+          </h4>
         </div>
 
         {status === "awaiting_account_statement_upload" &&
@@ -51,12 +61,11 @@ export default function LoanCard({ amount, url, status, application, id }: Compo
         )}
       </div>
 
-      {status !== 'active' && (
+      {status !== "active" && (
         <div className="pt-4">
           <p className="leading-tight">{trans(status)}</p>
         </div>
       )}
-
     </div>
   );
 }

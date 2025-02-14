@@ -75,7 +75,7 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
                   <span className="block text-sm font-normal">
                     Monto:
                   </span>
-                  {formatCurrency(data.amount)}
+                  {formatCurrency(data.total_amount)}
                 </p>
                 <div className="flex justify-center py-2">
                   <Tag status={data.status}>{t(data.status)}</Tag>
