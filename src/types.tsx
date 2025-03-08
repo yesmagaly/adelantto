@@ -21,6 +21,7 @@ export interface InstallmentType {
   amount: number;
   status: string;
   due_date: string;
+  total_amount: number;
 }
 
 
