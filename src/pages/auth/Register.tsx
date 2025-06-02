@@ -113,7 +113,7 @@ const Register: React.FC = () => {
                 Crear cuenta
               </h1>
             </div>
-            <span className="badge badge-sm">Paso 1/ 2</span>
+            <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
           </div>
           <progress
             className="progress text-indigo-300 w-full h-[5px]"
