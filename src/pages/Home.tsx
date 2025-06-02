@@ -10,9 +10,9 @@ const Home: React.FC = () => {
         <div className="flex h-full flex-col items-center justify-center">
           <div className="mb-14 text-center">
             <img className="mb-16 inline-block h-40 w-[220px]" src={logo} />
-            <h2 className="text-[28px] leading-tight mb-4 font-semibold">
+            <h2 className="text-2xl mb-4 font-semibold">
               Convierte tus rentas{" "}
-              <span className="text-aqua-green-700">en liquidez inmediata</span>
+              <span className="text-emerald-700">en liquidez inmediata</span>
             </h2>
             <p className="text-balance leading-tight">
               Con AdelanttoCash®, anticipa hasta 12 meses de renta en menos de 3
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
             </a>
 
             <a
-              className="btn btn-ghost rounded-full shadow-none"
+              className="btn btn-ghost rounded-full"
               href="/register"
             >
               Regístrate

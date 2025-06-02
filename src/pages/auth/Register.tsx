@@ -11,8 +11,10 @@ import Loader from "../../components/Loader/Loader";
 import registerAnimation from "../../assets/animations/register.json";
 import { API_SERVER_URL, PROD_MODE } from "../../config";
 import { t } from "@adelantto/utils";
+import InputPassword from "../../components/InputPassword";
 
 type FormValues = {
+  email: string;
   phone: string;
 };
 
@@ -28,6 +30,7 @@ const Register: React.FC = () => {
     control,
     handleSubmit,
     setError,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>();
 
@@ -99,57 +102,88 @@ const Register: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="heading heading--green">
-          <div className="heading__pager text-right">Paso 1 de 4</div>
-          <h1 className="heading__title">
-            Registra <br />
-            <strong>tu número celular</strong>
-          </h1>
-          <p className="heading__headline">
-            Esto nos ayudará a validar tu identidad
-          </p>
-        </div>
-
-        <div className="content">
-          <Lottie
-            animationData={registerAnimation}
-            style={{ width: 174, height: 262 }}
-            loop
-            play
-          />
-
-          <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-7">
-              <Controller
-                control={control}
-                name="phone"
-                render={({ field: { ref, ...field } }) => (
-                  <PatternFormat
-                    {...field}
-                    className="pattern-format"
-                    placeholder="Número de Celular"
-                    type="tel"
-                    format={PHONE_FORMAT}
-                    allowEmptyFormatting
-                    mask="_"
-                    required
-                    getInputRef={ref}
-                  />
-                )}
-              />
+      <IonContent fullscreen className="ion-padding">
+        <div className="mb-6">
+          <div className="flex justify-between items-center">
+            <div className="flex gap-2 items-center">
+              <a href="" className="inline-flex items-center">
+                <span className="material-symbols-outlined">arrow_back</span>
+              </a>
+              <h1 className="text-lg font-semibold text-dark-blue-700">
+                Crear cuenta
+              </h1>
             </div>
-
-            <p className="help-text mb-28">
-              Enviaremos un código de confirmación para iniciar el proceso de
-              validación de tu identidad.
-            </p>
-
-            <button className="button is-primary">Enviar código</button>
-          </form>
-
-          <div className="border-bottom border-primary-blue" />
+            <span className="badge badge-sm">Paso 1/ 2</span>
+          </div>
+          <progress
+            className="progress text-indigo-300 w-full h-[5px]"
+            value="50"
+            max="100"
+          ></progress>
         </div>
+
+        <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+          <div className="control">
+            <label htmlFor="email" className="control-label">
+              Correo electrónico
+            </label>
+            <input
+              className="input w-full"
+              type="email"
+              placeholder="Email"
+              {...register("email", { required: true })}
+            />
+          </div>
+
+          <div className="control">
+            <label htmlFor="email" className="control-label">
+              Celular
+            </label>
+            <Controller
+              control={control}
+              name="phone"
+              render={({ field: { ref, ...field } }) => (
+                <PatternFormat
+                  {...field}
+                  className="input w-full"
+                  placeholder="Número de Celular"
+                  type="tel"
+                  format={PHONE_FORMAT}
+                  allowEmptyFormatting
+                  mask="_"
+                  required
+                  getInputRef={ref}
+                />
+              )}
+            />
+          </div>
+
+          <div className="control">
+            <label className="control-label">Contraseña</label>
+            <InputPassword
+              {...register("password")}
+              required
+              className="input w-full"
+            />
+          </div>
+          <div className="control">
+            <label className="control-label">Confirmar Contraseña</label>
+            <InputPassword
+              {...register("password_confirmation")}
+              required
+              className="input w-full"
+            />
+          </div>
+
+          <button className="btn btn-primary rounded-full">Continuar</button>
+        </form>
+
+        <p className="text-center text-sm mt-8">
+          ¿Ya tienes una cuenta?{" "}
+          <a href="#" className="link font-semibold">
+            Iniciar sesión
+          </a>
+        </p>
 
         <Loader isOpen={isSubmitting} />
 

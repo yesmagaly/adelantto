@@ -9,22 +9,18 @@ const InputPassword = React.forwardRef<
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="form-password">
-      <input
-        ref={ref}
-        type={showPassword ? "text" : "password"}
-        {...props}
-      />
+    <div className="relative">
+      <input ref={ref} type={showPassword ? "text" : "password"} {...props} />
 
       <button
         type="button"
         aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
         onClick={() => setShowPassword(!showPassword)}
+        className="z-10 w-6 h-6 right-4 top-3 absolute"
       >
-        <img
-          src={showPassword ? eyeUrl : eyeSlashUrl}
-          alt="Show password"
-        />
+        <span className="material-symbols-outlined">
+          {showPassword ? "visibility_off" : "visibility"}
+        </span>
       </button>
     </div>
   );
