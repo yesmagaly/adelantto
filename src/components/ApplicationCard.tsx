@@ -32,7 +32,7 @@ export default function ApplicationCard({ item, className }: { item: Application
 
           {redirectTo && (
             <button
-              className="button is-small !py-2"
+              className="button is-small py-2!"
               onClick={() => router.push(redirectTo)}
             >
               Continuar

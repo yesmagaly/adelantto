@@ -13,7 +13,7 @@ import { useAuth } from "./authContext";
 interface LoginProps
   extends RouteComponentProps<{
     phone: string;
-  }> { }
+  }> {}
 
 type FormValues = {
   email: string;
@@ -49,55 +49,52 @@ const Login: React.FC<LoginProps> = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="flex h-full flex-col items-center justify-center text-center">
-          <img className="mb-20 h-40" src={logo} />
+      <IonContent fullscreen class="ion-padding">
+        <img className="mb-20 h-40 mx-auto" src={logo} />
+        <h1 className="text-xl font-semibold w-full mb-6">Iniciar sesión</h1>
+        <form className="grid gap-4 mb-14" onSubmit={handleSubmit(onSubmit)}>
+          <div className="control">
+            <label className="control-label">Correo electrónico</label>
+            <input
+              {...register("email")}
+              className="input"
+              placeholder="Email"
+              required
+              type="email"
+            />
+          </div>
+          <div className="control">
+            <label htmlFor="password" className="control-label">
+              Contraseña
+            </label>
+            <InputPassword
+              {...register("password")}
+              className="input"
+              id="password"
+              maxLength={20}
+              placeholder="Password"
+              required
+            />
+          </div>
 
-          <form className="form mb-14" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control">
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                {...register("email")}
-              />
-            </div>
-            <div className="form-control">
-              <InputPassword
-                placeholder="Password"
-                required
-                maxLength={20}
-                {...register("password")}
-              />
-            </div>
-
-            <button className="button is-primary w-full">Iniciar sesión</button>
-          </form>
-
-          <p className="mb-8 leading-5">
-            ¿Olvidaste tu contrasena?<br />
-            <a className="font-semibold" onClick={() => router.push("/forgot-password")}>
-              Recuperar aquí
+          <p className="my-4 text-center">
+            <a
+              className="text-sm underline font-semibold"
+              onClick={() => router.push("/forgot-password")}
+            >
+              ¿Olvidaste tu contrasena?
             </a>
           </p>
 
-          <p className="mt-8">
-            <a
-              className="mb-2 block"
-              href="https://adelanttocash.com/terminos-y-condiciones"
-              target="_blank"
-            >
-              Términos y condiciones
-            </a>
-            <a
-              className="block"
-              href="https://adelanttocash.com/aviso-privacidad"
-              target="_blank"
-            >
-              Aviso de privacidad
-            </a>
-          </p>
-        </div>
+          <button className="btn btn-primary btn-block rounded-full">
+            Iniciar sesión
+          </button>
+        </form>
+
+        <p className="text-center text-sm">
+          ¿No tienes cuenta?{" "}
+          <a href="#" className="underline font-semibold">Regístrate</a>
+        </p>
 
         <Loader isOpen={isSubmitting} />
 

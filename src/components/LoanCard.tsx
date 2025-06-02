@@ -44,7 +44,7 @@ export default function LoanCard({
         {status === "awaiting_account_statement_upload" &&
           application.status === "approved" && (
             <button
-              className="font-regular rounded bg-green-500 px-3 py-1 leading-5 text-white"
+              className="font-regular rounded-sm bg-green-500 px-3 py-1 leading-5 text-white"
               onClick={() => router.push(`/loans/${id}/success`)}
             >
               Continuar
@@ -53,7 +53,7 @@ export default function LoanCard({
 
         {status === "active" && (
           <button
-            className="font-regular rounded bg-blue-900 px-3 py-1 leading-5 text-white"
+            className="font-regular rounded-sm bg-blue-900 px-3 py-1 leading-5 text-white"
             onClick={showMore}
           >
             Ver

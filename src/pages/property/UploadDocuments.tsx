@@ -122,7 +122,7 @@ const UploadDocuments: React.FC = ({ match }) => {
             </div>
 
             <div className="form-control relative">
-              <label className="!inline-flex items-center">
+              <label className="inline-flex! items-center">
                 Folio real
                 <Tooltip.Trigger
                   aria-label="Más información"

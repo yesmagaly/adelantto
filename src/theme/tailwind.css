@@ -1,31 +1,205 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap");
-
-@import url(base.css);
-@import url(button.css);
-@import url(income.css);
-@import url(form.css);
-
-:root {
-  --font-sm: 14px;
-  --font-base: 16px;
-  --font-lg: 18px;
-
-  --color-neutral-50: #fafafa;
-  --color-neutral-100: #f4f4f4;
-  --color-neutral-200: #e5e5e5;
-  --color-neutral-300: #d4d4d4;
-  --color-neutral-400: #a3a3a3;
-  --color-neutral-500: #737373;
-  --color-neutral-600: #525252;
-  --color-neutral-700: #404040;
-  --color-neutral-800: #262626;
-  --color-neutral-900: #171717;
-  --color-neutral-950: #0a0a0a;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, pastel;
+}
+@plugin "daisyui/theme" {
+  name: "pastel";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.003 247.858);
+  --color-base-200: oklch(96% 0.007 247.896);
+  --color-base-300: oklch(92% 0.013 255.508);
+  --color-base-content: #081023;
+  --color-primary: #6ef1b9;
+  --color-primary-content: #060C1B;
+  --color-secondary: oklch(80% 0.114 19.571);
+  --color-secondary-content: oklch(25% 0.092 26.042);
+  --color-accent: oklch(84% 0.143 164.978);
+  --color-accent-content: oklch(26% 0.051 172.552);
+  --color-neutral: oklch(20% 0.042 265.755);
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(54% 0.245 262.881);
+  --color-info-content: oklch(97% 0.014 254.604);
+  --color-success: oklch(60% 0.118 184.704);
+  --color-success-content: oklch(98% 0.014 180.72);
+  --color-warning: oklch(64% 0.222 41.116);
+  --color-warning-content: oklch(98% 0.016 73.684);
+  --color-error: #F04E48;
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-selector: 0.5rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.3rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 1;
 }
 
-/** other custom global styles can go here */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
-.heading {
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, Rubik;
+
+  /* Primary: Verde aqua */
+  --color-emerald: #6ef1b9;
+
+  --color-emerald-50: #f1fef8;
+  --color-emerald-100: #e9fdf5;
+  --color-emerald-200: #d2fbe9;
+  --color-emerald-300: #6ef1b9;
+  --color-emerald-400: #63d9a7;
+  --color-emerald-500: #58c194;
+  --color-emerald-600: #53b58b;
+  --color-emerald-700: #42916f;
+  --color-emerald-800: #316c53;
+  --color-emerald-900: #275441;
+
+  /* Secundarios: verde */
+  --color-green: #5bc79b;
+  --color-green-50: #eff9f5;
+  --color-green-100: #e6f7f0;
+  --color-green-200: #cceee0;
+  --color-green-300: #5bc79b;
+  --color-green-400: #52b38c;
+  --color-green-500: #499f7c;
+  --color-green-600: #449574;
+  --color-green-700: #37775d;
+  --color-green-800: #295a46;
+  --color-green-900: #204636;
+
+  /* Secundarios: verde oscuro */
+
+  --color-dark-green: #173327;
+  --color-dark-green-50: #e8ebe9;
+  --color-dark-green-100: #dce0df;
+  --color-dark-green-200: #b7c0bc;
+  --color-dark-green-300: #173327;
+  --color-dark-green-400: #152e23;
+  --color-dark-green-500: #12291f;
+  --color-dark-green-600: #11261d;
+  --color-dark-green-700: #0e1f17;
+  --color-dark-green-800: #0a1712;
+  --color-dark-green-900: #08120e;
+
+  /* Secundarios: azul oscuro */
+  --color-dark-blue: #0D1B3B;
+  --color-dark-blue-50: #E7E8EB;
+  --color-dark-blue-100: #DBDDE2;
+  --color-dark-blue-200: #B4B8C2;
+  --color-dark-blue-300: #0D1B3B;
+  --color-dark-blue-400: #0C1835;
+  --color-dark-blue-500: #0A162F;
+  --color-dark-blue-600: #0A142C;
+  --color-dark-blue-700: #081023;
+  --color-dark-blue-800: #060C1B;
+  --color-dark-blue-900: #050915;
+
+  /* Acento: morado */
+  --color-purple: #6D6EFF;
+  --color-purple-50: #F0F1FF;
+  --color-purple-100: #E9E9FF;
+  --color-purple-200: #D2D2FF;
+  --color-purple-300: #6D6EFF;
+  --color-purple-400: #6263E6;
+  --color-purple-500: #5758CC;
+  --color-purple-600: #5253BF;
+  --color-purple-700: #414299;
+  --color-purple-800: #313173;
+  --color-purple-900: #262759;
+
+  /* Acento: púrpura */
+  --color-indigo: #425CC7;
+  --color-indigo-50: #ECEFF9;
+  --color-indigo-100: #E3E7F7;
+  --color-indigo-200: #C4CCEE;
+  --color-indigo-300: #425CC7;
+  --color-indigo-400: #3B53B3;
+  --color-indigo-500: #354A9F;
+  --color-indigo-600: #324595;
+  --color-indigo-700: #283777;
+  --color-indigo-800: #1E295A;
+  --color-indigo-900: #172046;
+
+  /* Semánticos: verde */
+  --color-lime: #91D91C;
+  --color-lime-50: #EDFBCC;
+  --color-lime-100: #D9F79F;
+  --color-lime-200: #BFEF67;
+  --color-lime-300: #A4E239;
+  --color-lime-400: #91D91C;
+  --color-lime-500: #66A010;
+  --color-lime-600: #4F7A11;
+  --color-lime-700: #406014;
+  --color-lime-800: #375215;
+  --color-lime-900: #1B2D06;
+
+  /* Semánticos: rojo */
+  --color-red: #F04E48;
+  --color-red-50: #FEE3E2;
+  --color-red-100: #FECCCA;
+  --color-red-200: #FCA8A5;
+  --color-red-300: #F87671;
+  --color-red-400: #F04E48;
+  --color-red-500: #DD2C25;
+  --color-red-600: #BA211B;
+  --color-red-700: #991F1B;
+  --color-red-800: #7F211D;
+  --color-red-900: #450C0A;
+
+  /* Escala de grises */
+  --color-gray-50: #FFFFF;
+  --color-gray-100: #FBFBFB;
+  --color-gray-200: #F2F3F7;
+  --color-gray-300: #E8EAF3;
+  --color-gray-400: #D8DBE4;
+  --color-gray-500: #C0C4D2;
+  --color-gray-600: #969AAC;
+  --color-gray-700: #727688;
+  --color-gray-800: #4D5163;
+  --color-gray-900: #3E414E;
+  --color-gray-950: #1D1E24;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer components {
+  .control {
+    display: grid;
+    gap: 0.5rem;
+    color: var(--color-gray-600)
+  }
+
+  .control-label {
+    font-size: var(--text-xs);
+  }
+}
+
+/* @import url(base.css); */
+/* @import url(button.css); */
+/* @import url(income.css); */
+/* @import url(form.css); */
+
+/*
+  .heading {
   @apply gap-2
     bg-cover
     text-white
@@ -104,7 +278,6 @@
   background-image: url("../assets/images/blue-bg.png");
 }
 
-/** Content styles. **/
 .content {
   @apply flex p-8 flex-col items-center text-center;
   min-height: calc(100% - 15rem);
@@ -139,4 +312,4 @@ ion-footer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
+} */

@@ -131,14 +131,14 @@ const UpdateTemporaryPassword: React.FC = () => {
 
             <form className="form mb-16 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
-                <label className="!font-normal text-white">Nueva contraseña</label>
+                <label className="font-normal! text-white">Nueva contraseña</label>
                 <InputPassword
                   {...register("password")}
                   required
                 />
               </div>
               <div className="form-control">
-                <label className="!font-normal text-white">Repite tu nueva contraseña</label>
+                <label className="font-normal! text-white">Repite tu nueva contraseña</label>
                 <InputPassword
                   {...register("password_confirmation")}
                   required

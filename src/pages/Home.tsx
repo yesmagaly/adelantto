@@ -6,51 +6,31 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="flex h-full flex-col items-center justify-center px-6 py-8">
+      <IonContent fullscreen class="ion-padding">
+        <div className="flex h-full flex-col items-center justify-center">
           <div className="mb-14 text-center">
-            <img className="mb-16 inline-block h-40" src={logo} />
-            <h1 className="mb-4 text-5xl font-semibold leading-normal">¡Hola!</h1>
-            <p className="max-w-xs text-xl leading-tight">
-              ¿Estás listo para recibir el pago de tus rentas por anticipado?
+            <img className="mb-16 inline-block h-40 w-[220px]" src={logo} />
+            <h2 className="text-[28px] leading-tight mb-4 font-semibold">
+              Convierte tus rentas{" "}
+              <span className="text-aqua-green-700">en liquidez inmediata</span>
+            </h2>
+            <p className="text-balance leading-tight">
+              Con AdelanttoCash®, anticipa hasta 12 meses de renta en menos de 3
+              días. Solo para quienes ya tienen rentado un inmueble.
             </p>
           </div>
 
-          <button
-            className="button is-primary mb-8"
-            onClick={() => router.push("/register")}
-          >
-            Crear cuenta
-          </button>
+          <div className="flex flex-col gap-2 w-full">
+            <a className="btn btn-primary rounded-full" href="/login">
+              Iniciar sesión
+            </a>
 
-          <div className="text-center">
-            <p>
-              Si tienes una cuenta puedes <br />
-              <a className="font-semibold" onClick={() => router.push("/login")}>
-                Iniciar sesión
-              </a>
-            </p>
-
-            <p className="mt-10 flex flex-col gap-2">
-              <a
-                href="https://adelanttocash.com/terminos-y-condiciones"
-                target="_blank"
-              >
-                Términos y condiciones
-              </a>
-              <a
-                href="https://adelanttocash.com/aviso-privacidad"
-                target="_blank"
-              >
-                Aviso de privacidad
-              </a>
-              <a
-                className="block text-balance leading-tight"
-                href="/info"
-              >
-                Información sobre la documentación requerida
-              </a>
-            </p>
+            <a
+              className="btn btn-ghost rounded-full shadow-none"
+              href="/register"
+            >
+              Regístrate
+            </a>
           </div>
         </div>
       </IonContent>

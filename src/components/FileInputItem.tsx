@@ -94,7 +94,7 @@ const FileInputItem: React.FC<ComponentProp> = ({
   return (
     <>
       <label
-        className="!flex flex-col items-center justify-center rounded border border-dashed border-slate-500 bg-slate-50 px-2 py-4 text-sm !font-normal text-slate-800"
+        className="!flex flex-col items-center justify-center rounded-sm border border-dashed border-slate-500 bg-slate-50 px-2 py-4 text-sm font-normal! text-slate-800"
         htmlFor={props.name}
       >
         <Icon name="upload-cloud" className="mb-1 h-8 w-8 bg-slate-400" />
@@ -115,7 +115,7 @@ const FileInputItem: React.FC<ComponentProp> = ({
           {displayFiles.map((file) => (
             <div key={file.id} className="flex items-center justify-between">
               <div className="inline-flex w-52 items-center gap-1 overflow-hidden text-ellipsis text-nowrap text-sm">
-                <Icon name="attachment" className="h-5 w-5 flex-shrink-0" />
+                <Icon name="attachment" className="h-5 w-5 shrink-0" />
                 {file.name}
               </div>
 

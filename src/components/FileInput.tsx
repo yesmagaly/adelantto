@@ -57,7 +57,7 @@ const UploadDocuments: React.FC<T_props> = ({
   };
 
   return (
-    <div className="flex min-h-[120px] items-center justify-center rounded bg-slate-200 px-4 py-2 text-center text-slate-900">
+    <div className="flex min-h-[120px] items-center justify-center rounded-sm bg-slate-200 px-4 py-2 text-center text-slate-900">
       <div>
         {!loading && value?.id && (
           <div className="flex items-center gap-4">

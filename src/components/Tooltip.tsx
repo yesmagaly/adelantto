@@ -80,7 +80,7 @@ const TooltipContent = React.forwardRef(
     return (
       <div
         data-value={value}
-        className="absolute left-0 top-7 hidden flex-col gap-2 rounded border border-slate-400 bg-white p-2"
+        className="absolute left-0 top-7 hidden flex-col gap-2 rounded-sm border border-slate-400 bg-white p-2"
         {...props}
       >
         <div className="text-left text-sm font-normal">{children}</div>

@@ -149,7 +149,7 @@ const CreateProfile: React.FC = () => {
               <div className="form-control relative">
                 <label
                   htmlFor="identification_number"
-                  className="!inline-flex items-center"
+                  className="inline-flex! items-center"
                 >
                   INE / Pasaporte
                   <Tooltip.Trigger

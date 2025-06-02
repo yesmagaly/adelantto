@@ -40,7 +40,7 @@
   width: 90%;
   min-height: 200px;
 
-  @apply shadow-md text-center rounded;
+  /* @apply shadow-md text-center rounded; */
 }
 
 .modal.is-fully .modal-content {

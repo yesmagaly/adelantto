@@ -53,7 +53,7 @@ export default function InstallmentCard({
         </div>
 
         <button
-          className="font-regular rounded bg-blue-900 px-3 py-1 text-sm text-white disabled:opacity-75"
+          className="font-regular rounded-sm bg-blue-900 px-3 py-1 text-sm text-white disabled:opacity-75"
           onClick={() => router.push(`/loans/${loanId}/installments/${id}`)}
           disabled={status === "approved" || status === "in_validation"}
         >

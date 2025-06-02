@@ -11,12 +11,12 @@ const Info: React.FC = ({ cta }: { cta?: { url: string, label: string } }) => {
           <Page.Body>
             <div className="">
               <div>
-                <h1 className="heading__title mt-20 text-center !text-3xl !leading-none">
+                <h1 className="heading__title mt-20 text-center text-3xl! leading-none!">
                   Documentación <strong>requerida</strong>
                 </h1>
               </div>
 
-              <div className="content !px-0">
+              <div className="content px-0!">
                 <div className="mb-14">
                   <p className="help-text mb-4">
                     Los siguiente documentos serán necesarios:
