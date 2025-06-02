@@ -236,7 +236,7 @@ const LeaseContract: React.FC = () => {
                 )}
               </div>
               <div className="control">
-                <h4 className="mb-2 font-medium">
+                <h4 className="control-label">
                   ¿Cómo recibes el pago de tu renta?
                 </h4>
                 <div className="flex w-full items-center justify-between">
