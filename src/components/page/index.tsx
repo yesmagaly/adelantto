@@ -14,20 +14,20 @@ export const Root: React.FC<
 
   return (
     <Tag
-      className={clsx(`page`, variant && `is-${variant}`, className)}
+      className={clsx(variant && `is-${variant}`, className)}
       {...props}
     />
   );
 };
 
 export const Header: React.FC<T_props> = ({ className, ...props }) => {
-  return <div className={clsx(`page-header`, className)} {...props} />;
+  return <div className={clsx(className)} {...props} />;
 };
 
 export const Body: React.FC<T_props> = ({ className, ...props }) => {
-  return <div className={clsx(`page-body`, className)} {...props} />;
+  return <div className={clsx(className)} {...props} />;
 };
 
 export const Footer: React.FC<T_props> = ({ className, ...props }) => {
-  return <div className={clsx(`page-footer`, className)} {...props} />;
+  return <div className={clsx(className)} {...props} />;
 };
