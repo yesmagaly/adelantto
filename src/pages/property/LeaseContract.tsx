@@ -100,7 +100,7 @@ const LeaseContract: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <Page.Root>
             <Page.Header className="text-center">
@@ -111,9 +111,9 @@ const LeaseContract: React.FC = () => {
                 </h1>
               </div>
             </Page.Header>
-            <Page.Body>
-              <div className="form-control is-center">
-                <label>Valor de renta</label>
+            <Page.Body className="grid gap-4">
+              <div className="control">
+                <label className="control-label">Valor de la renta mensual (después de la cuota de mantenimiento)</label>
                 <Controller
                   rules={{
                     validate: {
@@ -127,13 +127,14 @@ const LeaseContract: React.FC = () => {
                   render={({ field: { ref, ...field } }) => (
                     <NumericFormat
                       {...field}
-                      className="pattern-format"
+                      className="pattern-format input w-full"
                       type="text"
                       required
                       getInputRef={ref}
                       decimalScale={2}
                       thousandSeparator=","
                       prefix={"$"}
+                      placeholder="$00,000.00"
                     />
                   )}
                 />
@@ -169,18 +170,19 @@ const LeaseContract: React.FC = () => {
                 )}
               </div>
 
-              <div className="form-control is-center">
-                <label>Fecha de inicio del contrato de arrendamiento</label>
+              <div className="control">
+                <label className="control-label">Fecha de inicio del contrato</label>
                 <input
                   {...register("lease_start_date")}
                   type="date"
                   required
                   placeholder=""
+                  className="input w-full"
                 />
               </div>
 
-              <div className="form-control is-center">
-                <label>Fecha de fin del contrato de arrendamiento</label>
+              <div className="control">
+                <label className="control-label">Fecha de fin del contrato</label>
                 <input
                   {...register("lease_end_date", {
                     validate: {
@@ -191,6 +193,7 @@ const LeaseContract: React.FC = () => {
                   })}
                   type="date"
                   required
+                  className="input w-full"
                 />
 
                 {errors?.lease_end_date && (
@@ -232,7 +235,7 @@ const LeaseContract: React.FC = () => {
                   </div>
                 )}
               </div>
-              <div className="form-control is-center is-inline">
+              <div className="control">
                 <h4 className="mb-2 font-medium">
                   ¿Cómo recibes el pago de tu renta?
                 </h4>
