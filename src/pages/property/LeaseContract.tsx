@@ -1,10 +1,17 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import {
+  IonContent,
+  IonPage,
+  useIonRouter,
+  IonHeader,
+  IonFooter,
+} from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 import * as Page from "../../components/page";
 
 import { checkZipCode } from "../../api";
 import { applications } from "../../api";
+import { MaterialIcon } from "@adelantto/core";
 
 function removeNumericFormat(value: string) {
   return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
@@ -100,16 +107,36 @@ const LeaseContract: React.FC = () => {
 
   return (
     <IonPage>
+      <IonHeader>
+        <div className="flex items-center justify-between">
+          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+            <a href="/" className="inline-flex items-center">
+              <MaterialIcon name="arrow_back" />
+            </a>
+            Solicita tu AdelanttoCash®
+          </h1>
+        </div>
+        <p>
+          Ingresa tus datos de arrendamiento para poder ver la pre-oferta de tu
+          AdelanttoCash®
+        </p>
+      </IonHeader>
       <IonContent fullscreen className="ion-padding">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <Page.Root>
+          <Page.Root className="grid gap-6">
             <Page.Header className="text-center">
-              <div className="heading heading--blue">
-                <div className="heading__pager text-right">Paso 1 de 7</div>
-                <h1 className="heading-3">
-                  Datos de contrato <strong>de arrendamiento</strong>
+              <div className="flex items-center justify-between">
+                <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+                  <a href="/" className="inline-flex items-center"></a>
+                  Contrato de renta
                 </h1>
+                <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
               </div>
+              <progress
+                className="progress text-indigo-300 w-full h-[5px] mt-2"
+                value="50"
+                max="100"
+              ></progress>
             </Page.Header>
             <Page.Body className="grid gap-4">
               <div className="control">
@@ -233,19 +260,19 @@ const LeaseContract: React.FC = () => {
                     target="_blank"
                     className="font-medium bold"
                   >
-                   Términos y Condiciones
+                    Términos y Condiciones
                   </a>
                 </label>
               </div>
             </Page.Body>
-            <Page.Footer>
-              <button className="btn btn-primary btn-block">
-                Ver Pre-Oferta AdelanttoCash®
-              </button>
-            </Page.Footer>
           </Page.Root>
         </form>
       </IonContent>
+      <IonFooter>
+        <button className="btn btn-primary btn-block">
+          Ver Pre-Oferta AdelanttoCash®
+        </button>
+      </IonFooter>
     </IonPage>
   );
 };
