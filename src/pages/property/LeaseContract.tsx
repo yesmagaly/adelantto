@@ -113,7 +113,10 @@ const LeaseContract: React.FC = () => {
             </Page.Header>
             <Page.Body className="grid gap-4">
               <div className="control">
-                <label className="control-label">Valor de la renta mensual (después de la cuota de mantenimiento)</label>
+                <label className="control-label">
+                  Valor de la renta mensual (después de la cuota de
+                  mantenimiento)
+                </label>
                 <Controller
                   rules={{
                     validate: {
@@ -145,33 +148,10 @@ const LeaseContract: React.FC = () => {
                 )}
               </div>
 
-              <div className="form-control is-center">
-                <label>Cuota de mantenimiento</label>
-                <Controller
-                  control={control}
-                  name="lease_maintenance_fee"
-                  render={({ field: { ref, ...field } }) => (
-                    <NumericFormat
-                      {...field}
-                      className="pattern-format"
-                      type="text"
-                      required
-                      getInputRef={ref}
-                      decimalScale={2}
-                      thousandSeparator=","
-                      prefix={"$"}
-                    />
-                  )}
-                />
-                {errors?.lease_maintenance_fee && (
-                  <div className="description">
-                    {errors.lease_maintenance_fee?.message}
-                  </div>
-                )}
-              </div>
-
               <div className="control">
-                <label className="control-label">Fecha de inicio del contrato</label>
+                <label className="control-label">
+                  Fecha de inicio del contrato
+                </label>
                 <input
                   {...register("lease_start_date")}
                   type="date"
@@ -182,7 +162,9 @@ const LeaseContract: React.FC = () => {
               </div>
 
               <div className="control">
-                <label className="control-label">Fecha de fin del contrato</label>
+                <label className="control-label">
+                  Fecha de fin del contrato
+                </label>
                 <input
                   {...register("lease_end_date", {
                     validate: {
@@ -203,38 +185,6 @@ const LeaseContract: React.FC = () => {
                 )}
               </div>
 
-              <div className="form-control is-center">
-                <label>Código postal de tu bien inmueble en renta</label>
-                <input
-                  {...register("property_zip_code")}
-                  type="text"
-                  placeholder=""
-                  required
-                />
-                {errors?.property_zip_code && (
-                  <div className="description">
-                    {errors?.property_zip_code?.message}
-                  </div>
-                )}
-              </div>
-
-              <div className="form-control is-center">
-                <label>¿Cúanto tiempo llevas rentando tu inmueble?</label>
-                <select
-                  {...register("lease_renting_time")}
-                  className="w-full"
-                  required
-                >
-                  <option value="1">Menos de 1 año</option>
-                  <option value="2">De 1 a 2 años</option>
-                  <option value="3">Más de 2 años</option>
-                </select>
-                {errors?.property_zip_code && (
-                  <div className="description">
-                    {errors?.property_zip_code?.message}
-                  </div>
-                )}
-              </div>
               <div className="control">
                 <h4 className="control-label">
                   ¿Cómo recibes el pago de tu renta?
@@ -246,6 +196,7 @@ const LeaseContract: React.FC = () => {
                       type="radio"
                       id="payment_cash"
                       value="cash"
+                      className="radio"
                       required
                     />
                     <label className="ml-2" htmlFor="payment_cash">
@@ -258,6 +209,7 @@ const LeaseContract: React.FC = () => {
                       type="radio"
                       id="payment_transfer"
                       value="transfer"
+                      className="radio"
                       required
                     />
                     <label className="ml-2" htmlFor="payment_transfer">
@@ -266,9 +218,30 @@ const LeaseContract: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              <div>
+                <input
+                  type="checkbox"
+                  id="agreement"
+                  className="checkbox"
+                  required
+                />
+                <label className="control-label">
+                  He leído y estoy de acuerdo con los
+                  <a
+                    href="https://adelanttocash.com/terminos-y-condiciones"
+                    target="_blank"
+                    className="font-medium bold"
+                  >
+                   Términos y Condiciones
+                  </a>
+                </label>
+              </div>
             </Page.Body>
             <Page.Footer>
-              <button className="button is-primary">Siguiente</button>
+              <button className="btn btn-primary btn-block">
+                Ver Pre-Oferta AdelanttoCash®
+              </button>
             </Page.Footer>
           </Page.Root>
         </form>
