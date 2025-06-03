@@ -76,8 +76,29 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-tint: #f5f6f9;
 
   /* Set the font family of the entire app */
-  --ion-font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Rubik", sans-serif;
+  --ion-font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Rubik",
+    sans-serif;
 
   /* Set text color of the entire app */
   --ion-text-color: #0d1b3b;
+}
+
+ion-header {
+  padding-top: 24px;
+  padding-inline: 16px;
+  background-color: white;
+}
+
+ion-header.header-md {
+  box-shadow: none;
+}
+
+ion-footer {
+  padding-bottom: 24px;
+  padding-inline: 16px;
+}
+
+ion-footer.footer-md {
+  box-shadow: none;
+  background-color: white;
 }

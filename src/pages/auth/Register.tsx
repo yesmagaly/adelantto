@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import {
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  useIonRouter,
+} from "@ionic/react";
 import { useForm, Controller, FieldErrors } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
@@ -110,8 +116,7 @@ const Register: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen className="ion-padding">
-
+      <IonHeader>
         <div className="flex items-center justify-between">
           <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
             <a href="/" className="inline-flex items-center">
@@ -123,11 +128,12 @@ const Register: React.FC = () => {
         </div>
 
         <progress
-          className="progress text-indigo-300 w-full h-[5px] mt-2 mb-6"
+          className="progress text-indigo-300 w-full h-[5px] mt-2"
           value="50"
           max="100"
         ></progress>
-
+      </IonHeader>
+      <IonContent fullscreen className="ion-padding">
         <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="control">
             <label htmlFor="email" className="control-label">
@@ -184,15 +190,7 @@ const Register: React.FC = () => {
               required
             />
           </div>
-          <button className="btn btn-primary">Continuar</button>
         </form>
-
-        <p className="text-center text-sm mt-8">
-          ¿Ya tienes una cuenta?{" "}
-          <a href="/login" className="link">
-            Iniciar sesión
-          </a>
-        </p>
 
         <Loader isOpen={isSubmitting} />
 
@@ -207,6 +205,16 @@ const Register: React.FC = () => {
           </button>
         </Modal>
       </IonContent>
+      <IonFooter>
+        <button className="btn btn-primary btn-block">Continuar</button>
+
+        <p className="text-center text-sm mt-6">
+          ¿Ya tienes una cuenta?{" "}
+          <a href="/login" className="link">
+            Iniciar sesión
+          </a>
+        </p>
+      </IonFooter>
     </IonPage>
   );
 };
