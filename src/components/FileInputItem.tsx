@@ -9,11 +9,14 @@ import Modal from "../components/modal";
 import documentsAnimation from "../assets/animations/documents.json";
 import { ErrorType } from "../types";
 
-export interface ComponentProp extends UseControllerProps {
+export interface T_props extends UseControllerProps {
   className?: string;
   multiple?: boolean;
   accept?: string;
   name: string;
+  label: string;
+  description?: string;
+  helpText?: string;
 }
 
 const addFile = (body: FormData) => {
@@ -24,8 +27,12 @@ const addFile = (body: FormData) => {
   });
 };
 
-const FileInputItem: React.FC<ComponentProp> = ({
+
+const FileInputItem: React.FC<T_props> = ({
   className,
+  label,
+  description,
+  helpText,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +99,12 @@ const FileInputItem: React.FC<ComponentProp> = ({
   const displayFiles = props.multiple ? value ?? [] : value ? [value] : [];
 
   return (
-    <>
+    <div className="border border-gray-600 bg-white p-4 rounded-[12px]">
+
+      {label && <div className="font-semibold text-dark-blue-700 mb-2">{label}</div>}
+      {description && <div className="text-xs">{description}</div>}
+      {helpText && <div className="text-gray-600 text-xs">{helpText}</div>}
+
       <label
         className="!flex flex-col items-center justify-center rounded-sm border border-dashed border-slate-500 bg-slate-50 px-2 py-4 text-sm font-normal! text-slate-800"
         htmlFor={props.name}
@@ -133,7 +145,7 @@ const FileInputItem: React.FC<ComponentProp> = ({
       {error?.message && (
         <p className="text-sm text-red-500">{error.message}</p>
       )}
-    </>
+    </div>
   );
 };
 

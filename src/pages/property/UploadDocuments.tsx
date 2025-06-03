@@ -78,6 +78,10 @@ const UploadDocuments: React.FC = ({ match }) => {
                 control={control}
                 rules={{ required: "Documento obligatorio" }}
                 accept="application/pdf"
+
+                label="Contrato de arrendamiento vigente"
+                description="Firmado por ambas partes"
+                helpText="Tipo de archivo permitido PDF (500MB max)"
               />
               {errors.property_lease_agreement && (
                 <ErrorMessage error={errors.property_lease_agreement} />

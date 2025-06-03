@@ -12,7 +12,7 @@ import Register from "./pages/auth/Register";
 import VerificationCode from "./pages/auth/VerificationCode";
 import VerificationEmail from "./pages/auth/VerificationEmail";
 import AdvanceImmediately from "./pages/AdvanceImmediately";
-import CreateProfile from "./pages/CreateProfile";
+import CreateProfile from "./pages/profile/CreateProfile";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";
@@ -63,6 +63,7 @@ import "./theme/tailwind.css";
 
 import { useAuth } from "./pages/auth/authContext";
 import { InstallmentDetail } from "./pages/loan/InstallmentDetail";
+import { Profile } from "./pages/profile/Profile";
 
 setupIonicReact();
 
@@ -141,6 +142,8 @@ const App: React.FC = () => {
           <PrivateRoute path="/documents-required" children={<Info cta={{ url: "/dashboard", label: "Continuar" }} />} />
           <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
+
+          <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/create-profile" component={CreateProfile} />
 
           <PrivateRoute path="/applications/lease-contract" component={LeaseContract} />

@@ -3,12 +3,12 @@ import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
 import Lottie from "react-lottie-player";
 import { useForm } from "react-hook-form";
 
-import userAnimation from "../assets/animations/user.json";
-import { useAuth } from "../pages/auth/authContext";
+import userAnimation from "../../assets/animations/user.json";
+import { useAuth } from "../auth/authContext";
 
-import * as Page from "../components/page";
-import * as Tooltip from "../components/Tooltip";
-import { authentication, checkZipCode } from "../api";
+import * as Page from "../../components/page";
+import * as Tooltip from "../../components/Tooltip";
+import { authentication, checkZipCode } from "../../api";
 
 type FormValues = {
   name: string;
