@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import eyeUrl from "../assets/icons/eye.svg";
-import eyeSlashUrl from "../assets/icons/eye-slash.svg";
+import { MaterialIcon } from "@adelantto/core";
 
 const InputPassword = React.forwardRef<
   HTMLInputElement,
@@ -16,11 +15,9 @@ const InputPassword = React.forwardRef<
         type="button"
         aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
         onClick={() => setShowPassword(!showPassword)}
-        className="z-10 w-6 h-6 right-4 top-3 absolute"
+        className="z-10 w-6 h-6 right-4 top-3 absolute text-gray-600"
       >
-        <span className="material-symbols-outlined">
-          {showPassword ? "visibility_off" : "visibility"}
-        </span>
+        <MaterialIcon name={showPassword ? "visibility_off" : "visibility"} />
       </button>
     </div>
   );
