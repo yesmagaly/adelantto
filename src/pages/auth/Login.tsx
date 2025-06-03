@@ -77,23 +77,23 @@ const Login: React.FC<LoginProps> = () => {
             />
           </div>
 
-          <p className="my-4 text-center">
+          <p className="text-sm my-4 text-center">
             <a
-              className="text-sm underline font-semibold"
+              className="link"
               onClick={() => router.push("/forgot-password")}
             >
               ¿Olvidaste tu contrasena?
             </a>
           </p>
 
-          <button className="btn btn-primary btn-block rounded-full">
+          <button className="btn btn-primary btn-block">
             Iniciar sesión
           </button>
         </form>
 
         <p className="text-center text-sm">
           ¿No tienes cuenta?{" "}
-          <a href="#" className="underline font-semibold">Regístrate</a>
+          <a href="/register" className="link">Regístrate</a>
         </p>
 
         <Loader isOpen={isSubmitting} />

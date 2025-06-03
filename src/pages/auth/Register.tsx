@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
 import { useForm, Controller, FieldErrors } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
@@ -8,14 +7,16 @@ import { PatternFormat } from "react-number-format";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 
-import registerAnimation from "../../assets/animations/register.json";
 import { API_SERVER_URL, PROD_MODE } from "../../config";
 import { t } from "@adelantto/utils";
 import InputPassword from "../../components/InputPassword";
+import { MaterialIcon, PasswordStrength } from "@adelantto/core";
 
-type FormValues = {
+type T_form = {
   email: string;
   phone: string;
+  password: string;
+  password_confirmation: string;
 };
 
 const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
@@ -28,13 +29,14 @@ const Register: React.FC = () => {
 
   const {
     control,
-    handleSubmit,
-    setError,
-    register,
     formState: { errors, isSubmitting },
-  } = useForm<FormValues>();
+    handleSubmit,
+    register,
+    setError,
+    watch,
+  } = useForm<T_form>();
 
-  const validate = function (values: FormValues) {
+  const validate = function (values: T_form) {
     const errors = {} as FieldErrors;
 
     if (!values.phone) {
@@ -66,9 +68,6 @@ const Register: React.FC = () => {
       return;
     }
 
-    // Clean up phone number.
-    const phone = cleanUpPhone(data?.phone);
-
     try {
       // Send phone request.
       const response = await fetch(
@@ -79,11 +78,15 @@ const Register: React.FC = () => {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify({ phone }),
+          body: JSON.stringify({ ...data, phone: cleanUpPhone(data?.phone) }),
         }
       );
 
       const json = await response.json();
+
+      console.log(json);
+
+      return;
 
       if (json.status === "success") {
         router.push(`/verification-code/${phone}`);
@@ -104,15 +107,13 @@ const Register: React.FC = () => {
     <IonPage>
       <IonContent fullscreen className="ion-padding">
         <div className="mb-6">
-          <div className="flex justify-between items-center">
-            <div className="flex gap-2 items-center">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg font-semibold text-dark-blue-700 gap-2 inline-flex items-center">
               <a href="" className="inline-flex items-center">
                 <span className="material-symbols-outlined">arrow_back</span>
               </a>
-              <h1 className="text-lg font-semibold text-dark-blue-700">
-                Crear cuenta
-              </h1>
-            </div>
+              Crear cuenta
+            </h1>
             <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
           </div>
           <progress
@@ -130,11 +131,11 @@ const Register: React.FC = () => {
             <input
               className="input w-full"
               type="email"
-              placeholder="Email"
-              {...register("email", { required: true })}
+              placeholder="tucorreo@ejemplo.com"
+              required
+              {...register("email")}
             />
           </div>
-
           <div className="control">
             <label htmlFor="email" className="control-label">
               Celular
@@ -145,7 +146,7 @@ const Register: React.FC = () => {
               render={({ field: { ref, ...field } }) => (
                 <PatternFormat
                   {...field}
-                  className="input w-full"
+                  className="input"
                   placeholder="Número de Celular"
                   type="tel"
                   format={PHONE_FORMAT}
@@ -157,30 +158,33 @@ const Register: React.FC = () => {
               )}
             />
           </div>
-
           <div className="control">
             <label className="control-label">Contraseña</label>
             <InputPassword
               {...register("password")}
               required
-              className="input w-full"
+              className="input"
+              placeholder="Asegura tu seguridad"
             />
+
+            <PasswordStrength password={watch("password")} />
           </div>
+
           <div className="control">
             <label className="control-label">Confirmar Contraseña</label>
             <InputPassword
               {...register("password_confirmation")}
+              className="input"
+              placeholder="Reescribe tu contraseña"
               required
-              className="input w-full"
             />
           </div>
-
-          <button className="btn btn-primary rounded-full">Continuar</button>
+          <button className="btn btn-primary">Continuar</button>
         </form>
 
         <p className="text-center text-sm mt-8">
           ¿Ya tienes una cuenta?{" "}
-          <a href="#" className="link font-semibold">
+          <a href="/login" className="link">
             Iniciar sesión
           </a>
         </p>
