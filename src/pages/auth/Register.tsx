@@ -67,6 +67,11 @@ const Register: React.FC = () => {
       setIsOpen(true);
       return;
     }
+    const phone = cleanUpPhone(data.phone);
+
+    // Redirect to verification code page.
+    router.push(`/verification-code/${data.phone}`);
+    return;
 
     try {
       // Send phone request.
@@ -78,7 +83,7 @@ const Register: React.FC = () => {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify({ ...data, phone: cleanUpPhone(data?.phone) }),
+          body: JSON.stringify({ ...data, phone }),
         }
       );
 
@@ -106,22 +111,22 @@ const Register: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-lg font-semibold text-dark-blue-700 gap-2 inline-flex items-center">
-              <a href="" className="inline-flex items-center">
-                <span className="material-symbols-outlined">arrow_back</span>
-              </a>
-              Crear cuenta
-            </h1>
-            <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
-          </div>
-          <progress
-            className="progress text-indigo-300 w-full h-[5px]"
-            value="50"
-            max="100"
-          ></progress>
+
+        <div className="flex items-center justify-between">
+          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+            <a href="/" className="inline-flex items-center">
+              <MaterialIcon name="arrow_back" />
+            </a>
+            Crear cuenta
+          </h1>
+          <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
         </div>
+
+        <progress
+          className="progress text-indigo-300 w-full h-[5px] mt-2 mb-6"
+          value="50"
+          max="100"
+        ></progress>
 
         <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="control">
