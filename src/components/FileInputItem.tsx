@@ -14,6 +14,7 @@ export interface T_props extends UseControllerProps {
   label: string;
   description?: string;
   helpText?: string;
+  helpPicture?: string;
 }
 
 const addFile = (body: FormData) => {
@@ -29,6 +30,8 @@ const FileInputItem: React.FC<T_props> = ({
   label,
   description,
   helpText,
+  helpPicture,
+  multiple = false,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -163,6 +166,12 @@ const FileInputItem: React.FC<T_props> = ({
               </button>
             </div>
           ))}
+        </div>
+      )}
+
+      {helpPicture && !hasFiles && (
+        <div className="mt-4">
+          <img src={helpPicture} alt="Help picture" className="w-full" />
         </div>
       )}
 

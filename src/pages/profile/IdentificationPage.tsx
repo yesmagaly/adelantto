@@ -5,12 +5,15 @@ import {
   IonHeader,
   IonFooter,
 } from "@ionic/react";
-import { useForm, Controller } from "react-hook-form";
-import { NumericFormat } from "react-number-format";
+import { useForm } from "react-hook-form";
+
+import frontIdImageUrl from "./assets/images/front-id.png";
+import backIdImageUrl from "./assets/images/back-id.png";
 
 import { checkZipCode } from "../../api";
 import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
+import FileInputItem from "../../components/FileInputItem";
 
 function removeNumericFormat(value: string) {
   return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
@@ -61,13 +64,7 @@ type FormData = {
 export const IdentificationPage: React.FC = () => {
   const router = useIonRouter();
 
-  const {
-    handleSubmit,
-    register,
-    setError,
-    formState: { errors },
-    control,
-  } = useForm<FormData>();
+  const { handleSubmit, setError, control } = useForm<FormData>();
 
   const onSubmit = async ({
     lease_monthly_income,
@@ -107,39 +104,63 @@ export const IdentificationPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <h1 className="text-h5 text-dark-blue-700 gap-2 inline-flex items-center">
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
           <a href="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </a>
           Completa tu perfil
         </h1>
-        <p className="text-sm text-dark-gray mt-1">
+        <p className="mt-1 text-dark-gray text-sm">
           Ingresa tus datos básicos para identificarte correctamente. Esta
           información es necesaria para poder solicitar tu primer
           AdelanttoCash®.
         </p>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <div className="flex items-center justify-between">
-          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
             <a href="/" className="inline-flex items-center"></a>
             Identificación
           </h1>
           <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
         </div>
         <progress
-          className="progress text-indigo-300 w-full h-[5px] mt-2 mb-4"
+          className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
           value="50"
           max="100"
         ></progress>
+
+        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+          <FileInputItem
+            name="property_lease_agreement"
+            control={control}
+            rules={{ required: "Documento obligatorio" }}
+            accept="application/pdf"
+            label="Contrato de arrendamiento vigente"
+            description="Firmado por ambas partes"
+            helpText="Tipo de archivo permitido PDF (500MB max)"
+            helpPicture={frontIdImageUrl}
+          />
+
+          <FileInputItem
+            name="property_lease_agreement_2"
+            control={control}
+            rules={{ required: "Documento obligatorio" }}
+            accept="application/pdf"
+            label="Contrato de arrendamiento vigente"
+            description="Firmado por ambas partes"
+            helpText="Tipo de archivo permitido PDF (500MB max)"
+            helpPicture={backIdImageUrl}
+          />
+        </form>
       </IonContent>
       <IonFooter>
-        <div className="grid gap-2">
+        <div className="gap-2 grid">
           <button className="btn btn-primary" disabled>
             Continuar
           </button>
 
-          <button className="btn btn-secondary btn-outline">
+          <button className="btn-outline btn btn-secondary">
             Terminar después
           </button>
         </div>
