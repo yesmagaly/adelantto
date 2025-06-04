@@ -126,7 +126,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
             <a href="/" className="inline-flex items-center"></a>
             Ingresos e impuestos
           </h1>
-          <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
+          <span className="badge badge-primary badge-sm">Paso 2/ 2</span>
         </div>
         <progress
           className="progress text-indigo-300 w-full h-[5px] mt-2 mb-4"
