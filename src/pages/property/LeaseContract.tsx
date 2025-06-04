@@ -114,7 +114,7 @@ const LeaseContract: React.FC = () => {
           </a>
           Solicita tu AdelanttoCash®
         </h1>
-        <p className="text-sm">
+        <p className="text-sm text-dark-gray mt-1">
           Ingresa tus datos de arrendamiento para poder ver la pre-oferta de tu
           AdelanttoCash®
         </p>
