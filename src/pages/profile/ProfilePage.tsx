@@ -1,7 +1,7 @@
 import { MaterialIcon } from "@adelantto/core";
 import { IonContent, IonPage } from "@ionic/react";
 
-export function Profile() {
+export function ProfilePage() {
   return (
     <IonPage>
       <IonContent className="ion-padding">

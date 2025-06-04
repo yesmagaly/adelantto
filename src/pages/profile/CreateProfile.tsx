@@ -28,7 +28,7 @@ type FormValues = {
   instagram?: string;
 };
 
-const CreateProfile: React.FC = () => {
+export const CreateProfilePage: React.FC = () => {
   const tooltipRef = useRef(null);
   const buttonRef = useRef(null);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -337,5 +337,3 @@ const CreateProfile: React.FC = () => {
     </IonPage>
   );
 };
-
-export default CreateProfile;

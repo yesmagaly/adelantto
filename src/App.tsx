@@ -12,7 +12,6 @@ import Register from "./pages/auth/Register";
 import VerificationCode from "./pages/auth/VerificationCode";
 import VerificationEmail from "./pages/auth/VerificationEmail";
 import AdvanceImmediately from "./pages/AdvanceImmediately";
-import CreateProfile from "./pages/profile/CreateProfile";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";
@@ -63,7 +62,12 @@ import "./theme/tailwind.css";
 
 import { useAuth } from "./pages/auth/authContext";
 import { InstallmentDetail } from "./pages/loan/InstallmentDetail";
-import { Profile } from "./pages/profile/Profile";
+
+import { ProfilePage } from "./pages/profile/ProfilePage";
+import { CreateProfilePage } from "./pages/profile/CreateProfile";
+import { IdentificationPage } from "./pages/profile/IdentificationPage";
+import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
+
 
 setupIonicReact();
 
@@ -143,8 +147,13 @@ const App: React.FC = () => {
           <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
 
-          <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/create-profile" component={CreateProfile} />
+          Identification
+          Income and taxes
+
+          <PrivateRoute path="/profile" component={ProfilePage} />
+          <PrivateRoute path="/profile/identification" component={IdentificationPage} />
+          <PrivateRoute path="/profile/income-and-taxes" component={IncomeAndTaxesPage} />
+          <PrivateRoute path="/create-profile" component={CreateProfilePage} />
 
           <PrivateRoute path="/applications/lease-contract" component={LeaseContract} />
           <PrivateRoute path="/applications/:id/desired-loan" component={DesiredLoan} />
