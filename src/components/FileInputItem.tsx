@@ -1,13 +1,10 @@
-import React, { HTMLAttributes, useState } from "react";
-import Lottie from "react-lottie-player";
+import React, { useState } from "react";
 import { useController, UseControllerProps } from "react-hook-form";
 
+import { MaterialIcon } from "@adelantto/core";
 import { API_SERVER_URL } from "../config";
-
-import Icon from "../components/Icon/Icon";
-import Modal from "../components/modal";
-import documentsAnimation from "../assets/animations/documents.json";
 import { ErrorType } from "../types";
+import { cn } from "./utils";
 
 export interface T_props extends UseControllerProps {
   className?: string;
@@ -27,7 +24,6 @@ const addFile = (body: FormData) => {
   });
 };
 
-
 const FileInputItem: React.FC<T_props> = ({
   className,
   label,
@@ -35,7 +31,6 @@ const FileInputItem: React.FC<T_props> = ({
   helpText,
   ...props
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType>();
   const {
@@ -81,61 +76,90 @@ const FileInputItem: React.FC<T_props> = ({
     }
   };
 
-  const handleRemove = (fileId: number) => (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  const handleRemove =
+    (fileId: number) => (event: { preventDefault: () => void }) => {
+      event.preventDefault();
 
-    if (props.multiple) {
-      onChange(value.filter((file) => file.id != fileId));
-    } else {
-      onChange(undefined);
-    }
-  };
-
-  const openModal = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    setIsOpen(true);
-  };
+      if (props.multiple) {
+        onChange(value.filter((file) => file.id != fileId));
+      } else {
+        onChange(undefined);
+      }
+    };
 
   const displayFiles = props.multiple ? value ?? [] : value ? [value] : [];
+  const hasFiles = displayFiles.length > 0;
 
   return (
-    <div className="border border-gray-600 bg-white p-4 rounded-[12px]">
+    <div
+      className={cn(
+        "border border-dark-gray-active bg-white p-4 rounded-[12px]",
+        hasFiles && "border-lime-300",
+        className
+      )}
+    >
+      <div className="flex justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          {label && (
+            <div className="font-semibold text-dark-blue-700 text-sm">
+              {label}
+            </div>
+          )}
+          {description && <div className="text-xs">{description}</div>}
+          {!hasFiles && helpText && (
+            <div className="text-gray-700 text-xs">{helpText}</div>
+          )}
+        </div>
 
-      {label && <div className="font-semibold text-dark-blue-700 mb-2">{label}</div>}
-      {description && <div className="text-xs">{description}</div>}
-      {helpText && <div className="text-gray-600 text-xs">{helpText}</div>}
+        <label htmlFor={props.name}>
+          <div className="flex justify-center items-center size-10">
+            {!loading && !hasFiles && (
+              <MaterialIcon name="vertical_align_top" />
+            )}
+            {!loading && hasFiles && (
+              <MaterialIcon name="check_circle" className="text-lime-400" />
+            )}
+            {loading && (
+              <MaterialIcon
+                size="24px"
+                name="more_horiz"
+                className="animate-pulse"
+              />
+            )}
+          </div>
 
-      <label
-        className="!flex flex-col items-center justify-center rounded-sm border border-dashed border-slate-500 bg-slate-50 px-2 py-4 text-sm font-normal! text-slate-800"
-        htmlFor={props.name}
-      >
-        <Icon name="upload-cloud" className="mb-1 h-8 w-8 bg-slate-400" />
-        {!loading && <span>Cargar archivo</span>}
-        {loading && <span>Cargando ...</span>}
-        <input
-          {...props}
-          className="hidden"
-          id={props.name}
-          onChange={handleChange}
-          type="file"
-          placeholder="Buscar"
-        />
-      </label>
+          <input
+            {...props}
+            className="hidden"
+            id={props.name}
+            onChange={handleChange}
+            type="file"
+            placeholder="Buscar"
+          />
+        </label>
+      </div>
 
-      {displayFiles.length > 0 && (
-        <div className="my-3 flex flex-col gap-2">
+      {hasFiles && (
+        <div className="inline-block bg-gray-600 mt-4 px-3 py-1 rounded-full">
           {displayFiles.map((file) => (
-            <div key={file.id} className="flex items-center justify-between">
-              <div className="inline-flex w-52 items-center gap-1 overflow-hidden text-ellipsis text-nowrap text-sm">
-                <Icon name="attachment" className="h-5 w-5 shrink-0" />
-                {file.name}
-              </div>
+            <div
+              key={file.id}
+              className="flex justify-between items-center gap-2 text-white"
+            >
+              <MaterialIcon
+                name="description"
+                size="14px"
+                className="shrink-0"
+              />
+              <span className="text-xs">
+                {file.name} · {(file.size / 1000000).toFixed(0)}mb
+              </span>
 
               <button
-                className="text-sm font-medium"
+                className="size-4 text-xs"
                 onClick={handleRemove(file.id)}
               >
-                Borrar
+                <MaterialIcon name="close" size="16px" className="shrink-0" />
               </button>
             </div>
           ))}
@@ -143,7 +167,7 @@ const FileInputItem: React.FC<T_props> = ({
       )}
 
       {error?.message && (
-        <p className="text-sm text-red-500">{error.message}</p>
+        <p className="text-red-500 text-sm">{error.message}</p>
       )}
     </div>
   );

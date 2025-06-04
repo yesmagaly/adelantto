@@ -25,7 +25,7 @@
   --color-neutral-content: oklch(92% 0.004 286.32);
   --color-info: oklch(68% 0.169 237.323);
   --color-info-content: oklch(29% 0.066 243.157);
-  --color-success: oklch(69% 0.17 162.48);
+  --color-success: var(--color-lime-400);
   --color-success-content: oklch(26% 0.051 172.552);
   --color-warning: oklch(79% 0.184 86.047);
   --color-warning-content: oklch(28% 0.066 53.813);

@@ -40,15 +40,15 @@ const UploadDocuments: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue flex flex-col justify-center">
-          <div className="heading__pager text-right">Paso 6 de 7</div>
+        <div className="flex flex-col justify-center heading heading--blue">
+          <div className="text-right heading__pager">Paso 6 de 7</div>
           <h4 className="text-2xl">
             A continuación <strong>sube los siguientes documentos</strong> para
             validar tu propiedad
           </h4>
         </div>
 
-        <form className="form p-5" onSubmit={handleSubmit(onSubmit)}>
+        <form className="p-5 form" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <div className="form-control">
               <label>Escritura de la propiedad</label>
@@ -125,7 +125,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               )}
             </div>
 
-            <div className="form-control relative">
+            <div className="relative form-control">
               <label className="inline-flex! items-center">
                 Folio real
                 <Tooltip.Trigger
@@ -194,7 +194,7 @@ const UploadDocuments: React.FC = ({ match }) => {
           </div>
 
           <div className="mb-7 text-center">
-            <p className="mb-6 text-sm font-medium leading-tight">
+            <p className="mb-6 font-medium text-sm leading-tight">
               Los documentos deberán ser escaneados en alta resolución y en
               formato PDF, de lo contrario declinaremos el proceso.
             </p>
