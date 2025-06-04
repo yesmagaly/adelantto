@@ -136,9 +136,9 @@ export const IdentificationPage: React.FC = () => {
             control={control}
             rules={{ required: "Documento obligatorio" }}
             accept="application/pdf"
-            label="Contrato de arrendamiento vigente"
-            description="Firmado por ambas partes"
-            helpText="Tipo de archivo permitido PDF (500MB max)"
+            label="Frontal INE o Pasaporte"
+            description="Cara frontal donde sale la foto"
+            helpText="Tipo de archivo permitido JPG (500MB max)"
             helpPicture={frontIdImageUrl}
           />
 
@@ -147,9 +147,9 @@ export const IdentificationPage: React.FC = () => {
             control={control}
             rules={{ required: "Documento obligatorio" }}
             accept="application/pdf"
-            label="Contrato de arrendamiento vigente"
-            description="Firmado por ambas partes"
-            helpText="Tipo de archivo permitido PDF (500MB max)"
+            label="Reverso INE o Pasaporte"
+            description="Cara trasera donde está el código de barras"
+            helpText="Tipo de archivo permitido JPG (500MB max)"
             helpPicture={backIdImageUrl}
           />
         </form>

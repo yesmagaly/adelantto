@@ -11,6 +11,7 @@ import { NumericFormat } from "react-number-format";
 import { checkZipCode } from "../../api";
 import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
+import FileInputItem from "../../components/FileInputItem";
 
 function removeNumericFormat(value: string) {
   return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
@@ -132,6 +133,28 @@ export const IncomeAndTaxesPage: React.FC = () => {
           value="50"
           max="100"
         ></progress>
+
+        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+          <FileInputItem
+            name="property_lease_agreement"
+            control={control}
+            rules={{ required: "Documento obligatorio" }}
+            accept="application/pdf"
+            label="Comprobante de ingresos"
+            description="Últimos 3 meses (Nómina o bancarios)"
+            helpText="Tipo de archivo permitido PDF (500MB max)"
+          />
+
+          <FileInputItem
+            name="property_lease_agreement_2"
+            control={control}
+            rules={{ required: "Documento obligatorio" }}
+            accept="application/pdf"
+            label="RFC"
+            description="Constancia de situación fiscal con antigüedad no mayor a 3 meses"
+            helpText="Tipo de archivo permitido PDF (500MB max)"
+          />
+        </form>
       </IonContent>
       <IonFooter>
         <div className="grid gap-2">
