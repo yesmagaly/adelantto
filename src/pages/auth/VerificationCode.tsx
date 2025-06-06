@@ -8,6 +8,9 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
+import Lottie from "react-lottie-player";
+import Modal from "../../components/modal";
+import Loader from "../../components/Loader/Loader";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
@@ -80,79 +83,54 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
           tu teléfono <b>123*****56</b>. Esto nos permite continuar de forma
           segura.
         </p>
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type="numeric"
-            maxLength={4}
-            minLength={4}
-            placeholder="Código de verificación"
-            className="input input-xl"
-            {...register("code", { required: true })}
-          />
-          <div>
-            <p className="mt-1 text-primary-green">
-              {minutes}:{seconds}
-            </p>
-            {isExpired && (
-              <p className="text-orange-500">El código ha expirado.</p>
-            )}
+
+        <form className="mb-6 form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex gap-4">
+            <input
+              {...register("code1")}
+              className="h-24 text-center input"
+              maxLength={1}
+              minLength={1}
+              placeholder="0"
+              required
+              type="numeric"
+            />
+            <input
+              {...register("code2")}
+              className="h-24 text-center input"
+              maxLength={1}
+              minLength={1}
+              placeholder="0"
+              required
+              type="numeric"
+            />
+            <input
+              {...register("code3")}
+              className="h-24 text-center input"
+              maxLength={1}
+              minLength={1}
+              placeholder="0"
+              required
+              type="numeric"
+            />
+            <input
+              {...register("code4")}
+              className="h-24 text-center input"
+              maxLength={1}
+              minLength={1}
+              placeholder="0"
+              required
+              type="numeric"
+            />
           </div>
         </form>
-
-          <form className="mb-16 form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex gap-4">
-              <input
-                {...register("code1")}
-                className="h-24 text-center input"
-                maxLength={1}
-                minLength={1}
-                placeholder="0"
-                required
-                type="numeric"
-              />
-              <input
-                {...register("code2")}
-                className="h-24 text-center input"
-                maxLength={1}
-                minLength={1}
-                placeholder="0"
-                required
-                type="numeric"
-              />
-              <input
-                {...register("code3")}
-                className="h-24 text-center input"
-                maxLength={1}
-                minLength={1}
-                placeholder="0"
-                required
-                type="numeric"
-              />
-              <input
-                {...register("code4")}
-                className="h-24 text-center input"
-                maxLength={1}
-                minLength={1}
-                placeholder="0"
-                required
-                type="numeric"
-              />
-            </div>
-
-            <div className="mb-24">
-              <p className="mt-4 mb-4 help-text">
-                Si no recibiste el código, envíalo nuevamente desde{" "}
-                <a
-                  onClick={() => router.push("/register")}
-                  className="underline"
-                >
-                  aquí
-                </a>
-              </p>
-            </div>
-
-            <button className="button is-primary">Validar código</button>
-          </form>
+        <div className="grid gap-2">
+          <p>¿No has recibido el código?</p>
+          <div>
+            <a onClick={() => router.push("/register")} className="underline">
+              Reenviar código
+            </a>
+          </div>
         </div>
 
         <Loader isOpen={isSubmitting} />
@@ -170,14 +148,6 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
             Aceptar
           </button>
         </Modal>
-        <div className="flex flex-col items-center gap-2">
-          ¿No has recibido el código?
-          <div>
-            <a onClick={() => router.push("/register")} className="underline">
-              Reenviar código
-            </a>
-          </div>
-        </div>
       </IonContent>
       <IonFooter>
         <button className="btn btn-primary btn-block">Verificar cuenta</button>
