@@ -233,14 +233,14 @@ const LeaseContract: React.FC = () => {
             </div>
           </div>
 
-          <label className="items-start gap-2 mt-2 label">
+          <label className="label">
             <input
               type="checkbox"
               id="agreement"
               className="rounded-sm checkbox checkbox-sm"
               required
             />
-            <span className="text-sm text-wrap">
+            <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con los{" "}
               <a
                 href="https://adelanttocash.com/terminos-y-condiciones"
