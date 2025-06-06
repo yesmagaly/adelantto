@@ -108,32 +108,32 @@ const LeaseContract: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <h1 className="text-h5 text-dark-blue-700 gap-2 inline-flex items-center">
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
           <a href="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </a>
           Solicita tu AdelanttoCash®
         </h1>
-        <p className="text-sm text-dark-gray mt-1">
+        <p className="mt-1 text-dark-gray text-sm">
           Ingresa tus datos de arrendamiento para poder ver la pre-oferta de tu
           AdelanttoCash®
         </p>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <div className="flex items-center justify-between">
-          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
             <a href="/" className="inline-flex items-center"></a>
             Contrato de renta
           </h1>
           <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
         </div>
         <progress
-          className="progress text-indigo-300 w-full h-[5px] mt-2 mb-4"
+          className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
           value="50"
           max="100"
         ></progress>
 
-        <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
           <div className="control">
             <label className="control-label">
               Valor de la renta mensual (después de la cuota de mantenimiento)
@@ -151,7 +151,7 @@ const LeaseContract: React.FC = () => {
               render={({ field: { ref, ...field } }) => (
                 <NumericFormat
                   {...field}
-                  className="pattern-format input w-full"
+                  className="w-full pattern-format input"
                   type="text"
                   required
                   getInputRef={ref}
@@ -178,7 +178,7 @@ const LeaseContract: React.FC = () => {
               type="date"
               required
               placeholder=""
-              className="input w-full"
+              className="input"
             />
           </div>
 
@@ -194,7 +194,7 @@ const LeaseContract: React.FC = () => {
               })}
               type="date"
               required
-              className="input w-full"
+              className="input"
             />
 
             {errors?.lease_end_date && (
@@ -208,58 +208,53 @@ const LeaseContract: React.FC = () => {
             <h4 className="control-label">
               ¿Cómo recibes el pago de tu renta?
             </h4>
-            <div className="flex w-full items-center justify-between">
-              <div>
+            <div className="flex items-center gap-6">
+              <label className="label">
                 <input
                   {...register("lease_payment_method")}
                   type="radio"
-                  id="payment_cash"
                   value="cash"
-                  className="radio"
+                  className="radio radio-sm"
                   required
                 />
-                <label className="ml-2" htmlFor="payment_cash">
-                  Efectivo
-                </label>
-              </div>
-              <div>
+                <span className="text-sm">Efectivo</span>
+              </label>
+              <label className="label">
                 <input
                   {...register("lease_payment_method")}
                   type="radio"
                   id="payment_transfer"
                   value="transfer"
-                  className="radio"
+                  className="radio radio-sm"
                   required
                 />
-                <label className="ml-2" htmlFor="payment_transfer">
-                  Transferencia
-                </label>
-              </div>
+                <span className="text-sm">Transferencia</span>
+              </label>
             </div>
           </div>
 
-          <div>
+          <label className="items-start gap-2 mt-2 label">
             <input
               type="checkbox"
               id="agreement"
-              className="checkbox"
+              className="rounded-sm checkbox checkbox-sm"
               required
             />
-            <label className="control-label">
-              He leído y estoy de acuerdo con los
+            <span className="text-sm text-wrap">
+              He leído y estoy de acuerdo con los{" "}
               <a
                 href="https://adelanttocash.com/terminos-y-condiciones"
                 target="_blank"
-                className="font-medium bold"
+                className="text-emerald-700 link"
               >
                 Términos y Condiciones
               </a>
-            </label>
-          </div>
+            </span>
+          </label>
         </form>
       </IonContent>
       <IonFooter>
-        <button className="btn btn-primary btn-block">
+        <button className="btn-block btn btn-primary">
           Ver Pre-Oferta AdelanttoCash®
         </button>
       </IonFooter>
