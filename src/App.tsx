@@ -155,7 +155,6 @@ const App: React.FC = () => {
           <PrivateRoute path="/profile/identification" component={IdentificationPage} />
           <PrivateRoute path="/profile/income-and-taxes" component={IncomeAndTaxesPage} />
           <PrivateRoute path="/profile/property-validation" component={PropertyValidationPage} />
-          <PrivateRoute path="/create-profile" component={CreateProfilePage} />
 
           <PrivateRoute path="/applications/lease-contract" component={LeaseContract} />
           <PrivateRoute path="/applications/:id/desired-loan" component={DesiredLoan} />
@@ -183,6 +182,7 @@ const App: React.FC = () => {
           <PublicRoute path="/login" component={Login} />
           <PublicRoute path="/verification-code/:id" component={VerificationCode} />
           <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
+          <PublicRoute path="/create-profile" component={CreateProfilePage} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
           <PublicRoute path="/info" children={<Info cta={{ url: "/start", label: "Regresar" }} />} />
           <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
