@@ -242,8 +242,12 @@
   --input-color: var(--color-gray-hover);
 
   &:focus {
-    @apply outline-none border-emerald-400;
+    @apply border-emerald-400 outline-none;
   }
+}
+
+@utility label {
+  @apply gap-2;
 }
 
 @utility btn {
@@ -293,7 +297,7 @@
 }
 
 .heading-light-green {
-  @apply h-96 bg-cover px-9 pt-32;
+  @apply bg-cover px-9 pt-32 h-96;
   background-image: url("../assets/images/light-green-bg.png");
 }
 
@@ -302,7 +306,7 @@
 }
 
 .heading__title {
-  @apply text-4xl leading-none text-balance;
+  @apply text-4xl text-balance leading-none;
 }
 
 .heading__title strong {
@@ -340,7 +344,7 @@
 }
 
 .content {
-  @apply flex p-8 flex-col items-center text-center;
+  @apply flex flex-col items-center p-8 text-center;
   min-height: calc(100% - 15rem);
 }
 
@@ -353,15 +357,15 @@
 }
 
 .prose-sm p {
-  @apply text-sm mb-4;
+  @apply mb-4 text-sm;
 }
 
 .prose-sm h2 {
-  @apply text-base font-semibold mb-2 leading-tight;
+  @apply mb-2 font-semibold text-base leading-tight;
 }
 
 .border-full {
-  @apply border-b border-solid border-gray-400 w-full my-3;
+  @apply my-3 border-gray-400 border-b border-solid w-full;
 }
 
 #bg-checkbox {
