@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { RouteComponentProps } from "react-router";
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
+import {
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  useIonRouter,
+} from "@ionic/react";
+
 import { useForm, SubmitHandler } from "react-hook-form";
-
-import verificationCodeAnimation from "../../assets/animations/verification-code.json";
-import Modal from "../../components/modal";
-import Loader from "../../components/Loader/Loader";
 import { API_SERVER_URL } from "../../config";
-
 import useCountDownTimer from "../../hooks/useCountDownTimer";
+import { MaterialIcon, PasswordStrength } from "@adelantto/core";
 
 interface ComponentProps
   extends RouteComponentProps<{
@@ -62,23 +64,40 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
 
   return (
     <IonPage>
-      <IonContent fullscreen className="ion-padding">
-        <div className="heading heading--green">
-          <h1 className="heading__title">
-            Código
-            <br />
-            <strong>de verificación</strong>
+      <IonHeader>
+        <div className="flex items-center justify-between">
+          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+            <a href="/" className="inline-flex items-center">
+              <MaterialIcon name="arrow_back" />
+            </a>
+            Verificar cuenta
           </h1>
-          <div className="heading__pager">Paso 2 de 4</div>
         </div>
-
-        <div className="content">
-          <Lottie
-            animationData={verificationCodeAnimation}
-            style={{ width: 174, height: 262 }}
-            loop
-            play
+      </IonHeader>
+      <IonContent fullscreen className="ion-padding grid gap-4">
+        <p className="text-sm text-dark-gray mt-1 mb-4">
+          Confirma tus datos de contacto ingresando el código que te enviamos a
+          tu teléfono <b>123*****56</b>. Esto nos permite continuar de forma
+          segura.
+        </p>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="numeric"
+            maxLength={4}
+            minLength={4}
+            placeholder="Código de verificación"
+            className="input input-xl"
+            {...register("code", { required: true })}
           />
+          <div>
+            <p className="mt-1 text-primary-green">
+              {minutes}:{seconds}
+            </p>
+            {isExpired && (
+              <p className="text-orange-500">El código ha expirado.</p>
+            )}
+          </div>
+        </form>
 
           <form className="mb-16 form" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex gap-4">
@@ -151,7 +170,25 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
             Aceptar
           </button>
         </Modal>
+        <div className="flex flex-col items-center gap-2">
+          ¿No has recibido el código?
+          <div>
+            <a onClick={() => router.push("/register")} className="underline">
+              Reenviar código
+            </a>
+          </div>
+        </div>
       </IonContent>
+      <IonFooter>
+        <button className="btn btn-primary btn-block">Verificar cuenta</button>
+
+        <p className="text-center text-sm mt-6">
+          ¿Ya tienes una cuenta?{" "}
+          <a href="/login" className="link">
+            Iniciar sesión
+          </a>
+        </p>
+      </IonFooter>
     </IonPage>
   );
 };
