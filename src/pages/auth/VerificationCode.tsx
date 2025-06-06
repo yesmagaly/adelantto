@@ -13,7 +13,7 @@ import useCountDownTimer from "../../hooks/useCountDownTimer";
 
 interface ComponentProps
   extends RouteComponentProps<{
-    phone: string;
+    id: string;
   }> {}
 
 type FormValues = {
@@ -22,8 +22,7 @@ type FormValues = {
 
 const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
   // 3 Minutes
-  const { minutes, seconds, isExpired, stopTimer, resetTimer } =
-    useCountDownTimer(3);
+  const { minutes, seconds, isExpired, stopTimer } = useCountDownTimer(3);
   const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
 
@@ -38,7 +37,7 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
     stopTimer();
 
     const code = data.code;
-    const phone = match.params.phone;
+    const phone = match.params.id;
 
     // Send phone request.
     const response = await fetch(`${API_SERVER_URL}/api/verify-phone-code`, {
@@ -63,7 +62,7 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         <div className="heading heading--green">
           <h1 className="heading__title">
             Código
@@ -81,23 +80,48 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
             play
           />
 
-          <form className="form mb-16" onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="numeric"
-              maxLength={6}
-              minLength={6}
-              placeholder="Código de verificación"
-              {...register("code", { required: true })}
-            />
+          <form className="mb-16 form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex gap-4">
+              <input
+                {...register("code1")}
+                className="h-24 text-center input"
+                maxLength={1}
+                minLength={1}
+                placeholder="0"
+                required
+                type="numeric"
+              />
+              <input
+                {...register("code2")}
+                className="h-24 text-center input"
+                maxLength={1}
+                minLength={1}
+                placeholder="0"
+                required
+                type="numeric"
+              />
+              <input
+                {...register("code3")}
+                className="h-24 text-center input"
+                maxLength={1}
+                minLength={1}
+                placeholder="0"
+                required
+                type="numeric"
+              />
+              <input
+                {...register("code4")}
+                className="h-24 text-center input"
+                maxLength={1}
+                minLength={1}
+                placeholder="0"
+                required
+                type="numeric"
+              />
+            </div>
 
             <div className="mb-24">
-              <p className="mt-1 text-primary-green">
-                {minutes}:{seconds}
-              </p>
-              {isExpired && (
-                <p className="text-orange-500">El código ha expirado.</p>
-              )}
-              <p className="help-text mb-4 mt-4">
+              <p className="mt-4 mb-4 help-text">
                 Si no recibiste el código, envíalo nuevamente desde{" "}
                 <a
                   onClick={() => router.push("/register")}
@@ -115,7 +139,7 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="mb-5 text-center text-lg font-semibold">
+          <h3 className="mb-5 font-semibold text-lg text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.code?.message}</p>}

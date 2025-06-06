@@ -22,7 +22,7 @@ type T_form = {
   email: string;
   phone: string;
   password: string;
-  password_confirmation: string;
+  confirm_password: string;
 };
 
 const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
@@ -63,9 +63,9 @@ const Register: React.FC = () => {
     return errors;
   };
 
-  const onSubmit = async function (data: any) {
+  const onSubmit = async function (form: any) {
     // Make validaions.
-    const errors = validate(data);
+    const errors = validate(form);
 
     // Show phone errors.
     if (errors.phone) {
@@ -73,11 +73,8 @@ const Register: React.FC = () => {
       setIsOpen(true);
       return;
     }
-    const phone = cleanUpPhone(data.phone);
 
-    // Redirect to verification code page.
-    router.push(`/verification-code/${data.phone}`);
-    return;
+    const phone = cleanUpPhone(form.phone);
 
     try {
       // Send phone request.
@@ -89,20 +86,16 @@ const Register: React.FC = () => {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify({ ...data, phone }),
+          body: JSON.stringify({ ...form, phone }),
         }
       );
 
-      const json = await response.json();
+      const data = await response.json();
 
-      console.log(json);
-
-      return;
-
-      if (json.status === "success") {
-        router.push(`/verification-code/${phone}`);
+      if (response.ok) {
+        router.push(`/verification-code/${data.id}`);
       } else {
-        setError("phone", { message: json.message, type: "server" });
+        setError("phone", { message: data.message, type: "server" });
         setIsOpen(true);
       }
     } catch (error) {
@@ -117,8 +110,8 @@ const Register: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <div className="flex items-center justify-between">
-          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
             <a href="/" className="inline-flex items-center">
               <MaterialIcon name="arrow_back" />
             </a>
@@ -128,19 +121,19 @@ const Register: React.FC = () => {
         </div>
 
         <progress
-          className="progress text-indigo-300 w-full h-[5px] mt-2"
+          className="mt-2 w-full h-[5px] text-indigo-300 progress"
           value="50"
           max="100"
         ></progress>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
           <div className="control">
             <label htmlFor="email" className="control-label">
               Correo electrónico
             </label>
             <input
-              className="input w-full"
+              className="w-full input"
               type="email"
               placeholder="tucorreo@ejemplo.com"
               required
@@ -184,7 +177,7 @@ const Register: React.FC = () => {
           <div className="control">
             <label className="control-label">Confirmar Contraseña</label>
             <InputPassword
-              {...register("password_confirmation")}
+              {...register("confirm_password")}
               className="input"
               placeholder="Reescribe tu contraseña"
               required
@@ -195,7 +188,7 @@ const Register: React.FC = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="text-center text-lg font-semibold">Lo sentimos</h3>
+          <h3 className="font-semibold text-lg text-center">Lo sentimos</h3>
           {errors?.phone && <p>{errors.phone?.message}</p>}
           <button
             className="button is-primary"
@@ -206,9 +199,14 @@ const Register: React.FC = () => {
         </Modal>
       </IonContent>
       <IonFooter>
-        <button className="btn btn-primary btn-block">Continuar</button>
+        <button
+          className="btn-block btn btn-primary"
+          onClick={() => handleSubmit(onSubmit)()}
+        >
+          Continuar
+        </button>
 
-        <p className="text-center text-sm mt-6">
+        <p className="mt-6 text-sm text-center">
           ¿Ya tienes una cuenta?{" "}
           <a href="/login" className="link">
             Iniciar sesión

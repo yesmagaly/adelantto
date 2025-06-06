@@ -132,8 +132,8 @@ const App: React.FC = () => {
 
   if (!authInfo || !authInfo.initialized) {
     return <IonApp>
-      <div className="flex h-screen w-full items-center justify-center">
-        <span className="text-sm font-medium">
+      <div className="flex justify-center items-center w-full h-screen">
+        <span className="font-medium text-sm">
           Cargando ...
         </span>
       </div>
@@ -181,7 +181,7 @@ const App: React.FC = () => {
           <PublicRoute path="/create-account" component={Register} />
           <PublicRoute path="/register" component={Register} />
           <PublicRoute path="/login" component={Login} />
-          <PublicRoute path="/verification-code/:phone" component={VerificationCode} />
+          <PublicRoute path="/verification-code/:id" component={VerificationCode} />
           <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
           <PublicRoute path="/info" children={<Info cta={{ url: "/start", label: "Regresar" }} />} />
