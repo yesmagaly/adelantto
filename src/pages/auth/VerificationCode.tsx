@@ -8,13 +8,12 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-import Lottie from "react-lottie-player";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
-import { MaterialIcon, PasswordStrength } from "@adelantto/core";
+import { MaterialIcon } from "@adelantto/core";
 
 interface ComponentProps
   extends RouteComponentProps<{
@@ -124,10 +123,13 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
             />
           </div>
         </form>
-        <div className="grid gap-2">
+        <div className="grid gap-2 justify-self-center">
           <p>¿No has recibido el código?</p>
-          <div>
-            <a onClick={() => router.push("/register")} className="underline">
+          <div className=" justify-self-center">
+            <a
+              onClick={() => router.push("/register")}
+              className="underline font-semibold"
+            >
               Reenviar código
             </a>
           </div>
