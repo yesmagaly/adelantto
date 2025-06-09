@@ -115,12 +115,12 @@ export const CreateProfilePage: React.FC = () => {
         ></progress>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <p className="text-sm text-dark-gray mt-1 mb-4">
-          Nos gustaría saber cómo dirigirnos a ti. Por favor, ingresa tus
-          nombres y apellidos. Esta información es fundamental para crear tu
-          perfil y solicitar tu AdelanttoCash®.
-        </p>
-        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+        <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
+          <p className="text-sm text-dark-gray">
+            Nos gustaría saber cómo dirigirnos a ti. Por favor, ingresa tus
+            nombres y apellidos. Esta información es fundamental para crear tu
+            perfil y solicitar tu AdelanttoCash®.
+          </p>
           <div className="control">
             <label htmlFor="name" className="control-label">
               Nombre

@@ -76,14 +76,13 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
           </h1>
         </div>
       </IonHeader>
-      <IonContent fullscreen className="ion-padding grid gap-4">
-        <p className="text-sm text-dark-gray mt-1 mb-4">
-          Confirma tus datos de contacto ingresando el código que te enviamos a
-          tu teléfono <b>123*****56</b>. Esto nos permite continuar de forma
-          segura.
-        </p>
-
-        <form className="mb-6 form" onSubmit={handleSubmit(onSubmit)}>
+      <IonContent fullscreen className="ion-padding">
+        <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
+          <p className="text-sm text-dark-gray">
+            Confirma tus datos de contacto ingresando el código que te enviamos
+            a tu teléfono <b>123*****56</b>. Esto nos permite continuar de forma
+            segura.
+          </p>
           <div className="flex gap-4">
             <input
               {...register("code1")}
@@ -122,13 +121,13 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
               type="numeric"
             />
           </div>
+          <div className="grid gap-2 text-center">
+            <p>¿No has recibido el código?</p>
+            <a onClick={() => router.push("/register")} className="link">
+              Reenviar código
+            </a>
+          </div>
         </form>
-        <div className="grid gap-2 text-center">
-          <p>¿No has recibido el código?</p>
-          <a onClick={() => router.push("/register")} className="link">
-            Reenviar código
-          </a>
-        </div>
 
         <Loader isOpen={isSubmitting} />
 
