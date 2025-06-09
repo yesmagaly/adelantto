@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { IonContent, IonPage, IonIcon, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
+import {
+  IonContent,
+  IonPage,
+  IonFooter,
+  useIonRouter,
+  IonHeader,
+} from "@ionic/react";
 import { useForm } from "react-hook-form";
-
-import userAnimation from "../../assets/animations/user.json";
 import { useAuth } from "../auth/authContext";
-
-import * as Page from "../../components/page";
-import * as Tooltip from "../../components/Tooltip";
 import { authentication, checkZipCode } from "../../api";
+import { MaterialIcon } from "@adelantto/core";
 
 type FormValues = {
   name: string;
@@ -96,244 +97,102 @@ export const CreateProfilePage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <Page.Root>
-          <Page.Body>
-            <Lottie
-              animationData={userAnimation}
-              style={{ width: 280, height: 280, margin: "0 auto" }}
-              loop
-              play
+      <IonHeader>
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
+            <a href="/" className="inline-flex items-center">
+              <MaterialIcon name="arrow_back" />
+            </a>
+            Crear tu perfil
+          </h1>
+          <span className="badge badge-primary badge-sm">Paso 2/ 2</span>
+        </div>
+
+        <progress
+          className="mt-2 w-full h-[5px] text-indigo-300 progress"
+          value="100"
+          max="100"
+        ></progress>
+      </IonHeader>
+      <IonContent fullscreen className="ion-padding">
+        <p className="text-sm text-dark-gray mt-1 mb-4">
+          Nos gustaría saber cómo dirigirnos a ti. Por favor, ingresa tus
+          nombres y apellidos. Esta información es fundamental para crear tu
+          perfil y solicitar tu AdelanttoCash®.
+        </p>
+        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+          <div className="control">
+            <label htmlFor="name" className="control-label">
+              Nombre
+            </label>
+            <input
+              className="w-full input"
+              type="name"
+              placeholder="Ingresa tu nombre"
+              required
+              {...register("name")}
             />
-
-            <div className="mb-8">
-              <h1 className="heading-3 mb-4 text-center">
-                <strong>Crea tu perfil</strong>
-              </h1>
-              <p className="headline text-balance text-center">
-                Tu información personal deberá registrarse del mismo modo en que
-                aparece en tu identificación oficial
-              </p>
-            </div>
-
-            <form className="form" onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-control">
-                <label htmlFor="name">Nombre (s)</label>
-                <input
-                  type="text"
-                  id="name"
-                  className="min-w-full"
-                  {...register("name", { required: true })}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="first_last_name">Apellido Paterno</label>
-                <input
-                  type="text"
-                  id="first_last_name"
-                  className="min-w-full"
-                  {...register("first_last_name", { required: true })}
-                />
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="second_last_name">Apellido Materno</label>
-                <input
-                  type="text"
-                  id="second_last_name"
-                  className="min-w-full"
-                  {...register("second_last_name", { required: true })}
-                />
-              </div>
-
-              <div className="form-control relative">
-                <label
-                  htmlFor="identification_number"
-                  className="inline-flex! items-center"
-                >
-                  INE / Pasaporte
-                  <Tooltip.Trigger
-                    aria-label="Más información"
-                    value="identification-number-tooltip"
-                  />
-                </label>
-
-                <Tooltip.Content value="identification-number-tooltip">
-                  <p>
-                    <span className="font-medium">INE:</span> Número ubicado
-                    después de 'IDMEX' en la parte posterior de la credencial.
-                    Omite el último dígito.
-                  </p>
-
-                  <p>
-                    <span className="font-medium">Pasaporte:</span> "Ubicado en
-                    la esquina superior derecha de la página de información
-                    personal"
-                  </p>
-                </Tooltip.Content>
-
-                <input
-                  type="text"
-                  id="identification_number"
-                  className="min-w-full"
-                  {...register("identification_number", { required: true })}
-                />
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="birthdate">Fecha de nacimiento</label>
-                <input
-                  type="date"
-                  id="birthdate"
-                  className="min-w-full"
-                  {...register("birthdate", { required: true })}
-                />
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="rfc">
-                  Registro Federal de Contribuyentes (con homoclave)
-                </label>
-                <input
-                  type="text"
-                  id="rfc"
-                  placeholder="RFC"
-                  className="min-w-full uppercase"
-                  minLength={13}
-                  maxLength={13}
-                  {...register("rfc", { required: true })}
-                />
-              </div>
-
-              <div className="form-control">
-                <label htmlFor="curp">
-                  Clave Única de Registro de Población
-                </label>
-                <input
-                  type="text"
-                  id="curp"
-                  placeholder="CURP"
-                  className="min-w-full uppercase"
-                  minLength={18}
-                  maxLength={18}
-                  autoCapitalize="characters"
-                  {...register("curp", { required: true })}
-                />
-              </div>
-
-              <div className="my-8">
-                <label className="mb-4 block text-xl font-normal">
-                  Domicilio personal
-                </label>
-                <div>
-                  <div className="form-control">
-                    <label htmlFor="address">
-                      Calle, número exterior / interior
-                    </label>
-                    <input
-                      type="text"
-                      id="address"
-                      className="min-w-full"
-                      {...register("address", { required: true })}
-                    />
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="zip_code">Código postal</label>
-                    <input
-                      type="text"
-                      id="zip_code"
-                      className="min-w-full"
-                      {...register("zip_code", { required: true })}
-                      onBlur={handleBlurZipCode}
-                    />
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="colony">Colonia</label>
-                    <input
-                      type="text"
-                      id="colony"
-                      className="min-w-full"
-                      {...register("colony", { required: true })}
-                    />
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="municipality">Alcaldía</label>
-                    <input
-                      type="text"
-                      id="municipality"
-                      className="min-w-full"
-                      {...register("municipality", { required: true })}
-                    />
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="state">Estado</label>
-                    <input
-                      type="text"
-                      id="state"
-                      className="min-w-full"
-                      {...register("state", { required: true })}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="my-8">
-                <label className="mb-4 block text-xl font-normal">
-                  Redes sociales
-                </label>
-                <div>
-                  <div className="form-control">
-                    <label htmlFor="linkedin">LinkedIn</label>
-                    <input
-                      type="text"
-                      id="linkedin"
-                      className="min-w-full"
-                      {...register("linkedin")}
-                    />
-                    <p className="form-help-text">
-                      Use la URL de su perfil de LinkedIn
-                    </p>
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="instagram">Instagram</label>
-                    <input
-                      type="text"
-                      id="instagram"
-                      className="min-w-full"
-                      {...register("instagram")}
-                    />
-                    <p className="form-help-text">
-                      Use la URL de tu perfil de Instagram
-                    </p>
-                  </div>
-
-                  <div className="form-control">
-                    <label htmlFor="facebook">Facebook</label>
-                    <input
-                      type="text"
-                      id="facebook"
-                      className="min-w-full"
-                      {...register("facebook")}
-                    />
-                    <p className="form-help-text">
-                      Use la URL de tu perfil de Facebook
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-actions text-center">
-                <button className="button is-primary">Guardar</button>
-              </div>
-            </form>
-          </Page.Body>
-        </Page.Root>
+          </div>
+          <div className="control">
+            <label htmlFor="last_name" className="control-label">
+              Apellidos
+            </label>
+            <input
+              className="w-full input"
+              type="last_name"
+              placeholder="Ingresa tus apellidos"
+              required
+              {...register("last_name")}
+            />
+          </div>
+          <label className="label">
+            <input
+              type="checkbox"
+              id="agreement"
+              className="rounded-sm checkbox checkbox-sm"
+              required
+            />
+            <span className="text-xs text-wrap">
+              He leído y estoy de acuerdo con el{" "}
+              <a
+                href="https://adelanttocash.com/aviso-de-privacidad"
+                target="_blank"
+                className="text-emerald-700 link"
+              >
+                Aviso de Privacidad
+              </a>
+            </span>
+          </label>
+          <label className="label">
+            <input
+              type="checkbox"
+              id="agreement"
+              className="rounded-sm checkbox checkbox-sm"
+              required
+            />
+            <span className="text-xs text-wrap">
+              He leído y estoy de acuerdo con los{" "}
+              <a
+                href="https://adelanttocash.com/terminos-y-condiciones"
+                target="_blank"
+                className="text-emerald-700 link"
+              >
+                Términos y Condiciones
+              </a>
+            </span>
+          </label>
+        </form>
       </IonContent>
+      <IonFooter>
+        <button className="btn btn-primary btn-block">Regístrate</button>
+
+        <p className="text-center text-sm mt-6">
+          ¿Ya tienes una cuenta?{" "}
+          <a href="/login" className="link">
+            Iniciar sesión
+          </a>
+        </p>
+      </IonFooter>
     </IonPage>
   );
 };

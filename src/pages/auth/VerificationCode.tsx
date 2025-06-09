@@ -124,15 +124,10 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
           </div>
         </form>
         <div className="grid gap-2 text-center">
-          <p>
-            ¿No has recibido el código?
-            </p>
-            <a
-              onClick={() => router.push("/register")}
-              className="link"
-            >
-              Reenviar código
-            </a>
+          <p>¿No has recibido el código?</p>
+          <a onClick={() => router.push("/register")} className="link">
+            Reenviar código
+          </a>
         </div>
 
         <Loader isOpen={isSubmitting} />
