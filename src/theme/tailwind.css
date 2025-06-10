@@ -170,7 +170,26 @@
   --color-dark-gray: #515151;
   --color-dark-gray-active: #686868;
 
+ /* Typography h0 */
+
+ --fluid-44-60: clamp(2.75rem, 2.4167rem + 1.4815vw, 3.75rem);
+ --fluid-56-64: clamp(3.5rem, 3.3333rem + 0.7407vw, 4rem);
+
+ --text-h0: var(--fluid-44-60);
+ --text-h0--line-height: var(--fluid-56-64);
+ --text-h0--font-weight: 700;
+
+ /* Typography h1 */
+
+ --fluid-40-48: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
+ --fluid-52-56: clamp(3.25rem, 3.1667rem + 0.3704vw, 3.5rem);
+
+ --text-h1: var(--fluid-40-48);
+ --text-h1--line-height: var(--fluid-52-56);
+ --text-h1--font-weight: 700;
+
   /* Typography h2 */
+
   --fluid-32-40: clamp(2rem, 1.8333rem + 0.7407vw, 2.5rem);
   --fluid-40-48: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
 
@@ -213,6 +232,24 @@
   --text-h6: var(--fluid-18-20);
   --text-h6--line-height: var(--fluid-22-24);
   --text-h6--font-weight: 600;
+
+  /* Typography tab */
+
+  --fluid-14-14: clamp(0.875rem, 0.875rem + 0vw, 0.875rem);
+  --fluid-20-20: clamp(1.25rem, 1.25rem + 0vw, 1.25rem);
+
+  --text-tab: var(--fluid-14-14);
+  --text-tab--line-height: var(--fluid-20-20);
+  --text-tab--font-weight: 600;
+
+  /* Typography chip */
+
+  --fluid-10-10: clamp(0.625rem, 0.625rem + 0vw, 0.625rem);
+  --fluid-16-16: clamp(1rem, 1rem + 0vw, 1rem);
+
+  --text-chip: var(--fluid-10-10);
+  --text-chip--line-height: var(--fluid-16-16);
+  --text-chip--font-weight: 700;
 }
 
 /*
