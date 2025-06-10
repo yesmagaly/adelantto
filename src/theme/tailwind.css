@@ -3,7 +3,7 @@
 
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, pastel;
+  themes: light --default, dark --prefersdark, cupcake;
 }
 
 @plugin "daisyui/theme" {
@@ -259,7 +259,7 @@
 }
 
 @utility btn {
-  @apply rounded-full;
+  @apply rounded-full text-base;
 }
 
 @utility link {
