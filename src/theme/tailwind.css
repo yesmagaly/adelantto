@@ -170,7 +170,15 @@
   --color-dark-gray: #515151;
   --color-dark-gray-active: #686868;
 
-  /* Type h3 */
+  /* Typography h2 */
+  --fluid-32-40: clamp(2rem, 1.8333rem + 0.7407vw, 2.5rem);
+  --fluid-40-48: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
+
+  --text-h2: var(--fluid-32-40);
+  --text-h2--line-height: var(--fluid-40-48);
+  --text-h2--font-weight: 600;
+
+  /* Typography h3 */
 
   --fluid-28-36: clamp(1.75rem, 1.5833rem + 0.7407vw, 2.25rem);
   --fluid-34-40: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
@@ -179,7 +187,7 @@
   --text-h3--line-height: var(--fluid-34-40);
   --text-h3--font-weight: 600;
 
-  /* Type h4 */
+  /* Typography h4 */
 
   --fluid-28-36: clamp(1.75rem, 1.5833rem + 0.7407vw, 2.25rem);
   --fluid-34-40: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
@@ -188,7 +196,7 @@
   --text-h4--line-height: var(--fluid-34-40);
   --text-h4--font-weight: 600;
 
-  /* Type h5 */
+  /* Typography h5 */
 
   --fluid-20-24: clamp(1.25rem, 1.1667rem + 0.3704vw, 1.5rem);
   --fluid-28-32: clamp(1.75rem, 1.6667rem + 0.3704vw, 2rem);
@@ -197,7 +205,7 @@
   --text-h5--line-height: var(--fluid-28-32);
   --text-h5--font-weight: 600;
 
-  /* Type h6 */
+  /* Typography h6 */
 
   --fluid-18-20: clamp(1.125rem, 1.0833rem + 0.1852vw, 1.25rem);
   --fluid-22-24: clamp(1.375rem, 1.3333rem + 0.1852vw, 1.5rem);
