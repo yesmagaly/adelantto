@@ -284,7 +284,7 @@
 }
 
 @utility input {
-  @apply text-base;
+  @apply w-full text-base;
   --input-color: var(--color-gray-hover);
 
   &:focus {

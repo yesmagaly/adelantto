@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import {
   IonContent,
@@ -10,9 +10,8 @@ import {
 
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
-import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { MaterialIcon } from "@adelantto/core";
 
 interface ComponentProps
@@ -20,56 +19,86 @@ interface ComponentProps
     id: string;
   }> {}
 
-type FormValues = {
-  code: number;
+type T_form = {
+  code1: number;
+  code2: number;
+  code3: number;
+  code4: number;
+
+  code: string; // This is used to store the concatenated code.
 };
 
-const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
-  // 3 Minutes
-  const { minutes, seconds, isExpired, stopTimer } = useCountDownTimer(3);
+const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
+  console.log(match, props);
+
   const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
+  const id = match.params.id;
+
+  // Get phone from URL parameters.
+  const params = new URLSearchParams(props.location.search);
+  const phone = params.get("phone") || "";
 
   const {
     register,
     handleSubmit,
     setError,
+    watch,
+    setValue,
     formState: { isSubmitting, errors },
-  } = useForm();
+  } = useForm<T_form>();
 
-  const onSubmit: SubmitHandler<FormValues> = async function (data) {
-    stopTimer();
+  useEffect(() => {
+    const subscribe = watch((form, { name, type }) => {
+      if (type === "change") {
+        const code = `${form.code1}${form.code2}${form.code3}${form.code4}`;
 
-    const code = data.code;
-    const phone = match.params.id;
-
-    // Send phone request.
-    const response = await fetch(`${API_SERVER_URL}/api/verify-phone-code`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ code, phone }),
+        setValue("code", code, { shouldValidate: true });
+      }
     });
 
-    const json = await response.json();
+    return () => {
+      subscribe.unsubscribe();
+    };
+  }, [watch]);
 
-    if (json.status === "success") {
-      router.push(`/verification-email/${phone}`);
+  const onSubmit: SubmitHandler<T_form> = async function (form: T_form) {
+    const response = await fetch(
+      `${API_SERVER_URL}/api/auth/${id}/verify-phone-code`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ code: form.code }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok && data.id) {
+      router.push(`/create-profile/${id}`);
     } else {
-      // Show server errors.
-      setError("code", { message: json.message, type: "server" });
-      setIsOpen(true);
+      const errorFields = ["code", "root"];
+
+      errorFields.forEach((field) => {
+        if (data?.status === "fail" && data.errors[field]) {
+          setError(field as keyof FieldErrors<T_form>, {
+            message: data.errors[field][0],
+            type: "server",
+          });
+        }
+      });
     }
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <div className="flex items-center justify-between">
-          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
-            <a href="/" className="inline-flex items-center">
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
+            <a href="/register" className="inline-flex items-center">
               <MaterialIcon name="arrow_back" />
             </a>
             Verificar cuenta
@@ -77,57 +106,73 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
         </div>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
-          <p className="text-sm text-dark-gray">
+        <form className="mb-12" onSubmit={handleSubmit(onSubmit)}>
+          <p className="mb-6 text-dark-gray text-sm">
             Confirma tus datos de contacto ingresando el código que te enviamos
-            a tu teléfono <b>123*****56</b>. Esto nos permite continuar de forma
-            segura.
+            a tu teléfono <b>+{phone.trim()}</b>. Esto nos permite continuar de
+            forma segura.
           </p>
+
           <div className="flex gap-4">
             <input
               {...register("code1")}
-              className="h-24 text-center input"
+              className="h-24 text-center input validator"
               maxLength={1}
               minLength={1}
               placeholder="0"
               required
               type="numeric"
+              aria-invalid={errors.code ? "true" : "false"}
             />
             <input
               {...register("code2")}
-              className="h-24 text-center input"
+              className="h-24 text-center input validator"
               maxLength={1}
               minLength={1}
               placeholder="0"
               required
               type="numeric"
+              aria-invalid={errors.code ? "true" : "false"}
             />
             <input
               {...register("code3")}
-              className="h-24 text-center input"
+              className="h-24 text-center input validator"
               maxLength={1}
               minLength={1}
               placeholder="0"
               required
               type="numeric"
+              aria-invalid={errors.code ? "true" : "false"}
             />
             <input
               {...register("code4")}
-              className="h-24 text-center input"
+              className="h-24 text-center input validator"
               maxLength={1}
               minLength={1}
               placeholder="0"
               required
               type="numeric"
+              aria-invalid={errors.code ? "true" : "false"}
             />
           </div>
-          <div className="grid gap-2 text-center">
-            <p>¿No has recibido el código?</p>
-            <a onClick={() => router.push("/register")} className="link">
-              Reenviar código
-            </a>
-          </div>
+
+          <input
+            {...register("code")}
+            type="hidden"
+            className="input validator"
+            aria-invalid={errors.code ? "true" : "false"}
+          />
+          <p className="hidden text-center validator-hint">
+            {errors.code?.message}
+          </p>
         </form>
+
+        <div className="gap-2 grid text-center">
+          <p>¿No has recibido el código?</p>
+          <a onClick={() => router.push("/register")} className="link">
+            Reenviar código
+          </a>
+        </div>
 
         <Loader isOpen={isSubmitting} />
 
@@ -146,9 +191,24 @@ const VerificationCode: React.FC<ComponentProps> = ({ match }) => {
         </Modal>
       </IonContent>
       <IonFooter>
-        <button className="btn btn-primary btn-block">Verificar cuenta</button>
+        <input
+          type="hidden"
+          name="root"
+          className="input validator"
+          aria-invalid={errors.root ? "true" : "false"}
+        />
+        <p className="hidden mb-4 text-center validator-hint">
+          {errors.root?.message}
+        </p>
 
-        <p className="text-center text-sm mt-6">
+        <button
+          className="btn-block btn btn-primary"
+          onClick={() => handleSubmit(onSubmit)()}
+        >
+          Verificar cuenta
+        </button>
+
+        <p className="mt-6 text-sm text-center">
           ¿Ya tienes una cuenta?{" "}
           <a href="/login" className="link">
             Iniciar sesión

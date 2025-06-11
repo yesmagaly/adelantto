@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect } from "react";
 import {
   IonContent,
   IonPage,
@@ -11,28 +10,14 @@ import { useAuth } from "../auth/authContext";
 import { authentication, checkZipCode } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
 
-type FormValues = {
+type T_form = {
   name: string;
-  first_last_name: string;
-  second_last_name: string;
-  colony: string;
-  municipality: string;
-  zip_code: string;
-  state: string;
-  address: string;
-  curp: string;
-  rfc: string;
-  birthdate: string;
-  identification_number: string;
-  linkedin?: string;
-  facebook?: string;
-  instagram?: string;
+  last_name: string;
+  accept_privacy_policy: boolean;
+  accept_terms_and_conditions: boolean;
 };
 
 export const CreateProfilePage: React.FC = () => {
-  const tooltipRef = useRef(null);
-  const buttonRef = useRef(null);
-  const [showTooltip, setShowTooltip] = useState(false);
   const { setUserInfo } = useAuth()!;
   const router = useIonRouter();
 
@@ -41,59 +26,23 @@ export const CreateProfilePage: React.FC = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<T_form>();
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        showTooltip &&
-        tooltipRef.current &&
-        !tooltipRef.current.contains(event.target) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target)
-      ) {
-        setShowTooltip(false);
-      }
-    }
+  const onSubmit = async (form: T_form) => {
+    console.log(form);
 
-    // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
+    // const response = await authentication.updateProfile(data);
 
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [tooltipRef, showTooltip]);
-
-  const onSubmit = async (data: FormValues) => {
-    const response = await authentication.updateProfile(data);
-
-    if (response.status === 200) {
-      setUserInfo(
-        "full_name",
-        `${data.name} ${data.first_last_name} ${data.second_last_name}`
-      );
-      router.push(`/applications/lease-contract`);
-    }
+    // if (response.status === 200) {
+    //   // setUserInfo(
+    //   //   "full_name",
+    //   //   `${data.name} ${data.first_last_name} ${data.second_last_name}`
+    //   // );
+    //   // router.push(`/applications/lease-contract`);
+    // }
   };
 
-  const handleBlurZipCode = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (event.target.value) {
-      try {
-        const response = await checkZipCode(event.target.value);
-        if (response.status === 200) {
-          const data = await response.json();
-          setValue("municipality", data.municipality);
-          setValue("state", data.state);
-          setValue("colony", data.place);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+  console.log(errors);
 
   return (
     <IonPage>
@@ -115,8 +64,8 @@ export const CreateProfilePage: React.FC = () => {
         ></progress>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
-          <p className="text-sm text-dark-gray">
+        <form className="gap-6 grid" onSubmit={handleSubmit(onSubmit)}>
+          <p className="text-dark-gray text-sm">
             Nos gustaría saber cómo dirigirnos a ti. Por favor, ingresa tus
             nombres y apellidos. Esta información es fundamental para crear tu
             perfil y solicitar tu AdelanttoCash®.
@@ -126,11 +75,11 @@ export const CreateProfilePage: React.FC = () => {
               Nombre
             </label>
             <input
-              className="w-full input"
-              type="name"
+              {...register("name")}
+              className="input"
+              type="text"
               placeholder="Ingresa tu nombre"
               required
-              {...register("name")}
             />
           </div>
           <div className="control">
@@ -138,17 +87,20 @@ export const CreateProfilePage: React.FC = () => {
               Apellidos
             </label>
             <input
-              className="w-full input"
-              type="last_name"
+              {...register("last_name")}
+              className="input"
+              type="text"
               placeholder="Ingresa tus apellidos"
               required
-              {...register("last_name")}
             />
           </div>
+
           <label className="label">
             <input
+              {...register("accept_privacy_policy", {
+                required: "Debes aceptar el aviso de privacidad.",
+              })}
               type="checkbox"
-              id="agreement"
               className="rounded-sm checkbox checkbox-sm"
               required
             />
@@ -163,10 +115,13 @@ export const CreateProfilePage: React.FC = () => {
               </a>
             </span>
           </label>
+
           <label className="label">
             <input
+              {...register("accept_terms_and_conditions", {
+                required: "Debes aceptar los términos y condiciones.",
+              })}
               type="checkbox"
-              id="agreement"
               className="rounded-sm checkbox checkbox-sm"
               required
             />
@@ -184,9 +139,14 @@ export const CreateProfilePage: React.FC = () => {
         </form>
       </IonContent>
       <IonFooter>
-        <button className="btn btn-primary btn-block">Regístrate</button>
+        <button
+          className="btn-block btn btn-primary"
+          onClick={() => handleSubmit(onSubmit)()}
+        >
+          Regístrate
+        </button>
 
-        <p className="text-center text-sm mt-6">
+        <p className="mt-6 text-sm text-center">
           ¿Ya tienes una cuenta?{" "}
           <a href="/login" className="link">
             Iniciar sesión

@@ -59,25 +59,44 @@ const Register: React.FC = () => {
 
     try {
       // Send phone request.
-      const response = await fetch(
-        `${API_SERVER_URL}/api/send-verification-code`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({ ...form, phone }),
-        }
-      );
+      const response = await fetch(`${API_SERVER_URL}/api/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ ...form, phone }),
+      });
 
-      const data = await response.json();
+      const data = (await response.json()) as
+        | {
+            message: string;
+            phone: string;
+            id: string;
+          }
+        | {
+            status: "fail";
+            errors: { [key: string]: [string] };
+          };
 
-      if (response.ok) {
-        router.push(`/verification-code/${data.id}`);
+      if (response.ok && "id" in data && "phone" in data) {
+        router.push(`/verification-code/${data.id}?phone=${data.phone}`);
       } else {
-        setError("password", { message: data.message, type: "server" });
-        setIsOpen(true);
+        const errorFields: (keyof T_form)[] = [
+          "email",
+          "phone",
+          "password",
+          "confirm_password",
+        ];
+
+        errorFields.forEach((field) => {
+          if ("status" in data && data.status === "fail" && data.errors[field]) {
+            setError(field as keyof FieldErrors<T_form>, {
+              message: data.errors[field][0],
+              type: "server",
+            });
+          }
+        });
       }
     } catch (error) {
       setError("root", {
@@ -87,8 +106,6 @@ const Register: React.FC = () => {
       setIsOpen(true);
     }
   };
-
-  console.log(errors);
 
   return (
     <IonPage>
@@ -136,48 +153,6 @@ const Register: React.FC = () => {
 
             <p className="hidden validator-hint">{errors.email?.message}</p>
           </div>
-
-          {/* <div className="control">
-            <label htmlFor="email" className="control-label">
-              Celular
-            </label>
-            <Controller
-              control={control}
-              name="phone"
-              rules={{
-                required: t("Your cellphone number is required."),
-                validate: (value) => {
-                  if (
-                    value &&
-                    !parsePhoneNumber(cleanUpPhone(value))?.isValid()
-                  ) {
-                    return t("Your cellphone number is invalid.");
-                  }
-                },
-              }}
-              render={({ field: { ref, ...field } }) => (
-                <PatternFormat
-                  {...field}
-                  className="input validator"
-                  placeholder="Número de Celular"
-                  type="tel"
-                  format={PHONE_FORMAT}
-                  mask="_"
-                  required
-                  getInputRef={ref}
-                  pattern="+51 (d{3}) d{3}-d{3}"
-                  aria-invalid={errors.phone ? "true" : "false"}
-                />
-              )}
-            />
-            <p className="hidden validator-hint">{errors.phone?.message}</p>
-
-            <p className="label">
-              {t(
-                "The format phone should follow this pattern: +51 (951) 444-126"
-              )}
-            </p>
-          </div> */}
 
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Celular</legend>

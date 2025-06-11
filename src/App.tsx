@@ -182,7 +182,7 @@ const App: React.FC = () => {
           <PublicRoute path="/login" component={Login} />
           <PublicRoute path="/verification-code/:id" component={VerificationCode} />
           <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
-          <PublicRoute path="/create-profile" component={CreateProfilePage} />
+          <PublicRoute path="/create-profile/:id" component={CreateProfilePage} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
           <PublicRoute path="/info" children={<Info cta={{ url: "/start", label: "Regresar" }} />} />
           <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
