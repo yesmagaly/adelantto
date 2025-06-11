@@ -4,38 +4,37 @@ type T_props = {
   password: string;
 };
 
-export function PasswordStrength({ password = "" }: T_props) {
-  const atLeast8Chars = password.length >= 8;
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasNumber = /\d/.test(password);
-  const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(
-    password
-  );
+export const atLeast8Chars = (password: string = "") => password.length >= 8;
+export const hasUpperCase = (password: string = "") => /[A-Z]/.test(password);
+export const hasLowerCase = (password: string = "") => /[a-z]/.test(password);
+export const hasNumber = (password: string = "") => /\d/.test(password);
+export const hasSpecialChar = (password: string = "") =>
+  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
 
+export function PasswordStrength({ password = "" }: T_props) {
   const validationChecks = [
     {
-      check: atLeast8Chars,
+      check: atLeast8Chars(password),
       message: "Al menos 8 caracteres de longitud",
       score: 25,
     },
     {
-      check: hasUpperCase,
+      check: hasUpperCase(password),
       message: "Al menos una letra mayúscula (A-Z).",
       score: 20,
     },
     {
-      check: hasLowerCase,
+      check: hasLowerCase(password),
       message: "Al menos una letra minúscula (a-z).",
       score: 20,
     },
     {
-      check: hasNumber,
+      check: hasNumber(password),
       message: "Al menos un número (0-9).",
       score: 20,
     },
     {
-      check: hasSpecialChar,
+      check: hasSpecialChar(password),
       message:
         "Al menos un caracter especial (ej: !@#$%^&*()_+-=[]{};':\",.<>/?).",
       score: 15,
@@ -68,7 +67,7 @@ export function PasswordStrength({ password = "" }: T_props) {
         max={100}
       ></progress>
 
-      <ul className="text-xs list-inside flex flex-col gap-4">
+      <ul className="flex flex-col gap-4 text-xs list-inside">
         {validationChecks.map(({ check, message }, index) => (
           <li key={index} className={`inline-flex items-center gap-1.5`}>
             <MaterialIcon

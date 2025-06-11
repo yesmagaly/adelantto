@@ -272,22 +272,23 @@
 
 @layer components {
   .control {
-    display: grid;
-    gap: 0.5rem;
+    position: relative;
   }
 
   .control-label {
     color: var(--color-dark-gray);
     font-size: var(--text-xs);
+    margin-bottom: calc(var(--spacing) * 2);
+    display: inline-block
   }
 }
 
 @utility input {
-  @apply w-full text-base;
+  @apply text-base;
   --input-color: var(--color-gray-hover);
 
   &:focus {
-    @apply border-emerald-400 outline-none;
+    @apply outline-none;
   }
 }
 

@@ -16,7 +16,15 @@ import Loader from "../../components/Loader/Loader";
 import { API_SERVER_URL, PROD_MODE } from "../../config";
 import { t } from "@adelantto/utils";
 import InputPassword from "../../components/InputPassword";
-import { MaterialIcon, PasswordStrength } from "@adelantto/core";
+import {
+  atLeast8Chars,
+  hasLowerCase,
+  hasNumber,
+  hasSpecialChar,
+  hasUpperCase,
+  MaterialIcon,
+  PasswordStrength,
+} from "@adelantto/core";
 
 type T_form = {
   email: string;
@@ -26,6 +34,10 @@ type T_form = {
 };
 
 const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
+const PHONE_PATTERN = PROD_MODE
+  ? "+52 (d{2}) d{4}-d{4}"
+  : "+51 (d{3}) d{3}-d{3}";
+
 const cleanUpPhone = (phone = "") =>
   phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
@@ -42,38 +54,7 @@ const Register: React.FC = () => {
     watch,
   } = useForm<T_form>();
 
-  const validate = function (values: T_form) {
-    const errors = {} as FieldErrors;
-
-    if (!values.phone) {
-      errors.phone = {
-        type: "required",
-        message: t("Your cellphone number is required."),
-      };
-    } else if (
-      values.phone &&
-      !parsePhoneNumber(cleanUpPhone(values.phone))?.isValid()
-    ) {
-      errors.phone = {
-        type: "pattern",
-        message: t("Your cellphone number is invalid."),
-      };
-    }
-
-    return errors;
-  };
-
-  const onSubmit = async function (form: any) {
-    // Make validaions.
-    const errors = validate(form);
-
-    // Show phone errors.
-    if (errors.phone) {
-      setError("phone", errors.phone);
-      setIsOpen(true);
-      return;
-    }
-
+  const onSubmit = async function (form: T_form) {
     const phone = cleanUpPhone(form.phone);
 
     try {
@@ -95,17 +76,19 @@ const Register: React.FC = () => {
       if (response.ok) {
         router.push(`/verification-code/${data.id}`);
       } else {
-        setError("phone", { message: data.message, type: "server" });
+        setError("password", { message: data.message, type: "server" });
         setIsOpen(true);
       }
     } catch (error) {
-      setError("phone", {
+      setError("root", {
         message: "Ups, algo salió mal. Inténtalo de nuevo más tarde.",
         type: "server",
       });
       setIsOpen(true);
     }
   };
+
+  console.log(errors);
 
   return (
     <IonPage>
@@ -128,46 +111,141 @@ const Register: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
         <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
-          <div className="control">
+          <div className="control-">
             <label htmlFor="email" className="control-label">
               Correo electrónico
             </label>
             <input
-              className="w-full input"
+              {...register("email", {
+                required: t("Your email is required."),
+                validate: (value) => {
+                  if (
+                    value &&
+                    !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)
+                  ) {
+                    return t("Your email is invalid.");
+                  }
+                },
+              })}
+              aria-invalid={errors.email?.message ? "true" : "false"}
+              className="w-full input validator"
               type="email"
               placeholder="tucorreo@ejemplo.com"
               required
-              {...register("email")}
             />
+
+            <p className="hidden validator-hint">{errors.email?.message}</p>
           </div>
-          <div className="control">
+
+          {/* <div className="control">
             <label htmlFor="email" className="control-label">
               Celular
             </label>
             <Controller
               control={control}
               name="phone"
+              rules={{
+                required: t("Your cellphone number is required."),
+                validate: (value) => {
+                  if (
+                    value &&
+                    !parsePhoneNumber(cleanUpPhone(value))?.isValid()
+                  ) {
+                    return t("Your cellphone number is invalid.");
+                  }
+                },
+              }}
               render={({ field: { ref, ...field } }) => (
                 <PatternFormat
                   {...field}
-                  className="input"
+                  className="input validator"
                   placeholder="Número de Celular"
                   type="tel"
                   format={PHONE_FORMAT}
-                  allowEmptyFormatting
                   mask="_"
                   required
                   getInputRef={ref}
+                  pattern="+51 (d{3}) d{3}-d{3}"
+                  aria-invalid={errors.phone ? "true" : "false"}
                 />
               )}
             />
-          </div>
+            <p className="hidden validator-hint">{errors.phone?.message}</p>
+
+            <p className="label">
+              {t(
+                "The format phone should follow this pattern: +51 (951) 444-126"
+              )}
+            </p>
+          </div> */}
+
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Celular</legend>
+
+            <Controller
+              control={control}
+              name="phone"
+              rules={{
+                required: t("Your cellphone number is required."),
+                validate: (value) => {
+                  if (
+                    value &&
+                    !parsePhoneNumber(cleanUpPhone(value))?.isValid()
+                  ) {
+                    return t("Your cellphone number is invalid.");
+                  }
+                },
+              }}
+              render={({ field: { ref, ...field } }) => (
+                <PatternFormat
+                  {...field}
+                  className="input validator"
+                  placeholder="Número de Celular"
+                  type="tel"
+                  format={PHONE_FORMAT}
+                  mask="_"
+                  required
+                  getInputRef={ref}
+                  pattern="+51 (d{3}) d{3}-d{3}"
+                  aria-invalid={errors.phone ? "true" : "false"}
+                />
+              )}
+            />
+
+            <p className="hidden validator-hint">{errors.phone?.message}</p>
+
+            <p className="label">
+              {t(
+                "The format phone should follow this pattern: +51 (951) 444-126"
+              )}
+            </p>
+          </fieldset>
+
           <div className="control">
             <label className="control-label">Contraseña</label>
+
             <InputPassword
-              {...register("password")}
+              {...register("password", {
+                required: t("Your password is required."),
+                validate: (value) => {
+                  if (value) {
+                    const isValid = [
+                      atLeast8Chars(value),
+                      hasUpperCase(value),
+                      hasLowerCase(value),
+                      hasNumber(value),
+                      hasSpecialChar(value),
+                    ].every((item) => item);
+
+                    if (!isValid) {
+                      return t("Your password format is incorrect.");
+                    }
+                  }
+                },
+              })}
+              aria-invalid={errors.password ? "true" : "false"}
               required
-              className="input"
+              className="input validator"
               placeholder="Asegura tu seguridad"
             />
 
@@ -177,11 +255,22 @@ const Register: React.FC = () => {
           <div className="control">
             <label className="control-label">Confirmar Contraseña</label>
             <InputPassword
-              {...register("confirm_password")}
-              className="input"
+              {...register("confirm_password", {
+                validate: (value) => {
+                  if (value !== watch("password")) {
+                    return t("Your passwords do not match.");
+                  }
+                },
+              })}
+              aria-invalid={errors.confirm_password ? "true" : "false"}
+              className="input validator"
               placeholder="Reescribe tu contraseña"
               required
             />
+
+            <p className="hidden validator-hint">
+              {errors.confirm_password?.message}
+            </p>
           </div>
         </form>
 
