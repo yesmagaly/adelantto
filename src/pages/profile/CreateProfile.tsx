@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../auth/authContext";
 import { authentication, checkZipCode } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
+import { API_SERVER_URL } from "../../config";
 
 type T_form = {
   name: string;
@@ -17,9 +18,18 @@ type T_form = {
   accept_terms_and_conditions: boolean;
 };
 
-export const CreateProfilePage: React.FC = () => {
-  const { setUserInfo } = useAuth()!;
+type T_props = {
+  match: {
+    params: {
+      id: string;
+    };
+  };
+}
+
+
+export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
+  const { id } = match.params;
 
   const {
     register,
@@ -29,17 +39,18 @@ export const CreateProfilePage: React.FC = () => {
   } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
-    console.log(form);
+    const response = await fetch(`${API_SERVER_URL}/api/auth/${id}/profile`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-    // const response = await authentication.updateProfile(data);
-
-    // if (response.status === 200) {
-    //   // setUserInfo(
-    //   //   "full_name",
-    //   //   `${data.name} ${data.first_last_name} ${data.second_last_name}`
-    //   // );
-    //   // router.push(`/applications/lease-contract`);
-    // }
+    if (response.ok) {
+      router.push(`/login`);
+    }
   };
 
   console.log(errors);
@@ -103,7 +114,7 @@ export const CreateProfilePage: React.FC = () => {
             <p className="hidden validator-hint">{errors.last_name?.message}</p>
           </div>
 
-          <label className="label relative mb-2">
+          <label className="relative mb-2 label">
             <input
               {...register("accept_privacy_policy", {
                 required: "Debes aceptar el aviso de privacidad.",
@@ -123,12 +134,12 @@ export const CreateProfilePage: React.FC = () => {
                 Aviso de Privacidad
               </a>
             </span>
-            <p className="absolute -bottom-5 validator-hint">
+            <p className="-bottom-5 absolute validator-hint">
               {errors.accept_privacy_policy?.message}
             </p>
           </label>
 
-          <label className="label relative">
+          <label className="relative label">
             <input
               {...register("accept_terms_and_conditions", {
                 required: "Debes aceptar los términos y condiciones.",
@@ -150,7 +161,7 @@ export const CreateProfilePage: React.FC = () => {
                 Términos y Condiciones
               </a>
             </span>
-            <p className="absolute -bottom-5 validator-hint">
+            <p className="-bottom-5 absolute validator-hint">
               {errors.accept_terms_and_conditions?.message}
             </p>
           </label>

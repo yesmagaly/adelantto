@@ -147,10 +147,6 @@ const App: React.FC = () => {
           <PrivateRoute path="/documents-required" children={<Info cta={{ url: "/dashboard", label: "Continuar" }} />} />
           <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
-
-          Identification
-          Income and taxes
-
           <PrivateRoute path="/profile" component={ProfilePage} />
           <PrivateRoute path="/profile/identification" component={IdentificationPage} />
           <PrivateRoute path="/profile/income-and-taxes" component={IncomeAndTaxesPage} />
