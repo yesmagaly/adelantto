@@ -75,12 +75,16 @@ export const CreateProfilePage: React.FC = () => {
               Nombre
             </label>
             <input
-              {...register("name")}
-              className="input"
+              {...register("name", {
+                required: "Tu nombre es requerido.",
+              })}
+              className="input validator"
               type="text"
               placeholder="Ingresa tu nombre"
               required
+              aria-invalid={errors.name ? "true" : "false"}
             />
+            <p className="hidden validator-hint">{errors.name?.message}</p>
           </div>
           <div className="control">
             <label htmlFor="last_name" className="control-label">
@@ -94,13 +98,9 @@ export const CreateProfilePage: React.FC = () => {
               type="text"
               placeholder="Ingresa tus apellidos"
               required
-              aria-invalid={
-                errors.last_name ? "true" : "false"
-              }
+              aria-invalid={errors.last_name ? "true" : "false"}
             />
-            <p className="hidden validator-hint">
-              {errors.last_name?.message}
-            </p>
+            <p className="hidden validator-hint">{errors.last_name?.message}</p>
           </div>
 
           <label className="label relative mb-2">
