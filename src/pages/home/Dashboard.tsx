@@ -30,10 +30,6 @@ const Dashboard: React.FC = () => {
         try {
           const data = (await applications.list()) ?? [];
 
-          if (data.length === 0) {
-            router.push("/advance-immediately");
-          }
-
           setItems(data);
         } catch (error: any) {
           if (error instanceof UnauthorizedError) {
@@ -66,7 +62,7 @@ const Dashboard: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <div className="grid gap-6">
+        <div className="gap-6 grid">
           <h1 className="text-xl">
             {authInfo.user?.full_name && (
               <>
@@ -81,7 +77,7 @@ const Dashboard: React.FC = () => {
           <div role="alert" className="alert alert-horizontal">
             <MaterialIcon
               name="info"
-              className="stroke-info h-6 w-6 shrink-0"
+              className="stroke-info w-6 h-6 shrink-0"
             />
             <div>
               <h3 className="font-bold">New message!</h3>
@@ -92,31 +88,31 @@ const Dashboard: React.FC = () => {
             </button>
           </div>
 
-          <div className="card bg-linear-to-r from-indigo-600 to-indigo-300 text-white">
-            <div className="card-body p-4">
+          <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card">
+            <div className="p-4 card-body">
               <h2 className="card-title">Card Title</h2>
               <p>
                 A card component has a figure, a body part, and inside body
                 there are title and actions parts
               </p>
               <div className="card-actions">
-                <button className="btn btn-block btn-primary">Buy Now</button>
+                <button className="btn-block btn btn-primary">Buy Now</button>
               </div>
             </div>
           </div>
 
-          <h2 className="text-lg font-semibold text-dark-blue-700">
+          <h2 className="font-semibold text-dark-blue-700 text-lg">
             Temas de interés
           </h2>
 
-          <div className="card bg-base-100 shadow-sm">
+          <div className="bg-base-100 shadow-sm card">
             <figure>
               <img
                 src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                 alt="Shoes"
               />
             </figure>
-            <div className="card-body p-4">
+            <div className="p-4 card-body">
               <h2 className="card-title">Card Title</h2>
               <p>
                 A card component has a figure, a body part, and inside body

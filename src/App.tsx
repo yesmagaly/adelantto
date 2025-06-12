@@ -11,7 +11,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import VerificationCode from "./pages/auth/VerificationCode";
 import VerificationEmail from "./pages/auth/VerificationEmail";
-import AdvanceImmediately from "./pages/AdvanceImmediately";
+import AdvanceImmediately from "./pages/home/AdvanceImmediately";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
 import UploadPictures from "./pages/property/UploadPictures";

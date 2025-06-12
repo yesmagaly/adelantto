@@ -250,6 +250,9 @@
   --text-chip: var(--fluid-10-10);
   --text-chip--line-height: var(--fluid-16-16);
   --text-chip--font-weight: 700;
+
+
+  --blue-radial-gradient-bg: radial-gradient(38.6% 92.36% at 46.81% 46.56%, #2A3D96 0%, #0D1B3B 100%);
 }
 
 /*
