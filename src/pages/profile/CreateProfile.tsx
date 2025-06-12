@@ -87,22 +87,31 @@ export const CreateProfilePage: React.FC = () => {
               Apellidos
             </label>
             <input
-              {...register("last_name")}
-              className="input"
+              {...register("last_name", {
+                required: "Tus apellidos son requeridos.",
+              })}
+              className="input validator"
               type="text"
               placeholder="Ingresa tus apellidos"
               required
+              aria-invalid={
+                errors.last_name ? "true" : "false"
+              }
             />
+            <p className="hidden validator-hint">
+              {errors.last_name?.message}
+            </p>
           </div>
 
-          <label className="label">
+          <label className="label relative mb-2">
             <input
               {...register("accept_privacy_policy", {
                 required: "Debes aceptar el aviso de privacidad.",
               })}
               type="checkbox"
-              className="rounded-sm checkbox checkbox-sm"
+              className="rounded-sm checkbox checkbox-sm validator"
               required
+              aria-invalid={errors.accept_privacy_policy ? "true" : "false"}
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con el{" "}
@@ -114,16 +123,22 @@ export const CreateProfilePage: React.FC = () => {
                 Aviso de Privacidad
               </a>
             </span>
+            <p className="absolute -bottom-5 validator-hint">
+              {errors.accept_privacy_policy?.message}
+            </p>
           </label>
 
-          <label className="label">
+          <label className="label relative">
             <input
               {...register("accept_terms_and_conditions", {
                 required: "Debes aceptar los términos y condiciones.",
               })}
               type="checkbox"
-              className="rounded-sm checkbox checkbox-sm"
+              className="rounded-sm checkbox checkbox-sm validator"
               required
+              aria-invalid={
+                errors.accept_terms_and_conditions ? "true" : "false"
+              }
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con los{" "}
@@ -135,6 +150,9 @@ export const CreateProfilePage: React.FC = () => {
                 Términos y Condiciones
               </a>
             </span>
+            <p className="absolute -bottom-5 validator-hint">
+              {errors.accept_terms_and_conditions?.message}
+            </p>
           </label>
         </form>
       </IonContent>
