@@ -154,7 +154,7 @@ export const IdentificationPage: React.FC = () => {
           />
         </form>
       </IonContent>
-      <IonFooter>
+      <IonFooter className="ion-padding">
         <div className="gap-2 grid">
           <button className="btn btn-primary" disabled>
             Continuar
