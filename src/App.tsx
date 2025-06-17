@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import {
-  IonApp,
-  setupIonicReact,
-} from "@ionic/react";
+import { IonApp, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 import Home from "./pages/Home";
@@ -68,59 +65,70 @@ import { CreateProfilePage } from "./pages/profile/CreateProfile";
 import { IdentificationPage } from "./pages/profile/IdentificationPage";
 import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
 import { PropertyValidationPage } from "./pages/profile/PropertyValidationPage";
-
+import { MaterialIcon } from "@adelantto/core";
+import { HomePage } from "./pages/home/page/HomePage";
 
 setupIonicReact();
 
 const PrivateRoute: React.FC<{
-  path: string,
-  component?: React.FC<any>
-  children?: React.ReactNode,
-  exact?: boolean
+  path: string;
+  component?: React.FC<any>;
+  children?: React.ReactNode;
+  exact?: boolean;
 }> = ({ children, component: Component, ...rest }) => {
   const { authInfo } = useAuth()!;
 
   return (
-    <Route {...rest}
+    <Route
+      {...rest}
       render={(props) => {
         if (authInfo.loggedIn) {
           if (Component) {
-            return <Component {...props} />
+            return <Component {...props} />;
           }
 
-          return children
+          return children;
         }
 
-        return <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+        return (
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        );
       }}
     />
   );
-}
+};
 
 const PublicRoute: React.FC<{
-  path: string,
-  component?: React.FC<any>
-  children?: React.ReactNode,
-  exact?: boolean
+  path: string;
+  component?: React.FC<any>;
+  children?: React.ReactNode;
+  exact?: boolean;
 }> = ({ children, component: Component, ...rest }) => {
   const { authInfo } = useAuth()!;
 
   return (
-    <Route {...rest}
+    <Route
+      {...rest}
       render={(props) => {
         if (!authInfo.loggedIn) {
           if (Component) {
-            return <Component {...props} />
+            return <Component {...props} />;
           }
 
-          return children
+          return children;
         }
 
-        return <Redirect to={{ pathname: "/dashboard", state: { from: props.location } }} />
+        return (
+          <Redirect
+            to={{ pathname: "/dashboard", state: { from: props.location } }}
+          />
+        );
       }}
     />
   );
-}
+};
 
 const App: React.FC = () => {
   const { authInfo, initialize } = useAuth()!;
@@ -129,59 +137,131 @@ const App: React.FC = () => {
     !authInfo?.initialized && (async () => await initialize())();
   }, [authInfo, initialize]);
 
-
   if (!authInfo || !authInfo.initialized) {
-    return <IonApp>
-      <div className="flex justify-center items-center w-full h-screen">
-        <span className="font-medium text-sm">
-          Cargando ...
-        </span>
-      </div>
-    </IonApp>;
+    return (
+      <IonApp>
+        <div className="flex justify-center items-center w-full h-screen">
+          <span className="font-medium text-sm">Cargando ...</span>
+        </div>
+      </IonApp>
+    );
   } else {
     return (
       <IonApp>
         <IonReactRouter>
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="/update-temporary-password" component={UpdateTemporaryPassword} />
-          <PrivateRoute path="/documents-required" children={<Info cta={{ url: "/dashboard", label: "Continuar" }} />} />
-          <PrivateRoute path="/welcome" component={Welcome} />
-          <PrivateRoute path="/advance-immediately" component={AdvanceImmediately} />
-          <PrivateRoute path="/profile" component={ProfilePage} />
-          <PrivateRoute path="/profile/identification" component={IdentificationPage} />
-          <PrivateRoute path="/profile/income-and-taxes" component={IncomeAndTaxesPage} />
-          <PrivateRoute path="/profile/property-validation" component={PropertyValidationPage} />
+          <PrivateRoute path="/home" component={Dashboard} />
 
-          <PrivateRoute path="/applications/lease-contract" component={LeaseContract} />
-          <PrivateRoute path="/applications/:id/desired-loan" component={DesiredLoan} />
-          <PrivateRoute path="/applications/:id/pre-offer" component={PreOffer} />
-          <PrivateRoute path="/applications/:id/privacy-policy" component={PrivacyPolicy} />
-          <PrivateRoute path="/applications/:id/confirm-privacy-policy" component={ConfirmPrivacyPolicy} />
-          <PrivateRoute path="/applications/:id/fail-buro-score" component={FailBuroScore} />
-          <PrivateRoute path="/applications/:id/identity-check" component={Passport} />
-          <PrivateRoute path="/applications/:id/property-documents" component={UploadDocuments} />
-          <PrivateRoute path="/applications/:id/property-pictures" component={UploadPictures} />
-          <PrivateRoute path="/applications/:id/final-announcement" component={DataValidation} />
+          <PrivateRoute
+            path="/update-temporary-password"
+            component={UpdateTemporaryPassword}
+          />
+          <PrivateRoute
+            path="/documents-required"
+            children={<Info cta={{ url: "/dashboard", label: "Continuar" }} />}
+          />
+          <PrivateRoute path="/welcome" component={Welcome} />
+          <PrivateRoute
+            path="/advance-immediately"
+            component={AdvanceImmediately}
+          />
+          <PrivateRoute path="/profile" component={ProfilePage} />
+          <PrivateRoute
+            path="/profile/identification"
+            component={IdentificationPage}
+          />
+          <PrivateRoute
+            path="/profile/income-and-taxes"
+            component={IncomeAndTaxesPage}
+          />
+          <PrivateRoute
+            path="/profile/property-validation"
+            component={PropertyValidationPage}
+          />
+
+          <PrivateRoute
+            path="/applications/lease-contract"
+            component={LeaseContract}
+          />
+          <PrivateRoute
+            path="/applications/:id/desired-loan"
+            component={DesiredLoan}
+          />
+          <PrivateRoute
+            path="/applications/:id/pre-offer"
+            component={PreOffer}
+          />
+          <PrivateRoute
+            path="/applications/:id/privacy-policy"
+            component={PrivacyPolicy}
+          />
+          <PrivateRoute
+            path="/applications/:id/confirm-privacy-policy"
+            component={ConfirmPrivacyPolicy}
+          />
+          <PrivateRoute
+            path="/applications/:id/fail-buro-score"
+            component={FailBuroScore}
+          />
+          <PrivateRoute
+            path="/applications/:id/identity-check"
+            component={Passport}
+          />
+          <PrivateRoute
+            path="/applications/:id/property-documents"
+            component={UploadDocuments}
+          />
+          <PrivateRoute
+            path="/applications/:id/property-pictures"
+            component={UploadPictures}
+          />
+          <PrivateRoute
+            path="/applications/:id/final-announcement"
+            component={DataValidation}
+          />
 
           <PrivateRoute exact path="/loans/:id" component={Summary} />
           <PrivateRoute path="/loans/:id/success" component={CorrectData} />
-          <PrivateRoute path="/loans/:id/account-statement" component={Withdrawals} />
-          <PrivateRoute path="/loans/:id/installments/:installment_id" component={InstallmentDetail} />
+          <PrivateRoute
+            path="/loans/:id/account-statement"
+            component={Withdrawals}
+          />
+          <PrivateRoute
+            path="/loans/:id/installments/:installment_id"
+            component={InstallmentDetail}
+          />
 
           <PrivateRoute path="/validation-error" component={ValidationError} />
           <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
-          <PrivateRoute path="/succesful-transaction" component={SuccesfulTransaction} />
+          <PrivateRoute
+            path="/succesful-transaction"
+            component={SuccesfulTransaction}
+          />
 
           <PublicRoute path="/start" component={Home} />
           <PublicRoute path="/create-account" component={Register} />
           <PublicRoute path="/register" component={Register} />
           <PublicRoute path="/login" component={Login} />
-          <PublicRoute path="/verification-code/:id" component={VerificationCode} />
-          <PublicRoute path="/verification-email/:phone" component={VerificationEmail} />
-          <PublicRoute path="/create-profile/:id" component={CreateProfilePage} />
+          <PublicRoute
+            path="/verification-code/:id"
+            component={VerificationCode}
+          />
+          <PublicRoute
+            path="/verification-email/:phone"
+            component={VerificationEmail}
+          />
+          <PublicRoute
+            path="/create-profile/:id"
+            component={CreateProfilePage}
+          />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
-          <PublicRoute path="/info" children={<Info cta={{ url: "/start", label: "Regresar" }} />} />
-          <PublicRoute exact path="/"><Redirect to="/start" /></PublicRoute>
+          <PublicRoute
+            path="/info"
+            children={<Info cta={{ url: "/start", label: "Regresar" }} />}
+          />
+          <PublicRoute exact path="/">
+            <Redirect to="/start" />
+          </PublicRoute>
+
         </IonReactRouter>
       </IonApp>
     );
