@@ -5,27 +5,17 @@ import {
   IonHeader,
   IonFooter,
 } from "@ionic/react";
-import { useForm } from "react-hook-form";
 
 import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
 
-import { MaterialIcon } from "@adelantto/core";
 import FileInputItem from "../../components/FileInputItem";
-
-export function atLeastThreeMonths(end_date, months_number) {
-  const date1 = new Date();
-  const date2 = new Date(end_date);
-  const diffTime = Math.abs(date2 - date1);
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  const diffMonths = diffDays / 30.44;
-
-  return diffMonths >= months_number;
-}
+import { useForm } from "react-hook-form";
+import { MaterialIcon } from "@adelantto/core";
 
 type T_form = {
-  front_id: string;
   back_id: string;
+  front_id: string;
 };
 
 export const IdentificationPage: React.FC = () => {
@@ -78,8 +68,8 @@ export const IdentificationPage: React.FC = () => {
           <FileInputItem
             name="front_id"
             control={control}
-            rules={{ required: "Documento obligatorio" }}
-            accept="application/pdf"
+            rules={{ required: "Imagen requerida" }}
+            accept="image/jpg"
             label="Frontal INE o Pasaporte"
             description="Cara frontal donde sale la foto"
             helpText="Tipo de archivo permitido JPG (500MB max)"
@@ -89,8 +79,8 @@ export const IdentificationPage: React.FC = () => {
           <FileInputItem
             name="back_id"
             control={control}
-            rules={{ required: "Documento obligatorio" }}
-            accept="application/pdf"
+            rules={{ required: "Imagen requerida" }}
+            accept="image/jpg"
             label="Reverso INE o Pasaporte"
             description="Cara trasera donde está el código de barras"
             helpText="Tipo de archivo permitido JPG (500MB max)"

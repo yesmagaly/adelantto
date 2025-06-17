@@ -5,58 +5,14 @@ import {
   IonHeader,
   IonFooter,
 } from "@ionic/react";
-import { useForm, Controller } from "react-hook-form";
-import { NumericFormat } from "react-number-format";
 
-import { checkZipCode } from "../../api";
-import { applications } from "../../api";
+import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import FileInputItem from "../../components/FileInputItem";
 
-function removeNumericFormat(value: string) {
-  return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
-}
-
-function addMonths(date: any, months: number) {
-  date.setMonth(date.getMonth() + months);
-
-  return date;
-}
-
-function parseDate(str: string) {
-  const [year, month, day] = str.split("-").map((i) => Number.parseInt(i));
-
-  return new Date(+year, month - 1, +day);
-}
-
-// Validate minimum period of contract time
-function validateMinContractTime(startDateStr: string, endDateStr: string) {
-  const minMonths = 6;
-  const oneDayTimestamp = 86400000;
-  const endDate = parseDate(endDateStr);
-  const minEndDate = addMonths(parseDate(startDateStr), minMonths);
-
-  return minEndDate.getTime() - oneDayTimestamp <= endDate.getTime();
-}
-
-export function atLeastThreeMonths(end_date, months_number) {
-  const date1 = new Date();
-  const date2 = new Date(end_date);
-  const diffTime = Math.abs(date2 - date1);
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  const diffMonths = diffDays / 30.44;
-
-  return diffMonths >= months_number;
-}
-
-type FormData = {
-  lease_monthly_income: number;
-  lease_maintenance_fee: number;
-  lease_start_date: string;
-  lease_end_date: string;
-  lease_payment_method: string;
-  lease_renting_time: number;
-  property_zip_code: string;
+type T_form = {
+  bank_statements: string;
+  rfc: string;
 };
 
 export const IncomeAndTaxesPage: React.FC = () => {
@@ -64,46 +20,15 @@ export const IncomeAndTaxesPage: React.FC = () => {
 
   const {
     handleSubmit,
-    register,
-    setError,
-    formState: { errors },
     control,
-  } = useForm<FormData>();
+    formState: { errors },
+  } = useForm<T_form>();
 
-  const onSubmit = async ({
-    lease_monthly_income,
-    lease_maintenance_fee,
-    ...data
-  }: any) => {
-    const zipCodeResponse = await checkZipCode(data.property_zip_code);
-
-    if (zipCodeResponse.status === 200) {
-      const data = await zipCodeResponse.json();
-
-      if (data.state !== "Ciudad de México") {
-        return setError("property_zip_code", {
-          message:
-            "El código postal no pertenece al estado de Ciudad de México.",
-        });
-      }
-    } else {
-      return setError("property_zip_code", {
-        message: "No es un código postal válido.",
-      });
-    }
-
-    const response = await applications.leaseContract({
-      lease_monthly_income: removeNumericFormat(lease_monthly_income),
-      lease_maintenance_fee: removeNumericFormat(lease_maintenance_fee),
-      ...data,
-    });
-
-    const application = await response.json();
-
-    if (response.status === 200) {
-      router.push(`/applications/${application.id}/desired-loan`);
-    }
+  const onSubmit = async (form: T_form) => {
+    console.log(form);
   };
+
+  console.log(errors);
 
   return (
     <IonPage>
@@ -130,13 +55,13 @@ export const IncomeAndTaxesPage: React.FC = () => {
         </div>
         <progress
           className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
-          value="50"
+          value="100"
           max="100"
         ></progress>
 
         <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
           <FileInputItem
-            name="property_lease_agreement"
+            name="bank_statements"
             control={control}
             rules={{ required: "Documento obligatorio" }}
             accept="application/pdf"
@@ -146,7 +71,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
           />
 
           <FileInputItem
-            name="property_lease_agreement_2"
+            name="rfc"
             control={control}
             rules={{ required: "Documento obligatorio" }}
             accept="application/pdf"
@@ -156,15 +81,18 @@ export const IncomeAndTaxesPage: React.FC = () => {
           />
         </form>
       </IonContent>
-      <IonFooter>
+      <IonFooter className="ion-padding">
         <div className="gap-2 grid">
-          <button className="btn btn-primary" disabled>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleSubmit(onSubmit)()}
+          >
             Continuar
           </button>
 
-          <button className="btn-outline btn btn-secondary">
+          <a className="btn-outline btn" href="/profile">
             Terminar después
-          </button>
+          </a>
         </div>
       </IonFooter>
     </IonPage>
