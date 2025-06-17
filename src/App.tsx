@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { IonApp, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from "@ionic/react";
+import { Redirect, Route } from "react-router-dom";
+import { IonApp, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 import Home from "./pages/Home";
@@ -65,8 +65,6 @@ import { CreateProfilePage } from "./pages/profile/CreateProfile";
 import { IdentificationPage } from "./pages/profile/IdentificationPage";
 import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
 import { PropertyValidationPage } from "./pages/profile/PropertyValidationPage";
-import { MaterialIcon } from "@adelantto/core";
-import { HomePage } from "./pages/home/page/HomePage";
 
 setupIonicReact();
 
