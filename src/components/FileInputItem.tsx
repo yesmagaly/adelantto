@@ -35,10 +35,14 @@ const FileInputItem: React.FC<T_props> = ({
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<ErrorType>();
+  //const [error, setError] = useState<ErrorType>();
   const {
     field: { onChange, value },
+    formState,
+    fieldState: {error}
   } = useController(props);
+
+  console.log(formState);
 
   const handleChange = async (event: { target: { files: Array<File> } }) => {
     const { files } = event.target;
@@ -70,7 +74,7 @@ const FileInputItem: React.FC<T_props> = ({
             onChange(data);
           }
         } catch (errorFetch: any) {
-          setError({ message: errorFetch.message });
+          //setError({ message: errorFetch.message });
         }
       }
 
@@ -176,7 +180,7 @@ const FileInputItem: React.FC<T_props> = ({
       )}
 
       {error?.message && (
-        <p className="text-red-500 text-sm">{error.message}</p>
+        <p className="text-sm text-error">{error.message}</p>
       )}
     </div>
   );
