@@ -262,7 +262,7 @@ const Register: React.FC = () => {
           </button>
         </Modal>
       </IonContent>
-      <IonFooter>
+      <IonFooter className="ion-padding">
         <button
           className="btn-block btn btn-primary"
           onClick={() => handleSubmit(onSubmit)()}
