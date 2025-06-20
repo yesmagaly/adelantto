@@ -20,7 +20,8 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (!authInfo.user?.is_verified) {
-      router.push("/update-temporary-password");
+      // router.push("/update-temporary-password");
+      router.push("/home");
     } else {
       const fetchData = async () => {
         try {

@@ -122,7 +122,7 @@ const PublicRoute: React.FC<{
 
         return (
           <Redirect
-            to={{ pathname: "/dashboard", state: { from: props.location } }}
+            to={{ pathname: "/home", state: { from: props.location } }}
           />
         );
       }}
@@ -157,7 +157,7 @@ const App: React.FC = () => {
           />
           <PrivateRoute
             path="/documents-required"
-            children={<Info cta={{ url: "/dashboard", label: "Continuar" }} />}
+            children={<Info cta={{ url: "/home", label: "Continuar" }} />}
           />
           <PrivateRoute path="/welcome" component={Welcome} />
           <PrivateRoute
