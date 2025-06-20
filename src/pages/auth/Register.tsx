@@ -33,9 +33,9 @@ type T_form = {
   confirm_password: string;
 };
 
-const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
+const PHONE_FORMAT = PROD_MODE ? "+57 (##) ####-####" : "+## (###) ###-###";
 const PHONE_PATTERN = PROD_MODE
-  ? "+52 (d{2}) d{4}-d{4}"
+  ? "+57 (d{2}) d{4}-d{4}"
   : "+51 (d{3}) d{3}-d{3}";
 
 const cleanUpPhone = (phone = "") =>
