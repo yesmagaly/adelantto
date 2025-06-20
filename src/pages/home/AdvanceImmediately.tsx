@@ -24,7 +24,7 @@ const AdvanceImmediately: React.FC = () => {
             <h1 className="mb-2 font-bold text-h4">¡Bienvenido!</h1>
             <p className="text-sm">Ahora eres parte de adelantto</p>
           </div>
-          <a className="btn-block btn btn-primary" href="/dashboard">
+          <a className="btn-block btn btn-primary" href="/home">
             Continuar
           </a>
         </div>

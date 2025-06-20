@@ -18,7 +18,7 @@ const DataValidation: React.FC = ({ match }) => {
     const response = await applications.finalAnnouncement(match.params.id, {});
 
     if (response.status === 200) {
-      router.push(`/dashboard`);
+      router.push(`/home`);
     }
   };
 
@@ -34,18 +34,18 @@ const DataValidation: React.FC = ({ match }) => {
                 loop
                 play
               />
-              <h3 className="font-bold text-3xl mb-4">¡Ya casi!</h3>
+              <h3 className="mb-4 font-bold text-3xl">¡Ya casi!</h3>
 
             </Page.Header>
             <Page.Body className="px-16">
-              <p className="text-center text-base leading-tight mb-8">
+              <p className="mb-8 text-base text-center leading-tight">
                 Por último validaremos los datos de tu propiedad.
                 Te enviaremos un correo electrónico en las próximas <strong>
                   72 horas con el resultado de la validación.</strong>
               </p>
             </Page.Body>
             <Page.Footer className="text-center">
-              <h4 className="font-bold text-xl mb-10">¡Hasta pronto!</h4>
+              <h4 className="mb-10 font-bold text-xl">¡Hasta pronto!</h4>
 
               <button className="button is-primary">
                 Finalizar

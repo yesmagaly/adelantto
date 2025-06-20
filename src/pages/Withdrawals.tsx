@@ -31,26 +31,26 @@ const Withdrawals: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="heading heading--blue heading--compact mb-2 text-center">
-          <h3 className="heading-3 py-5">
+        <div className="mb-2 text-center heading heading--blue heading--compact">
+          <h3 className="py-5 heading-3">
             ¿Dónde quieres <strong>tu dinero?</strong>
           </h3>
         </div>
         <div className="content">
-          <div className="content mb-5 w-full border border-gray-200 bg-white py-5 shadow-2xl">
+          <div className="bg-white shadow-2xl mb-5 py-5 border border-gray-200 w-full content">
             <Lottie
               animationData={walletAnimation}
               style={{ width: 251, height: 251 }}
               loop
               play
             />
-            <form className="form w-full" onSubmit={handleSubmit(onSubmit)}>
+            <form className="w-full form" onSubmit={handleSubmit(onSubmit)}>
               <FileInput
                 name="account_statement"
                 control={control}
                 rules={{ required: "Documento obligatorio" }}
               >
-                <h5 className="text-sm font-bold leading-4">
+                <h5 className="font-bold text-sm leading-4">
                   Subir estado de cuenta bancario completo (con QR)
                 </h5>
 
@@ -61,13 +61,13 @@ const Withdrawals: React.FC = ({ match }) => {
                 )}
               </FileInput>
 
-              <div className="mb-16 mt-4">
+              <div className="mt-4 mb-16">
                 <p>
                   Enviaremos el contrato de tu AdelanttoCash® a tu correo electrónico, por favor, ayudanos a revisarlo y firmarlo de manera digital.
                 </p>
               </div>
 
-              <button className="button is-primary mb-8">
+              <button className="mb-8 button is-primary">
                 Siguiente
               </button>
             </form>
@@ -89,8 +89,8 @@ const Withdrawals: React.FC = ({ match }) => {
           </Modal.Body>
           <Modal.Footer>
             <button
-              className="button is-secondary mb-8"
-              onClick={() => router.push("/dashboard")}
+              className="mb-8 button is-secondary"
+              onClick={() => router.push("/home")}
             >
               Siguiente
             </button>
