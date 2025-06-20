@@ -181,7 +181,7 @@ const Register: React.FC = () => {
                   mask="_"
                   required
                   getInputRef={ref}
-                  pattern="+51 (d{3}) d{3}-d{3}"
+                  pattern={PHONE_PATTERN}
                   aria-invalid={errors.phone ? "true" : "false"}
                 />
               )}
