@@ -3,7 +3,6 @@ import { useController, UseControllerProps } from "react-hook-form";
 
 import { MaterialIcon } from "@adelantto/core";
 import { API_SERVER_URL } from "../config";
-import { ErrorType } from "../types";
 import { cn } from "./utils";
 
 export interface T_props extends UseControllerProps {
@@ -180,7 +179,7 @@ const FileInputItem: React.FC<T_props> = ({
       )}
 
       {error?.message && (
-        <p className="text-sm text-error">{error.message}</p>
+        <p className="mt-1 text-error text-xs">{error.message}</p>
       )}
     </div>
   );

@@ -52,6 +52,7 @@ const Login: React.FC<LoginProps> = () => {
       <IonContent fullscreen class="ion-padding">
         <img className="mx-auto mb-20 h-40" src={logo} />
         <h1 className="mb-6 w-full font-semibold text-xl">Iniciar sesión</h1>
+
         <form className="gap-4 grid mb-14" onSubmit={handleSubmit(onSubmit)}>
           <div className="control">
             <label className="control-label">Correo electrónico</label>
