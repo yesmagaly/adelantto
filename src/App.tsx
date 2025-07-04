@@ -67,6 +67,7 @@ import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
 import { PropertyValidationPage } from "./pages/profile/PropertyValidationPage";
 import { CongratulationsPage } from "./pages/profile/CongratulationsPage";
 import { OopsPage } from "./pages/profile/OopsPage";
+import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
 
 setupIonicReact();
 
@@ -168,6 +169,10 @@ const App: React.FC = () => {
           <PrivateRoute
             path="/profile/identification"
             component={IdentificationPage}
+          />
+          <PrivateRoute
+            path="/profile/biometric-validation"
+            component={BiometricValidationPage}
           />
           <PrivateRoute
             path="/profile/income-and-taxes"
