@@ -8,27 +8,51 @@ import {
 
 import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
-import FileInputItem from "../../components/FileInputItem";
+import { api, useIncode } from "@adelantto/incode";
+import { IncodeSelfieInput } from "@adelantto/incode/src/components/IncodeSelfieInput";
+import { applications } from "../../api";
 
 type T_form = {
-  bank_statements: string;
-  rfc: string;
+  selfie: {
+    format: string;
+    base64String: string;
+  };
 };
 
-export const IncomeAndTaxesPage: React.FC = () => {
+export const BiometricValidationPage: React.FC = () => {
   const router = useIonRouter();
+  const { session, error } = useIncode();
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<T_form>();
+  const { handleSubmit, control, setError } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
-    console.log(form);
-  };
+    if (session) {
+      const selfieData = await api.addFaceSelfie({
+        session,
+        body: { base64Image: form.selfie?.base64String },
+      });
 
-  console.log(errors);
+      if (selfieData.confidence === 0) {
+        const processData = await api.processFace({ session });
+
+        if (processData.confidence === 0) {
+          return setError("selfie", {
+            message:
+              "La foto de su selfie no coincide con la imagen del documento de identidad.",
+          });
+        }
+
+        await api.finishStatus({ session });
+
+        await applications.identityCheck(match.params.id, {
+          identity_checked: true,
+          interviewId: session.interviewId,
+        });
+
+        router.push("/profile/income-and-taxes");
+      }
+    }
+  };
 
   return (
     <IonPage>
@@ -48,35 +72,27 @@ export const IncomeAndTaxesPage: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            Ingresos e impuestos
+            Validación biométrica
           </h1>
-          <span className="badge badge-primary badge-sm">Paso 3/ 3</span>
+          <span className="badge badge-primary badge-sm">Paso 2/ 3</span>
         </div>
         <progress
           className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
-          value="100"
+          value="66"
           max="100"
         ></progress>
 
         <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
-          <FileInputItem
-            name="bank_statements"
+          <IncodeSelfieInput
+            name="selfie"
             control={control}
-            rules={{ required: "Documento obligatorio" }}
-            accept="application/pdf"
-            label="Comprobante de ingresos"
-            description="Últimos 3 meses (Nómina o bancarios)"
-            helpText="Tipo de archivo permitido PDF (500MB max)"
-          />
-
-          <FileInputItem
-            name="rfc"
-            control={control}
-            rules={{ required: "Documento obligatorio" }}
-            accept="application/pdf"
-            label="RFC"
-            description="Constancia de situación fiscal con antigüedad no mayor a 3 meses"
-            helpText="Tipo de archivo permitido PDF (500MB max)"
+            rules={{
+              required: "Imagen requerida",
+            }}
+            accept="image/jpg"
+            label="Selfie"
+            description="Manten una expresión neutra, busca una luz equilibrada, retire
+            gafas, gorra o sombrero."
           />
         </form>
       </IonContent>

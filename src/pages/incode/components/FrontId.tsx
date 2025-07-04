@@ -8,7 +8,7 @@ import {
   REJECTED_STATUS,
   PROCESSING_STATUS,
 } from "./constants";
-import { addFrontId, processId } from "../client";
+import { addFrontId, processId } from "@adelantto/incode/src/client";
 import "../styles.css";
 
 import videoIdShadow from "../../../assets/video/id-shadow.mp4"
@@ -84,7 +84,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
     <div>
       <Modal.Root isOpen={step === 0} variant="fully">
         <Modal.Header className="text-center">
-          <h3 className="mb-2 text-xl font-semibold">
+          <h3 className="mb-2 font-semibold text-xl">
             Tome una fotografía clara, sin sombras ni reflejos.
           </h3>
         </Modal.Header>
@@ -102,7 +102,7 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
         <>
           <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
             <Modal.Header className="text-center">
-              <h2 className="mb-2 text-xl font-semibold">Revisa tu foto</h2>
+              <h2 className="mb-2 font-semibold text-xl">Revisa tu foto</h2>
               <p className="leading-tight">
                 Asegúrate de que las letras sean claras y tenga buena
                 iluminación.
@@ -138,19 +138,19 @@ export const FrontId: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Body>
             <Modal.Footer className="gap-6">
               {status === LOADING_STATUS && (
-                <p className="message text-center">Cargando ...</p>
+                <p className="text-center message">Cargando ...</p>
               )}
               {status === PROCESSING_STATUS && (
-                <p className="message text-center">Procesando ...</p>
+                <p className="text-center message">Procesando ...</p>
               )}
               {status === APPROVED_STATUS && (
-                <p className="message is-success text-center">
+                <p className="text-center message is-success">
                   Validación Exitosa
                 </p>
               )}
               {status === REJECTED_STATUS && (
                 <>
-                  <p className="message is-danger text-center">
+                  <p className="text-center message is-danger">
                     Fallo la verificación frontal de identificación
                   </p>
                   <button onClick={tryAgain} className="button is-primary">

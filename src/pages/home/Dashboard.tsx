@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
-import { MaterialIcon, Nav } from "@adelantto/core";
+import { MaterialIcon } from "@adelantto/core";
 
 import TotalCard from "../../components/TotalCard";
 import LoanCard from "../../components/LoanCard";
@@ -152,19 +152,6 @@ const Dashboard: React.FC = () => {
               </>
             )}
           </div>
-
-          {/* {error && (
-                <Modal.Root isOpen={!!error}>
-                  <Modal.Body>
-                    <p>Error message</p>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <button onClick={logOut} className="button is-primary">
-                      Okay
-                    </button>
-                  </Modal.Footer>
-                </Modal.Root>
-              )} */}
         </div>
       </IonContent>
       <IonFooter>

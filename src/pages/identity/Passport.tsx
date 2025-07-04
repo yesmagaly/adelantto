@@ -7,7 +7,7 @@ import { FrontId } from "../incode/components/FrontId";
 import { BackId } from "../incode/components/BackId";
 import { Selfie } from "../incode/components/Selfie";
 
-import { initSession } from "../incode/client";
+import { initSession } from "@adelantto/incode/src/client";
 
 import * as Modal from "../../components/modal";
 import * as Page from "../../components/page";
@@ -65,13 +65,15 @@ const Passport: React.FC = ({ match }) => {
     );
   };
 
+  console.log(step);
+
   return (
     <IonPage>
       <IonContent fullscreen>
         <Page.Root>
           <Page.Header>
             <div className="heading heading--green">
-              <div className="heading__pager text-right">Paso 5 de 7</div>
+              <div className="text-right heading__pager">Paso 5 de 7</div>
               <h1 className="heading-2">
                 Captura tu <strong>INE o Pasaporte</strong>
               </h1>
@@ -89,7 +91,7 @@ const Passport: React.FC = ({ match }) => {
               play
             />
 
-            {session && step === 0 && (
+            {step === 0 && (
               <FrontId session={session} onSuccess={successFrontCallback} />
             )}
             {session && step === 1 && (
@@ -101,7 +103,7 @@ const Passport: React.FC = ({ match }) => {
             {step === 3 && (
               <Modal.Root isOpen={true}>
                 <div className="text-center">
-                  <img className="mb-4 inline-block h-10" src={check} />
+                  <img className="inline-block mb-4 h-10" src={check} />
                   <p className="mb-4 text-[20px]">Datos correctos</p>
                 </div>
                 <Modal.Footer>

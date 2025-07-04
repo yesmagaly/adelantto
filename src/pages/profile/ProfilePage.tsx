@@ -55,16 +55,8 @@ export function ProfilePage() {
               ></progress>
 
               <h2 className="text-h6 card-title">Siguiente paso</h2>
-              <form className="" onSubmit={handleSubmit(onSubmit)}>
-                <FileInputItem
-                  name="property_lease_agreement"
-                  control={control}
-                  rules={{ required: "Documento obligatorio" }}
-                  accept="application/pdf"
-                  label="Comprobante de ingresos"
-                  description="Últimos 3 meses (Nómina o bancarios)"
-                />
-              </form>
+
+              <a href="/profile/identification" className="btn btn-primary">Continuar</a>
             </div>
           </div>
 

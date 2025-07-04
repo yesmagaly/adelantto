@@ -14,7 +14,7 @@ import {
   REJECTED_STATUS,
   PROCESSING_STATUS,
 } from "./constants";
-import { addFaceSelfie, processFace, finishStatus } from "../client";
+import { addFaceSelfie, processFace, finishStatus } from "@adelantto/incode/src/client";
 import "../styles.css";
 
 import selfie from "../../../assets/video/selfie.mp4";
@@ -89,7 +89,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
     <div>
       <Modal.Root isOpen={step === 0} variant="fully">
         <Modal.Header className="text-center">
-          <h3 className="mb-2 text-xl font-semibold">Validación Biométrica</h3>
+          <h3 className="mb-2 font-semibold text-xl">Validación Biométrica</h3>
           <p className="leading-tight">
             Manten una expresión neutra, busca una luz equilibrada, retire
             gafas, gorra o sombrero.
@@ -107,7 +107,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
         <>
           <Modal.Root isOpen={Boolean(photo) && step === 1} variant="fully">
             <Modal.Header className="text-center">
-              <h2 className="mb-2 text-xl font-semibold">Revisa tu foto</h2>
+              <h2 className="mb-2 font-semibold text-xl">Revisa tu foto</h2>
               <p className="leading-tight">
                 Manten una expresión neutra, busca una luz equilibrada, retire
                 gafas, gorra o sombrero.
@@ -144,19 +144,19 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Body>
             <Modal.Footer className="gap-6">
               {status === LOADING_STATUS && (
-                <p className="message is-info text-center">Cargando ...</p>
+                <p className="text-center message is-info">Cargando ...</p>
               )}
               {status === PROCESSING_STATUS && (
-                <p className="message is-info text-center">Procesando ...</p>
+                <p className="text-center message is-info">Procesando ...</p>
               )}
               {status === APPROVED_STATUS && (
-                <p className="message is-success text-center">
+                <p className="text-center message is-success">
                   Validación Exitosa
                 </p>
               )}
               {status === REJECTED_STATUS && (
                 <>
-                  <p className="message is-danger text-center">
+                  <p className="text-center message is-danger">
                     Fallo la verificación su biométrica.
                     {error && <span>({t(error)})</span>}
                   </p>
@@ -170,7 +170,7 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
 
           <Modal.Root isOpen={Boolean(photo) && step === 3} variant="fully">
             <Modal.Header>
-              <h3 className="mb-2 text-xl font-semibold">Validando documento y photo</h3>
+              <h3 className="mb-2 font-semibold text-xl">Validando documento y photo</h3>
             </Modal.Header>
             <Modal.Body className="flex items-center">
               <div
@@ -185,15 +185,15 @@ export const Selfie: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Body>
             <Modal.Footer className="gap-6">
               {status === LOADING_STATUS && (
-                <p className="message is-info text-center">Validando ...</p>
+                <p className="text-center message is-info">Validando ...</p>
               )}
               {status === APPROVED_STATUS && (
-                <p className="message is-success text-center">
+                <p className="text-center message is-success">
                   Validación Exitosa
                 </p>
               )}
               {status === REJECTED_STATUS && (
-                <p className="message is-danger text-center">
+                <p className="text-center message is-danger">
                   Fallo la verificación.
                   <span>({error})</span>
                 </p>
