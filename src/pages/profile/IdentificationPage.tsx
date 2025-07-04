@@ -5,35 +5,63 @@ import {
   IonHeader,
   IonFooter,
 } from "@ionic/react";
+import { useForm } from "react-hook-form";
+
+import { MaterialIcon } from "@adelantto/core";
+import {
+  INCODE_FRONT_ID_ERRORS,
+  IncodeFileInput,
+  useIncode,
+  api,
+} from "@adelantto/incode";
 
 import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
-
-import FileInputItem from "../../components/FileInputItem";
-import { useForm } from "react-hook-form";
-import { MaterialIcon } from "@adelantto/core";
+import { getBase64String } from "@adelantto/utils";
 
 type T_form = {
-  back_id: string;
-  front_id: string;
+  back_id: File;
+  front_id: File;
 };
 
 export const IdentificationPage: React.FC = () => {
   const router = useIonRouter();
-
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<T_form>();
+  const { session, error } = useIncode();
+  const { handleSubmit, control, setError } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
-    console.log(form);
+    if (session) {
+      const frontData = await api.addFrontId({
+        session,
+        body: { base64Image: await getBase64String(form.front_id) },
+      });
 
-    /* router.push(`/applications/${application.id}/desired-loan`); */
+      if (frontData.failReason) {
+        return setError("front_id", {
+          message: INCODE_FRONT_ID_ERRORS[frontData.failReason],
+        });
+      }
+
+      if (!frontData.skipBackIdCapture) {
+        const backData = await api.addBackId({
+          session,
+          body: { base64Image: await getBase64String(form.back_id) },
+        });
+
+        if (backData.failReason) {
+          return setError("back_id", {
+            message: INCODE_FRONT_ID_ERRORS[backData.failReason],
+          });
+        }
+      }
+
+      const processData = await api.processId({ session });
+
+      if (processData.success) {
+        router.push(`/profile/biometric-validation`);
+      }
+    }
   };
-
-  console.log(errors);
 
   return (
     <IonPage>
@@ -53,19 +81,18 @@ export const IdentificationPage: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <a href="/" className="inline-flex items-center"></a>
             Identificación
           </h1>
-          <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
+          <span className="badge badge-primary badge-sm">Paso 1/ 3</span>
         </div>
         <progress
           className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
-          value="50"
+          value="33"
           max="100"
         ></progress>
 
         <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
-          <FileInputItem
+          <IncodeFileInput
             name="front_id"
             control={control}
             rules={{ required: "Imagen requerida" }}
@@ -76,7 +103,7 @@ export const IdentificationPage: React.FC = () => {
             helpPicture={frontIdImageUrl}
           />
 
-          <FileInputItem
+          <IncodeFileInput
             name="back_id"
             control={control}
             rules={{ required: "Imagen requerida" }}

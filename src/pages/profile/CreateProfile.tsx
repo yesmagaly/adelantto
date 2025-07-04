@@ -6,8 +6,6 @@ import {
   IonHeader,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../auth/authContext";
-import { authentication, checkZipCode } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
 import { API_SERVER_URL } from "../../config";
 
@@ -24,8 +22,7 @@ type T_props = {
       id: string;
     };
   };
-}
-
+};
 
 export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
@@ -34,15 +31,14 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
     const response = await fetch(`${API_SERVER_URL}/api/auth/${id}/profile`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Accept: "application/json",
       },
       body: JSON.stringify(form),
@@ -52,8 +48,6 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
       router.push(`/login`);
     }
   };
-
-  console.log(errors);
 
   return (
     <IonPage>

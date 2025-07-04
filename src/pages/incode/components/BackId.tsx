@@ -8,7 +8,7 @@ import {
   REJECTED_STATUS,
   PROCESSING_STATUS,
 } from "./constants";
-import { addBackId, processId } from "../client";
+import { addBackId, processId } from "@adelantto/incode/src/client";
 import "../styles.css";
 
 import videoTutorial from "../../../assets/video/tutorial.gif"
@@ -136,19 +136,19 @@ export const BackId: React.FC<ComponentProp> = ({ session, ...props }) => {
             </Modal.Body>
             <Modal.Footer className="gap-6">
               {status === LOADING_STATUS && (
-                <p className="message is-info text-center">Cargando ...</p>
+                <p className="text-center message is-info">Cargando ...</p>
               )}
               {status === PROCESSING_STATUS && (
-                <p className="message is-info text-center">Procesando ...</p>
+                <p className="text-center message is-info">Procesando ...</p>
               )}
               {status === APPROVED_STATUS && (
-                <p className="message is-success text-center">
+                <p className="text-center message is-success">
                   Validación Exitosa
                 </p>
               )}
               {status === REJECTED_STATUS && (
                 <>
-                  <p className="message is-danger text-center">
+                  <p className="text-center message is-danger">
                     Fallo la verificación del reverso de tu identificación.
                   </p>
                   <button onClick={tryAgain} className="button">
