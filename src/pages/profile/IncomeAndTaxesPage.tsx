@@ -9,26 +9,35 @@ import {
 import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import FileInputItem from "../../components/FileInputItem";
+import { useLazyGetUserQuery, useUpdateUserMutation } from "@adelantto/store";
 
 type T_form = {
-  bank_statements: string;
-  rfc: string;
+  income_proof?: File;
+  rfc?: File;
 };
 
 export const IncomeAndTaxesPage: React.FC = () => {
   const router = useIonRouter();
-
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<T_form>();
+  const [mutation, { isLoading }] = useUpdateUserMutation();
+  const [trigger] = useLazyGetUserQuery();
+  const { handleSubmit, control } = useForm<T_form>({
+    defaultValues: async () => {
+      try {
+        return await trigger().unwrap();
+      } catch (error) {
+        return {};
+      }
+    },
+  });
 
   const onSubmit = async (form: T_form) => {
-    console.log(form);
+    try {
+      await mutation(form).unwrap();
+      router.push("/profile/income-and-taxes");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  console.log(errors);
 
   return (
     <IonPage>
@@ -58,9 +67,9 @@ export const IncomeAndTaxesPage: React.FC = () => {
           max="100"
         ></progress>
 
-        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+        <form id="form" className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
           <FileInputItem
-            name="bank_statements"
+            name="income_proof"
             control={control}
             rules={{ required: "Documento obligatorio" }}
             accept="application/pdf"
@@ -82,10 +91,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
       </IonContent>
       <IonFooter className="ion-padding">
         <div className="gap-2 grid">
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSubmit(onSubmit)()}
-          >
+          <button className="btn btn-primary" type="submit" form="form" disabled={isLoading}>
             Continuar
           </button>
 
