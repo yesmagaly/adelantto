@@ -1,0 +1,10 @@
+{
+  "name": "@adelantto/store",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
+    "redux-first-history": "^5.2.0"
+  }
+}
