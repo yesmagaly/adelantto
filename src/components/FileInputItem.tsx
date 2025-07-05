@@ -41,8 +41,6 @@ const FileInputItem: React.FC<T_props> = ({
     fieldState: {error}
   } = useController(props);
 
-  console.log(formState);
-
   const handleChange = async (event: { target: { files: Array<File> } }) => {
     const { files } = event.target;
 
