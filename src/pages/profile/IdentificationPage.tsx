@@ -8,58 +8,37 @@ import {
 import { useForm } from "react-hook-form";
 
 import { MaterialIcon } from "@adelantto/core";
-import {
-  INCODE_FRONT_ID_ERRORS,
-  IncodeFileInput,
-  useIncode,
-  api,
-} from "@adelantto/incode";
+import { useUpdateUserMutation, useLazyGetUserQuery } from "@adelantto/store";
 
 import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
-import { getBase64String } from "@adelantto/utils";
+import FileInputItem from "../../components/FileInputItem";
 
 type T_form = {
-  back_id: File;
-  front_id: File;
+  back_id?: File;
+  front_id?: File;
 };
 
 export const IdentificationPage: React.FC = () => {
   const router = useIonRouter();
-  const { session, error } = useIncode();
-  const { handleSubmit, control, setError } = useForm<T_form>();
+  const [mutation, { isLoading }] = useUpdateUserMutation();
+  const [trigger] = useLazyGetUserQuery();
+  const { handleSubmit, control } = useForm<T_form>({
+    defaultValues: async () => {
+      try {
+        return await trigger().unwrap();
+      } catch (error) {
+        return {};
+      }
+    },
+  });
 
   const onSubmit = async (form: T_form) => {
-    if (session) {
-      const frontData = await api.addFrontId({
-        session,
-        body: { base64Image: await getBase64String(form.front_id) },
-      });
-
-      if (frontData.failReason) {
-        return setError("front_id", {
-          message: INCODE_FRONT_ID_ERRORS[frontData.failReason],
-        });
-      }
-
-      if (!frontData.skipBackIdCapture) {
-        const backData = await api.addBackId({
-          session,
-          body: { base64Image: await getBase64String(form.back_id) },
-        });
-
-        if (backData.failReason) {
-          return setError("back_id", {
-            message: INCODE_FRONT_ID_ERRORS[backData.failReason],
-          });
-        }
-      }
-
-      const processData = await api.processId({ session });
-
-      if (processData.success) {
-        router.push(`/profile/biometric-validation`);
-      }
+    try {
+      await mutation(form).unwrap();
+      router.push('/profile/income-and-taxes');
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -91,9 +70,13 @@ export const IdentificationPage: React.FC = () => {
           max="100"
         ></progress>
 
-        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
-          <IncodeFileInput
-            name="front_id"
+        <form
+          id="form"
+          className="gap-4 grid"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <FileInputItem
+            name="front_document"
             control={control}
             rules={{ required: "Imagen requerida" }}
             accept="image/jpg"
@@ -103,8 +86,8 @@ export const IdentificationPage: React.FC = () => {
             helpPicture={frontIdImageUrl}
           />
 
-          <IncodeFileInput
-            name="back_id"
+          <FileInputItem
+            name="back_document"
             control={control}
             rules={{ required: "Imagen requerida" }}
             accept="image/jpg"
@@ -117,10 +100,7 @@ export const IdentificationPage: React.FC = () => {
       </IonContent>
       <IonFooter className="ion-padding">
         <div className="gap-2 grid">
-          <button
-            className="btn btn-primary"
-            onClick={() => handleSubmit(onSubmit)()}
-          >
+          <button className="btn btn-primary" type="submit" form="form" disabled={isLoading}>
             Continuar
           </button>
 
