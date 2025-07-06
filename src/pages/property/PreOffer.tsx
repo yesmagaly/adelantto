@@ -76,7 +76,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
         <Page.Root>
           <Page.Header className="text-center">
             <div className="heading heading--blue heading--compact">
-              <div className="heading__pager text-right">Paso 3 de 7</div>
+              <div className="text-right heading__pager">Paso 3 de 7</div>
               <h1 className="heading-3">
                 Pre<strong> - oferta</strong>
               </h1>
@@ -89,7 +89,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
             </h3>
 
             {offer && (
-              <div className="mx-5 flex flex-col gap-3">
+              <div className="flex flex-col gap-3 mx-5">
                 <div className="dislay-control">
                   <div className="number">
                     {formatCurrency(offer.principal)} MXN
@@ -109,7 +109,7 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
                   <span>Comisión por apertura</span>
                 </div>
 
-                <p className="text-center text-xs leading-tight">
+                <p className="text-xs text-center leading-tight">
                   {offer.note}
                 </p>
               </div>
@@ -134,11 +134,11 @@ const PreOffer: React.FC<PreOfferProps> = ({ match }) => {
               </div>
             )}
 
-            <button onClick={handleSubmit} className="button is-secondary mb-7">
+            <button onClick={handleSubmit} className="mb-7 button is-secondary">
               Continuar
             </button>
 
-            <p className="text-center text-xs leading-4">
+            <p className="text-xs text-center leading-4">
               Al aceptar estas aprobando el uso de tus datos para validaciones
               de identificación.
               <a className="underline" href="">

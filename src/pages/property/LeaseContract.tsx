@@ -7,39 +7,11 @@ import {
 } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
-import * as Page from "../../components/page";
 
-import { checkZipCode } from "../../api";
-import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
+import { useAddApplicationMutation, useLazyGetApplicationQuery } from "@adelantto/store";
 
-function removeNumericFormat(value: string) {
-  return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
-}
-
-function addMonths(date: any, months: number) {
-  date.setMonth(date.getMonth() + months);
-
-  return date;
-}
-
-function parseDate(str: string) {
-  const [year, month, day] = str.split("-").map((i) => Number.parseInt(i));
-
-  return new Date(+year, month - 1, +day);
-}
-
-// Validate minimum period of contract time
-function validateMinContractTime(startDateStr: string, endDateStr: string) {
-  const minMonths = 6;
-  const oneDayTimestamp = 86400000;
-  const endDate = parseDate(endDateStr);
-  const minEndDate = addMonths(parseDate(startDateStr), minMonths);
-
-  return minEndDate.getTime() - oneDayTimestamp <= endDate.getTime();
-}
-
-export function atLeastThreeMonths(end_date, months_number) {
+export function atLeastThreeMonths(end_date: any, months_number: any) {
   const date1 = new Date();
   const date2 = new Date(end_date);
   const diffTime = Math.abs(date2 - date1);
@@ -49,59 +21,29 @@ export function atLeastThreeMonths(end_date, months_number) {
   return diffMonths >= months_number;
 }
 
-type FormData = {
+type T_form = {
   lease_monthly_income: number;
-  lease_maintenance_fee: number;
   lease_start_date: string;
   lease_end_date: string;
   lease_payment_method: string;
-  lease_renting_time: number;
-  property_zip_code: string;
 };
 
 const LeaseContract: React.FC = () => {
   const router = useIonRouter();
-
+  const [mutation] = useAddApplicationMutation();
   const {
     handleSubmit,
     register,
-    setError,
     formState: { errors },
     control,
-  } = useForm<FormData>();
+  } = useForm<T_form>();
 
-  const onSubmit = async ({
-    lease_monthly_income,
-    lease_maintenance_fee,
-    ...data
-  }: any) => {
-    const zipCodeResponse = await checkZipCode(data.property_zip_code);
-
-    if (zipCodeResponse.status === 200) {
-      const data = await zipCodeResponse.json();
-
-      if (data.state !== "Ciudad de México") {
-        return setError("property_zip_code", {
-          message:
-            "El código postal no pertenece al estado de Ciudad de México.",
-        });
-      }
-    } else {
-      return setError("property_zip_code", {
-        message: "No es un código postal válido.",
-      });
-    }
-
-    const response = await applications.leaseContract({
-      lease_monthly_income: removeNumericFormat(lease_monthly_income),
-      lease_maintenance_fee: removeNumericFormat(lease_maintenance_fee),
-      ...data,
-    });
-
-    const application = await response.json();
-
-    if (response.status === 200) {
-      router.push(`/applications/${application.id}/desired-loan`);
+  const onSubmit = async (form: T_form) => {
+    try {
+      const response = await mutation(form).unwrap();
+      router.push(`/applications/${response.id}/desired-loan`)
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -119,6 +61,7 @@ const LeaseContract: React.FC = () => {
           AdelanttoCash®
         </p>
       </IonHeader>
+
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
@@ -133,7 +76,11 @@ const LeaseContract: React.FC = () => {
           max="100"
         ></progress>
 
-        <form className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="form"
+          className="gap-4 grid"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="control">
             <label className="control-label">
               Valor de la renta mensual (después de la cuota de mantenimiento)
@@ -141,17 +88,25 @@ const LeaseContract: React.FC = () => {
             <Controller
               rules={{
                 validate: {
-                  greaterThan: (v) =>
-                    removeNumericFormat(v) >= 15000 ||
-                    "El monto mínimo es de $15,000 MXN",
+                  greaterThan: (v) => {
+                    console.log(v, "__V__");
+
+                    return v >= 15000 || "El monto mínimo es de $15,000 MXN";
+                  },
                 },
               }}
               control={control}
               name="lease_monthly_income"
-              render={({ field: { ref, ...field } }) => (
+              render={({ field: { ref, onChange } }) => (
                 <NumericFormat
-                  {...field}
-                  className="w-full pattern-format input"
+                  onChange={(value) => {
+                    const normalizedValue = parseFloat(
+                      value.target.value.replaceAll(/\,|\$|\s/g, "")
+                    );
+
+                    onChange(normalizedValue);
+                  }}
+                  className="w-full pattern-format input validator"
                   type="text"
                   required
                   getInputRef={ref}
@@ -159,14 +114,13 @@ const LeaseContract: React.FC = () => {
                   thousandSeparator=","
                   prefix={"$"}
                   placeholder="$00,000.00"
+                  aria-invalid={errors.lease_monthly_income ? "true" : "false"}
                 />
               )}
             />
-            {errors?.lease_monthly_income && (
-              <div className="description">
-                {errors?.lease_monthly_income?.message}
-              </div>
-            )}
+            <p className="hidden validator-hint">
+              {errors?.lease_monthly_income?.message}
+            </p>
           </div>
 
           <div className="control">
@@ -177,8 +131,7 @@ const LeaseContract: React.FC = () => {
               {...register("lease_start_date")}
               type="date"
               required
-              placeholder=""
-              className="input"
+              className="input validator"
             />
           </div>
 
@@ -194,14 +147,12 @@ const LeaseContract: React.FC = () => {
               })}
               type="date"
               required
-              className="input"
+              className="input validator"
+              aria-invalid={errors.lease_end_date ? "true" : "false"}
             />
-
-            {errors?.lease_end_date && (
-              <div className="description is-danger">
-                {errors.lease_end_date?.message}
-              </div>
-            )}
+            <p className="hidden validator-hint">
+              {errors.lease_end_date?.message}
+            </p>
           </div>
 
           <div className="control">
@@ -253,8 +204,9 @@ const LeaseContract: React.FC = () => {
           </label>
         </form>
       </IonContent>
-      <IonFooter>
-        <button className="btn-block btn btn-primary">
+
+      <IonFooter className="ion-padding">
+        <button type="submit" form="form" className="btn-block btn btn-primary">
           Ver Pre-Oferta AdelanttoCash®
         </button>
       </IonFooter>
