@@ -11,7 +11,7 @@ export default function Tag({ children, status }: T_props) {
   return (
     <div
       className={clsx(
-        " text-white font-semibold rounded-sm py-1 px-6 inline-block",
+        "inline-block px-6 py-1 rounded-sm font-semibold text-white",
         status === 'overdue' && "bg-black",
         status === 'pending' && "bg-blue-600",
         status === 'rejected' && "bg-red-700",
