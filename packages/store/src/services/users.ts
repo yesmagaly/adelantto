@@ -4,6 +4,9 @@ import { BASE_URL } from "../constants";
 
 type T_user = {
   id: string;
+  name?: string;
+  last_name?: string;
+  is_completed: boolean;
 };
 
 export const userApi = createApi({
@@ -30,4 +33,8 @@ export const userApi = createApi({
   }),
 });
 
-export const { useUpdateUserMutation, useLazyGetUserQuery } = userApi;
+export const {
+  useUpdateUserMutation,
+  useGetUserQuery,
+  useLazyGetUserQuery
+} = userApi;
