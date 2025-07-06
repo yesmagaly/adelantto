@@ -34,32 +34,28 @@ export default function InstallmentCard({
   const router = useIonRouter();
 
   return (
-    <>
-      <div className="flex items-center justify-between">
-        <div>
-          <h6 className="font-semibold leading-6">
-            Mes {index + 1}: {t(status)}
-          </h6>
-          <p className="text-sm">
-            Fecha limite de pago: {" "}
-            <span className="font-medium">
-              {capitalizeFirstLetter(
-                DateTime.fromISO(due_date)
-                  .setLocale("es")
-                  .toFormat("dd LLL yyyy")
-              )}
-            </span>
-          </p>
-        </div>
-
-        <button
-          className="font-regular rounded-sm bg-blue-900 px-3 py-1 text-sm text-white disabled:opacity-75"
-          onClick={() => router.push(`/loans/${loanId}/installments/${id}`)}
-          disabled={status === "approved" || status === "in_validation"}
-        >
-          Ver
-        </button>
+    <div className="flex justify-between items-center bg-gray-200 p-4 rounded-md">
+      <div>
+        <h6 className="font-semibold leading-6">
+          Mes {index + 1}: {t(status)}
+        </h6>
+        <p className="text-sm">
+          Fecha limite de pago:{" "}
+          <span className="font-medium">
+            {capitalizeFirstLetter(
+              DateTime.fromISO(due_date).setLocale("es").toFormat("dd LLL yyyy")
+            )}
+          </span>
+        </p>
       </div>
-    </>
+
+      <button
+        className="bg-blue-900 disabled:opacity-75 px-3 py-1 rounded-sm font-regular text-white text-sm"
+        onClick={() => router.push(`/loans/${loanId}/installments/${id}`)}
+        disabled={status === "approved" || status === "in_validation"}
+      >
+        Ver
+      </button>
+    </div>
   );
 }
