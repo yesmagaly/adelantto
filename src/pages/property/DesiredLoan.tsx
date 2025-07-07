@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
-import { applications } from "../../api";
 import { atLeastThreeMonths } from "./LeaseContract";
 import { useForm } from "react-hook-form";
 import {
@@ -11,18 +10,11 @@ import {
   useLazyGetOfferQuery,
   useUpdateApplicationMutation,
 } from "@adelantto/store";
-import { cn } from "@adelantto/utils";
+import { cn, formatCurrency } from "@adelantto/utils";
 
 type T_form = T_application & {
   desired_loan_term_frame?: number;
 };
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: "MXN",
-  }).format(value);
-}
 
 interface DesiredLoanProps
   extends RouteComponentProps<{
@@ -45,11 +37,16 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
 
   useEffect(() => {
     if (application?.lease_end_date) {
-      setOptions(
-        [3, 6, 8, 12].filter((value) =>
-          atLeastThreeMonths(application.lease_end_date, value)
-        )
+      const options = [3, 6, 8, 12].filter((value) =>
+        atLeastThreeMonths(application.lease_end_date, value)
       );
+
+      setValue(
+        "desired_loan_term_frame",
+        options.length > 0 ? options[options.length - 1] : undefined
+      );
+
+      setOptions(options);
     }
   }, [application]);
 
@@ -78,7 +75,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
           application.lease_monthly_income * desired_loan_term_frame,
       }).unwrap();
 
-      router.push(`/applications/${match.params.id}/pre-offer`);
+      router.push(`/applications/${match.params.id}/property-documents`);
     }
   };
 
@@ -125,7 +122,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   <div className="text-h4">
                     {formatCurrency(offer.fees)} MXN
                   </div>
-                  <p className="text-purple-200">MXN Pago de seguro</p>
+                  <p className="text-purple-200">Pago de seguro</p>
                 </div>
               </div>
             </div>

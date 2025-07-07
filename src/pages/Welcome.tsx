@@ -11,7 +11,7 @@ const Welcome: React.FC = () => {
     <IonPage>
       <IonContent fullscreen>
         <Page.Root>
-          <Page.Header className="text-center pt-20">
+          <Page.Header className="pt-20 text-center">
             <h1 className="heading-3">
               Recibe una <strong>pre-oferta</strong> en segundos
             </h1>

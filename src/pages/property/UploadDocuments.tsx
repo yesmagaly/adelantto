@@ -5,35 +5,42 @@ import FileInputItem from "../../components/FileInputItem";
 import { applications } from "../../api";
 import ErrorMessage from "../../components/ErrorMessage";
 import * as Tooltip from "../../components/Tooltip";
+import {
+  useLazyGetApplicationQuery,
+  useUpdateApplicationMutation,
+} from "@adelantto/store";
 
 interface File {
   id: number;
   name: string;
 }
 
-interface FormData {
+interface T_form {
   deed_of_ownership?: File;
   leasing_contract_id: number;
 }
 
 const UploadDocuments: React.FC = ({ match }) => {
   const router = useIonRouter();
+  const [trigger, { data: application, isLoading }] =
+    useLazyGetApplicationQuery();
+  const [migration] = useUpdateApplicationMutation();
 
   const {
     control,
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm<T_form>({
+    defaultValues: async () => await trigger(match.params.id).unwrap(),
+  });
 
-  const onSubmit = async (data: FormData) => {
-    const response = await applications.propertyDocuments(match.params.id, {
-      ...data,
-      step: "property_documents",
-    });
-
-    if (response.status === 200) {
+  const onSubmit = async (data: T_form) => {
+    try {
+      await migration(data).unwrap();
       router.push(`/applications/${match.params.id}/property-pictures`);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -48,7 +55,11 @@ const UploadDocuments: React.FC = ({ match }) => {
           </h4>
         </div>
 
-        <form id="form" className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="form"
+          className="gap-4 grid"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="control">
             <label className="control-label">Folio Real</label>
             <input
@@ -91,11 +102,7 @@ const UploadDocuments: React.FC = ({ match }) => {
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button
-          className="btn-block btn btn-primary"
-          type="submit"
-          form="form"
-        >
+        <button className="btn-block btn btn-primary" type="submit" form="form">
           Continuar
         </button>
       </IonFooter>

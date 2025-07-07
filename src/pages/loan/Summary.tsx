@@ -21,7 +21,8 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
         const response = await api.loans.get(match.params.id);
         const data = (await response.json()) as LoanType;
         const residue =
-          data.amount + data.moratorium_amount -
+          data.amount +
+          data.moratorium_amount -
           data.installments
             .filter((installment) => installment.status === "approved")
             .reduce((acc, installment) => acc + installment.amount, 0);
@@ -46,64 +47,54 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
 
   if (!loan) {
     return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <span className="text-sm font-medium">Cargando ...</span>
+      <div className="flex justify-center items-center w-full h-screen">
+        <span className="font-medium text-sm">Cargando ...</span>
       </div>
     );
   }
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <Page.Root>
-          <Page.Header>
-            <div className="heading--blue bg-cover px-6 py-8 text-white">
-              <h1 className="heading-4 font-medium">
-                AdelanttoCash® {loan.id.toString().padStart(5, "0")}
-              </h1>
+      <IonContent className="ion-padding">
+        <div className="bg-cover px-6 py-8 heading--blue">
+          <h1 className="font-medium heading-4">
+            AdelanttoCash® {loan.id.toString().padStart(5, "0")}
+          </h1>
 
-              <div className="border-full mb-4 block" />
+          <div className="block mb-4 border-full" />
 
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h6 className="text-sm">CUOTA A PAGAR</h6>
-                  {detail && (
-                    <p className="text-2xl font-semibold">
-                      {formatCurrency(detail.installment.total_amount)}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <h6 className="text-sm">SALDO</h6>
-                  {detail && (
-                    <p className="text-2xl font-semibold">
-                      {formatCurrency(detail.residue)}
-                    </p>
-                  )}
-                </div>
-              </div>
+          <div className="flex flex-col gap-4">
+            <div>
+              <h6 className="text-sm">CUOTA A PAGAR</h6>
+              {detail && (
+                <p className="font-semibold text-2xl">
+                  {formatCurrency(detail.installment.total_amount)}
+                </p>
+              )}
             </div>
-          </Page.Header>
-          <Page.Body className="flex-1">
-            <div className="flex flex-col gap-4">
-              {loan?.installments.map((installment, key) => (
-                <InstallmentCard
-                  key={installment.id}
-                  index={key}
-                  loanId={match.params.id}
-                  {...installment}
-                />
-              ))}
+            <div>
+              <h6 className="text-sm">SALDO</h6>
+              {detail && (
+                <p className="font-semibold text-2xl">
+                  {formatCurrency(detail.residue)}
+                </p>
+              )}
             </div>
-          </Page.Body>
-          <Page.Footer className="bg-gray-100">
-            <div className="flex justify-between">
-              <button onClick={() => router.push("/")}>
-                <Icon name="home" className="h-5 w-5 bg-black" />
-              </button>
-            </div>
-          </Page.Footer>
-        </Page.Root>
+          </div>
+        </div>
+
+        <h4 className="mb-4 text-h6">Historial de pagos</h4>
+
+        <div className="flex flex-col gap-4">
+          {loan?.installments.map((installment, key) => (
+            <InstallmentCard
+              key={installment.id}
+              index={key}
+              loanId={match.params.id}
+              {...installment}
+            />
+          ))}
+        </div>
       </IonContent>
     </IonPage>
   );
