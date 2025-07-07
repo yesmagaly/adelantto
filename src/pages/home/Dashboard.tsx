@@ -1,59 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 import { MaterialIcon } from "@adelantto/core";
 
-import TotalCard from "../../components/TotalCard";
 import LoanCard from "../../components/LoanCard";
 import ApplicationCard from "../../components/ApplicationCard";
-import { ApplicationType, LoanType } from "../../types";
-import { UnauthorizedError, applications } from "../../api";
 import { useAuth } from "../auth/authContext";
-import * as api from "../../api";
 import { AppNav } from "../../layout/AppNav";
+import {
+  useGetApplicationsQuery,
+  useGetLoansQuery,
+  useGetUserQuery,
+} from "@adelantto/store";
 
 const Dashboard: React.FC = () => {
   const { authInfo, logOut } = useAuth()!;
   const router = useIonRouter();
-  const [items, setItems] = useState<Array<ApplicationType>>([]);
-  const [loans, setLoans] = useState<Array<LoanType>>([]);
-  const [error, setError] = useState("");
+
+  const { data: user, isLoading: isUserLoading } = useGetUserQuery();
+  const { data: loans = [], isLoading: isLoansLoading } = useGetLoansQuery();
+  const { data: applications = [], isLoading: isApplicationLoading } =
+    useGetApplicationsQuery();
 
   useEffect(() => {
     if (!authInfo.user?.is_verified) {
       // router.push("/update-temporary-password");
       router.push("/home");
-    } else {
-      const fetchData = async () => {
-        try {
-          const data = (await applications.list()) ?? [];
-
-          setItems(data);
-        } catch (error: any) {
-          if (error instanceof UnauthorizedError) {
-            setError(error.message);
-          }
-        }
-      };
-
-      fetchData();
     }
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.loans.list();
-        const data = await response.json();
-
-        setLoans(data);
-      } catch (error: any) {
-        if (error instanceof UnauthorizedError) {
-          setError(error.message);
-        }
-      }
-    };
-
-    fetchData();
   }, []);
 
   return (
@@ -61,51 +33,89 @@ const Dashboard: React.FC = () => {
       <IonContent class="ion-padding">
         <div id="home-page">
           <div className="gap-6 grid">
-            <h1 className="text-xl">
-              {authInfo.user?.full_name && (
-                <>
-                  ¡Hola, <br />
-                  <strong>{authInfo.user.full_name}!</strong>
-                </>
-              )}
+            {user && (
+              <h1 className="text-h5">
+                <span className="font-normal">¡Hola,</span>
+                <br />
+                {[user.name, user.last_name].join(" ")}!
+              </h1>
+            )}
 
-              {!authInfo.user?.full_name && <strong>¡Hola!</strong>}
-            </h1>
+            {Boolean(user?.is_completed) && (
+              <div role="alert" className="alert alert-horizontal">
+                <MaterialIcon
+                  name="info"
+                  className="stroke-info w-6 h-6 shrink-0"
+                />
+                <div>
+                  <h3 className="font-bold">Completa tu perfil</h3>
+                  <div className="text-xs">
+                    Ingresa tus datos básicos para identificarte correctamente.
+                    Esta información es necesaria para poder solicitar tu primer
+                    Adelantto.
+                  </div>
+                </div>
+                <button className="btn btn-sm">
+                  <MaterialIcon name="arrow_forward" />
+                </button>
+              </div>
+            )}
 
-            <div role="alert" className="alert alert-horizontal">
-              <MaterialIcon
-                name="info"
-                className="stroke-info w-6 h-6 shrink-0"
-              />
+            {loans.length === 0 && (
+              <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card">
+                <div className="p-4 card-body">
+                  <h2 className="card-title">
+                    Convierte tus rentas en liquidez inmediata
+                  </h2>
+                  <p>
+                    Con AdelanttoCash®, anticipa hasta 12 meses de renta en
+                    menos de 72 horas. Solo para quienes ya tienen rentado un
+                    inmueble.
+                  </p>
+                  <div className="mt-4 card-actions">
+                    <button className="btn-block btn btn-primary">
+                      Solicita tu primer Adelantto
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {applications.length > 0 && (
               <div>
-                <h3 className="font-bold">Completa tu perfil</h3>
-                <div className="text-xs">
-                  Ingresa tus datos básicos para identificarte correctamente.
-                  Esta información es necesaria para poder solicitar tu primer
-                  Adelantto.
-                </div>
-              </div>
-              <button className="btn btn-sm">
-                <MaterialIcon name="arrow_forward" />
-              </button>
-            </div>
+                <h4 className="mb-4 text-h6">
+                  Tus solicitudes de AdelanttoCash®
+                </h4>
 
-            <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card">
-              <div className="p-4 card-body">
-                <h2 className="card-title">
-                  Convierte tus rentas en liquidez inmediata
-                </h2>
-                <p>
-                  Con AdelanttoCash®, anticipa hasta 12 meses de renta en menos
-                  de 72 horas. Solo para quienes ya tienen rentado un inmueble.
-                </p>
-                <div className="card-actions">
-                  <button className="btn-block btn btn-primary">
-                    Solicita tu primer Adelantto
-                  </button>
+                <div className="flex flex-col gap-2">
+                  {applications.map((item) => (
+                    <ApplicationCard
+                      key={item.id}
+                      item={item}
+                      className="mb-4"
+                    />
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
+
+            {loans.length > 0 && (
+              <div>
+                <h4 className="mb-4 text-h6">Tus AdelanttoCash®</h4>
+                <div className="flex flex-col gap-2">
+                  {loans.map((loan) => (
+                    <LoanCard key={loan.id} {...loan} />
+                  ))}
+                </div>
+
+                <a
+                  className="btn-block mt-4 btn btn-primary"
+                  href="/applications/lease-contract"
+                >
+                  Solicitar nuevo AdelanttoCash®
+                </a>
+              </div>
+            )}
 
             <h2 className="font-semibold text-dark-blue-700 text-lg">
               Temas de interés
@@ -126,31 +136,6 @@ const Dashboard: React.FC = () => {
                 </p>
               </div>
             </div>
-
-            {loans.length === 0 && (
-              <div className="flex flex-col gap-2">
-                {items
-                  .filter((item) => item.status !== "approved")
-                  .map((item) => (
-                    <ApplicationCard
-                      key={item.id}
-                      item={item}
-                      className="mb-4"
-                    />
-                  ))}
-              </div>
-            )}
-
-            {loans.length > 0 && (
-              <>
-                <TotalCard
-                  amount={loans.reduce((acc, loan) => acc + loan.amount, 0)}
-                />
-                {loans.map((loan) => (
-                  <LoanCard key={loan.id} url={`/loans/${loan.id}`} {...loan} />
-                ))}
-              </>
-            )}
           </div>
         </div>
       </IonContent>

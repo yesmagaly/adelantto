@@ -33,7 +33,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
   const onSubmit = async (form: T_form) => {
     try {
       await mutation(form).unwrap();
-      router.push("/profile/income-and-taxes");
+      router.push("/applications/lease-contract");
     } catch (error) {
       console.log(error);
     }

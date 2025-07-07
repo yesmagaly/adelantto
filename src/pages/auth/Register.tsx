@@ -6,7 +6,7 @@ import {
   IonPage,
   useIonRouter,
 } from "@ionic/react";
-import { useForm, Controller, FieldErrors } from "react-hook-form";
+import { useForm, Controller, FieldErrors, ErrorOption } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
 import { PatternFormat } from "react-number-format";
@@ -90,13 +90,41 @@ const Register: React.FC = () => {
         ];
 
         errorFields.forEach((field) => {
-          if ("status" in data && data.status === "fail" && data.errors[field]) {
+          if (
+            "status" in data &&
+            data.status === "fail" &&
+            data.errors[field]
+          ) {
             setError(field as keyof FieldErrors<T_form>, {
               message: data.errors[field][0],
               type: "server",
             });
           }
         });
+
+        function handleServerError(
+          fields: Array<keyof FieldErrors<T_form>>,
+          response: { errors: any }
+        ): Array<ErrorOption> {
+          return fields.reduce((acc, field) => {
+
+            if (response.errors?.[field]?.[0]) {
+              acc = acc.concat([
+                {
+                  message: response.errors[field][0],
+                  type: "server",
+                },
+              ]);
+            }
+
+            return acc;
+          }, []);
+        }
+
+        handleServerError(
+          ["root"],
+          "Ups, algo salió mal. Inténtalo de nuevo más tarde."
+        );
       }
     } catch (error) {
       setError("root", {

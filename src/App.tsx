@@ -19,7 +19,6 @@ import DesiredLoan from "./pages/property/DesiredLoan";
 import Passport from "./pages/identity/Passport";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import Welcome from "./pages/Welcome";
-import PreOffer from "./pages/property/PreOffer";
 import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
@@ -204,10 +203,6 @@ const App: React.FC = () => {
             <PrivateRoute
               path="/applications/:id/desired-loan"
               component={DesiredLoan}
-            />
-            <PrivateRoute
-              path="/applications/:id/pre-offer"
-              component={PreOffer}
             />
             <PrivateRoute
               path="/applications/:id/privacy-policy"

@@ -1,7 +1,7 @@
 export interface LoanType {
-  status: string;
   id: string;
   application: ApplicationType;
+  status: string;
   amount: number;
   installments: Array<InstallmentType>
 }

@@ -11,7 +11,6 @@ import Icon from "../../components/Icon/Icon";
 import ErrorMessage from "../../components/ErrorMessage";
 import Tag from "../../components/Tag";
 import * as Modal from "../../components/modal";
-import * as Page from "../../components/page";
 
 import { uploadInstallmentFile } from "../../api";
 import { useGetInstallmentQuery } from "../../queries";
@@ -51,14 +50,15 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <Page.Root as="form" onSubmit={handleSubmit(onSubmit)}>
-          <Page.Header className="pt-6">
-            <h6 className="text-center font-bold uppercase text-blue-700">
+      <IonContent className="ion-padding">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="pt-6">
+            <h6 className="font-bold text-blue-700 text-center uppercase">
               Cuota a pagar
             </h6>
-          </Page.Header>
-          <Page.Body className="flex flex-col gap-4">
+          </div>
+
+          <div className="flex flex-col gap-4">
             {data && (
               <>
                 <p className="text-center">
@@ -71,8 +71,8 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
                     )}
                   </span>
                 </p>
-                <p className="text-center text-3xl font-bold">
-                  <span className="block text-sm font-normal">
+                <p className="font-bold text-3xl text-center">
+                  <span className="block font-normal text-sm">
                     Monto:
                   </span>
                   {formatCurrency(data.total_amount)}
@@ -86,7 +86,7 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
                     Realiza tu pago por transferencia
                   </p>
 
-                  <ul className="rounded bg-slate-100 p-3">
+                  <ul className="bg-slate-100 p-3 rounded text-sm">
                     <li>
                       Banco: <strong className="font-medium">BBVA</strong>
                     </li>
@@ -114,7 +114,7 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
                   rules={{ required: "Imagen obligatoria" }}
                   accept="image/*"
                 >
-                  <h5 className="inline-flex gap-4 text-lg font-bold leading-none">
+                  <h5 className="inline-flex gap-4 font-bold text-lg leading-none">
                     Sube tu comprobante
                     <Icon name="upload" className="bg-slate-500 text-lg" />
                   </h5>
@@ -147,8 +147,8 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
               </Modal.Footer>
             </Modal.Root>
 
-          </Page.Body>
-          <Page.Footer className="gap-2">
+          </div>
+          <div className="gap-2">
             <button className="button is-primary" type="submit">
               Validar pago
             </button>
@@ -159,8 +159,8 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
             >
               Regresar
             </button>
-          </Page.Footer>
-        </Page.Root>
+          </div>
+        </form>
       </IonContent>
     </IonPage >
   );
