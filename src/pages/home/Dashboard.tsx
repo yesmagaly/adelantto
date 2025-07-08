@@ -6,6 +6,7 @@ import LoanCard from "../../components/LoanCard";
 import ApplicationCard from "../../components/ApplicationCard";
 import { useAuth } from "../auth/authContext";
 import { AppNav } from "../../layout/AppNav";
+import adelanttoBgTopRightUrl from "../../v2/assets/images/adelantto-bg-top-right.png";
 import {
   useGetApplicationsQuery,
   useGetLoansQuery,
@@ -30,7 +31,12 @@ const Dashboard: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent class="ion-padding">
+      <IonContent
+        class="ion-padding"
+        style={{
+          "--background": `url(${adelanttoBgTopRightUrl}) no-repeat top right`,
+        }}
+      >
         <div id="home-page">
           <div className="gap-6 grid">
             {user && (

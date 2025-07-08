@@ -6,7 +6,11 @@ import {
   IonPage,
   useIonRouter,
 } from "@ionic/react";
-import { useForm, Controller, FieldErrors, ErrorOption } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  FieldErrors,
+} from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
 import { PatternFormat } from "react-number-format";
@@ -14,7 +18,7 @@ import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 
 import { API_SERVER_URL, PROD_MODE } from "../../config";
-import { t } from "@adelantto/utils";
+import { handleServerErrors, t } from "@adelantto/utils";
 import InputPassword from "../../components/InputPassword";
 import {
   atLeast8Chars,
@@ -82,49 +86,20 @@ const Register: React.FC = () => {
       if (response.ok && "id" in data && "phone" in data) {
         router.push(`/verification-code/${data.id}?phone=${data.phone}`);
       } else {
-        const errorFields: (keyof T_form)[] = [
+        const errorFields: (keyof FieldErrors<T_form>)[] = [
+          "root",
           "email",
           "phone",
           "password",
           "confirm_password",
         ];
 
-        errorFields.forEach((field) => {
-          if (
-            "status" in data &&
-            data.status === "fail" &&
-            data.errors[field]
-          ) {
-            setError(field as keyof FieldErrors<T_form>, {
-              message: data.errors[field][0],
-              type: "server",
-            });
-          }
-        });
+        // if (data?.status === "fail" && data?.errors) {
+        //   handleServerErrors<T_form>(errorFields, data.errors).forEach(([field, error]) => {
+        //     setError(field as keyof FieldErrors<T_form>, error);
+        //   });
+        // }
 
-        function handleServerError(
-          fields: Array<keyof FieldErrors<T_form>>,
-          response: { errors: any }
-        ): Array<ErrorOption> {
-          return fields.reduce((acc, field) => {
-
-            if (response.errors?.[field]?.[0]) {
-              acc = acc.concat([
-                {
-                  message: response.errors[field][0],
-                  type: "server",
-                },
-              ]);
-            }
-
-            return acc;
-          }, []);
-        }
-
-        handleServerError(
-          ["root"],
-          "Ups, algo salió mal. Inténtalo de nuevo más tarde."
-        );
       }
     } catch (error) {
       setError("root", {
