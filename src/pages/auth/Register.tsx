@@ -6,11 +6,7 @@ import {
   IonPage,
   useIonRouter,
 } from "@ionic/react";
-import {
-  useForm,
-  Controller,
-  FieldErrors,
-} from "react-hook-form";
+import { useForm, Controller, FieldErrors } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
 import { PatternFormat } from "react-number-format";
@@ -29,6 +25,7 @@ import {
   MaterialIcon,
   PasswordStrength,
 } from "@adelantto/core";
+import { useRegisterUserMutation } from "@adelantto/store";
 
 type T_form = {
   email: string;
@@ -48,6 +45,7 @@ const cleanUpPhone = (phone = "") =>
 const Register: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
+  const [mutation] = useRegisterUserMutation();
 
   const {
     control,
@@ -62,45 +60,47 @@ const Register: React.FC = () => {
     const phone = cleanUpPhone(form.phone);
 
     try {
+      const response = await mutation(form).unwrap();
+      console.log("Register response:", response);
+
       // Send phone request.
-      const response = await fetch(`${API_SERVER_URL}/api/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ ...form, phone }),
-      });
+      // const response = await fetch(`${API_SERVER_URL}/api/auth/register`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //   },
+      //   body: JSON.stringify({ ...form, phone }),
+      // });
 
-      const data = (await response.json()) as
-        | {
-            message: string;
-            phone: string;
-            id: string;
-          }
-        | {
-            status: "fail";
-            errors: { [key: string]: [string] };
-          };
+      // const data = (await response.json()) as
+      //   | {
+      //       message: string;
+      //       phone: string;
+      //       id: string;
+      //     }
+      //   | {
+      //       status: "fail";
+      //       errors: { [key: string]: [string] };
+      //     };
 
-      if (response.ok && "id" in data && "phone" in data) {
-        router.push(`/verification-code/${data.id}?phone=${data.phone}`);
-      } else {
-        const errorFields: (keyof FieldErrors<T_form>)[] = [
-          "root",
-          "email",
-          "phone",
-          "password",
-          "confirm_password",
-        ];
+      // if (response.ok && "id" in data && "phone" in data) {
+      //   router.push(`/verification-code/${data.id}?phone=${data.phone}`);
+      // } else {
+      //   const errorFields: (keyof FieldErrors<T_form>)[] = [
+      //     "root",
+      //     "email",
+      //     "phone",
+      //     "password",
+      //     "confirm_password",
+      //   ];
 
-        // if (data?.status === "fail" && data?.errors) {
-        //   handleServerErrors<T_form>(errorFields, data.errors).forEach(([field, error]) => {
-        //     setError(field as keyof FieldErrors<T_form>, error);
-        //   });
-        // }
-
-      }
+      //   if (data?.status === "fail" && data?.errors) {
+      //     handleServerErrors<T_form>(errorFields, data.errors).forEach(([field, error]) => {
+      //       setError(field as keyof FieldErrors<T_form>, error);
+      //     });
+      //   }
+      // }
     } catch (error) {
       setError("root", {
         message: "Ups, algo salió mal. Inténtalo de nuevo más tarde.",
