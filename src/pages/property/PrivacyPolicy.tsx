@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonHeader, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { applications } from "../../api";
-
-import * as Modal from "../../components/modal";
+import { MaterialIcon } from "@adelantto/core";
 
 const PrivacyPolicy: React.FC = ({ match }) => {
   const router = useIonRouter();
@@ -26,16 +25,21 @@ const PrivacyPolicy: React.FC = ({ match }) => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="heading heading--blue mb-10 flex flex-col justify-center">
-          <div className="heading__pager text-right">Paso 4 de 7</div>
-          <h4 className="text-2xl">
-            Autorización para solicitar reportes de crédito, informes buró y
-            reportes de crédito especiales
-          </h4>
-        </div>
+      <IonHeader>
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
+          <a href="/" className="inline-flex items-center">
+            <MaterialIcon name="arrow_back" />
+          </a>
+          Autorización de Buro
+        </h1>
+        <p className="mt-1 text-dark-gray text-sm">
+          Autorización para solicitar reportes de crédito, informes buró y
+          reportes de crédito especiales
+        </p>
+      </IonHeader>
+      <IonContent className="ion-padding">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="&_p:mb-4 mb-7 flex flex-col gap-4 px-9">
+          <div className="&_p:mb-4 mb-7 flex flex-col gap-4 px-1">
             <p>
               Por este conducto autorizo expresamente a{" "}
               <strong>SOLUCIONES INTEGRALES TAFS, SAPI DE C.V.</strong> para que
@@ -72,33 +76,8 @@ const PrivacyPolicy: React.FC = ({ match }) => {
               considerará como Confidencial.
             </p>
           </div>
-
-          <div className="mb-7 text-center">
-            <button className="button is-primary">Aceptar</button>
-          </div>
+          <button className="btn btn-block btn-primary">Aceptar</button>
         </form>
-
-        <Modal.Root isOpen={isOpen}>
-          <Modal.Body>
-            <p>
-              Se ha enviado un SMS con el código de confirmación a su número de
-              teléfono. Por favor, revise su bandeja de entrada y complete el
-              proceso de verificación.
-            </p>
-          </Modal.Body>
-          <Modal.Footer>
-            <button
-              className="button"
-              onClick={() =>
-                router.push(
-                  `/applications/${match.params.id}/confirm-privacy-policy`
-                )
-              }
-            >
-              Continuar
-            </button>
-          </Modal.Footer>
-        </Modal.Root>
       </IonContent>
     </IonPage>
   );

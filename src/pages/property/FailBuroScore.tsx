@@ -1,36 +1,32 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
-
-import closeHomeAnimation from "../../assets/animations/close-home.json";
+import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
+import adelanttoBg from "../../v2/assets/images/adelantto-gradient-bg.png";
 
 const FailBuroScore: React.FC = () => {
   const router = useIonRouter();
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="content heading-light-green">
-          <h1 className="mt-16 text-center text-4xl font-bold">¡Lo sentimos!</h1>
-          <div className="flex items-center">
-            <Lottie
-              animationData={closeHomeAnimation}
-              style={{ width: 174, height: 262 }}
-              loop
-              play
-            />
+      <IonContent className="ion-padding">
+        <img src={adelanttoBg} className="absolute inset-0 mx-auto" />
+        <img src={adelanttoBgUrl} className="absolute inset-0 mx-auto" />
+        <div className="flex flex-col justify-center items-center h-full">
+          <img src={exclamation} alt="exclamation" className="mb-18" />
+          <div className="content heading-light-green">
+            <div className="mb-6 text-center">
+              <h1 className="mb-3 text-h2">¡Lo sentimos!</h1>
+              <p className="text-sm">
+                La puntuación de Buró es baja.
+                <br />
+                Te recomendamos intentarlo nuevamente en <strong>3</strong>{" "}
+                meses.
+              </p>
+            </div>
+            <a className="btn-block btn btn-primary" href="/">
+              Aceptar
+            </a>
           </div>
-          <p className="help-text mb-28 text-balance border-y border-solid border-primary-blue py-6">
-            La puntuación de Buró es baja.<br />
-            Te recomendamos intentarlo nuevamente en {" "}
-            <strong>3</strong> meses.
-          </p>
-
-          <button
-            className="button is-primary"
-            onClick={() => router.push("/")}
-          >
-            Aceptar
-          </button>
         </div>
       </IonContent>
     </IonPage>
