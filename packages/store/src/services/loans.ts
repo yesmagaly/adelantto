@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setAuthHeaders } from "../utils/setAuthHeaders";
+import { setAuthHeaders } from "../utils/setHeaders";
 import { BASE_URL } from "../constants";
 
 export type T_loan_item = {

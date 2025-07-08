@@ -3,6 +3,7 @@ import { createReduxHistoryContext } from "redux-first-history";
 import { createBrowserHistory } from "history";
 
 import { applicationsApi } from "./services/applications";
+import { authApi } from "./services/auth";
 import { calculatorApi } from "./services/calculator";
 import { loansApi } from "./services/loans";
 import { userApi } from "./services/users";
@@ -13,6 +14,7 @@ const { routerMiddleware, routerReducer } = createReduxHistoryContext({
 
 const RTKState = {
   [applicationsApi.reducerPath]: applicationsApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
   [calculatorApi.reducerPath]: calculatorApi.reducer,
   [loansApi.reducerPath]: loansApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
@@ -42,6 +44,7 @@ const createStore = () =>
       })
         .concat(routerMiddleware)
         .concat(applicationsApi.middleware)
+        .concat(authApi.middleware)
         .concat(calculatorApi.middleware)
         .concat(loansApi.middleware)
         .concat(userApi.middleware),

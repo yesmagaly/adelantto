@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setAuthHeaders } from "../utils/setAuthHeaders";
+import { setAuthHeaders } from "../utils/setHeaders";
 import { BASE_URL } from "../constants";
+import { FieldErrors, FieldValues } from "react-hook-form";
 
 type T_user = {
   id: string;
@@ -8,6 +9,12 @@ type T_user = {
   last_name?: string;
   is_completed: boolean;
 };
+
+type T_error_respose<T extends FieldValues> = {
+  status: "fail";
+  message: string;
+  errors: Partial<Record<keyof FieldErrors<T>, string[]>>
+}
 
 export const authApi = createApi({
   reducerPath: "authApi",
