@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
+import {
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  useIonRouter,
+} from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 
 import { atLeastThreeMonths } from "./LeaseContract";
@@ -11,6 +17,7 @@ import {
   useUpdateApplicationMutation,
 } from "@adelantto/store";
 import { cn, formatCurrency } from "@adelantto/utils";
+import { MaterialIcon } from "@adelantto/core";
 
 type T_form = T_application & {
   desired_loan_term_frame?: number;
@@ -81,8 +88,21 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
 
   return (
     <IonPage>
+      <IonHeader>
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
+          <a href="/" className="inline-flex items-center">
+            <MaterialIcon name="arrow_back" />
+          </a>
+          Pre-Oferta AdelanttoCash®
+        </h1>
+        <p className="mt-1 text-dark-gray text-sm">
+          Revisa aquí el cálculo preliminar de tu adelanto, incluyendo montos y
+          costos, antes de iniciar la validación de documentos.
+        </p>
+      </IonHeader>
+
       <IonContent className="ion-padding">
-        <form id="form" onSubmit={handleSubmit(onSubmit)}>
+        <form id="form" className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
           <h3 className="text-h6 text-center">Cantidad de meses</h3>
           <div className="flex gap-4">
             {!isLoading &&
@@ -102,7 +122,9 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                 </button>
               ))}
           </div>
-          Definir manualmente
+          <h4 className="text-center underline font-semibold">
+            Definir manualmente
+          </h4>
           {offer && (
             <div className="bg-blue-600 card">
               <div className="gap-4 card-body">
@@ -134,6 +156,16 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
         <button type="submit" form="form" className="btn-block btn btn-primary">
           Subir documentación
         </button>
+        <span className="text-gray-900 text-xs text-wrap text-center">
+          He leído y estoy de acuerdo con el{" "}
+          <a
+            href="https://adelanttocash.com/aviso-de-privacidad"
+            target="_blank"
+            className="text-emerald-800"
+          >
+            Aviso de Privacidad
+          </a>
+        </span>
       </IonFooter>
     </IonPage>
   );

@@ -1,4 +1,10 @@
-import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
+import {
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  useIonRouter,
+} from "@ionic/react";
 import { useForm } from "react-hook-form";
 
 import FileInputItem from "../../components/FileInputItem";
@@ -9,6 +15,7 @@ import {
   useLazyGetApplicationQuery,
   useUpdateApplicationMutation,
 } from "@adelantto/store";
+import { MaterialIcon } from "@adelantto/core";
 
 interface File {
   id: number;
@@ -46,15 +53,32 @@ const UploadDocuments: React.FC = ({ match }) => {
 
   return (
     <IonPage>
-      <IonContent className="ion-padding">
-        <div className="flex flex-col justify-center heading heading--blue">
-          <div className="text-right heading__pager">Paso 6 de 7</div>
-          <h4 className="text-2xl">
-            A continuación <strong>sube los siguientes documentos</strong> para
-            validar tu propiedad
-          </h4>
-        </div>
+      <IonHeader>
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
+          <a href="/" className="inline-flex items-center">
+            <MaterialIcon name="arrow_back" />
+          </a>
+          Solicita tu AdelanttoCash®
+        </h1>
+        <p className="mt-1 text-dark-gray text-sm">
+          Con tu información y documentos listos, indícanos el monto de adelanto
+          que te interesa y comienza formalmente tu solicitud.
+        </p>
+      </IonHeader>
 
+      <IonContent className="ion-padding">
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
+            <a href="/" className="inline-flex items-center"></a>
+            Validación de propiedad
+          </h1>
+          <span className="badge badge-primary badge-sm">Paso 2/ 2</span>
+        </div>
+        <progress
+          className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
+          value="100"
+          max="100"
+        ></progress>
         <form
           id="form"
           className="gap-4 grid"
@@ -69,6 +93,26 @@ const UploadDocuments: React.FC = ({ match }) => {
               required
               type="text"
             />
+          </div>
+          <div className="flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="h-5 w-5 shrink-0 stroke-current inline"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <p className="ml-1 control-label">
+              El número de matrícula inmobiliaria aparece en el certificado de
+              tradición y libertad del predio, así como en la escritura o
+              documento de propiedad del mismo.
+            </p>
           </div>
 
           <div className="control">
@@ -102,8 +146,11 @@ const UploadDocuments: React.FC = ({ match }) => {
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button className="btn-block btn btn-primary" type="submit" form="form">
+        <button className="btn-block btn mb-2" type="submit" form="form">
           Continuar
+        </button>
+        <button className="btn-block btn btn-outline" type="submit" form="form">
+          Guardar como borrador
         </button>
       </IonFooter>
     </IonPage>
