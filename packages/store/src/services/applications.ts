@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CREATE_authHeaders } from "../utils/createAuthHeaders";
+import { setAuthHeaders } from "../utils/setAuthHeaders";
 import { BASE_URL } from "../constants";
 
 export type T_application = {
@@ -16,7 +16,7 @@ export const applicationsApi = createApi({
   reducerPath: "applicationsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api/applications`,
-    prepareHeaders: CREATE_authHeaders,
+    prepareHeaders: setAuthHeaders,
   }),
   tagTypes: ["Applications"],
   endpoints: (builder) => ({
