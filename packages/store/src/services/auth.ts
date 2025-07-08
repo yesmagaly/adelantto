@@ -13,8 +13,8 @@ type T_user = {
 type T_error_respose<T extends FieldValues> = {
   status: "fail";
   message: string;
-  errors: Partial<Record<keyof FieldErrors<T>, string[]>>
-}
+  errors: Partial<Record<keyof FieldErrors<T>, string[]>>;
+};
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -32,7 +32,25 @@ export const authApi = createApi({
       }),
       invalidatesTags: (_post, _error) => [{ type: "User", id: _post?.id }],
     }),
+
+    loginUser: builder.mutation<T_user, { email: string; password: string }>({
+      query: (body) => ({
+        url: "/login",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_post, _error) => [{ type: "User", id: _post?.id }],
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          console.error("data:", data);
+          // localStorage.setItem("user", JSON.stringify(data));
+        } catch (error) {
+          console.error("Failed to save user to local storage:", error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useRegisterUserMutation } = authApi;
+export const { useRegisterUserMutation, useLoginUserMutation } = authApi;
