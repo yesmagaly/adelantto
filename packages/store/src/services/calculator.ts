@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CREATE_authHeaders } from "../utils/createAuthHeaders";
+import { setAuthHeaders } from "../utils/setAuthHeaders";
 import { BASE_URL } from "../constants";
 
 type T_offer = {
@@ -14,7 +14,7 @@ export const calculatorApi = createApi({
   reducerPath: "calculatorApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api/calc`,
-    prepareHeaders: CREATE_authHeaders,
+    prepareHeaders: setAuthHeaders,
   }),
   tagTypes: ["Offer"],
   endpoints: (builder) => ({

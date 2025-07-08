@@ -9,23 +9,18 @@ type T_user = {
   is_completed: boolean;
 };
 
-export const userApi = createApi({
-  reducerPath: "userApi",
+export const authApi = createApi({
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/api/user`,
+    baseUrl: `${BASE_URL}/api/auth`,
     prepareHeaders: setAuthHeaders,
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    getUser: builder.query<T_user, void>({
-      query: () => "",
-      providesTags: (_post, _err) => [{ type: "User", id: _post?.id }],
-    }),
-
-    updateUser: builder.mutation<T_user, any>({
+    registerUser: builder.mutation<T_user, any>({
       query: (body) => ({
-        url: "",
-        method: "PUT",
+        url: "/register",
+        method: "POST",
         body,
       }),
       invalidatesTags: (_post, _error) => [{ type: "User", id: _post?.id }],
@@ -33,8 +28,4 @@ export const userApi = createApi({
   }),
 });
 
-export const {
-  useUpdateUserMutation,
-  useGetUserQuery,
-  useLazyGetUserQuery
-} = userApi;
+export const { useRegisterUserMutation } = authApi;

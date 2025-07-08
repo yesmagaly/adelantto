@@ -1,4 +1,4 @@
-export async function CREATE_authHeaders(headers: any) {
+export async function setAuthHeaders(headers: any) {
   const userString = sessionStorage.getItem("AUTH") ?? "{}";
   const user = JSON.parse(userString);
 

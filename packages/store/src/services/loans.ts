@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CREATE_authHeaders } from "../utils/createAuthHeaders";
+import { setAuthHeaders } from "../utils/setAuthHeaders";
 import { BASE_URL } from "../constants";
 
 export type T_loan_item = {
@@ -19,7 +19,7 @@ export const loansApi = createApi({
   reducerPath: "loansApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/api/loans`,
-    prepareHeaders: CREATE_authHeaders,
+    prepareHeaders: setAuthHeaders,
   }),
   tagTypes: ["Loans"],
   endpoints: (builder) => ({
