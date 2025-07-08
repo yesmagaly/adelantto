@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonHeader, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
 
 import * as Modal from "../../components/modal";
 import { t } from "@adelantto/utils";
+import { MaterialIcon } from "@adelantto/core";
 
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
   const [displayedSentModal, setSentModal] = useState(false);
@@ -58,23 +59,28 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
       } else if (response.status === 429) {
         setErrorModal(true);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="heading heading--blue mb-10 flex flex-col justify-center">
-          <div className="heading__pager text-right">Paso 4 de 7</div>
-          <h4 className="text-2xl">
-            Autorización para solicitar reportes de crédito, informes buró y
-            reportes de crédito especiales
-          </h4>
-        </div>
+      <IonHeader>
+        <h1 className="text-h5 text-dark-blue-700 gap-2 inline-flex items-center">
+          <a href="/" className="inline-flex items-center">
+            <MaterialIcon name="arrow_back" />
+          </a>
+          Confirmar autorización de Buró
+        </h1>
+        <p className="text-sm text-dark-gray mt-1">
+          Autorización para solicitar reportes de crédito, informes buró y
+          reportes de crédito especiales
+        </p>
+      </IonHeader>
 
+      <IonContent className="ion-padding">
         <div className="content">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control mx-6">
+            <div className="form-control text-center">
               <label htmlFor="code">Código de confirmación</label>
               <input
                 type="numeric"
@@ -120,7 +126,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
             </div>
 
             <div className="form-actions">
-              <button className="button is-primary">Confirmar</button>
+              <button className="btn btn-block btn-primary">Confirmar</button>
             </div>
           </form>
         </div>
