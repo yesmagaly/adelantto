@@ -24,7 +24,6 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (!authInfo.user?.is_verified) {
-      // router.push("/update-temporary-password");
       router.push("/home");
     }
   }, []);
@@ -41,29 +40,41 @@ const Dashboard: React.FC = () => {
           <div className="gap-6 grid">
             {user && (
               <h1 className="text-h5">
-                <span className="font-normal">¡Hola,</span>
-                <br />
-                {[user.name, user.last_name].join(" ")}!
+                {user?.name && user?.last_name ? (
+                  <>
+                    <span className="font-normal">¡Hola,</span>
+                    <br />
+                    {[user.name, user.last_name].join(" ")}!
+                  </>
+                ) : (
+                  <span className="font-normal">¡Hola!</span>
+                )}
               </h1>
             )}
 
-            {Boolean(user?.is_completed) && (
-              <div role="alert" className="alert alert-horizontal">
+            {!Boolean(user?.is_completed) && (
+              <div
+                role="alert"
+                className="alert alert-horizontal alert-warning"
+              >
                 <MaterialIcon
                   name="info"
-                  className="stroke-info w-6 h-6 shrink-0"
+                  className="stroke-info text-amber-400"
                 />
                 <div>
-                  <h3 className="font-bold">Completa tu perfil</h3>
-                  <div className="text-xs">
+                  <h3 className="mb-1 font-semibold">Completa tu perfil</h3>
+                  <div className="text-gray-900 text-xs">
                     Ingresa tus datos básicos para identificarte correctamente.
                     Esta información es necesaria para poder solicitar tu primer
                     Adelantto.
                   </div>
                 </div>
-                <button className="btn btn-sm">
+                <a
+                  className="btn btn-sm btn-ghost btn-warning"
+                  href="/profile/identification"
+                >
                   <MaterialIcon name="arrow_forward" />
-                </button>
+                </a>
               </div>
             )}
 
@@ -79,9 +90,16 @@ const Dashboard: React.FC = () => {
                     inmueble.
                   </p>
                   <div className="mt-4 card-actions">
-                    <button className="btn-block btn btn-primary">
+                    <a
+                      className="btn-block btn btn-primary"
+                      href={
+                        user?.is_completed
+                          ? "/applications/lease-contract"
+                          : "/profile"
+                      }
+                    >
                       Solicita tu primer Adelantto
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

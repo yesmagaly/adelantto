@@ -1,12 +1,10 @@
-import React from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 
 import logo from "../../assets/icons/logo.svg";
 import InputPassword from "../../components/InputPassword";
 import Loader from "../../components/Loader/Loader";
-import { useLoginUserMutation } from "@adelantto/store";
-import { handleServerErrors } from "@adelantto/utils";
+import { useAuth } from "./authContext";
 
 type T_form = {
   email: string;
@@ -15,7 +13,7 @@ type T_form = {
 
 function Login() {
   const router = useIonRouter();
-  const [mutation] = useLoginUserMutation();
+  const { logIn } = useAuth()!;
 
   const {
     register,
@@ -26,17 +24,10 @@ function Login() {
 
   const onSubmit = async function (form: T_form) {
     try {
-      const response = await mutation(form).unwrap();
-      console.log(response);
-    } catch (error) {
-      const serverErrors = (error as any)?.data?.errors;
-
-      if (errors) {
-        handleServerErrors<T_form>(
-          ["root", "email", "password"],
-          serverErrors
-        ).forEach(([field, error]) => setError(field, error));
-      }
+      await logIn(form);
+      router.push("/home");
+    } catch (error: any) {
+      setError("root", { message: error.message, type: "server" });
     }
   };
 

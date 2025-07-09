@@ -12,7 +12,7 @@ type MyContextInterface = {
   initialize: () => Promise<boolean>;
   logOut: () => Promise<boolean>;
   setUserInfo: (key: string, value: any) => null;
-  logIn: (email: string, password: string) => Promise<any>;
+  logIn: (args: { email: string; password: string }) => Promise<any>;
 };
 
 export const AuthContext = React.createContext<MyContextInterface | undefined>(
@@ -20,8 +20,8 @@ export const AuthContext = React.createContext<MyContextInterface | undefined>(
 );
 
 interface ComponentProps {
-  children: React.ReactNode
-};
+  children: React.ReactNode;
+}
 
 export const AuthProvider = (props: ComponentProps) => {
   const [authInfo, setAuthInfo] = React.useState<UserDataInterface>();
@@ -32,7 +32,13 @@ export const AuthProvider = (props: ComponentProps) => {
     await authentication.logout();
   };
 
-  const logIn = async (email: string, password: string) => {
+  const logIn = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
     const response = await authentication.login({ email, password });
     const data = await response.json();
 
@@ -63,13 +69,13 @@ export const AuthProvider = (props: ComponentProps) => {
       if (authInfo) {
         const updatedAuthInfo = {
           ...authInfo,
-          user
+          user,
         };
 
         setAuthInfo(updatedAuthInfo);
       }
     }
-  }
+  };
 
   const initialize = () => {
     let response = window.sessionStorage.getItem("AUTH") || null;
