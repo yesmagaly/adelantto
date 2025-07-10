@@ -54,7 +54,6 @@ import "./theme/variables.css";
 /* Tailwind styles */
 import "./theme/tailwind.css";
 
-
 import { useAuth } from "./pages/auth/authContext";
 import { InstallmentDetail } from "./pages/loan/InstallmentDetail";
 import { ProfilePage } from "./pages/profile/ProfilePage";
@@ -66,7 +65,7 @@ import { CongratulationsPage } from "./pages/profile/CongratulationsPage";
 import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
 
-import { store } from "@adelantto/store"
+import { store } from "@adelantto/store";
 
 setupIonicReact();
 
@@ -184,10 +183,7 @@ const App: React.FC = () => {
               component={CongratulationsPage}
             />
 
-            <PrivateRoute
-              path="/profile/oops"
-              component={OopsPage}
-            />
+            <PrivateRoute path="/profile/oops" component={OopsPage} />
 
             <PrivateRoute
               path="/applications/lease-contract"
@@ -233,14 +229,18 @@ const App: React.FC = () => {
               component={InstallmentDetail}
             />
 
-            <PrivateRoute path="/validation-error" component={ValidationError} />
+            <PrivateRoute
+              path="/validation-error"
+              component={ValidationError}
+            />
             <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
             <PrivateRoute
               path="/succesful-transaction"
               component={SuccesfulTransaction}
             />
 
-            <PublicRoute path="/start" component={Home} />
+            <PublicRoute path="/" component={Home} exact />
+            <PublicRoute path="/forgot-password" component={ForgotPassword} />
             <PublicRoute path="/create-account" component={Register} />
             <PublicRoute path="/register" component={Register} />
             <PublicRoute path="/login" component={Login} />
@@ -252,11 +252,6 @@ const App: React.FC = () => {
               path="/create-profile/:id"
               component={CreateProfilePage}
             />
-            <PublicRoute path="/forgot-password" component={ForgotPassword} />
-
-            <PublicRoute exact path="/">
-              <Redirect to="/start" />
-            </PublicRoute>
           </IonReactRouter>
         </Provider>
       </IonApp>
