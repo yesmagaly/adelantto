@@ -199,7 +199,7 @@ export const PropertyValidationPage: React.FC = () => {
           />
         </form>
       </IonContent>
-      <IonFooter>
+      <IonFooter className="ion-padding">
         <div className="grid gap-2">
           <button className="btn btn-primary" disabled>
             Continuar
