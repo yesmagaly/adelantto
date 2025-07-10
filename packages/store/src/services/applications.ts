@@ -9,7 +9,7 @@ export type T_application = {
   lease_end_date: string;
   lease_payment_method: string;
 
-  desired_loan_term_frame?: number;
+  pre_offer_term_frame?: number;
 };
 
 export const applicationsApi = createApi({

@@ -12,7 +12,6 @@ import VerificationEmail from "./pages/auth/VerificationEmail";
 import AdvanceImmediately from "./pages/home/AdvanceImmediately";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
-import UploadPictures from "./pages/property/UploadPictures";
 
 import LeaseContract from "./pages/property/LeaseContract";
 import DesiredLoan from "./pages/property/DesiredLoan";
@@ -205,6 +204,10 @@ const App: React.FC = () => {
               component={DesiredLoan}
             />
             <PrivateRoute
+              path="/applications/:id/property-documents"
+              component={UploadDocuments}
+            />
+            <PrivateRoute
               path="/applications/:id/privacy-policy"
               component={PrivacyPolicy}
             />
@@ -220,19 +223,11 @@ const App: React.FC = () => {
               path="/applications/:id/identity-check"
               component={Passport}
             />
-            <PrivateRoute
-              path="/applications/:id/property-documents"
-              component={UploadDocuments}
-            />
-            <PrivateRoute
-              path="/applications/:id/property-pictures"
-              component={UploadPictures}
-            />
+
             <PrivateRoute
               path="/applications/:id/final-announcement"
               component={DataValidation}
             />
-
             <PrivateRoute exact path="/loans/:id" component={Summary} />
             <PrivateRoute path="/loans/:id/success" component={CorrectData} />
             <PrivateRoute

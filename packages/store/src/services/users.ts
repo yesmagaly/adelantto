@@ -5,6 +5,7 @@ import { BASE_URL } from "../constants";
 type T_user = {
   id: string;
   name?: string;
+  email?: string;
   last_name?: string;
   is_completed: boolean;
 };
