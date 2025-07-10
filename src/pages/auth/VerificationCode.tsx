@@ -190,7 +190,7 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
           </button>
         </Modal>
       </IonContent>
-      <IonFooter>
+      <IonFooter className="ion-padding">
         <input
           type="hidden"
           name="root"
