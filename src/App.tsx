@@ -240,10 +240,10 @@ const App: React.FC = () => {
             />
 
             <PublicRoute path="/" component={Home} exact />
+            <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/forgot-password" component={ForgotPassword} />
             <PublicRoute path="/create-account" component={Register} />
             <PublicRoute path="/register" component={Register} />
-            <PublicRoute path="/login" component={Login} />
             <PublicRoute
               path="/verification-code/:id"
               component={VerificationCode}
