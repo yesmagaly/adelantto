@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { IonContent, IonHeader, IonPage, useIonRouter } from "@ionic/react";
+import {
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  useIonRouter,
+} from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
@@ -38,8 +44,8 @@ const PrivacyPolicy: React.FC = ({ match }) => {
         </p>
       </IonHeader>
       <IonContent className="ion-padding">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="&_p:mb-4 mb-7 flex flex-col gap-4 px-1">
+        <form id="form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="prose prose-sm">
             <p>
               Por este conducto autorizo expresamente a{" "}
               <strong>SOLUCIONES INTEGRALES TAFS, SAPI DE C.V.</strong> para que
@@ -76,9 +82,13 @@ const PrivacyPolicy: React.FC = ({ match }) => {
               considerará como Confidencial.
             </p>
           </div>
-          <button className="btn btn-block btn-primary">Aceptar</button>
         </form>
       </IonContent>
+      <IonFooter className="ion-padding">
+        <button type="submit" form="form" className="btn-block btn btn-primary">
+          Aceptar
+        </button>
+      </IonFooter>
     </IonPage>
   );
 };

@@ -20,7 +20,7 @@ import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 
 type T_form = T_application & {
-  desired_loan_term_frame?: number;
+  pre_offer_term_frame?: number;
 };
 
 interface DesiredLoanProps
@@ -37,53 +37,51 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const [options, setOptions] = useState<Array<number>>([]);
 
   const { register, setValue, handleSubmit, watch } = useForm<T_form>({
-    defaultValues: async () => await trigger(match.params.id).unwrap(),
+    defaultValues: async () => {
+      try {
+        const values = await trigger(match.params.id).unwrap();
+        const options = [3, 6, 8, 12].filter((value) =>
+          atLeastThreeMonths(values.lease_end_date, value)
+        );
+
+        setOptions(options);
+        return values;
+      } catch (error) {
+        return {};
+      }
+    },
   });
 
-  const desired_loan_term_frame = watch("desired_loan_term_frame");
+  const pre_offer_term_frame = watch("pre_offer_term_frame");
 
   useEffect(() => {
-    if (application?.lease_end_date) {
-      const options = [3, 6, 8, 12].filter((value) =>
-        atLeastThreeMonths(application.lease_end_date, value)
-      );
-
+    if (application?.lease_end_date && !application?.pre_offer_term_frame) {
       setValue(
-        "desired_loan_term_frame",
+        "pre_offer_term_frame",
         options.length > 0 ? options[options.length - 1] : undefined
       );
-
-      setOptions(options);
     }
-  }, [application]);
+  }, [application, options]);
 
   useEffect(() => {
     const fetchLoanContract = async () => {
-      if (desired_loan_term_frame && application?.lease_monthly_income) {
+      if (pre_offer_term_frame && application?.lease_monthly_income) {
         const data = await getLazyOffer({
-          principal: application.lease_monthly_income * desired_loan_term_frame,
-          months: desired_loan_term_frame,
+          principal: application.lease_monthly_income * pre_offer_term_frame,
+          months: pre_offer_term_frame,
         }).unwrap();
 
         setValue("pre_offer_amount", data.principal);
         setValue("pre_offer_fees", data.fees);
         setValue("pre_offer_commissions", data.iva_commission);
-        setValue("pre_offer_term_frame", months);
       }
     };
     fetchLoanContract();
-  }, [desired_loan_term_frame]);
+  }, [pre_offer_term_frame]);
 
   const onSubmit = async (form: T_form) => {
-    if (application?.lease_monthly_income && desired_loan_term_frame) {
-      await mutation({
-        ...form,
-        desired_loan_amount:
-          application.lease_monthly_income * desired_loan_term_frame,
-      }).unwrap();
-
-      router.push(`/applications/${match.params.id}/property-documents`);
-    }
+    await mutation(form).unwrap();
+    router.push(`/applications/${match.params.id}/property-documents`);
   };
 
   return (
@@ -102,7 +100,11 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
       </IonHeader>
 
       <IonContent className="ion-padding">
-        <form id="form" className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="form"
+          className="gap-4 grid"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <h3 className="text-h6 text-center">Cantidad de meses</h3>
           <div className="flex gap-4">
             {!isLoading &&
@@ -114,33 +116,33 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   type="button"
                   className={cn(
                     "btn btn-outline flex-1/4 h-30 rounded-xl",
-                    value === desired_loan_term_frame && "btn-active"
+                    value === pre_offer_term_frame && "btn-active"
                   )}
-                  onClick={() => setValue("desired_loan_term_frame", value)}
+                  onClick={() => setValue("pre_offer_term_frame", value)}
                 >
                   <div className="w-full text-2xl">{value}</div>
                 </button>
               ))}
           </div>
-          <h4 className="text-center underline font-semibold">
-            Definir manualmente
-          </h4>
+
+          <h4 className="text-center link">Definir manualmente</h4>
+
           {offer && (
-            <div className="bg-blue-600 card">
+            <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card">
               <div className="gap-4 card-body">
-                <div className="text-white text-center">
+                <div className="text-center">
                   <div className="text-emerald-300 text-h2">
                     {formatCurrency(offer.advance)} MXN
                   </div>
                   <p className="text-purple-200">Total que recibiras</p>
                 </div>
-                <div className="text-white text-center">
+                <div className="text-center">
                   <div className="text-h4">
                     {formatCurrency(offer.principal)} MXN
                   </div>
                   <p className="text-purple-200">Total que pagarás</p>
                 </div>
-                <div className="text-white text-center">
+                <div className="text-center">
                   <div className="text-h4">
                     {formatCurrency(offer.fees)} MXN
                   </div>
@@ -156,16 +158,17 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
         <button type="submit" form="form" className="btn-block btn btn-primary">
           Subir documentación
         </button>
-        <span className="text-gray-900 text-xs text-wrap text-center">
+
+        <p className="mt-4 text-gray-900 text-xs text-center text-wrap">
           He leído y estoy de acuerdo con el{" "}
           <a
             href="https://adelanttocash.com/aviso-de-privacidad"
             target="_blank"
-            className="text-emerald-800"
+            className="text-emerald-700 no-underline link"
           >
             Aviso de Privacidad
           </a>
-        </span>
+        </p>
       </IonFooter>
     </IonPage>
   );

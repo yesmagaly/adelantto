@@ -8,9 +8,6 @@ import {
 import { useForm } from "react-hook-form";
 
 import FileInputItem from "../../components/FileInputItem";
-import { applications } from "../../api";
-import ErrorMessage from "../../components/ErrorMessage";
-import * as Tooltip from "../../components/Tooltip";
 import {
   useLazyGetApplicationQuery,
   useUpdateApplicationMutation,
@@ -45,7 +42,7 @@ const UploadDocuments: React.FC = ({ match }) => {
   const onSubmit = async (data: T_form) => {
     try {
       await migration(data).unwrap();
-      router.push(`/applications/${match.params.id}/property-pictures`);
+      router.push(`/applications/${match.params.id}/privacy-policy`);
     } catch (error) {
       console.log(error);
     }
@@ -99,7 +96,7 @@ const UploadDocuments: React.FC = ({ match }) => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="h-5 w-5 shrink-0 stroke-current inline"
+              className="inline stroke-current w-5 h-5 shrink-0"
             >
               <path
                 stroke-linecap="round"
@@ -146,10 +143,14 @@ const UploadDocuments: React.FC = ({ match }) => {
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button className="btn-block btn mb-2" type="submit" form="form">
+        <button
+          className="btn-block mb-2 btn-primary btn"
+          type="submit"
+          form="form"
+        >
           Continuar
         </button>
-        <button className="btn-block btn btn-outline" type="submit" form="form">
+        <button className="btn-block btn-outline btn" type="submit" form="form">
           Guardar como borrador
         </button>
       </IonFooter>

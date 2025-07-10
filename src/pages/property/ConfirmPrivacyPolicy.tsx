@@ -65,13 +65,13 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
   return (
     <IonPage>
       <IonHeader>
-        <h1 className="text-h5 text-dark-blue-700 gap-2 inline-flex items-center">
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
           <a href="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </a>
           Confirmar autorización de Buró
         </h1>
-        <p className="text-sm text-dark-gray mt-1">
+        <p className="mt-1 text-dark-gray text-sm">
           Autorización para solicitar reportes de crédito, informes buró y
           reportes de crédito especiales
         </p>
@@ -80,7 +80,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
       <IonContent className="ion-padding">
         <div className="content">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control text-center">
+            <div className="text-center form-control">
               <label htmlFor="code">Código de confirmación</label>
               <input
                 type="numeric"
@@ -107,7 +107,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
               )}
             </div>
 
-            <div className="mb-8 flex flex-col gap-4 [&>p]:text-balance">
+            <div className="flex flex-col gap-4 mb-8 [&>p]:text-balance">
               <p>
                 Al confirmar el código SMS, acepto las políticas de privacidad
                 de la aplicación.
@@ -126,7 +126,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
             </div>
 
             <div className="form-actions">
-              <button className="btn btn-block btn-primary">Confirmar</button>
+              <button className="btn-block btn btn-primary">Confirmar</button>
             </div>
           </form>
         </div>
