@@ -12,7 +12,7 @@ const Home: React.FC = () => {
         }}
         className="ion-padding"
       >
-        <div className={`flex flex-col justify-center px-4 py-6 h-full`}>
+        <div className="flex flex-col justify-center py-6 h-full">
           <div className="mb-14 text-center">
             <img className="inline-block mb-16 w-[220px] h-40" src={logo} />
             <h2 className="mb-4 font-semibold text-2xl">
