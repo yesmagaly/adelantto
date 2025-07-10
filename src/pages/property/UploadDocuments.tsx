@@ -84,7 +84,7 @@ const UploadDocuments: React.FC = ({ match }) => {
           <div className="control">
             <label className="control-label">Folio Real</label>
             <input
-              {...register("commercial_folio")}
+              {...register("property_commercial_folio")}
               className="input validator"
               placeholder="123456"
               required

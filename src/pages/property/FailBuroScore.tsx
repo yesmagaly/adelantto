@@ -9,21 +9,21 @@ const FailBuroScore: React.FC = () => {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <img src={adelanttoBg} className="absolute inset-0 mx-auto" />
-        <img src={adelanttoBgUrl} className="absolute inset-0 mx-auto" />
+        <img src={adelanttoBg} className="absolute inset-0 w-full" />
+        <img src={adelanttoBgUrl} className="absolute inset-0 w-full" />
         <div className="flex flex-col justify-center items-center h-full">
           <img src={exclamation} alt="exclamation" className="mb-18" />
-          <div className="content heading-light-green">
-            <div className="mb-6 text-center">
+          <div className="flex flex-col items-center gap-6">
+            <div className="text-center">
               <h1 className="mb-3 text-h2">¡Lo sentimos!</h1>
               <p className="text-sm">
                 La puntuación de Buró es baja.
                 <br />
-                Te recomendamos intentarlo nuevamente en <strong>3</strong>{" "}
-                meses.
+                Te recomendamos intentarlo nuevamente <br /> en <strong>3</strong> meses.
               </p>
             </div>
-            <a className="btn-block btn btn-primary" href="/">
+
+            <a className="btn btn-primary btn-wide" href="/">
               Aceptar
             </a>
           </div>

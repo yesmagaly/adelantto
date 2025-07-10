@@ -24,8 +24,8 @@ const PrivacyPolicy: React.FC = ({ match }) => {
       step: "confirm_privacy_policy",
     });
 
-    if (response.status === 200) {
-      setOpen(true);
+    if (response.ok) {
+      router.push(`/applications/${match.params.id}/confirm-privacy-policy`);
     }
   };
 

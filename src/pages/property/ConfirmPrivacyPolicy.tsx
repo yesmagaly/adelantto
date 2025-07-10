@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { IonContent, IonHeader, IonPage, useIonRouter } from "@ionic/react";
+import {
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonPage,
+  useIonRouter,
+} from "@ionic/react";
 import { useForm } from "react-hook-form";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
@@ -7,6 +13,10 @@ import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
 import * as Modal from "../../components/modal";
 import { t } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
+
+type T_form = {
+  code: string;
+};
 
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
   const [displayedSentModal, setSentModal] = useState(false);
@@ -23,9 +33,9 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     reset,
     setError,
     formState: { errors },
-  } = useForm();
+  } = useForm<T_form>();
 
-  const onSubmit = async (data: {} | undefined) => {
+  const onSubmit = async (data: T_form) => {
     const response = await applications.confirmPrivacyPolicy(
       applicationId,
       data
@@ -79,26 +89,29 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
 
       <IonContent className="ion-padding">
         <div className="content">
-          <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="text-center form-control">
-              <label htmlFor="code">Código de confirmación</label>
-              <input
-                type="numeric"
-                maxLength={6}
-                minLength={6}
-                {...register("code", { required: true })}
-                className="mb-4"
-              />
+          <form id="form" onSubmit={handleSubmit(onSubmit)}>
+            <div className="control">
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">
+                  Código de confirmación
+                </legend>
+                <input
+                  type="numeric"
+                  maxLength={6}
+                  minLength={6}
+                  {...register("code", { required: true })}
+                  className="input validator"
+                  aria-invalid={errors.code ? "true" : "false"}
+                />
+                <p className="text-center">
+                  El código expirará en {minutes}:{seconds} min
+                </p>
+              </fieldset>
 
               <p className="text-primary-green">
-                {minutes}:{seconds}
               </p>
 
-              {errors?.code && (
-                <p className="font-medium text-orange-500">
-                  {errors.code?.message}
-                </p>
-              )}
+              <p className="hidden validator-hint">{errors.code?.message}</p>
 
               {isExpired && (
                 <p className="font-medium text-orange-500">
@@ -107,26 +120,11 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
               )}
             </div>
 
-            <div className="flex flex-col gap-4 mb-8 [&>p]:text-balance">
-              <p>
-                Al confirmar el código SMS, acepto las políticas de privacidad
-                de la aplicación.
-              </p>
-
-              <p>
-                Si no recibiste el código, envíalo nuevamente desde{" "}
-                <button
-                  type="button"
-                  onClick={handleResendCode}
-                  className="font-medium underline"
-                >
-                  aquí
-                </button>
-              </p>
-            </div>
-
-            <div className="form-actions">
-              <button className="btn-block btn btn-primary">Confirmar</button>
+            <div className="mt-6 text-center">
+              <p>¿No has recibido el código?</p>
+              <a onClick={() => router.push("/register")} className="link">
+                Reenviar código
+              </a>
             </div>
           </form>
         </div>
@@ -159,6 +157,19 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
           </Modal.Footer>
         </Modal.Root>
       </IonContent>
+      <IonFooter className="ion-padding">
+        <button form="form" type="submit" className="btn-block btn btn-primary">
+          Confirmar
+        </button>
+
+        <p className="mt-4 text-gray-800 text-xs text-center">
+          Al confirmar el código SMS, acepto las{" "}
+          <a className="text-emerald-700 link" href="#">
+            Políticas de Privacidad
+          </a>{" "}
+          de la aplicación.
+        </p>
+      </IonFooter>
     </IonPage>
   );
 };
