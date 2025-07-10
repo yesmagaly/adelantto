@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 import { MaterialIcon } from "@adelantto/core";
 
@@ -7,6 +7,8 @@ import ApplicationCard from "../../components/ApplicationCard";
 import { useAuth } from "../auth/authContext";
 import { AppNav } from "../../layout/AppNav";
 import adelanttoBgTopRightUrl from "../../v2/assets/images/adelantto-bg-top-right.png";
+import exclamation from "../../v2/assets/svgs/exclamation.svg";
+
 import {
   useGetApplicationsQuery,
   useGetLoansQuery,
@@ -14,6 +16,7 @@ import {
 } from "@adelantto/store";
 
 const Dashboard: React.FC = () => {
+  const modalRef = useRef<HTMLDialogElement>(null);
   const { authInfo, logOut } = useAuth()!;
   const router = useIonRouter();
 
@@ -47,7 +50,7 @@ const Dashboard: React.FC = () => {
                     {[user.name, user.last_name].join(" ")}!
                   </>
                 ) : (
-                  <span className="font-normal">¡Hola!</span>
+                  <span>¡Hola!</span>
                 )}
               </h1>
             )}
@@ -90,16 +93,20 @@ const Dashboard: React.FC = () => {
                     inmueble.
                   </p>
                   <div className="mt-4 card-actions">
-                    <a
+                    <button
                       className="btn-block btn btn-primary"
-                      href={
-                        user?.is_completed
-                          ? "/applications/lease-contract"
-                          : "/profile"
-                      }
+                      onClick={() => {
+                        if (user?.is_completed) {
+                          router.push("/applications/lease-contract");
+                        } else {
+                          if (modalRef.current) {
+                            modalRef.current.showModal();
+                          }
+                        }
+                      }}
                     >
                       Solicita tu primer Adelantto
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -162,6 +169,39 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <dialog ref={modalRef} id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <button
+              className="top-0.5 right-0.5 absolute btn btn-sm btn-circle btn-ghost"
+              onClick={() => modalRef.current?.close()}
+            >
+              <MaterialIcon name="close" className="text-red-500" size="20px" />
+            </button>
+
+            <div className="flex flex-col items-center gap-6">
+              <img src={exclamation} alt="exclamation" className="size-32" />
+
+              <div className="flex flex-col items-center gap-2">
+                <h1 className="text-h2">¡Ups!</h1>
+                <p className="max-w-3/4 text-sm text-center">
+                  Debes completar tu perfil para solicitar tu primer Adelantto
+                </p>
+              </div>
+            </div>
+
+            <div className="justify-center px-4 modal-action">
+              <form method="dialog" className="w-full">
+                <button
+                  className="btn-block btn btn-primary"
+                  onClick={() => router.push("/profile/identification")}
+                >
+                  Completa tu perfil
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </IonContent>
       <IonFooter>
         <AppNav />
