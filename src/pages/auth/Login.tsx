@@ -6,6 +6,8 @@ import InputPassword from "../../components/InputPassword";
 import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
+import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
+
 type T_form = {
   email: string;
   password: string;
@@ -33,8 +35,13 @@ function Login() {
 
   return (
     <IonPage>
-      <IonContent fullscreen class="ion-padding">
-        <img className="mx-auto mb-20 h-40" src={logo} />
+      <IonContent
+        class="ion-padding"
+        style={{
+          "--background": `url(${adelanttoBgUrl}) no-repeat center top`,
+        }}
+      >
+        <img className="mx-auto my-20 h-40" src={logo} alt="Adelantto Logo" />
         <h1 className="mb-2 w-full font-semibold text-xl">Iniciar sesión</h1>
 
         {errors.root && (
