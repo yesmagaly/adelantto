@@ -6,6 +6,7 @@ import { FieldErrors, FieldValues } from "react-hook-form";
 type T_user = {
   id: string;
   name?: string;
+  phone?: string;
   last_name?: string;
   is_completed: boolean;
 };
