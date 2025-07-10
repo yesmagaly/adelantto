@@ -99,13 +99,13 @@ const Register: React.FC = () => {
             </label>
             <input
               {...register("email", {
-                required: t("Your email is required."),
+                required: t("Your email is required"),
                 validate: (value) => {
                   if (
                     value &&
                     !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(value)
                   ) {
-                    return t("Your email is invalid.");
+                    return t("Your email is invalid");
                   }
                 },
               })}
@@ -189,7 +189,9 @@ const Register: React.FC = () => {
               placeholder="Asegura tu seguridad"
             />
 
-            <PasswordStrength password={watch("password")} />
+            {errors.password && (
+              <PasswordStrength password={watch("password")} />
+            )}
           </div>
 
           <div className="control">
@@ -198,7 +200,7 @@ const Register: React.FC = () => {
               {...register("confirm_password", {
                 validate: (value) => {
                   if (value !== watch("password")) {
-                    return t("Your passwords do not match.");
+                    return t("Your passwords do not match");
                   }
                 },
               })}
