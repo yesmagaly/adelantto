@@ -10,8 +10,8 @@ export const CongratulationsPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <img src={adelanttoBgUrl} className="absolute inset-0 mx-auto" />
-        <img src={adelanttoBg} className="absolute inset-0 mx-auto" />
+        <img src={adelanttoBgUrl} className="absolute inset-0 w-full" />
+        <img src={adelanttoBg} className="absolute inset-0 w-full" />
 
         <div className="flex flex-col justify-center items-center h-full">
           <img src={fireworks} alt="fireworks" className="mb-18" />

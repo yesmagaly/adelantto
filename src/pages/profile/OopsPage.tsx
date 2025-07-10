@@ -10,8 +10,8 @@ export const OopsPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <img src={adelanttoBg} className="absolute inset-0 mx-auto" />
-        <img src={adelanttoBgUrl} className="absolute inset-0 mx-auto" />
+        <img src={adelanttoBg} className="absolute inset-0 w-full" />
+        <img src={adelanttoBgUrl} className="absolute inset-0 w-full" />
 
         <div className="flex flex-col justify-center items-center h-full">
           <img src={exclamation} alt="exclamation" className="mb-18" />
