@@ -150,12 +150,11 @@ const App: React.FC = () => {
         <Provider store={store}>
           <IonReactRouter>
             <PrivateRoute path="/home" component={Dashboard} />
-
+            <PrivateRoute path="/welcome" component={Welcome} />
             <PrivateRoute
               path="/update-temporary-password"
               component={UpdateTemporaryPassword}
             />
-            <PrivateRoute path="/welcome" component={Welcome} />
             <PrivateRoute
               path="/advance-immediately"
               component={AdvanceImmediately}
