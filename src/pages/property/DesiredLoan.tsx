@@ -106,7 +106,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <h3 className="text-h6 text-center">Cantidad de meses</h3>
-          <div className="flex gap-4">
+          <div className="flex justify-center gap-4">
             {!isLoading &&
               application &&
               options.map((value) => (
@@ -115,7 +115,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   id={`desired-loan-${value}`}
                   type="button"
                   className={cn(
-                    "btn btn-outline flex-1/4 h-30 rounded-xl",
+                    "btn btn-outline flex-1/4 h-30 rounded-xl max-w-1/4",
                     value === pre_offer_term_frame && "btn-active"
                   )}
                   onClick={() => setValue("pre_offer_term_frame", value)}
