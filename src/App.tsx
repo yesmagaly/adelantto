@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import VerificationCode from "./pages/auth/VerificationCode";
-import VerificationEmail from "./pages/auth/VerificationEmail";
 import AdvanceImmediately from "./pages/home/AdvanceImmediately";
 
 import UploadDocuments from "./pages/property/UploadDocuments";
@@ -26,7 +25,6 @@ import CorrectDeposit from "./pages/CorrectDeposit";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
-import Info from "./pages/Info";
 
 import Summary from "./pages/loan/Summary";
 
@@ -158,10 +156,6 @@ const App: React.FC = () => {
               path="/update-temporary-password"
               component={UpdateTemporaryPassword}
             />
-            <PrivateRoute
-              path="/documents-required"
-              children={<Info cta={{ url: "/home", label: "Continuar" }} />}
-            />
             <PrivateRoute path="/welcome" component={Welcome} />
             <PrivateRoute
               path="/advance-immediately"
@@ -255,18 +249,11 @@ const App: React.FC = () => {
               component={VerificationCode}
             />
             <PublicRoute
-              path="/verification-email/:phone"
-              component={VerificationEmail}
-            />
-            <PublicRoute
               path="/create-profile/:id"
               component={CreateProfilePage}
             />
             <PublicRoute path="/forgot-password" component={ForgotPassword} />
-            <PublicRoute
-              path="/info"
-              children={<Info cta={{ url: "/start", label: "Regresar" }} />}
-            />
+
             <PublicRoute exact path="/">
               <Redirect to="/start" />
             </PublicRoute>
