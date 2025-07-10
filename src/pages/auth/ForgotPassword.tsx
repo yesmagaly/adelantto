@@ -56,12 +56,12 @@ const ForgotPassword: React.FC = () => {
           />
 
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <p className="help-text mb-10">
+            <p className="mb-10 help-text">
               Enviaremos una contraseña temporal a tu correo electrónico.
             </p>
 
             <div className="mb-6">
-              <input type="email" required placeholder="Email" {...register('email')} />
+              <input className="input" type="email" required placeholder="Email" {...register('email')} />
             </div>
             <button className="button is-primary">Enviar</button>
           </form>
@@ -70,7 +70,7 @@ const ForgotPassword: React.FC = () => {
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={showSuccessModal}>
-          <h3 className="mb-5 text-center text-lg font-semibold">
+          <h3 className="mb-5 font-semibold text-lg text-center">
             Success
           </h3>
           <p>Una contraseña temporal fue enviada a su correo electrónico.</p>
@@ -80,7 +80,7 @@ const ForgotPassword: React.FC = () => {
         </Modal>
 
         <Modal isOpen={showErrorModal}>
-          <h3 className="mb-5 text-center text-lg font-semibold">
+          <h3 className="mb-5 font-semibold text-lg text-center">
             Lo sentimos
           </h3>
 
