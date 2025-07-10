@@ -1,14 +1,10 @@
 import { MaterialIcon } from "@adelantto/core";
 import { IonContent, IonFooter, IonPage } from "@ionic/react";
 import { AppNav } from "../../layout/AppNav";
-import FileInputItem from "../../components/FileInputItem";
-import { useForm } from "react-hook-form";
 import { useGetUserQuery } from "@adelantto/store";
 
 export function ProfilePage() {
   const { data: user, isLoading: isUserLoading } = useGetUserQuery();
-  const { control, handleSubmit } = useForm();
-  const onSubmit = () => {};
 
   return (
     <IonPage>
