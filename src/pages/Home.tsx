@@ -20,7 +20,7 @@ const Home: React.FC = () => {
               <span className="text-emerald-700">en liquidez inmediata</span>
             </h2>
 
-            <p className="text-dark-gray text-balance leading-tight">
+          <p className="text-dark-gray text-balance leading-tight">
               Con AdelanttoCash®, anticipa hasta 12 meses de renta en menos de 3
               días. Solo para quienes ya tienen rentado un inmueble.
             </p>
