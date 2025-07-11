@@ -51,7 +51,20 @@ export const authApi = createApi({
         }
       },
     }),
+
+    recoverPassword: builder.mutation<T_user, { email: string }>({
+      query: (body) => ({
+        url: "/recover-password",
+        method: "POST",
+        body,
+      }),
+    }),
+
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation } = authApi;
+export const {
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useRecoverPasswordMutation
+} = authApi;
