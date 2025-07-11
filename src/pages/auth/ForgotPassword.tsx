@@ -1,37 +1,50 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { authentication } from "../../api";
-import Modal from "../../components/modal";
-import Loader from "../../components/Loader/Loader";
-import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
-import logo from "../../assets/icons/logo.svg";
+import { useRecoverPasswordMutation } from "@adelantto/store";
 
-type FormValues = {
-  email: string | undefined;
+import Loader from "../../components/Loader/Loader";
+import logo from "../../assets/icons/logo.svg";
+import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
+import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import { handleServerErrors, t } from "@adelantto/utils";
+
+type T_form = {
+  email: string;
 };
 
 const ForgotPassword: React.FC = () => {
-  const [showErrorModal, setErrorModal] = useState(false);
-  const [showSuccessModal, setSuccessModal] = useState(false);
+  const [mutation] = useRecoverPasswordMutation();
+  const modalRef = useRef<HTMLDialogElement>(null);
   const router = useIonRouter();
+
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<T_form>();
 
-  const onSubmit = async function (data: FormValues) {
-    const response = await authentication.forgotPassword(data);
-    const json = await response.json();
+  const onSubmit = async function (form: T_form) {
+    try {
+      await mutation(form).unwrap();
 
-    if (response.status === 200) {
-      setSuccessModal(true);
-    } else {
-      // Show server errors.
-      setError("email", { message: json.message, type: "server" });
-      setErrorModal(true);
+      if (modalRef.current) {
+        modalRef.current.showModal();
+      }
+    } catch (error: any) {
+      const errors = error?.data?.errors;
+
+      if (errors) {
+        handleServerErrors<T_form>(["email"], errors).forEach(
+          ([field, errorOption]) => setError(field, errorOption)
+        );
+      } else {
+        setError("root", {
+          message: t("Something went wrong"),
+          type: "server",
+        });
+      }
     }
   };
 
@@ -55,7 +68,7 @@ const ForgotPassword: React.FC = () => {
             </p>
           )}
 
-          <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
+          <form className="gap-6 grid" onSubmit={handleSubmit(onSubmit)}>
             <div className="control">
               <label className="control-label">
                 Enviaremos una contraseña temporal a tu correo electrónico.
@@ -68,38 +81,44 @@ const ForgotPassword: React.FC = () => {
                 type="email"
                 aria-invalid={errors.root || errors.email ? "true" : "false"}
               />
+              <p className="hidden validator-hint">{errors.email?.message}</p>
             </div>
-            <button className="btn-block btn btn-primary">Enviar</button>
+
+            <button
+              className="btn-block btn btn-primary"
+              disabled={isSubmitting}
+            >
+              Enviar
+            </button>
           </form>
 
           <Loader isOpen={isSubmitting} />
         </div>
 
-        <Modal isOpen={showSuccessModal}>
-          <h3 className="mb-5 font-semibold text-lg text-center">Success</h3>
-          <p>Una contraseña temporal fue enviada a su correo electrónico.</p>
-          <button
-            className="button is-primary"
-            onClick={() => router.push(`/login`)}
-          >
-            Continuar
-          </button>
-        </Modal>
+        <dialog ref={modalRef} id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <div className="flex flex-col items-center gap-6">
+              <img src={exclamation} alt="exclamation" className="size-24" />
 
-        <Modal isOpen={showErrorModal}>
-          <h3 className="mb-5 font-semibold text-lg text-center">
-            Lo sentimos
-          </h3>
+              <div className="flex flex-col items-center gap-2">
+                <p className="max-w-3/4 text-sm text-center">
+                  Una contraseña temporal fue enviada a su correo electrónico.
+                </p>
+              </div>
+            </div>
 
-          {errors?.email && <p>{errors?.email?.message}</p>}
-
-          <button
-            className="button is-primary"
-            onClick={() => setErrorModal(false)}
-          >
-            Cerrar
-          </button>
-        </Modal>
+            <div className="justify-center px-4 modal-action">
+              <form method="dialog" className="w-full">
+                <button
+                  className="btn-block btn btn-primary"
+                  onClick={() => router.push("/login")}
+                >
+                  Continuar
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </IonContent>
     </IonPage>
   );
