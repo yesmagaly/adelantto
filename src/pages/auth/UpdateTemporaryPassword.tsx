@@ -116,10 +116,10 @@ const UpdateTemporaryPassword: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className="blue-bg flex h-full flex-col items-center justify-center text-center">
+        <div className="flex flex-col justify-center items-center h-full text-center blue-bg">
           <img className="mb-5 w-44" src={logo} />
           <div className="text-white">
-            <h1 className="mb-4 text-4xl font-semibold">¡Bienvenido!</h1>
+            <h1 className="mb-4 font-semibold text-4xl">¡Bienvenido!</h1>
             <p className="mb-8 text-lg leading-6">
               Ahora eres parte <br />
               <strong> de AdelanttoCash® </strong>
@@ -127,13 +127,14 @@ const UpdateTemporaryPassword: React.FC = () => {
           </div>
 
           <div>
-            <p className="mb-8 text-xl font-medium text-white">Actualiza tu contraseña</p>
+            <p className="mb-8 font-medium text-white text-xl">Actualiza tu contraseña</p>
 
-            <form className="form mb-16 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col mb-16 form" onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
                 <label className="font-normal! text-white">Nueva contraseña</label>
                 <InputPassword
                   {...register("password")}
+                  className="input"
                   required
                 />
               </div>
@@ -141,6 +142,7 @@ const UpdateTemporaryPassword: React.FC = () => {
                 <label className="font-normal! text-white">Repite tu nueva contraseña</label>
                 <InputPassword
                   {...register("password_confirmation")}
+                  className="input"
                   required
                 />
               </div>
@@ -149,14 +151,14 @@ const UpdateTemporaryPassword: React.FC = () => {
                 Cambiar contraseña
               </button>
             </form>
-            <div className="border-bottom border-white" />
+            <div className="border-white border-bottom" />
           </div>
         </div>
 
         <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
-          <h3 className="mb-5 text-center text-lg font-semibold">
+          <h3 className="mb-5 font-semibold text-lg text-center">
             Lo sentimos
           </h3>
           {<p>{errors?.password?.message}</p>}
