@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
-import { MaterialIcon } from "@adelantto/core";
 
+import { Carousel, CarouselItem, MaterialIcon } from "@adelantto/core";
 import LoanCard from "../../components/LoanCard";
 import ApplicationCard from "../../components/ApplicationCard";
 import { useAuth } from "../auth/authContext";
@@ -30,6 +30,10 @@ const Dashboard: React.FC = () => {
       router.push("/home");
     }
   }, []);
+
+  const OPTIONS = {};
+  const SLIDE_COUNT = 5;
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
   return (
     <IonPage>
@@ -152,21 +156,43 @@ const Dashboard: React.FC = () => {
               Temas de interés
             </h2>
 
-            <div className="bg-base-100 shadow-sm card">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="p-4 card-body">
-                <h2 className="card-title">Card Title</h2>
-                <p>
-                  A card component has a figure, a body part, and inside body
-                  there are title and actions parts
-                </p>
-              </div>
-            </div>
+            <Carousel slides={SLIDES} options={OPTIONS} displayDots>
+              <CarouselItem>
+                <div className="bg-base-100 shadow-md mx-1 mb-2 card">
+                  <figure>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="p-4 card-body">
+                    <h2 className="card-title">Multi-Adelanttos</h2>
+                    <p>
+                      Transformamos tus rentas futuras en capital disponible
+                      hoy.
+                    </p>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem>
+                <div className="bg-base-100 shadow-md mx-1 mb-2 card">
+                  <figure>
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="p-4 card-body">
+                    <h2 className="card-title">Multi-Adelanttos</h2>
+                    <p>
+                      Transformamos tus rentas futuras en capital disponible
+                      hoy.
+                    </p>
+                  </div>
+                </div>
+              </CarouselItem>
+            </Carousel>
           </div>
         </div>
 
