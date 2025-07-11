@@ -11,7 +11,6 @@ import {
 } from "./EmblaCarouselArrowButtons";
 
 type T_props = {
-  slides: number[];
   options?: EmblaOptionsType;
   displayButtons?: boolean;
   displayDots?: boolean;
@@ -19,7 +18,7 @@ type T_props = {
 };
 
 export const Carousel: React.FC<T_props> = (props) => {
-  const { slides, options } = props;
+  const { options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
