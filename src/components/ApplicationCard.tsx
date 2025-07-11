@@ -29,37 +29,53 @@ export default function ApplicationCard({
   return (
     <div className={`card card-sm bg-gray-200 ${className}`}>
       <div className="card-body">
-        <h4 className="font-semibold text-lg leading-5">
+        <h4 className="font-semibold text-lg leading-4">
           Solicitud AdelanttoCash® {item.id.toString().padStart(4, "S0")}
         </h4>
+        <div className="flex gap-2 mb-2">
+          <div className="badge-outline text-xs badge">{item.step}</div>
+          <div className="badge-outline text-xs badge">{item.status}</div>
+        </div>
+
         <dl>
           {item.status === "uncompleted" && (
             <>
-              <dt className="float-left mr-1 mb-1">Renta mensual:</dt>
+              <dt className="float-left mr-1 mb-1">
+                Valor de la renta mensual:
+              </dt>
               <dd className="mb-1 font-bold">
                 {formatCurrency(item.lease_monthly_income)} MXN
               </dd>
 
-              <dt className="float-left mr-1 mb-1">Pre-oferta Monto:</dt>
+              <dt className="mt-2 font-semibold">Pre-oferta</dt>
+              <dd className="mb-1 font-bold"></dd>
+
+              <dt className="float-left mr-1 mb-1 ml-2">Cantidad de meses:</dt>
+              <dd className="mb-1 font-bold">
+                {item.pre_offer_term_frame} meses
+              </dd>
+
+              <dt className="float-left mr-1 mb-1 ml-2">Total que pagarás:</dt>
               <dd className="mb-1 font-bold">
                 {formatCurrency(item.pre_offer_amount)} MXN
               </dd>
 
+              <dt className="float-left mr-1 mb-1 ml-2">
+                Total que recibiras:
+              </dt>
+              <dd className="mb-1 font-bold">
+                {formatCurrency(item.pre_offer_amount - item.pre_offer_fees)}{" "}
+                MXN
+              </dd>
 
-              {/* pre_offer_commissions
-              pre_offer_fees
-              pre_offer_term_frame */}
-
-              <div className="text-sm"></div>
-              <h3 className="mb-2 text-xl heading-5">
-                <span className="text-xs">
-                  {item.status} | {item.step}
-                </span>
-              </h3>
+              <dt className="float-left mr-1 mb-1 ml-2">Pago de seguro:</dt>
+              <dd className="mb-1 font-bold">
+                {formatCurrency(item.pre_offer_fees)} MXN
+              </dd>
 
               {redirectTo && (
                 <button
-                  className="btn btn-sm"
+                  className="btn-block mt-2 btn btn-primary"
                   onClick={() => router.push(redirectTo)}
                 >
                   Continuar
