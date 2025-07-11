@@ -3,5 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "main": "src/index.ts",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-react": "^8.6.0"
+  }
 }
