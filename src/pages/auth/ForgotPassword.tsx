@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Lottie from "react-lottie-player";
-import { useForm, Controller } from "react-hook-form";
-import { PatternFormat } from "react-number-format";
+import { useForm } from "react-hook-form";
+import { authentication } from "../../api";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
-
-import registerAnimation from "../../assets/animations/register.json";
-import { API_SERVER_URL } from "../../config";
-import { authentication } from "../../api";
+import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
+import logo from "../../assets/icons/logo.svg";
 
 type FormValues = {
   email: string | undefined;
@@ -40,41 +37,51 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <div className="heading heading--green">
-          <h1 className="heading__title">
-            Recuperar <strong>contraseña</strong>
+      <IonContent
+        class="ion-padding"
+        style={{
+          "--background": `url(${adelanttoBgUrl}) no-repeat center top`,
+        }}
+      >
+        <div className="flex flex-col justify-center py-6 h-full">
+          <img className="mx-auto mb-12 h-40" src={logo} alt="Adelantto Logo" />
+          <h1 className="mb-2 w-full font-semibold text-xl">
+            Recuperar contraseña
           </h1>
-        </div>
 
-        <div className="content">
-          <Lottie
-            animationData={registerAnimation}
-            style={{ width: 174, height: 262 }}
-            loop
-            play
-          />
-
-          <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <p className="mb-10 help-text">
-              Enviaremos una contraseña temporal a tu correo electrónico.
+          {errors.root && (
+            <p className="validator-visible mb-4 validator-hint">
+              {errors.root?.message}
             </p>
+          )}
 
-            <div className="mb-6">
-              <input className="input" type="email" required placeholder="Email" {...register('email')} />
+          <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="control">
+              <label className="control-label">
+                Enviaremos una contraseña temporal a tu correo electrónico.
+              </label>
+              <input
+                {...register("email")}
+                className="input validator"
+                placeholder="Email"
+                required
+                type="email"
+                aria-invalid={errors.root || errors.email ? "true" : "false"}
+              />
             </div>
-            <button className="button is-primary">Enviar</button>
+            <button className="btn-block btn btn-primary">Enviar</button>
           </form>
-        </div>
 
-        <Loader isOpen={isSubmitting} />
+          <Loader isOpen={isSubmitting} />
+        </div>
 
         <Modal isOpen={showSuccessModal}>
-          <h3 className="mb-5 font-semibold text-lg text-center">
-            Success
-          </h3>
+          <h3 className="mb-5 font-semibold text-lg text-center">Success</h3>
           <p>Una contraseña temporal fue enviada a su correo electrónico.</p>
-          <button className="button is-primary" onClick={() => router.push(`/login`)}>
+          <button
+            className="button is-primary"
+            onClick={() => router.push(`/login`)}
+          >
             Continuar
           </button>
         </Modal>
@@ -86,7 +93,10 @@ const ForgotPassword: React.FC = () => {
 
           {errors?.email && <p>{errors?.email?.message}</p>}
 
-          <button className="button is-primary" onClick={() => setErrorModal(false)}>
+          <button
+            className="button is-primary"
+            onClick={() => setErrorModal(false)}
+          >
             Cerrar
           </button>
         </Modal>
