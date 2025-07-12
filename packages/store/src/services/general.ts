@@ -10,22 +10,35 @@ type T_offer = {
   principal: number;
 };
 
-export const calculatorApi = createApi({
-  reducerPath: "calculatorApi",
+type T_zipCode = {
+  zip_code: string;
+  state: string;
+  municipality: string;
+  city: string;
+  place: string;
+};
+
+export const generalApi = createApi({
+  reducerPath: "generalApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/api/calc`,
+    baseUrl: `${BASE_URL}/api`,
     prepareHeaders: setAuthHeaders,
   }),
-  tagTypes: ["Offer"],
+  tagTypes: ["Offer", "ZipCodes"],
   endpoints: (builder) => ({
     getOffer: builder.query<T_offer, { principal: number; months: number }>({
       query: ({ principal, months }) =>
-        `?principal=${principal}&months=${months}`,
+        `/calc?principal=${principal}&months=${months}`,
       providesTags: (_post, _err, args) => [
         { type: "Offer", id: `${args.principal}:${args.months}` },
       ],
     }),
+
+    checkZipCode: builder.query<T_zipCode, string>({
+      query: (code) => `/zip-codes/${code}`,
+      providesTags: (_post, _err, code) => [{ type: "ZipCodes", id: code }],
+    }),
   }),
 });
 
-export const { useLazyGetOfferQuery } = calculatorApi;
+export const { useLazyGetOfferQuery, useLazyCheckZipCodeQuery } = generalApi;
