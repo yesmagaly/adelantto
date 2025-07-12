@@ -38,7 +38,7 @@ const FileInputItem: React.FC<T_props> = ({
   const {
     field: { onChange, value },
     formState,
-    fieldState: {error}
+    fieldState: { error },
   } = useController(props);
 
   const handleChange = async (event: { target: { files: Array<File> } }) => {
@@ -99,6 +99,7 @@ const FileInputItem: React.FC<T_props> = ({
       className={cn(
         "border border-dark-gray-active bg-white p-4 rounded-[12px]",
         hasFiles && "border-lime-300",
+        error?.message && "border-error",
         className
       )}
     >
@@ -177,7 +178,9 @@ const FileInputItem: React.FC<T_props> = ({
       )}
 
       {error?.message && (
-        <p className="mt-1 text-error text-xs">{error.message}</p>
+        <p className="validator-visible !mt-1 validator-hint">
+          {error.message}
+        </p>
       )}
     </div>
   );
