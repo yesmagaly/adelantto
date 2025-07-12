@@ -14,9 +14,7 @@ import UploadDocuments from "./pages/property/UploadDocuments";
 
 import LeaseContract from "./pages/property/LeaseContract";
 import DesiredLoan from "./pages/property/DesiredLoan";
-import Passport from "./pages/identity/Passport";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
-import Welcome from "./pages/Welcome";
 import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
@@ -144,118 +142,110 @@ const App: React.FC = () => {
         </div>
       </IonApp>
     );
-  } else {
-    return (
-      <IonApp>
-        <Provider store={store}>
-          <IonReactRouter>
-            <PrivateRoute path="/home" component={Dashboard} />
-            <PrivateRoute path="/welcome" component={Welcome} />
-            <PrivateRoute
-              path="/update-temporary-password"
-              component={UpdateTemporaryPassword}
-            />
-            <PrivateRoute
-              path="/advance-immediately"
-              component={AdvanceImmediately}
-            />
-            <PrivateRoute path="/profile" component={ProfilePage} />
-            <PrivateRoute
-              path="/profile/identification"
-              component={IdentificationPage}
-            />
-            <PrivateRoute
-              path="/profile/biometric-validation"
-              component={BiometricValidationPage}
-            />
-            <PrivateRoute
-              path="/profile/income-and-taxes"
-              component={IncomeAndTaxesPage}
-            />
-            <PrivateRoute
-              path="/profile/property-validation"
-              component={PropertyValidationPage}
-            />
-
-            <PrivateRoute
-              path="/profile/congratulations"
-              component={CongratulationsPage}
-            />
-
-            <PrivateRoute path="/profile/oops" component={OopsPage} />
-
-            <PrivateRoute
-              path="/applications/lease-contract"
-              component={LeaseContract}
-            />
-            <PrivateRoute
-              path="/applications/:id/desired-loan"
-              component={DesiredLoan}
-            />
-            <PrivateRoute
-              path="/applications/:id/property-documents"
-              component={UploadDocuments}
-            />
-            <PrivateRoute
-              path="/applications/:id/privacy-policy"
-              component={PrivacyPolicy}
-            />
-            <PrivateRoute
-              path="/applications/:id/confirm-privacy-policy"
-              component={ConfirmPrivacyPolicy}
-            />
-            <PrivateRoute
-              path="/applications/:id/fail-buro-score"
-              component={FailBuroScore}
-            />
-            <PrivateRoute
-              path="/applications/:id/identity-check"
-              component={Passport}
-            />
-
-            <PrivateRoute
-              path="/applications/:id/final-announcement"
-              component={DataValidation}
-            />
-            <PrivateRoute exact path="/loans/:id" component={Summary} />
-            <PrivateRoute path="/loans/:id/success" component={CorrectData} />
-            <PrivateRoute
-              path="/loans/:id/account-statement"
-              component={Withdrawals}
-            />
-            <PrivateRoute
-              path="/loans/:id/installments/:installment_id"
-              component={InstallmentDetail}
-            />
-
-            <PrivateRoute
-              path="/validation-error"
-              component={ValidationError}
-            />
-            <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
-            <PrivateRoute
-              path="/succesful-transaction"
-              component={SuccesfulTransaction}
-            />
-
-            <PublicRoute path="/" component={Home} exact />
-            <PublicRoute path="/login" component={Login} />
-            <PublicRoute path="/forgot-password" component={ForgotPassword} />
-            <PublicRoute path="/create-account" component={Register} />
-            <PublicRoute path="/register" component={Register} />
-            <PublicRoute
-              path="/verification-code/:id"
-              component={VerificationCode}
-            />
-            <PublicRoute
-              path="/create-profile/:id"
-              component={CreateProfilePage}
-            />
-          </IonReactRouter>
-        </Provider>
-      </IonApp>
-    );
   }
+  return (
+    <IonApp>
+      <Provider store={store}>
+        <IonReactRouter>
+          <PrivateRoute path="/home" component={Dashboard} />
+          <PrivateRoute
+            path="/update-temporary-password"
+            component={UpdateTemporaryPassword}
+          />
+          <PrivateRoute
+            path="/advance-immediately"
+            component={AdvanceImmediately}
+          />
+
+          <PrivateRoute path="/profile" component={ProfilePage} />
+          <PrivateRoute
+            path="/profile/identification"
+            component={IdentificationPage}
+          />
+          <PrivateRoute
+            path="/profile/biometric-validation"
+            component={BiometricValidationPage}
+          />
+          <PrivateRoute
+            path="/profile/income-and-taxes"
+            component={IncomeAndTaxesPage}
+          />
+          <PrivateRoute
+            path="/profile/property-validation"
+            component={PropertyValidationPage}
+          />
+
+          <PrivateRoute
+            path="/profile/congratulations"
+            component={CongratulationsPage}
+          />
+
+          <PrivateRoute path="/profile/oops" component={OopsPage} />
+
+          <PrivateRoute
+            path="/applications/lease-contract"
+            component={LeaseContract}
+          />
+          <PrivateRoute
+            path="/applications/:id/desired-loan"
+            component={DesiredLoan}
+          />
+          <PrivateRoute
+            path="/applications/:id/property-documents"
+            component={UploadDocuments}
+          />
+          <PrivateRoute
+            path="/applications/:id/privacy-policy"
+            component={PrivacyPolicy}
+          />
+          <PrivateRoute
+            path="/applications/:id/confirm-privacy-policy"
+            component={ConfirmPrivacyPolicy}
+          />
+          <PrivateRoute
+            path="/applications/:id/fail-buro-score"
+            component={FailBuroScore}
+          />
+          <PrivateRoute
+            path="/applications/:id/final-announcement"
+            component={DataValidation}
+          />
+
+          <PrivateRoute exact path="/loans/:id" component={Summary} />
+          <PrivateRoute path="/loans/:id/success" component={CorrectData} />
+          <PrivateRoute
+            path="/loans/:id/account-statement"
+            component={Withdrawals}
+          />
+          <PrivateRoute
+            path="/loans/:id/installments/:installment_id"
+            component={InstallmentDetail}
+          />
+
+          <PrivateRoute path="/validation-error" component={ValidationError} />
+          <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
+          <PrivateRoute
+            path="/succesful-transaction"
+            component={SuccesfulTransaction}
+          />
+
+          <PublicRoute path="/" component={Home} exact />
+          <PublicRoute path="/login" component={Login} />
+          <PublicRoute path="/forgot-password" component={ForgotPassword} />
+          <PublicRoute path="/create-account" component={Register} />
+          <PublicRoute path="/register" component={Register} />
+          <PublicRoute
+            path="/verification-code/:id"
+            component={VerificationCode}
+          />
+          <PublicRoute
+            path="/create-profile/:id"
+            component={CreateProfilePage}
+          />
+        </IonReactRouter>
+      </Provider>
+    </IonApp>
+  );
 };
 
 export default App;
