@@ -8,25 +8,41 @@ import {
 import { useForm } from "react-hook-form";
 
 import { MaterialIcon } from "@adelantto/core";
-import { useUpdateUserMutation, useLazyGetUserQuery } from "@adelantto/store";
+import {
+  useUpdateUserMutation,
+  useLazyGetUserQuery,
+  useLazyCheckZipCodeQuery,
+} from "@adelantto/store";
 
 import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
 import FileInputItem from "../../components/FileInputItem";
+import { useState } from "react";
 
 type T_form = {
   back_id?: File;
   front_id?: File;
+  curp_number?: string;
+  address?: string;
+  zip_code?: string;
 };
 
 export const IdentificationPage: React.FC = () => {
   const router = useIonRouter();
   const [mutation, { isLoading }] = useUpdateUserMutation();
-  const [trigger] = useLazyGetUserQuery();
-  const { handleSubmit, control } = useForm<T_form>({
+  const [getUserQuery] = useLazyGetUserQuery();
+  const [checkZipCodeQuery] = useLazyCheckZipCodeQuery();
+
+  const {
+    handleSubmit,
+    control,
+    register,
+    setError,
+    formState: { errors },
+  } = useForm<T_form>({
     defaultValues: async () => {
       try {
-        return await trigger().unwrap();
+        return await getUserQuery().unwrap();
       } catch (error) {
         return {};
       }
@@ -35,12 +51,27 @@ export const IdentificationPage: React.FC = () => {
 
   const onSubmit = async (form: T_form) => {
     try {
+      if (form.zip_code) {
+        await checkZipCodeQuery(form.zip_code).unwrap();
+      }
+    } catch (error: any) {
+      setError("zip_code", {
+        type: "manual",
+        message: error.data?.message || "Código postal inválido",
+      });
+
+      return;
+    }
+
+    try {
       await mutation(form).unwrap();
-      router.push('/profile/income-and-taxes');
+      router.push("/profile/income-and-taxes");
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(errors);
 
   return (
     <IonPage>
@@ -85,7 +116,6 @@ export const IdentificationPage: React.FC = () => {
             helpText="Tipo de archivo permitido JPG (500MB max)"
             helpPicture={frontIdImageUrl}
           />
-
           <FileInputItem
             name="back_document"
             control={control}
@@ -96,11 +126,60 @@ export const IdentificationPage: React.FC = () => {
             helpText="Tipo de archivo permitido JPG (500MB max)"
             helpPicture={backIdImageUrl}
           />
+          <div className="control">
+            <label className="control-label">
+              Clave Única de Registro de Población
+            </label>
+            <input
+              {...register("curp_number")}
+              type="text"
+              required
+              className="input validator"
+              placeholder="Ingresa tu CURP"
+              aria-invalid={errors.curp_number ? "true" : "false"}
+            />
+            <p className="hidden validator-hint">
+              {errors.curp_number?.message}
+            </p>
+          </div>
+          <div className="control">
+            <label className="control-label">
+              Calle, número exterior / interior
+            </label>
+            <input
+              {...register("address")}
+              type="text"
+              required
+              className="input validator"
+              placeholder="Ingresa tu dirección"
+              aria-invalid={errors.address ? "true" : "false"}
+            />
+            <p className="hidden validator-hint">{errors.address?.message}</p>
+          </div>
+          <div className="control">
+            <label className="control-label">Código postal</label>
+            <input
+              {...register("zip_code")}
+                type="text"
+                required
+                placeholder="Ingresa tu código postal"
+                pattern="[0-9]{4,5}"
+                maxLength={5}
+                className="input validator"
+                aria-invalid={errors.zip_code ? "true" : "false"}
+              />
+            <p className="hidden validator-hint">{errors.zip_code?.message}</p>
+          </div>
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
         <div className="gap-2 grid">
-          <button className="btn btn-primary" type="submit" form="form" disabled={isLoading}>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            form="form"
+            disabled={isLoading}
+          >
             Continuar
           </button>
 
