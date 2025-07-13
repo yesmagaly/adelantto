@@ -5,7 +5,7 @@ export function handleServerErrors<T extends FieldValues>(
   errors: Partial<Record<keyof FieldErrors<T>, string[]>>
 ) {
   return fields.reduce((acc: [keyof FieldErrors<T>, ErrorOption][], field) => {
-    const error = errors[field];
+    const error = errors?.[field];
     if (error && error?.[0]) {
       acc = [
         ...acc,
