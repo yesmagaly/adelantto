@@ -13,6 +13,7 @@ import {
   useUpdateApplicationMutation,
 } from "@adelantto/store";
 import { MaterialIcon } from "@adelantto/core";
+import { handleServerErrors } from "@adelantto/utils";
 
 interface File {
   id: number;
@@ -20,8 +21,10 @@ interface File {
 }
 
 interface T_form {
-  deed_of_ownership?: File;
-  leasing_contract_id: number;
+  property_commercial_folio: string;
+  property_zip_code: string;
+  property_lease_agreement?: File;
+  property_latest_tax_receipt?: File;
 }
 
 const UploadDocuments: React.FC = ({ match }) => {
@@ -35,6 +38,7 @@ const UploadDocuments: React.FC = ({ match }) => {
     handleSubmit,
     register,
     formState: { errors },
+    setError,
   } = useForm<T_form>({
     defaultValues: async () => await trigger(match.params.id).unwrap(),
   });
@@ -43,8 +47,11 @@ const UploadDocuments: React.FC = ({ match }) => {
     try {
       await migration(data).unwrap();
       router.push(`/applications/${match.params.id}/privacy-policy`);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      handleServerErrors<T_form>(
+        ["property_zip_code", "property_commercial_folio"],
+        error.data.errors
+      ).forEach(([field, errorOption]) => setError(field, errorOption));
     }
   };
 
@@ -89,7 +96,11 @@ const UploadDocuments: React.FC = ({ match }) => {
               placeholder="123456"
               required
               type="text"
+              aria-invalid={errors.property_commercial_folio ? "true" : "false"}
             />
+            <p className="hidden validator-hint">
+              {errors.property_commercial_folio?.message}
+            </p>
           </div>
           <div className="flex">
             <svg
@@ -120,7 +131,13 @@ const UploadDocuments: React.FC = ({ match }) => {
               placeholder="123456"
               required
               type="text"
+              maxLength={5}
+              aria-invalid={errors.property_zip_code ? "true" : "false"}
             />
+
+            <p className="hidden validator-hint">
+              {errors.property_zip_code?.message}
+            </p>
           </div>
 
           <FileInputItem
@@ -150,6 +167,7 @@ const UploadDocuments: React.FC = ({ match }) => {
         >
           Continuar
         </button>
+
         <button className="btn-block btn-outline btn" type="submit" form="form">
           Guardar como borrador
         </button>

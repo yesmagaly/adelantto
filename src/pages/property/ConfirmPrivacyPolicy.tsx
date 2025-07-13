@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   IonContent,
   IonFooter,
@@ -7,18 +7,25 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import useCountDownTimer from "../../hooks/useCountDownTimer";
-import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
 
-import * as Modal from "../../components/modal";
 import { t } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
+import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import useCountDownTimer from "../../hooks/useCountDownTimer";
+import * as Modal from "../../components/modal";
+import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
 
 type T_form = {
+  code1?: number;
+  code2?: number;
+  code3?: number;
+  code4?: number;
+
   code: string;
 };
 
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
+  const modalRef = useRef<HTMLDialogElement>(null);
   const [displayedSentModal, setSentModal] = useState(false);
   const [displayedErrorModal, setErrorModal] = useState(false);
   const [displayedCounter, setDisplayedCounter] = useState(true);
@@ -32,6 +39,8 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     register,
     reset,
     setError,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<T_form>();
 
@@ -41,15 +50,17 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
       data
     );
 
+    console.log(response);
+
     if (response.status === 200) {
       stopTimer();
-      router.push(`/applications/${applicationId}/identity-check`);
+      // router.push(`/applications/${applicationId}/identity-check`);
     } else {
       const error = await response.json();
       setDisplayedCounter(false);
 
       if (error.type === "BUREAU_SCORE_TOO_LOW") {
-        router.push(`/applications/${applicationId}/fail-buro-score`);
+        // router.push(`/applications/${applicationId}/fail-buro-score`);
       } else if (error.type === "INVALID_CODE") {
         setError("code", { message: t(error.message) });
       }
@@ -72,6 +83,20 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     } catch (error) {}
   };
 
+  useEffect(() => {
+    const subscribe = watch((form, { name, type }) => {
+      if (type === "change") {
+        const code = `${form.code1}${form.code2}${form.code3}${form.code4}`;
+
+        setValue("code", code, { shouldValidate: true });
+      }
+    });
+
+    return () => {
+      subscribe.unsubscribe();
+    };
+  }, [watch]);
+
   return (
     <IonPage>
       <IonHeader>
@@ -79,7 +104,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
           <a href="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </a>
-          Confirmar autorización de Buró
+          Autorización de Buro
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
           Autorización para solicitar reportes de crédito, informes buró y
@@ -92,35 +117,76 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
           <form id="form" onSubmit={handleSubmit(onSubmit)}>
             <div className="control">
               <fieldset className="fieldset">
-                <legend className="fieldset-legend">
+                <legend className="text-center fieldset-legend">
                   Código de confirmación
                 </legend>
+
+                <div className="flex gap-4">
+                  <input
+                    {...register("code1")}
+                    className="h-24 text-center input validator"
+                    maxLength={1}
+                    minLength={1}
+                    placeholder="0"
+                    required
+                    type="numeric"
+                    aria-invalid={errors.code ? "true" : "false"}
+                  />
+                  <input
+                    {...register("code2")}
+                    className="h-24 text-center input validator"
+                    maxLength={1}
+                    minLength={1}
+                    placeholder="0"
+                    required
+                    type="numeric"
+                    aria-invalid={errors.code ? "true" : "false"}
+                  />
+                  <input
+                    {...register("code3")}
+                    className="h-24 text-center input validator"
+                    maxLength={1}
+                    minLength={1}
+                    placeholder="0"
+                    required
+                    type="numeric"
+                    aria-invalid={errors.code ? "true" : "false"}
+                  />
+                  <input
+                    {...register("code4")}
+                    className="h-24 text-center input validator"
+                    maxLength={1}
+                    minLength={1}
+                    placeholder="0"
+                    required
+                    type="numeric"
+                    aria-invalid={errors.code ? "true" : "false"}
+                  />
+                </div>
+
                 <input
-                  type="numeric"
-                  maxLength={6}
-                  minLength={6}
-                  {...register("code", { required: true })}
+                  {...register("code")}
+                  type="hidden"
                   className="input validator"
                   aria-invalid={errors.code ? "true" : "false"}
                 />
-                <p className="text-center">
-                  El código expirará en {minutes}:{seconds} min
+                <p className="hidden text-center validator-hint">
+                  {errors.code?.message}
                 </p>
+
+                {!isExpired && (
+                  <p className="mt-1 text-center">
+                    El código expirará en{" "}
+                    <span className="font-medium">
+                      {minutes}:{seconds}
+                    </span>{" "}
+                    min
+                  </p>
+                )}
               </fieldset>
-
-              <p className="text-primary-green">
-              </p>
-
-              <p className="hidden validator-hint">{errors.code?.message}</p>
-
-              {isExpired && (
-                <p className="font-medium text-orange-500">
-                  El código ha expirado.
-                </p>
-              )}
             </div>
 
-            <div className="mt-6 text-center">
+            <div className="mt-8 text-center">
               <p>¿No has recibido el código?</p>
               <a onClick={() => router.push("/register")} className="link">
                 Reenviar código
