@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 import { T_loan_item } from "@adelantto/store";
-import { formatCurrency } from "@adelantto/utils";
+import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 
 function trans(key) {
@@ -26,9 +26,11 @@ function trans(key) {
 
 type T_props = {
   loan: T_loan_item;
+
+  displayActions: boolean;
 };
 
-export default function LoanCard({ loan }: T_props) {
+export default function LoanCard({ loan, displayActions = false }: T_props) {
   return (
     <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card card-sm">
       <div className="card-body">
@@ -74,27 +76,29 @@ export default function LoanCard({ loan }: T_props) {
           </dl>
         )}
 
-        {loan.status === "awaiting_account_statement_upload" && (
-          <a
-            className="mt-4 btn btn-primary"
-            href={`/loans/${loan.id}/success`}
-          >
-            Continuar
-          </a>
-        )}
+        <div className={cn("card-actions", !displayActions && "hidden")}>
+          {loan.status === "awaiting_account_statement_upload" && (
+            <a
+              className="btn btn-primary"
+              href={`/loans/${loan.id}/success`}
+            >
+              Continuar
+            </a>
+          )}
 
-        {loan.status === "active" && (
-          <a className="btn" href={`/loans/${loan.id}`}>
-            Ver
-          </a>
-        )}
+          {loan.status === "active" && (
+            <a className="btn-block btn" href={`/loans/${loan.id}`}>
+              Ver
+            </a>
+          )}
 
-        {loan.status !== "active" && (
-          <div className="flex gap-1.5 mt-2">
-            <MaterialIcon name="info" size="18px" />
-            <p className="text-sm leading-4">{trans(loan.status)}</p>
-          </div>
-        )}
+          {loan.status !== "active" && (
+            <div className="flex gap-1.5 mt-2">
+              <MaterialIcon name="info" size="18px" />
+              <p className="text-sm leading-4">{trans(loan.status)}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
