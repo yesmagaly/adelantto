@@ -56,7 +56,7 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <div className="bg-cover px-6 py-8 heading--blue">
+        <div className="bg-blue-900 bg-cover px-6 py-8">
           <h1 className="font-medium heading-4">
             AdelanttoCash® {loan.id.toString().padStart(5, "0")}
           </h1>
