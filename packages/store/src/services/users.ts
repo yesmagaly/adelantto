@@ -4,10 +4,21 @@ import { BASE_URL } from "../constants";
 
 type T_user = {
   id: string;
+  email: string;
   name?: string;
-  email?: string;
   last_name?: string;
   is_completed: boolean;
+  birthday: string;
+
+  next_step: 'identification' | 'income_and_taxes';
+};
+
+const IDENTIFICATION_USER_STEP = "identification";
+const INCOME_AND_TAXES_USER_STEP = "income_and_taxes";
+
+export const userStepsUrls = {
+  [IDENTIFICATION_USER_STEP]: "/profile/identification",
+  [INCOME_AND_TAXES_USER_STEP]: "/profile/income-and-taxes",
 };
 
 export const userApi = createApi({
