@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 
 import { Carousel, CarouselItem, MaterialIcon } from "@adelantto/core";
-import LoanCard from "../../components/LoanCard";
+import LoanCard from "../loan/components/LoanCard";
 import ApplicationCard from "../applications/components/ApplicationCard";
 import { useAuth } from "../auth/authContext";
 import { AppNav } from "../../layout/AppNav";
@@ -48,11 +48,11 @@ const Dashboard: React.FC = () => {
           <div className="gap-6 grid">
             {user && (
               <h1 className="text-h5">
-                {user?.name && user?.last_name ? (
+                {user?.name ? (
                   <>
                     <span className="font-normal">¡Hola,</span>
                     <br />
-                    {[user.name, user.last_name].join(" ")}!
+                    {user.name}!
                   </>
                 ) : (
                   <span>¡Hola!</span>
@@ -140,7 +140,7 @@ const Dashboard: React.FC = () => {
                 <h4 className="mb-4 text-h6">Tus AdelanttoCash®</h4>
                 <div className="flex flex-col gap-2">
                   {loans.map((loan) => (
-                    <LoanCard key={loan.id} {...loan} />
+                    <LoanCard key={loan.id} loan={loan} />
                   ))}
                 </div>
 

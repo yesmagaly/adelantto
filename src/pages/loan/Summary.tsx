@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import Icon from "../../components/Icon/Icon";
 import * as api from "../../api";
 import { formatCurrency } from "@adelantto/utils";
 import InstallmentCard from "../../components/InstallmentCard";
 import { InstallmentType, LoanType } from "../../types";
-import * as Page from "../../components/page";
 
 const Summary: React.FC<{ match: any }> = ({ match }) => {
   const router = useIonRouter();
