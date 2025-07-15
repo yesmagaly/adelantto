@@ -6,7 +6,7 @@ import { T_loan_item } from "@adelantto/store";
 import { formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 
-function trans(key: string) {
+function trans(key) {
   const mapper = {
     awaiting_account_statement_upload:
       "Esperando la carga de tu estado de cuenta",
@@ -24,80 +24,75 @@ function trans(key: string) {
   return mapper[key] ?? key;
 }
 
-type T_props = T_loan_item;
+type T_props = {
+  loan: T_loan_item;
+};
 
-export default function LoanCard({
-  id,
-  amount,
-  missing_installments_counter,
-  paid_amount,
-  status,
-  ...loan
-}: T_props) {
-  const router = useIonRouter();
-  const showMore = () => router.push(`/loans/${id}`);
-
-  console.log({ amount, status, id, ...loan });
-
+export default function LoanCard({ loan }: T_props) {
   return (
     <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card card-sm">
       <div className="card-body">
         <h4 className="font-semibold text-lg leading-5">
-          AdelanttoCash® {id.toString().padStart(4, "0")}
+          AdelanttoCash® {loan.id.toString().padStart(4, "0")}
         </h4>
 
-        {status === "active" && (
+        {loan.status === "active" && (
           <dl>
-            {loan.missing_installment && (
+            {loan.summary?.missing_installment && (
               <>
                 <dt className="mr-1">Valor a pagar este mes</dt>
                 <dd className="mb-2 font-bold text-emerald-300 text-h3">
-                  {formatCurrency(loan.missing_installment?.amount)} MXN
+                  {formatCurrency(loan.summary.missing_installment?.amount)} MXN
                 </dd>
 
                 <dt className="float-left mr-1 mb-1">Fecha límite:</dt>
                 <dd className="mb-1 font-bold">
-                  {format(loan.missing_installment?.due_date, "d 'de' MMMM", {
-                    locale: es,
-                  })}
+                  {format(
+                    loan.summary.missing_installment?.due_date,
+                    "d 'de' MMMM",
+                    {
+                      locale: es,
+                    }
+                  )}
+                </dd>
+
+                <dt className="float-left mr-1 mb-1">Total pagado:</dt>
+                <dd className="mb-1 font-bold">
+                  {formatCurrency(loan.summary.total_paid_amount)} MXN
+                </dd>
+                <dt className="float-left mr-1 mb-1">Deuda total:</dt>
+                <dd className="mb-1 font-bold">
+                  {formatCurrency(loan.amount)} MXN
+                </dd>
+
+                <dt className="float-left mr-1">Cuotas restantes:</dt>
+                <dd className="font-bold">
+                  {loan.summary.missing_installments_counter}
                 </dd>
               </>
             )}
-
-            <dt className="float-left mr-1 mb-1">Total pagado:</dt>
-            <dd className="mb-1 font-bold">
-              {formatCurrency(paid_amount)} MXN
-            </dd>
-
-            <dt className="float-left mr-1 mb-1">Deuda total:</dt>
-            <dd className="mb-1 font-bold">{formatCurrency(amount)} MXN</dd>
-
-            <dt className="float-left mr-1">Cuotas restantes:</dt>
-            <dd className="font-bold">{missing_installments_counter}</dd>
           </dl>
         )}
 
-        {status === "awaiting_account_statement_upload" && (
-          <button
+        {loan.status === "awaiting_account_statement_upload" && (
+          <a
             className="mt-4 btn btn-primary"
-            onClick={() => router.push(`/loans/${id}/success`)}
+            href={`/loans/${loan.id}/success`}
           >
             Continuar
-          </button>
+          </a>
         )}
 
-        {status === "active" && (
-          <button className="btn" onClick={showMore}>
+        {loan.status === "active" && (
+          <a className="btn" href={`/loans/${loan.id}`}>
             Ver
-          </button>
+          </a>
         )}
 
-        {status !== "active" && (
+        {loan.status !== "active" && (
           <div className="flex gap-1.5 mt-2">
             <MaterialIcon name="info" size="18px" />
-            <p className="text-sm leading-4">
-              {trans(status)}
-            </p>
+            <p className="text-sm leading-4">{trans(loan.status)}</p>
           </div>
         )}
       </div>

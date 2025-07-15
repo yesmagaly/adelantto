@@ -6,12 +6,15 @@ export type T_loan_item = {
   id: string;
   amount: number;
   status: string;
-  missing_installments_counter: number;
-  paid_amount: number;
-  missing_installment?: {
-    id: number;
-    amount: number;
-    due_date: string;
+
+  summary: {
+    total_paid_amount: number;
+    missing_installments_counter: number;
+    missing_installment?: {
+      id: number;
+      due_date: string;
+      amount: number;
+    };
   };
 };
 
