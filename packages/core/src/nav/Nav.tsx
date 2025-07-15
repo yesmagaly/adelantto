@@ -3,7 +3,11 @@ import { MaterialIcon } from "../icon";
 import { cn } from "../../../../src/components/utils";
 import React from "react";
 
-export function NavRoot(props) {
+export function NavRoot(props: {
+  className?: string;
+  children: React.ReactNode;
+  [key: string]: any;
+}) {
   return <ul className="gap-2 grid grid-cols-4 p-4" {...props} />;
 }
 

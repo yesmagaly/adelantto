@@ -107,27 +107,27 @@ export const PropertyValidationPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <h1 className="text-h5 text-dark-blue-700 gap-2 inline-flex items-center">
+        <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
           <a href="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </a>
           Solicita tu AdelanttoCash®
         </h1>
-        <p className="text-sm text-dark-gray mt-1">
+        <p className="mt-1 text-dark-gray text-sm">
           Con tu información y documentos listos, indícanos el monto de adelanto
           que te interesa y comienza formalmente tu solicitud.
         </p>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <div className="flex items-center justify-between">
-          <h1 className="text-h6 text-dark-blue-700 gap-2 inline-flex items-center">
+        <div className="flex justify-between items-center">
+          <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
             <a href="/" className="inline-flex items-center"></a>
             Validación de propiedad
           </h1>
           <span className="badge badge-primary badge-sm">Paso 2/ 2</span>
         </div>
         <progress
-          className="progress text-indigo-300 w-full h-[5px] mt-2 mb-4"
+          className="mt-2 mb-4 w-full h-[5px] text-indigo-300 progress"
           value="50"
           max="100"
         ></progress>
@@ -138,7 +138,7 @@ export const PropertyValidationPage: React.FC = () => {
               Folio Real
             </label>
             <input
-              className="input w-full"
+              className="w-full input"
               type="number"
               placeholder="123456"
               id="real-folio"
@@ -151,7 +151,7 @@ export const PropertyValidationPage: React.FC = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="h-5 w-5 shrink-0 stroke-current inline"
+              className="inline stroke-current w-5 h-5 shrink-0"
             >
               <path
                 stroke-linecap="round"
@@ -171,7 +171,7 @@ export const PropertyValidationPage: React.FC = () => {
               Código postal del inmueble
             </label>
             <input
-              className="input w-full"
+              className="w-full input"
               type="number"
               placeholder="123456"
               id="property-zip-code"
@@ -199,12 +199,12 @@ export const PropertyValidationPage: React.FC = () => {
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
-        <div className="grid gap-2">
+        <div className="gap-2 grid">
           <button className="btn btn-primary" disabled={isSubmitting}>
             Continuar
           </button>
 
-          <button className="btn btn-secondary btn-outline" disabled={isSubmitting}>
+          <button className="btn-outline btn btn-secondary" disabled={isSubmitting}>
             Guardar como borrador
           </button>
         </div>

@@ -140,7 +140,7 @@ const Dashboard: React.FC = () => {
                 <h4 className="mb-4 text-h6">Tus AdelanttoCash®</h4>
                 <div className="flex flex-col gap-2">
                   {loans.map((loan) => (
-                    <LoanCard key={loan.id} loan={loan} />
+                    <LoanCard key={loan.id} loan={loan} displayActions/>
                   ))}
                 </div>
 
