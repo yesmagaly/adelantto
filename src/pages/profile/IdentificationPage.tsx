@@ -17,12 +17,12 @@ import {
 import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
 import FileInputItem from "../../components/FileInputItem";
-import { useState } from "react";
 
 type T_form = {
-  back_id?: File;
-  front_id?: File;
+  back_document?: File;
+  front_document?: File;
   curp_number?: string;
+  birthdate?: string;
   address?: string;
   zip_code?: string;
 };
@@ -70,8 +70,6 @@ export const IdentificationPage: React.FC = () => {
       console.log(error);
     }
   };
-
-  console.log(errors);
 
   return (
     <IonPage>
@@ -126,6 +124,18 @@ export const IdentificationPage: React.FC = () => {
             helpText="Tipo de archivo permitido JPG (500MB max)"
             helpPicture={backIdImageUrl}
           />
+
+          <div className="control">
+            <label className="control-label">
+              Fecha de nacimiento
+            </label>
+            <input
+              type="date"
+              className="input validator"
+              {...register("birthdate")}
+            />
+          </div>
+
           <div className="control">
             <label className="control-label">
               Clave Única de Registro de Población
@@ -160,14 +170,14 @@ export const IdentificationPage: React.FC = () => {
             <label className="control-label">Código postal</label>
             <input
               {...register("zip_code")}
-                type="text"
-                required
-                placeholder="Ingresa tu código postal"
-                pattern="[0-9]{4,5}"
-                maxLength={5}
-                className="input validator"
-                aria-invalid={errors.zip_code ? "true" : "false"}
-              />
+              type="text"
+              required
+              placeholder="Ingresa tu código postal"
+              pattern="[0-9]{4,5}"
+              maxLength={5}
+              className="input validator"
+              aria-invalid={errors.zip_code ? "true" : "false"}
+            />
             <p className="hidden validator-hint">{errors.zip_code?.message}</p>
           </div>
         </form>

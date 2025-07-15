@@ -4,8 +4,7 @@ import exclamation from "../../v2/assets/svgs/exclamation.svg";
 import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
 import adelanttoBg from "../../v2/assets/images/adelantto-gradient-bg.png";
 
-const FailBuroScore: React.FC = () => {
-  const router = useIonRouter();
+export const AwaitingValidation: React.FC = () => {
 
   return (
     <IonPage>
@@ -16,17 +15,16 @@ const FailBuroScore: React.FC = () => {
           <img src={exclamation} alt="exclamation" className="mb-18" />
           <div className="flex flex-col items-center gap-6">
             <div className="text-center">
-              <h1 className="mb-3 text-h2">¡Lo sentimos!</h1>
-              <p className="text-sm">
-                La puntuación de Buró es baja.
-                <br />
-                Te recomendamos intentarlo nuevamente <br /> en{" "}
-                <strong>3</strong> meses.
+              <h1 className="mb-3 text-h2">¡Ya casi!</h1>
+              <p className="mx-auto max-w-[90%] text-sm">
+                Por último validaremos los datos de tu propiedad. Te enviaremos
+                un correo electrónico en las próximas{" "}
+                <strong>72 horas con el resultado de la validación.</strong>
               </p>
             </div>
 
             <a className="btn btn-primary btn-wide" href="/">
-              Aceptar
+              Finalizar
             </a>
           </div>
         </div>
@@ -34,5 +32,3 @@ const FailBuroScore: React.FC = () => {
     </IonPage>
   );
 };
-
-export default FailBuroScore;

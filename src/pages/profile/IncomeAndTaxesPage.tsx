@@ -14,13 +14,14 @@ import { useLazyGetUserQuery, useUpdateUserMutation } from "@adelantto/store";
 type T_form = {
   income_proof?: File;
   rfc?: File;
+  rfc_number?: string;
 };
 
 export const IncomeAndTaxesPage: React.FC = () => {
   const router = useIonRouter();
   const [mutation, { isLoading }] = useUpdateUserMutation();
   const [trigger] = useLazyGetUserQuery();
-  const { handleSubmit, control } = useForm<T_form>({
+  const { handleSubmit, control, register } = useForm<T_form>({
     defaultValues: async () => {
       try {
         return await trigger().unwrap();
@@ -67,7 +68,11 @@ export const IncomeAndTaxesPage: React.FC = () => {
           max="100"
         ></progress>
 
-        <form id="form" className="gap-4 grid" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="form"
+          className="gap-4 grid"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <FileInputItem
             name="income_proof"
             control={control}
@@ -77,6 +82,20 @@ export const IncomeAndTaxesPage: React.FC = () => {
             description="Últimos 3 meses (Nómina o bancarios)"
             helpText="Tipo de archivo permitido PDF (500MB max)"
           />
+
+          <div className="control">
+            <label className="control-label">
+              Registro Federal de Contribuyentes (con homoclave)
+            </label>
+            <input
+              type="text"
+              placeholder="RFC"
+              className="input validator"
+              minLength={13}
+              maxLength={13}
+              {...register("rfc_number")}
+            />
+          </div>
 
           <FileInputItem
             name="rfc"
@@ -91,7 +110,12 @@ export const IncomeAndTaxesPage: React.FC = () => {
       </IonContent>
       <IonFooter className="ion-padding">
         <div className="gap-2 grid">
-          <button className="btn btn-primary" type="submit" form="form" disabled={isLoading}>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            form="form"
+            disabled={isLoading}
+          >
             Continuar
           </button>
 
