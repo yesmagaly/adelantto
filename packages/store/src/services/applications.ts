@@ -10,6 +10,16 @@ export type T_application = {
   lease_payment_method: string;
 
   pre_offer_term_frame?: number;
+
+  next_step: 'pre_offer' | 'property_details';
+};
+
+const PRE_OFFER_STEP = "pre_offer";
+const PROPERTY_DETAILS_STEP = "property_details";
+
+export const applicationStepsUrls = {
+  [PRE_OFFER_STEP]: "/desired-loan",
+  [PROPERTY_DETAILS_STEP]: "/property-documents",
 };
 
 export const applicationsApi = createApi({
