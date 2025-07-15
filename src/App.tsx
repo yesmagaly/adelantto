@@ -15,10 +15,9 @@ import UploadDocuments from "./pages/property/UploadDocuments";
 import LeaseContract from "./pages/property/LeaseContract";
 import DesiredLoan from "./pages/property/DesiredLoan";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
-import DataValidation from "./pages/DataValidation";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
-import Withdrawals from "./pages/Withdrawals";
+import Withdrawals from "./pages/loan/Withdrawals";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
@@ -59,7 +58,7 @@ import { CreateProfilePage } from "./pages/profile/CreateProfile";
 import { IdentificationPage } from "./pages/profile/IdentificationPage";
 import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
 import { PropertyValidationPage } from "./pages/profile/PropertyValidationPage";
-import { CongratulationsPage } from "./pages/profile/CongratulationsPage";
+import { CongratulationsPage } from "./pages/loan/CongratulationsPage";
 import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
 
@@ -213,11 +212,11 @@ const App: React.FC = () => {
           />
 
           <PrivateRoute exact path="/loans/:id" component={Summary} />
-          <PrivateRoute path="/loans/:id/success" component={CorrectData} />
           <PrivateRoute
-            path="/loans/:id/account-statement"
-            component={Withdrawals}
+            path="/loans/:id/success"
+            component={CongratulationsPage}
           />
+
           <PrivateRoute
             path="/loans/:id/installments/:installment_id"
             component={InstallmentDetail}
