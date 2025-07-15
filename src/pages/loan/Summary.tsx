@@ -4,6 +4,7 @@ import * as api from "../../api";
 import { formatCurrency } from "@adelantto/utils";
 import InstallmentCard from "../../components/InstallmentCard";
 import { InstallmentType, LoanType } from "../../types";
+import LoanCard from "./components/LoanCard";
 
 const Summary: React.FC<{ match: any }> = ({ match }) => {
   const router = useIonRouter();
@@ -54,44 +55,23 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <div className="bg-blue-900 bg-cover px-6 py-8">
-          <h1 className="font-medium heading-4">
-            AdelanttoCash® {loan.id.toString().padStart(5, "0")}
-          </h1>
+        <div className="gap-6 grid">
+          <LoanCard loan={loan} />
 
-          <div className="block mb-4 border-full" />
+          <div>
+            <h4 className="mb-4 text-h6">Historial de pagos</h4>
 
-          <div className="flex flex-col gap-4">
-            <div>
-              <h6 className="text-sm">CUOTA A PAGAR</h6>
-              {detail && (
-                <p className="font-semibold text-2xl">
-                  {formatCurrency(detail.installment.total_amount)}
-                </p>
-              )}
-            </div>
-            <div>
-              <h6 className="text-sm">SALDO</h6>
-              {detail && (
-                <p className="font-semibold text-2xl">
-                  {formatCurrency(detail.residue)}
-                </p>
-              )}
+            <div className="flex flex-col gap-4">
+              {loan?.installments.map((installment, key) => (
+                <InstallmentCard
+                  key={installment.id}
+                  index={key}
+                  loanId={match.params.id}
+                  {...installment}
+                />
+              ))}
             </div>
           </div>
-        </div>
-
-        <h4 className="mb-4 text-h6">Historial de pagos</h4>
-
-        <div className="flex flex-col gap-4">
-          {loan?.installments.map((installment, key) => (
-            <InstallmentCard
-              key={installment.id}
-              index={key}
-              loanId={match.params.id}
-              {...installment}
-            />
-          ))}
         </div>
       </IonContent>
     </IonPage>
