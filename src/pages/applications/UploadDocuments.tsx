@@ -37,7 +37,7 @@ const UploadDocuments: React.FC = ({ match }) => {
     control,
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     setError,
   } = useForm<T_form>({
     defaultValues: async () => await trigger(match.params.id).unwrap(),
@@ -164,11 +164,17 @@ const UploadDocuments: React.FC = ({ match }) => {
           className="btn-block mb-2 btn-primary btn"
           type="submit"
           form="form"
+          disabled={isSubmitting}
         >
           Continuar
         </button>
 
-        <button className="btn-block btn-outline btn" type="submit" form="form">
+        <button
+          className="btn-block btn-outline btn"
+          type="submit"
+          form="form"
+          disabled={isSubmitting}
+        >
           Guardar como borrador
         </button>
       </IonFooter>

@@ -36,7 +36,12 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
   const [getLazyOffer, { data: offer }] = useLazyGetOfferQuery();
   const [options, setOptions] = useState<Array<number>>([]);
 
-  const { register, setValue, handleSubmit, watch } = useForm<T_form>({
+  const {
+    setValue,
+    handleSubmit,
+    watch,
+    formState: { isSubmitting },
+  } = useForm<T_form>({
     defaultValues: async () => {
       try {
         const values = await trigger(match.params.id).unwrap();
@@ -155,7 +160,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
       </IonContent>
 
       <IonFooter className="ion-padding">
-        <button type="submit" form="form" className="btn-block btn btn-primary">
+        <button type="submit" form="form" disabled={isSubmitting} className="btn-block btn btn-primary">
           Subir documentación
         </button>
 

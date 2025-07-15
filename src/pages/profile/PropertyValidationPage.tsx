@@ -5,8 +5,7 @@ import {
   IonHeader,
   IonFooter,
 } from "@ionic/react";
-import { useForm, Controller } from "react-hook-form";
-import { NumericFormat } from "react-number-format";
+import { useForm } from "react-hook-form";
 
 import { checkZipCode } from "../../api";
 import { applications } from "../../api";
@@ -66,7 +65,7 @@ export const PropertyValidationPage: React.FC = () => {
     handleSubmit,
     register,
     setError,
-    formState: { errors },
+    formState: { isSubmitting },
     control,
   } = useForm<FormData>();
 
@@ -201,11 +200,11 @@ export const PropertyValidationPage: React.FC = () => {
       </IonContent>
       <IonFooter className="ion-padding">
         <div className="grid gap-2">
-          <button className="btn btn-primary" disabled>
+          <button className="btn btn-primary" disabled={isSubmitting}>
             Continuar
           </button>
 
-          <button className="btn btn-secondary btn-outline">
+          <button className="btn btn-secondary btn-outline" disabled={isSubmitting}>
             Guardar como borrador
           </button>
         </div>

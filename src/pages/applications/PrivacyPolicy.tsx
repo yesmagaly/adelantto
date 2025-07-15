@@ -85,7 +85,7 @@ const PrivacyPolicy: React.FC = ({ match }) => {
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button type="submit" form="form" className="btn-block btn btn-primary">
+        <button type="submit" form="form" disabled={isSubmitting} className="btn-block btn btn-primary">
           Aceptar
         </button>
       </IonFooter>

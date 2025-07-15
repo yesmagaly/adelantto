@@ -38,7 +38,7 @@ export const IdentificationPage: React.FC = () => {
     control,
     register,
     setError,
-    formState: { errors },
+    formState: { isSubmitting, errors },
   } = useForm<T_form>({
     defaultValues: async () => {
       try {
@@ -188,7 +188,7 @@ export const IdentificationPage: React.FC = () => {
             className="btn btn-primary"
             type="submit"
             form="form"
-            disabled={isLoading}
+            disabled={isSubmitting}
           >
             Continuar
           </button>

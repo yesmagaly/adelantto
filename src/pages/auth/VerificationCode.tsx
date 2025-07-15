@@ -202,6 +202,7 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
         </p>
 
         <button
+          disabled={isSubmitting}
           className="btn-block btn btn-primary"
           onClick={() => handleSubmit(onSubmit)()}
         >

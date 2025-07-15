@@ -6,14 +6,14 @@ import {
   IonPage,
   useIonRouter,
 } from "@ionic/react";
-import { useForm, Controller, FieldErrors } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
 import { PatternFormat } from "react-number-format";
 import Modal from "../../components/modal";
 import Loader from "../../components/Loader/Loader";
 
-import { API_SERVER_URL, PROD_MODE } from "../../config";
+import { PROD_MODE } from "../../config";
 import { handleServerErrors, t } from "@adelantto/utils";
 import InputPassword from "../../components/InputPassword";
 import {
@@ -231,6 +231,7 @@ const Register: React.FC = () => {
       </IonContent>
       <IonFooter className="ion-padding">
         <button
+          disabled={isSubmitting}
           className="btn-block btn btn-primary"
           onClick={() => handleSubmit(onSubmit)()}
         >

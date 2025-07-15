@@ -31,7 +31,7 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting, errors },
   } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
@@ -163,6 +163,7 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
       </IonContent>
       <IonFooter className="ion-padding">
         <button
+          disabled={isSubmitting}
           className="btn-block btn btn-primary"
           onClick={() => handleSubmit(onSubmit)()}
         >

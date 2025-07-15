@@ -36,7 +36,7 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const {
     control,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     handleSubmit,
   } = useForm();
 
@@ -149,7 +149,7 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
 
           </div>
           <div className="gap-2">
-            <button className="button is-primary" type="submit">
+            <button disabled={isSubmitting} className="button is-primary" type="submit">
               Validar pago
             </button>
 
