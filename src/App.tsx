@@ -64,6 +64,7 @@ import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
 
 import { store } from "@adelantto/store";
+import { AwaitingValidation } from "./pages/property/AwaitingValidation";
 
 setupIonicReact();
 
@@ -208,7 +209,7 @@ const App: React.FC = () => {
           />
           <PrivateRoute
             path="/applications/:id/final-announcement"
-            component={DataValidation}
+            component={AwaitingValidation}
           />
 
           <PrivateRoute exact path="/loans/:id" component={Summary} />
