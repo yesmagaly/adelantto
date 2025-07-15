@@ -16,8 +16,6 @@ import LeaseContract from "./pages/applications/LeaseContract";
 import DesiredLoan from "./pages/applications/DesiredLoan";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import ValidationError from "./pages/ValidationError";
-import CorrectData from "./pages/CorrectData";
-import Withdrawals from "./pages/loan/Withdrawals";
 import CorrectDeposit from "./pages/CorrectDeposit";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
