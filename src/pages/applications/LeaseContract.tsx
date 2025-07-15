@@ -9,7 +9,7 @@ import { useForm, Controller } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
 import { MaterialIcon } from "@adelantto/core";
-import { useAddApplicationMutation, useLazyGetApplicationQuery } from "@adelantto/store";
+import { useAddApplicationMutation } from "@adelantto/store";
 
 export function atLeastThreeMonths(end_date: any, months_number: any) {
   const date1 = new Date();
@@ -34,7 +34,7 @@ const LeaseContract: React.FC = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { isSubmitting, errors },
     control,
   } = useForm<T_form>();
 
@@ -207,7 +207,7 @@ const LeaseContract: React.FC = () => {
       </IonContent>
 
       <IonFooter className="ion-padding">
-        <button type="submit" form="form" className="btn-block btn btn-primary">
+        <button type="submit" form="form" disabled={isSubmitting} className="btn-block btn btn-primary">
           Ver Pre-Oferta AdelanttoCash®
         </button>
       </IonFooter>

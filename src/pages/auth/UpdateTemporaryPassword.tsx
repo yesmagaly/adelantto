@@ -147,7 +147,7 @@ const UpdateTemporaryPassword: React.FC = () => {
                 />
               </div>
 
-              <button className="button is-secondary">
+              <button disabled={isSubmitting} className="button is-secondary">
                 Cambiar contraseña
               </button>
             </form>

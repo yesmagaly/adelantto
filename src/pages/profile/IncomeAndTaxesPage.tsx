@@ -21,7 +21,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
   const router = useIonRouter();
   const [mutation, { isLoading }] = useUpdateUserMutation();
   const [trigger] = useLazyGetUserQuery();
-  const { handleSubmit, control, register } = useForm<T_form>({
+  const { handleSubmit, control, register, formState: { isSubmitting } } = useForm<T_form>({
     defaultValues: async () => {
       try {
         return await trigger().unwrap();
@@ -114,7 +114,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
             className="btn btn-primary"
             type="submit"
             form="form"
-            disabled={isLoading}
+            disabled={isSubmitting}
           >
             Continuar
           </button>

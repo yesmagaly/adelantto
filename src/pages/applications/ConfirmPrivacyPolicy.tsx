@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 
 import { t } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
-import exclamation from "../../v2/assets/svgs/exclamation.svg";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import * as Modal from "../../components/modal";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
@@ -41,7 +40,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     setError,
     watch,
     setValue,
-    formState: { errors },
+    formState: { isSubmitting, errors },
   } = useForm<T_form>();
 
   const onSubmit = async (data: T_form) => {
@@ -49,8 +48,6 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
       applicationId,
       data
     );
-
-    console.log(response);
 
     if (response.status === 200) {
       stopTimer();
@@ -224,7 +221,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
         </Modal.Root>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button form="form" type="submit" className="btn-block btn btn-primary">
+        <button form="form" type="submit" disabled={isSubmitting} className="btn-block btn btn-primary">
           Confirmar
         </button>
 

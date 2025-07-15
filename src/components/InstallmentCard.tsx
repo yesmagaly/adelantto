@@ -1,15 +1,7 @@
 import { useIonRouter } from "@ionic/react";
-import { formatCurrency } from "@adelantto/utils";
-import { useState } from "react";
-import * as Modal from "../components/modal";
 import { InstallmentType } from "../types";
 import { DateTime } from "luxon";
 import { t } from "@adelantto/utils";
-import FileInputItem from "../components/FileInputItem";
-import ErrorMessage from "../components/ErrorMessage";
-import { useForm } from "react-hook-form";
-import Tag from "./Tag";
-import { uploadInstallmentFile } from "../api";
 
 interface ComponentProps extends InstallmentType {
   index: number;

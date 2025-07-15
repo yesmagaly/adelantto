@@ -87,7 +87,7 @@ function Login() {
               </a>
             </p>
 
-            <button className="btn-block btn btn-primary">
+            <button disabled={isSubmitting} className="btn-block btn btn-primary">
               Iniciar sesión
             </button>
           </form>

@@ -16,7 +16,11 @@ type T_form = {
 export const CongratulationsPage: React.FC = ({ match }) => {
   const router = useIonRouter();
   const modalRef = useRef<HTMLDialogElement>(null);
-  const { control, handleSubmit } = useForm<T_form>();
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<T_form>();
 
   const onSubmit = async (data: T_form) => {
     const response = await applications.accountStatement(match.params.id, data);
@@ -52,7 +56,7 @@ export const CongratulationsPage: React.FC = ({ match }) => {
               label="Subir estado de cuenta bancario completo (con QR)"
             />
 
-            <button className="btn-block mb-8 btn btn-primary">Enviar</button>
+            <button disabled={isSubmitting} className="btn-block mb-8 btn btn-primary">Enviar</button>
           </form>
 
           {/* <a

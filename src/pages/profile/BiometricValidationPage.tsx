@@ -21,9 +21,9 @@ type T_form = {
 
 export const BiometricValidationPage: React.FC = () => {
   const router = useIonRouter();
-  const { session, error } = useIncode();
+  const { session } = useIncode();
 
-  const { handleSubmit, control, setError } = useForm<T_form>();
+  const { handleSubmit, control, setError, formState: {isSubmitting} } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
     if (session) {
@@ -99,6 +99,7 @@ export const BiometricValidationPage: React.FC = () => {
       <IonFooter className="ion-padding">
         <div className="gap-2 grid">
           <button
+            disabled={isSubmitting}
             className="btn btn-primary"
             onClick={() => handleSubmit(onSubmit)()}
           >
