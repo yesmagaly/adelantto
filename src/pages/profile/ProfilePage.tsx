@@ -1,7 +1,7 @@
 import { MaterialIcon } from "@adelantto/core";
 import { IonContent, IonFooter, IonPage } from "@ionic/react";
 import { AppNav } from "../../layout/AppNav";
-import { useGetUserQuery } from "@adelantto/store";
+import { useGetUserQuery, userStepsUrls } from "@adelantto/store";
 
 export function ProfilePage() {
   const { data: user, isLoading: isUserLoading } = useGetUserQuery();
@@ -42,7 +42,7 @@ export function ProfilePage() {
 
           {/* Use a card */}
 
-          {!user?.is_completed && (
+          {user && !user?.is_completed && (
             <div className="bg-amber-100 shadow-sm card card-sm">
               <div className="gap-3 card-body">
                 <h2 className="text-h6 card-title">Completa tu perfil</h2>
@@ -53,13 +53,16 @@ export function ProfilePage() {
                 </p>
                 <progress
                   className="mb-4 w-full text-amber-500 progress"
-                  value="20"
+                  value={user.next_step === "income_and_taxes" ? 66 : 33}
                   max="100"
                 ></progress>
 
                 {/* <h2 className="text-h6 card-title">Siguiente paso</h2> */}
 
-                <a href="/profile/identification" className="btn btn-primary">
+                <a
+                  href={userStepsUrls[user.next_step]}
+                  className="btn btn-primary"
+                >
                   Continuar
                 </a>
               </div>

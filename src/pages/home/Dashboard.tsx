@@ -13,6 +13,7 @@ import {
   useGetApplicationsQuery,
   useGetLoansQuery,
   useGetUserQuery,
+  userStepsUrls,
 } from "@adelantto/store";
 
 const Dashboard: React.FC = () => {
@@ -59,7 +60,7 @@ const Dashboard: React.FC = () => {
               </h1>
             )}
 
-            {!Boolean(user?.is_completed) && (
+            {user && !Boolean(user?.is_completed) && (
               <div
                 role="alert"
                 className="alert alert-horizontal alert-warning"
@@ -78,7 +79,7 @@ const Dashboard: React.FC = () => {
                 </div>
                 <a
                   className="btn btn-sm btn-ghost btn-warning"
-                  href="/profile/identification"
+                  href={userStepsUrls[user.next_step]}
                 >
                   <MaterialIcon name="arrow_forward" />
                 </a>

@@ -186,6 +186,7 @@ const LeaseContract: React.FC = () => {
 
           <label className="label">
             <input
+              {...register('accept_privacy_policy')}
               type="checkbox"
               id="agreement"
               className="rounded-sm checkbox checkbox-sm"
