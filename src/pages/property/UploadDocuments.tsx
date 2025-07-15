@@ -21,8 +21,8 @@ interface File {
 }
 
 interface T_form {
-  property_commercial_folio: string;
-  property_zip_code: string;
+  property_commercial_folio?: string;
+  property_zip_code?: string;
   property_lease_agreement?: File;
   property_latest_tax_receipt?: File;
 }
@@ -46,7 +46,7 @@ const UploadDocuments: React.FC = ({ match }) => {
   const onSubmit = async (data: T_form) => {
     try {
       await migration(data).unwrap();
-      router.push(`/applications/${match.params.id}/privacy-policy`);
+      router.push(`/applications/${match.params.id}/final-announcement`);
     } catch (error: any) {
       handleServerErrors<T_form>(
         ["property_zip_code", "property_commercial_folio"],
