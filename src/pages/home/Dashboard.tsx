@@ -3,7 +3,7 @@ import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 
 import { Carousel, CarouselItem, MaterialIcon } from "@adelantto/core";
 import LoanCard from "../../components/LoanCard";
-import ApplicationCard from "../../components/ApplicationCard";
+import ApplicationCard from "../applications/components/ApplicationCard";
 import { useAuth } from "../auth/authContext";
 import { AppNav } from "../../layout/AppNav";
 import adelanttoBgTopRightUrl from "../../v2/assets/images/adelantto-bg-top-right.png";

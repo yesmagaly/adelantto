@@ -10,10 +10,10 @@ import Register from "./pages/auth/Register";
 import VerificationCode from "./pages/auth/VerificationCode";
 import AdvanceImmediately from "./pages/home/AdvanceImmediately";
 
-import UploadDocuments from "./pages/property/UploadDocuments";
+import UploadDocuments from "./pages/applications/UploadDocuments";
 
-import LeaseContract from "./pages/property/LeaseContract";
-import DesiredLoan from "./pages/property/DesiredLoan";
+import LeaseContract from "./pages/applications/LeaseContract";
+import DesiredLoan from "./pages/applications/DesiredLoan";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import ValidationError from "./pages/ValidationError";
 import CorrectData from "./pages/CorrectData";
@@ -25,9 +25,9 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 
 import Summary from "./pages/loan/Summary";
 
-import PrivacyPolicy from "./pages/property/PrivacyPolicy";
-import ConfirmPrivacyPolicy from "./pages/property/ConfirmPrivacyPolicy";
-import FailBuroScore from "./pages/property/FailBuroScore";
+import PrivacyPolicy from "./pages/applications/PrivacyPolicy";
+import ConfirmPrivacyPolicy from "./pages/applications/ConfirmPrivacyPolicy";
+import FailBuroScore from "./pages/applications/FailBuroScore";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -63,7 +63,7 @@ import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
 
 import { store } from "@adelantto/store";
-import { AwaitingValidation } from "./pages/property/AwaitingValidation";
+import { AwaitingValidation } from "./pages/applications/AwaitingValidation";
 
 setupIonicReact();
 
