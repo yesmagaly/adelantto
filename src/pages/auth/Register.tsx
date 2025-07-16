@@ -34,9 +34,9 @@ type T_form = {
   confirm_password: string;
 };
 
-const PHONE_FORMAT = PROD_MODE ? "+57 (##) ####-####" : "+## (###) ###-###";
+const PHONE_FORMAT = PROD_MODE ? "+52 (##) ####-####" : "+## (###) ###-###";
 const PHONE_PATTERN = PROD_MODE
-  ? "+57 (d{2}) d{4}-d{4}"
+  ? "+52 (d{2}) d{4}-d{4}"
   : "+51 (d{3}) d{3}-d{3}";
 
 const cleanUpPhone = (phone = "") =>
@@ -156,7 +156,7 @@ const Register: React.FC = () => {
 
             <p className="label">
               {t(
-                "The format phone should follow this pattern: +51 (951) 444-126"
+                "El formato del teléfono debe seguir este patrón: +52 (##) ####-####"
               )}
             </p>
           </fieldset>
