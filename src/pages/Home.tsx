@@ -2,6 +2,7 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import logo from "../assets/svgs/logo.svg";
 
 import adelanttoBgUrl from "../assets/images/adelantto-bg.png";
+import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
   return (
@@ -27,12 +28,12 @@ const Home: React.FC = () => {
           </div>
 
           <div className="gap-2 grid">
-            <a className="btn btn-primary" href="/login">
+            <Link className="btn btn-primary" to="/login">
               Iniciar sesión
-            </a>
-            <a className="btn btn-ghost" href="/register">
+            </Link>
+            <Link className="btn btn-ghost" to="/register">
               Regístrate
-            </a>
+            </Link>
           </div>
         </div>
       </IonContent>

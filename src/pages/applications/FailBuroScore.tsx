@@ -3,6 +3,7 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import exclamation from "../../assets/svgs/exclamation.svg";
 import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
 import adelanttoBg from "../../assets/images/adelantto-gradient-bg.png";
+import { Link } from "react-router-dom";
 
 const FailBuroScore: React.FC = () => {
   const router = useIonRouter();
@@ -25,9 +26,9 @@ const FailBuroScore: React.FC = () => {
               </p>
             </div>
 
-            <a className="btn btn-primary btn-wide" href="/">
+            <Link className="btn btn-primary btn-wide" to="/">
               Aceptar
-            </a>
+            </Link>
           </div>
         </div>
       </IonContent>
