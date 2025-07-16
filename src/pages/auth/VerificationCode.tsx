@@ -8,7 +8,6 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-import Modal from "../../components/modal";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import { MaterialIcon } from "@adelantto/core";
@@ -172,21 +171,8 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
             Reenviar código
           </a>
         </div>
-
-        <Modal isOpen={isOpen}>
-          <h3 className="mb-5 font-semibold text-lg text-center">
-            Lo sentimos
-          </h3>
-          {<p>{errors?.code?.message}</p>}
-
-          <button
-            className="button is-primary"
-            onClick={() => setIsOpen(false)}
-          >
-            Aceptar
-          </button>
-        </Modal>
       </IonContent>
+
       <IonFooter className="ion-padding">
         <input
           type="hidden"

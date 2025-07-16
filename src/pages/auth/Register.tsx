@@ -214,18 +214,8 @@ const Register: React.FC = () => {
             </p>
           </div>
         </form>
-
-        <Modal isOpen={isOpen}>
-          <h3 className="font-semibold text-lg text-center">Lo sentimos</h3>
-          {errors?.phone && <p>{errors.phone?.message}</p>}
-          <button
-            className="button is-primary"
-            onClick={() => setIsOpen(false)}
-          >
-            Aceptar
-          </button>
-        </Modal>
       </IonContent>
+
       <IonFooter className="ion-padding">
         <button
           disabled={isSubmitting}
