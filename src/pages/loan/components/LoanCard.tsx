@@ -5,6 +5,7 @@ import { es } from "date-fns/locale";
 import { T_loan_item } from "@adelantto/store";
 import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
+import { Link } from "react-router-dom";
 
 function trans(key) {
   const mapper = {
@@ -33,10 +34,16 @@ type T_props = {
 export default function LoanCard({ loan, displayActions = false }: T_props) {
   return (
     <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card card-sm">
-      <div className="card-body">
-        <h4 className="font-semibold text-lg leading-5">
-          AdelanttoCash® {loan.id.toString().padStart(4, "0")}
-        </h4>
+      <div className="gap-3 card-body" style={{ '--card-fs': '14px'}}>
+        <div className="flex justify-between items-center">
+          <h4 className="font-semibold text-lg leading-5">
+            <span>AdelanttoCash® {loan.id.toString().padStart(4, "0")}</span>
+          </h4>
+
+          {/* <a href="" className="btn-outline btn-square btn btn-xs btn-primary">
+            <MaterialIcon name="arrow_outward" size="18px" />
+          </a> */}
+        </div>
 
         {loan.status === "active" && (
           <dl>
@@ -78,24 +85,21 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
 
         <div className={cn("card-actions", !displayActions && "hidden")}>
           {loan.status === "awaiting_account_statement_upload" && (
-            <a
-              className="btn btn-primary"
-              href={`/loans/${loan.id}/success`}
-            >
+            <Link className="btn btn-primary" to={`/loans/${loan.id}/success`}>
               Continuar
-            </a>
+            </Link>
           )}
 
           {loan.status === "active" && (
-            <a className="btn-block btn" href={`/loans/${loan.id}`}>
+            <Link className="btn-block btn btn-primary" to={`/loans/${loan.id}`}>
               Ver
-            </a>
+            </Link>
           )}
 
           {loan.status !== "active" && (
-            <div className="flex gap-1.5 mt-2">
+            <div className="flex gap-1.5">
               <MaterialIcon name="info" size="18px" />
-              <p className="text-sm leading-4">{trans(loan.status)}</p>
+              <p className="leading-4">{trans(loan.status)}</p>
             </div>
           )}
         </div>
