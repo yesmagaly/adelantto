@@ -15,8 +15,6 @@ import UploadDocuments from "./pages/applications/UploadDocuments";
 import LeaseContract from "./pages/applications/LeaseContract";
 import { DesiredLoan } from "./pages/applications/DesiredLoan";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
-import ValidationError from "./pages/ValidationError";
-import CorrectDeposit from "./pages/CorrectDeposit";
 import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -220,8 +218,6 @@ const App: React.FC = () => {
             component={InstallmentDetail}
           />
 
-          <PrivateRoute path="/validation-error" component={ValidationError} />
-          <PrivateRoute path="/correct-deposit" component={CorrectDeposit} />
           <PrivateRoute
             path="/succesful-transaction"
             component={SuccesfulTransaction}
