@@ -13,7 +13,7 @@ import AdvanceImmediately from "./pages/home/AdvanceImmediately";
 import UploadDocuments from "./pages/applications/UploadDocuments";
 
 import LeaseContract from "./pages/applications/LeaseContract";
-import DesiredLoan from "./pages/applications/DesiredLoan";
+import { DesiredLoan } from "./pages/applications/DesiredLoan";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import ValidationError from "./pages/ValidationError";
 import CorrectDeposit from "./pages/CorrectDeposit";

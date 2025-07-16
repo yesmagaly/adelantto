@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import FileInputItem from "../../components/FileInputItem";
 import { useLazyGetUserQuery, useUpdateUserMutation } from "@adelantto/store";
+import { Link } from "react-router-dom";
 
 type T_form = {
   income_proof?: File;
@@ -19,9 +20,14 @@ type T_form = {
 
 export const IncomeAndTaxesPage: React.FC = () => {
   const router = useIonRouter();
-  const [mutation, { isLoading }] = useUpdateUserMutation();
+  const [mutation] = useUpdateUserMutation();
   const [trigger] = useLazyGetUserQuery();
-  const { handleSubmit, control, register, formState: { isSubmitting } } = useForm<T_form>({
+  const {
+    handleSubmit,
+    control,
+    register,
+    formState: { isSubmitting },
+  } = useForm<T_form>({
     defaultValues: async () => {
       try {
         return await trigger().unwrap();
@@ -34,7 +40,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
   const onSubmit = async (form: T_form) => {
     try {
       await mutation(form).unwrap();
-      router.push("/applications/lease-contract");
+      router.push("/home");
     } catch (error) {
       console.log(error);
     }
@@ -119,9 +125,9 @@ export const IncomeAndTaxesPage: React.FC = () => {
             Continuar
           </button>
 
-          <a className="btn-outline btn" href="/profile">
+          <Link className="btn-outline btn" to="/profile">
             Terminar después
-          </a>
+          </Link>
         </div>
       </IonFooter>
     </IonPage>

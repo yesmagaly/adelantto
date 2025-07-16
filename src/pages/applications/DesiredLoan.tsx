@@ -18,17 +18,18 @@ import {
 } from "@adelantto/store";
 import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
+import tooltipUrl from "../../v2/assets/svgs/tooltip.svg"
 
 type T_form = T_application & {
   pre_offer_term_frame?: number;
 };
 
-interface DesiredLoanProps
+interface T_props
   extends RouteComponentProps<{
     id: string;
   }> {}
 
-const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
+export const DesiredLoan: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
   const [trigger, { data: application, isLoading }] =
     useLazyGetApplicationQuery();
@@ -40,6 +41,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
     setValue,
     handleSubmit,
     watch,
+    register,
     formState: { isSubmitting },
   } = useForm<T_form>({
     defaultValues: async () => {
@@ -120,7 +122,7 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
                   id={`desired-loan-${value}`}
                   type="button"
                   className={cn(
-                    "btn btn-outline flex-1/4 h-30 rounded-xl max-w-1/4",
+                    "flex-1/4 rounded-xl btn-outline max-w-1/4 h-30 btn",
                     value === pre_offer_term_frame && "btn-active"
                   )}
                   onClick={() => setValue("pre_offer_term_frame", value)}
@@ -160,7 +162,12 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
       </IonContent>
 
       <IonFooter className="ion-padding">
-        <button type="submit" form="form" disabled={isSubmitting} className="btn-block btn btn-primary">
+        <button
+          type="submit"
+          form="form"
+          disabled={isSubmitting}
+          className="btn-block btn btn-primary"
+        >
           Subir documentación
         </button>
 
@@ -178,5 +185,3 @@ const DesiredLoan: React.FC<DesiredLoanProps> = ({ match }) => {
     </IonPage>
   );
 };
-
-export default DesiredLoan;
