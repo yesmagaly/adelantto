@@ -6,10 +6,10 @@ export function AppNav() {
       <Nav.Item icon="home" href="/home">
         Home
       </Nav.Item>
-      <Nav.Item icon="currency_exchange" href="/profile">
-        Home
+      <Nav.Item icon="currency_exchange" href="#">
+        Adelanttos
       </Nav.Item>
-      <Nav.Item icon="location_on" href="/profile">
+      <Nav.Item icon="location_on" href="#">
         Contacto
       </Nav.Item>
       <Nav.Item icon="person" href="/profile">

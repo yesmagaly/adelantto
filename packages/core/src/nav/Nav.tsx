@@ -8,7 +8,7 @@ export function NavRoot(props: {
   children: React.ReactNode;
   [key: string]: any;
 }) {
-  return <ul className="gap-2 grid grid-cols-4 p-4" {...props} />;
+  return <ul className="flex justify-center gap-2 p-4" {...props} />;
 }
 
 export function NavItem({
@@ -21,7 +21,7 @@ export function NavItem({
   children: React.ReactNode;
 }) {
   return (
-    <li>
+    <li className="w-1/4">
       <NavLink
         to={href}
         className={(isActive) => {
