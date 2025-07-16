@@ -15,7 +15,6 @@ import UploadDocuments from "./pages/applications/UploadDocuments";
 import LeaseContract from "./pages/applications/LeaseContract";
 import { DesiredLoan } from "./pages/applications/DesiredLoan";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
-import SuccesfulTransaction from "./pages/SuccesfulTransaction";
 import Dashboard from "./pages/home/Dashboard";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 
@@ -216,11 +215,6 @@ const App: React.FC = () => {
           <PrivateRoute
             path="/loans/:id/installments/:installment_id"
             component={InstallmentDetail}
-          />
-
-          <PrivateRoute
-            path="/succesful-transaction"
-            component={SuccesfulTransaction}
           />
 
           <PublicRoute path="/" component={Home} exact />

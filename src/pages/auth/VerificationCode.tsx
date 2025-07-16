@@ -9,7 +9,6 @@ import {
 } from "@ionic/react";
 
 import Modal from "../../components/modal";
-import Loader from "../../components/Loader/Loader";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import { MaterialIcon } from "@adelantto/core";
@@ -173,8 +172,6 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
             Reenviar código
           </a>
         </div>
-
-        <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
           <h3 className="mb-5 font-semibold text-lg text-center">

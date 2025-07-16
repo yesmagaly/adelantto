@@ -3,7 +3,6 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { FieldErrors, useForm } from "react-hook-form";
 import Modal from "../../components/modal";
 import InputPassword from "../../components/InputPassword";
-import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
 import logo from "../../assets/icons/logo.svg";
@@ -154,8 +153,6 @@ const UpdateTemporaryPassword: React.FC = () => {
             <div className="border-white border-bottom" />
           </div>
         </div>
-
-        <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
           <h3 className="mb-5 font-semibold text-lg text-center">
