@@ -1,8 +1,8 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 
-import exclamation from "../../v2/assets/svgs/exclamation.svg";
-import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
-import adelanttoBg from "../../v2/assets/images/adelantto-gradient-bg.png";
+import exclamation from "../../assets/svgs/exclamation.svg";
+import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
+import adelanttoBg from "../../assets/images/adelantto-gradient-bg.png";
 
 const FailBuroScore: React.FC = () => {
   const router = useIonRouter();

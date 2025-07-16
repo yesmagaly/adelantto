@@ -1,11 +1,11 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 
-import logo from "../../assets/icons/logo.svg";
+import logo from "../../assets/svgs/logo.svg";
 import InputPassword from "../../components/InputPassword";
 import { useAuth } from "./authContext";
 
-import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
+import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
 
 type T_form = {
   email: string;

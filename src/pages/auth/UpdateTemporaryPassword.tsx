@@ -4,7 +4,7 @@ import { FieldErrors, useForm } from "react-hook-form";
 import InputPassword from "../../components/InputPassword";
 import { useAuth } from "./authContext";
 
-import logo from "../../assets/icons/logo.svg";
+import logo from "../../assets/svgs/logo.svg";
 import { authentication } from "../../api";
 import { t } from "@adelantto/utils";
 

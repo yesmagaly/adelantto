@@ -6,10 +6,10 @@ import LoanCard from "../loan/components/LoanCard";
 import ApplicationCard from "../applications/components/ApplicationCard";
 import { useAuth } from "../auth/authContext";
 import { AppNav } from "../../layout/AppNav";
-import adelanttoBgTopRightUrl from "../../v2/assets/images/adelantto-bg-top-right.png";
-import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import adelanttoBgTopRightUrl from "../../assets/images/adelantto-bg-top-right.png";
+import exclamation from "../../assets/svgs/exclamation.svg";
 
-import buildingPictureUrl from "../../v2/assets/images/building-picture.png"
+import buildingPictureUrl from "../../assets/images/building-picture.png"
 
 import {
   useGetApplicationsQuery,

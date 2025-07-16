@@ -3,9 +3,9 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { useRecoverPasswordMutation } from "@adelantto/store";
 
-import logo from "../../assets/icons/logo.svg";
-import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
-import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import logo from "../../assets/svgs/logo.svg";
+import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
+import exclamation from "../../assets/svgs/exclamation.svg";
 import { handleServerErrors, t } from "@adelantto/utils";
 
 type T_form = {

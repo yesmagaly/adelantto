@@ -1,7 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
-import logo from "../assets/icons/logo.svg";
+import logo from "../assets/svgs/logo.svg";
 
-import adelanttoBgUrl from "../v2/assets/images/adelantto-bg.png";
+import adelanttoBgUrl from "../assets/images/adelantto-bg.png";
 
 const Home: React.FC = () => {
   return (

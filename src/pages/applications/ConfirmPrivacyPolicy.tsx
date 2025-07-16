@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 import { t } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
-import * as Modal from "../../components/modal";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
 
 type T_form = {
@@ -192,36 +191,41 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
           </form>
         </div>
 
-        <Modal.Root isOpen={displayedSentModal}>
-          <Modal.Body>
+        <div data-modal data-isOpen={displayedSentModal}>
+          <div>
             <p>
               Se ha vuelto a enviar un SMS con el código de confirmación a su
               número de teléfono.
             </p>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div>
             <button className="button" onClick={() => setSentModal(false)}>
               Continuar
             </button>
-          </Modal.Footer>
-        </Modal.Root>
+          </div>
+        </div>
 
-        <Modal.Root isOpen={displayedErrorModal}>
-          <Modal.Header>
+        <div data-modal data-isOpen={displayedErrorModal}>
+          <div>
             <h4 className="font-semibold">Demasiados intentos.</h4>
-          </Modal.Header>
-          <Modal.Body>
+          </div>
+          <div>
             <p>Inténtalo de nuevo después de un minuto.</p>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div>
             <button className="button" onClick={() => setErrorModal(false)}>
               Aceptar
             </button>
-          </Modal.Footer>
-        </Modal.Root>
+          </div>
+        </div>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button form="form" type="submit" disabled={isSubmitting} className="btn-block btn btn-primary">
+        <button
+          form="form"
+          type="submit"
+          disabled={isSubmitting}
+          className="btn-block btn btn-primary"
+        >
           Confirmar
         </button>
 

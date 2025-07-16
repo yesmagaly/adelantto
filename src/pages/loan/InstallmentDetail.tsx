@@ -12,7 +12,7 @@ import Tag from "../../components/Tag";
 import { uploadInstallmentFile } from "../../api";
 import { useGetInstallmentQuery } from "../../queries";
 import FileInputItem from "../../components/FileInputItem";
-import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import exclamation from "../../assets/svgs/exclamation.svg";
 
 interface ComponentProps extends InstallmentType {
   index: number;
