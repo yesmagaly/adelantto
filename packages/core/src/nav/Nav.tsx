@@ -13,17 +13,17 @@ export function NavRoot(props: {
 
 export function NavItem({
   icon,
-  href,
+  to,
   children,
 }: {
   icon?: string;
-  href: string;
+  to: string;
   children: React.ReactNode;
 }) {
   return (
     <li className="w-1/4">
       <NavLink
-        to={href}
+        to={to}
         className={(isActive) => {
           return cn(
             "flex flex-col justify-center items-center gap-1 py-2 h-full",
