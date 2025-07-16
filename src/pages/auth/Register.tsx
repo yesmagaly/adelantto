@@ -11,7 +11,6 @@ import parsePhoneNumber from "libphonenumber-js";
 
 import { PatternFormat } from "react-number-format";
 import Modal from "../../components/modal";
-import Loader from "../../components/Loader/Loader";
 
 import { PROD_MODE } from "../../config";
 import { handleServerErrors, t } from "@adelantto/utils";
@@ -215,8 +214,6 @@ const Register: React.FC = () => {
             </p>
           </div>
         </form>
-
-        <Loader isOpen={isSubmitting} />
 
         <Modal isOpen={isOpen}>
           <h3 className="font-semibold text-lg text-center">Lo sentimos</h3>

@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 
 import logo from "../../assets/icons/logo.svg";
 import InputPassword from "../../components/InputPassword";
-import Loader from "../../components/Loader/Loader";
 import { useAuth } from "./authContext";
 
 import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
@@ -98,8 +97,6 @@ function Login() {
               Regístrate
             </a>
           </p>
-
-          <Loader isOpen={isSubmitting} />
         </div>
       </IonContent>
     </IonPage>
