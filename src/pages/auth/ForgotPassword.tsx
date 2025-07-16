@@ -3,7 +3,6 @@ import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { useRecoverPasswordMutation } from "@adelantto/store";
 
-import Loader from "../../components/Loader/Loader";
 import logo from "../../assets/icons/logo.svg";
 import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
 import exclamation from "../../v2/assets/svgs/exclamation.svg";
@@ -91,8 +90,6 @@ const ForgotPassword: React.FC = () => {
               Enviar
             </button>
           </form>
-
-          <Loader isOpen={isSubmitting} />
         </div>
 
         <dialog ref={modalRef} id="my_modal_1" className="modal">
