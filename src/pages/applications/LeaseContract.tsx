@@ -52,7 +52,7 @@ const LeaseContract: React.FC = () => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <Link to="/boom" className="inline-flex items-center">
+          <Link to="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </Link>
           Solicita tu AdelanttoCash®
@@ -66,7 +66,7 @@ const LeaseContract: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <Link to="/boom" className="inline-flex items-center"></Link>
+            <Link to="/" className="inline-flex items-center"></Link>
             Contrato de renta
           </h1>
           <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
