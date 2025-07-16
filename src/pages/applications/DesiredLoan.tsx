@@ -18,7 +18,6 @@ import {
 } from "@adelantto/store";
 import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
-import tooltipUrl from "../../v2/assets/svgs/tooltip.svg"
 
 type T_form = T_application & {
   pre_offer_term_frame?: number;

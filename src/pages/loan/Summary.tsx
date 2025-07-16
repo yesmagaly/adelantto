@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import * as api from "../../api";
-import { formatCurrency } from "@adelantto/utils";
 import InstallmentCard from "../../components/InstallmentCard";
 import { InstallmentType, LoanType } from "../../types";
 import LoanCard from "./components/LoanCard";

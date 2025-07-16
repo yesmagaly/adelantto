@@ -2,10 +2,10 @@ import { useRef } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
 
-import fireworks from "../../v2/assets/svgs/fireworks.svg";
-import adelanttoBgUrl from "../../v2/assets/images/adelantto-bg.png";
-import adelanttoBg from "../../v2/assets/images/adelantto-gradient-bg.png";
-import exclamation from "../../v2/assets/svgs/exclamation.svg";
+import fireworks from "../../assets/svgs/fireworks.svg";
+import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
+import adelanttoBg from "../../assets/images/adelantto-gradient-bg.png";
+import exclamation from "../../assets/svgs/exclamation.svg";
 import FileInputItem from "../../components/FileInputItem";
 import { applications } from "../../api";
 
