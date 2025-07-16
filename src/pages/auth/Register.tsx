@@ -154,7 +154,7 @@ const Register: React.FC = () => {
 
             <p className="hidden validator-hint">{errors.phone?.message}</p>
 
-            <p className="label">
+            <p className="text-wrap label">
               {t(
                 "El formato del teléfono debe seguir este patrón: +52 (##) ####-####"
               )}

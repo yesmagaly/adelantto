@@ -9,6 +9,8 @@ import { AppNav } from "../../layout/AppNav";
 import adelanttoBgTopRightUrl from "../../v2/assets/images/adelantto-bg-top-right.png";
 import exclamation from "../../v2/assets/svgs/exclamation.svg";
 
+import buildingPictureUrl from "../../v2/assets/images/building-picture.png"
+
 import {
   useGetApplicationsQuery,
   useGetLoansQuery,
@@ -162,7 +164,7 @@ const Dashboard: React.FC = () => {
                 <div className="bg-base-100 shadow-md mx-1 mb-2 card">
                   <figure>
                     <img
-                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      src={buildingPictureUrl}
                       alt="Shoes"
                     />
                   </figure>
@@ -180,7 +182,7 @@ const Dashboard: React.FC = () => {
                 <div className="bg-base-100 shadow-md mx-1 mb-2 card">
                   <figure>
                     <img
-                      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                      src={buildingPictureUrl}
                       alt="Shoes"
                     />
                   </figure>
