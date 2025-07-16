@@ -57,14 +57,14 @@ const UploadDocuments: React.FC<T_props> = ({
   };
 
   return (
-    <div className="flex min-h-[120px] items-center justify-center rounded-sm bg-slate-200 px-4 py-2 text-center text-slate-900">
+    <div className="flex justify-center items-center bg-slate-200 px-4 py-2 rounded-sm min-h-[120px] text-slate-900 text-center">
       <div>
         {!loading && value?.id && (
           <div className="flex items-center gap-4">
             {value?.name}
 
             <button
-              className="border-2 border-red-600 p-1"
+              className="p-1 border-2 border-red-600"
               onClick={handleRemove}
             >
               <Icon name="trash-can" />
@@ -88,7 +88,7 @@ const UploadDocuments: React.FC<T_props> = ({
         placeholder="Buscar"
       />
       {error?.message && (
-        <p className="mb-4 text-sm text-red-500">{error.message}</p>
+        <p className="mb-4 text-red-500 text-sm">{error.message}</p>
       )}
     </div>
   );
