@@ -10,6 +10,7 @@ import { NumericFormat } from "react-number-format";
 
 import { MaterialIcon } from "@adelantto/core";
 import { useAddApplicationMutation } from "@adelantto/store";
+import { Link } from "react-router-dom";
 
 export function atLeastThreeMonths(end_date: any, months_number: any) {
   const date1 = new Date();
@@ -51,9 +52,9 @@ const LeaseContract: React.FC = () => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <a href="/" className="inline-flex items-center">
+          <Link to="/boom" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
-          </a>
+          </Link>
           Solicita tu AdelanttoCash®
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
@@ -65,7 +66,7 @@ const LeaseContract: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <a href="/" className="inline-flex items-center"></a>
+            <Link to="/boom" className="inline-flex items-center"></Link>
             Contrato de renta
           </h1>
           <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
@@ -194,13 +195,13 @@ const LeaseContract: React.FC = () => {
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con los{" "}
-              <a
-                href="https://adelanttocash.com/terminos-y-condiciones"
+              <Link
+                to="https://adelanttocash.com/terminos-y-condiciones"
                 target="_blank"
                 className="text-emerald-700 link"
               >
                 Términos y Condiciones
-              </a>
+              </Link>
             </span>
           </label>
         </form>
