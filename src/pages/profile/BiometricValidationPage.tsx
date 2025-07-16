@@ -9,7 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import { api, useIncode } from "@adelantto/incode";
-import { IncodeSelfieInput } from "@adelantto/incode/src/components/IncodeSelfieInput";
+import { IncodeSelfieInput } from "@adelantto/incode";
 import { applications } from "../../api";
 
 type T_form = {

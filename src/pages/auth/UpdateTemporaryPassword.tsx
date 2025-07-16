@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { FieldErrors, useForm } from "react-hook-form";
-import Modal from "../../components/modal";
 import InputPassword from "../../components/InputPassword";
 import { useAuth } from "./authContext";
 
@@ -153,20 +152,6 @@ const UpdateTemporaryPassword: React.FC = () => {
             <div className="border-white border-bottom" />
           </div>
         </div>
-
-        <Modal isOpen={isOpen}>
-          <h3 className="mb-5 font-semibold text-lg text-center">
-            Lo sentimos
-          </h3>
-          {<p>{errors?.password?.message}</p>}
-          {<p>{errors?.password_confirmation?.message}</p>}
-          <button
-            className="button is-primary"
-            onClick={() => setIsOpen(false)}
-          >
-            Aceptar
-          </button>
-        </Modal>
       </IonContent>
     </IonPage>
   );
