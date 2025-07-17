@@ -22,6 +22,8 @@ type T_form = {
   accept_privacy_policy: boolean;
 };
 
+export const MIN_MONTHS_REMAINING = 3;
+
 const LeaseContract: React.FC = () => {
   const router = useIonRouter();
   const [mutation] = useAddApplicationMutation();
@@ -37,7 +39,7 @@ const LeaseContract: React.FC = () => {
       const response = await mutation(form).unwrap();
       router.push(`/applications/${response.id}/desired-loan`);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
@@ -81,11 +83,8 @@ const LeaseContract: React.FC = () => {
             <Controller
               rules={{
                 validate: {
-                  greaterThan: (v) => {
-                    console.log(v, "__V__");
-
-                    return v >= 15000 || "El monto mínimo es de $15,000 MXN";
-                  },
+                  greaterThan: (v) =>
+                    v >= 15000 || "El monto mínimo es de $15,000 MXN",
                 },
               }}
               control={control}
@@ -133,8 +132,8 @@ const LeaseContract: React.FC = () => {
             <input
               {...register("lease_end_date", {
                 validate: (value) =>
-                  hasAtLeastMonthsRemaining(value, 3) ||
-                  "El tiempo restante de su contrato debe ser mayor o igual a 6 meses respecto a la fecha actual",
+                  hasAtLeastMonthsRemaining(value, MIN_MONTHS_REMAINING) ||
+                  `El tiempo restante de su contrato debe ser mayor o igual a ${MIN_MONTHS_REMAINING} meses respecto a la fecha actual`,
               })}
               type="date"
               required

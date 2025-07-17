@@ -14,9 +14,14 @@ import {
   useLazyGetOfferQuery,
   useUpdateApplicationMutation,
 } from "@adelantto/store";
-import { cn, formatCurrency, hasAtLeastMonthsRemaining } from "@adelantto/utils";
+import {
+  cn,
+  formatCurrency,
+  hasAtLeastMonthsRemaining,
+} from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
+import { MIN_MONTHS_REMAINING } from "./LeaseContract";
 
 type T_form = {
   pre_offer_amount?: number;
@@ -37,11 +42,13 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
   const [mutation] = useUpdateApplicationMutation();
   const [getLazyOffer, { data: offer }] = useLazyGetOfferQuery();
   const [options, setOptions] = useState<Array<number>>([]);
+  const [displayIntput, setDisplayInput] = useState<boolean>(false);
 
   const {
     setValue,
     handleSubmit,
     watch,
+    register,
     formState: { isSubmitting },
   } = useForm<T_form>({
     defaultValues: async () => {
@@ -131,8 +138,6 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
                 </button>
               ))}
           </div>
-
-          <h4 className="text-center link">Definir manualmente</h4>
 
           {offer && (
             <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card">

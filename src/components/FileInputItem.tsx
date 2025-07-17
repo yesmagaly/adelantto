@@ -39,13 +39,13 @@ const FileInputItem: React.FC<T_props> = ({
     fieldState: { error },
   } = useController(props);
 
-  const handleChange = async (event: { target: { files: Array<File> } }) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
 
     // Start Loading.
     setLoading(true);
 
-    if (files.length > 0) {
+    if (files && files?.length > 0) {
       if (multiple) {
         const newFiles = [...files].map(async (file) => {
           const body = new FormData();
@@ -80,14 +80,14 @@ const FileInputItem: React.FC<T_props> = ({
     (fileId: number) => (event: { preventDefault: () => void }) => {
       event.preventDefault();
 
-      if (props.multiple) {
+      if (multiple) {
         onChange(value.filter((file) => file.id != fileId));
       } else {
         onChange(undefined);
       }
     };
 
-  const displayFiles = props.multiple ? value ?? [] : value ? [value] : [];
+  const displayFiles = multiple ? value ?? [] : value ? [value] : [];
   const hasFiles = displayFiles.length > 0;
 
   return (
@@ -131,7 +131,7 @@ const FileInputItem: React.FC<T_props> = ({
 
           <input
             {...props}
-            className="hidden validator"
+            className="hidden"
             id={props.name}
             onChange={handleChange}
             type="file"
