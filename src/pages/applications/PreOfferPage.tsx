@@ -6,16 +6,15 @@ import {
   IonPage,
   useIonRouter,
 } from "@ionic/react";
-import { RouteComponentProps } from "react-router";
-
-import { atLeastThreeMonths } from "./LeaseContract";
+import { RouteComponentProps } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import {
   useLazyGetApplicationQuery,
   useLazyGetOfferQuery,
   useUpdateApplicationMutation,
 } from "@adelantto/store";
-import { cn, formatCurrency } from "@adelantto/utils";
+import { cn, formatCurrency, hasAtLeastMonthsRemaining } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
 
@@ -49,7 +48,7 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
       try {
         const values = await trigger(match.params.id).unwrap();
         const options = [3, 6, 8, 12].filter((value) =>
-          atLeastThreeMonths(values.lease_end_date, value)
+          hasAtLeastMonthsRemaining(values.lease_end_date, value)
         );
 
         setOptions(options);

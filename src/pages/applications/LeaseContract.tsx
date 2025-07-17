@@ -5,28 +5,21 @@ import {
   IonHeader,
   IonFooter,
 } from "@ionic/react";
+import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
 
 import { MaterialIcon } from "@adelantto/core";
 import { useAddApplicationMutation } from "@adelantto/store";
-import { Link } from "react-router-dom";
-
-export function atLeastThreeMonths(end_date: any, months_number: any) {
-  const date1 = new Date();
-  const date2 = new Date(end_date);
-  const diffTime = Math.abs(date2 - date1);
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  const diffMonths = diffDays / 30.44;
-
-  return diffMonths >= months_number;
-}
+import { hasAtLeastMonthsRemaining } from "@adelantto/utils";
 
 type T_form = {
   lease_monthly_income: number;
   lease_start_date: string;
   lease_end_date: string;
   lease_payment_method: string;
+
+  accept_privacy_policy: boolean;
 };
 
 const LeaseContract: React.FC = () => {
@@ -42,9 +35,9 @@ const LeaseContract: React.FC = () => {
   const onSubmit = async (form: T_form) => {
     try {
       const response = await mutation(form).unwrap();
-      router.push(`/applications/${response.id}/desired-loan`)
+      router.push(`/applications/${response.id}/desired-loan`);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -66,7 +59,6 @@ const LeaseContract: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <Link to="/" className="inline-flex items-center"></Link>
             Contrato de renta
           </h1>
           <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
@@ -140,11 +132,9 @@ const LeaseContract: React.FC = () => {
             <label className="control-label">Fecha de fin del contrato</label>
             <input
               {...register("lease_end_date", {
-                validate: {
-                  atLeastSixMonths: (v) =>
-                    atLeastThreeMonths(v, 6) ||
-                    "El tiempo restante de su contrato debe ser mayor o igual a 6 meses",
-                },
+                validate: (value) =>
+                  hasAtLeastMonthsRemaining(value, 3) ||
+                  "El tiempo restante de su contrato debe ser mayor o igual a 6 meses respecto a la fecha actual",
               })}
               type="date"
               required
@@ -177,7 +167,7 @@ const LeaseContract: React.FC = () => {
                   type="radio"
                   id="payment_transfer"
                   value="transfer"
-                  className="radio radio-sm validator"
+                  className="radio validator radio-sm"
                   required
                 />
                 <span className="text-sm">Transferencia</span>
@@ -187,7 +177,7 @@ const LeaseContract: React.FC = () => {
 
           <label className="label">
             <input
-              {...register('accept_privacy_policy')}
+              {...register("accept_privacy_policy")}
               type="checkbox"
               id="agreement"
               className="rounded-sm checkbox checkbox-sm validator"
@@ -208,7 +198,12 @@ const LeaseContract: React.FC = () => {
       </IonContent>
 
       <IonFooter className="ion-padding">
-        <button type="submit" form="form" disabled={isSubmitting} className="btn-block btn btn-primary">
+        <button
+          type="submit"
+          form="form"
+          disabled={isSubmitting}
+          className="btn-block btn btn-primary"
+        >
           Ver Pre-Oferta AdelanttoCash®
         </button>
       </IonFooter>
