@@ -9,7 +9,7 @@ const InputPassword = React.forwardRef<
 
   return (
     <>
-      <input ref={ref} type={showPassword ? "text" : "password"} {...props} />
+      <input className="validator" ref={ref} type={showPassword ? "text" : "password"} {...props} />
 
       <button
         type="button"

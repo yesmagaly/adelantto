@@ -135,7 +135,7 @@ const FileInputItem: React.FC<T_props> = ({
 
           <input
             {...props}
-            className="hidden"
+            className="hidden validator"
             id={props.name}
             onChange={handleChange}
             type="file"

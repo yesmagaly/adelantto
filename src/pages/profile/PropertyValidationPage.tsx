@@ -139,7 +139,7 @@ export const PropertyValidationPage: React.FC = () => {
               Folio Real
             </label>
             <input
-              className="w-full input"
+              className="w-full input validator"
               type="number"
               placeholder="123456"
               id="real-folio"
@@ -172,7 +172,7 @@ export const PropertyValidationPage: React.FC = () => {
               Código postal del inmueble
             </label>
             <input
-              className="w-full input"
+              className="w-full input validator"
               type="number"
               placeholder="123456"
               id="property-zip-code"

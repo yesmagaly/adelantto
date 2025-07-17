@@ -166,7 +166,7 @@ const LeaseContract: React.FC = () => {
                   {...register("lease_payment_method")}
                   type="radio"
                   value="cash"
-                  className="radio radio-sm"
+                  className="radio radio-sm validator"
                   required
                 />
                 <span className="text-sm">Efectivo</span>
@@ -177,7 +177,7 @@ const LeaseContract: React.FC = () => {
                   type="radio"
                   id="payment_transfer"
                   value="transfer"
-                  className="radio radio-sm"
+                  className="radio radio-sm validator"
                   required
                 />
                 <span className="text-sm">Transferencia</span>
@@ -190,7 +190,7 @@ const LeaseContract: React.FC = () => {
               {...register('accept_privacy_policy')}
               type="checkbox"
               id="agreement"
-              className="rounded-sm checkbox checkbox-sm"
+              className="rounded-sm checkbox checkbox-sm validator"
               required
             />
             <span className="text-xs text-wrap">
