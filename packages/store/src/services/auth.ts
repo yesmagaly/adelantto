@@ -11,12 +11,6 @@ type T_user = {
   is_completed: boolean;
 };
 
-type T_error_respose<T extends FieldValues> = {
-  status: "fail";
-  message: string;
-  errors: Partial<Record<keyof FieldErrors<T>, string[]>>;
-};
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({

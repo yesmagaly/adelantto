@@ -1,13 +1,11 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
+import { Link } from "react-router-dom";
 
 import exclamation from "../../assets/svgs/exclamation.svg";
 import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
 import adelanttoBg from "../../assets/images/adelantto-gradient-bg.png";
-import { Link } from "react-router-dom";
 
 export const OopsPage: React.FC = () => {
-  const router = useIonRouter();
-
   return (
     <IonPage>
       <IonContent className="ion-padding">

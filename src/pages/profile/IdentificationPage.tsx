@@ -30,7 +30,7 @@ type T_form = {
 
 export const IdentificationPage: React.FC = () => {
   const router = useIonRouter();
-  const [mutation, { isLoading }] = useUpdateUserMutation();
+  const [mutation] = useUpdateUserMutation();
   const [getUserQuery] = useLazyGetUserQuery();
   const [checkZipCodeQuery] = useLazyCheckZipCodeQuery();
 
@@ -44,7 +44,7 @@ export const IdentificationPage: React.FC = () => {
     defaultValues: async () => {
       try {
         return await getUserQuery().unwrap();
-      } catch (error) {
+      } catch {
         return {};
       }
     },

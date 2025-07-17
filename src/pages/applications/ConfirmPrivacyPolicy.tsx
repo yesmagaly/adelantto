@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   IonContent,
   IonFooter,
   IonHeader,
   IonPage,
-  useIonRouter,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
 

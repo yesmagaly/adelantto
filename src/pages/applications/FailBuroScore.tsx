@@ -1,4 +1,4 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 
 import exclamation from "../../assets/svgs/exclamation.svg";
 import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";

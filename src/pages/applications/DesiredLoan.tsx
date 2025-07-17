@@ -54,7 +54,7 @@ export const DesiredLoan: React.FC<T_props> = ({ match }) => {
 
         setOptions(options);
         return values;
-      } catch (error) {
+      } catch {
         return {};
       }
     },
