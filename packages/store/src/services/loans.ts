@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuthHeaders } from "../utils/setHeaders";
 import { BASE_URL } from "../constants";
+import { T_installment } from "../../../../src/types";
 
-export type T_loan_item = {
+export type T_loan = {
   id: string;
   amount: number;
   status: string;
@@ -16,6 +17,8 @@ export type T_loan_item = {
       amount: number;
     };
   };
+
+  installments: Array<T_installment>;
 };
 
 export const loansApi = createApi({
@@ -26,7 +29,7 @@ export const loansApi = createApi({
   }),
   tagTypes: ["Loans"],
   endpoints: (builder) => ({
-    getLoans: builder.query<Array<T_loan_item>, void>({
+    getLoans: builder.query<Array<T_loan>, void>({
       query: () => "",
       providesTags: (_loan, _err) => [{ type: "Loans", id: "LIST" }],
     }),

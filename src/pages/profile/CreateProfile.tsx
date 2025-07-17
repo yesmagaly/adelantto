@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import { API_SERVER_URL } from "../../config";
 import { Link } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 
 type T_form = {
   name: string;
@@ -17,13 +18,9 @@ type T_form = {
   accept_terms_and_conditions: boolean;
 };
 
-type T_props = {
-  match: {
-    params: {
-      id: string;
-    };
-  };
-};
+type T_props = RouteComponentProps<{
+  id: string;
+}>;
 
 export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();

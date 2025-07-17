@@ -52,7 +52,6 @@ import { ProfilePage } from "./pages/profile/ProfilePage";
 import { CreateProfilePage } from "./pages/profile/CreateProfile";
 import { IdentificationPage } from "./pages/profile/IdentificationPage";
 import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
-import { PropertyValidationPage } from "./pages/profile/PropertyValidationPage";
 import { CongratulationsPage } from "./pages/loan/CongratulationsPage";
 import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
@@ -164,10 +163,6 @@ const App: React.FC = () => {
           <PrivateRoute
             path="/profile/income-and-taxes"
             component={IncomeAndTaxesPage}
-          />
-          <PrivateRoute
-            path="/profile/property-validation"
-            component={PropertyValidationPage}
           />
 
           <PrivateRoute

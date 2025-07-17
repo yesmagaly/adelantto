@@ -2,7 +2,7 @@ import { useIonRouter } from "@ionic/react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-import { T_loan_item } from "@adelantto/store";
+import { T_loan } from "@adelantto/store";
 import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
@@ -26,9 +26,9 @@ function trans(key) {
 }
 
 type T_props = {
-  loan: T_loan_item;
+  loan: T_loan;
 
-  displayActions: boolean;
+  displayActions?: boolean;
 };
 
 export default function LoanCard({ loan, displayActions = false }: T_props) {

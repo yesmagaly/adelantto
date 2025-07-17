@@ -3,7 +3,7 @@ export interface LoanType {
   application: ApplicationType;
   status: string;
   amount: number;
-  installments: Array<InstallmentType>
+  installments: Array<T_installment>
 }
 
 export interface ApplicationType {
@@ -16,14 +16,13 @@ export interface ApplicationType {
   loan: LoanType;
 }
 
-export interface InstallmentType {
+export interface T_installment {
   id: string;
   amount: number;
   status: string;
   due_date: string;
   total_amount: number;
 }
-
 
 export interface OfferType {
   principal: number;

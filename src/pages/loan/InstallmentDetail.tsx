@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { IonContent, IonFooter, IonPage } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils";
 import { DateTime } from "luxon";
 import { t } from "@adelantto/utils";
 
-import { InstallmentType } from "../../types";
+import { T_installment } from "../../types";
 import Tag from "../../components/Tag";
 
 import { uploadInstallmentFile } from "../../api";
@@ -14,10 +14,13 @@ import { useGetInstallmentQuery } from "../../queries";
 import FileInputItem from "../../components/FileInputItem";
 import exclamation from "../../assets/svgs/exclamation.svg";
 
-interface ComponentProps extends InstallmentType {
+type T_props = {
   index: number;
   loanId: number;
-}
+} & RouteComponentProps<{
+  id: string;
+  installment_id: string;
+}>;
 
 function capitalizeFirstLetter(string: string) {
   return string
@@ -26,10 +29,10 @@ function capitalizeFirstLetter(string: string) {
     .join(" ");
 }
 
-export const InstallmentDetail = ({ match }: ComponentProps) => {
+export const InstallmentDetail = ({ match }: T_props) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const installementId = match.params.installment_id;
-  const { data }: { data: InstallmentType } =
+  const { data }: { data: T_installment } =
     useGetInstallmentQuery(installementId);
 
   const {

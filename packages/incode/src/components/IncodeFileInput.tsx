@@ -29,18 +29,16 @@ export const IncodeFileInput: React.FC<T_props> = ({
     fieldState: { error },
   } = useController(props);
 
-  const handleChange = async (event: { target: { files: Array<File> } }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
 
-    // Start Loading.
     setLoading(true);
 
-    if (files.length > 0) {
+    if (files && files.length > 0) {
       onChange(files[0]);
-
-      // Stop loading.
-      setLoading(false);
     }
+
+    setLoading(false);
   };
 
   const handleRemove = () => (event: { preventDefault: () => void }) => {
@@ -53,7 +51,7 @@ export const IncodeFileInput: React.FC<T_props> = ({
   return (
     <div
       className={cn(
-        "border border-dark-gray-active bg-white p-4 rounded-[12px]",
+        "bg-white p-4 border border-dark-gray-active rounded-[12px]",
         hasFiles && "border-lime-300",
         className
       )}

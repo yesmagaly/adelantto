@@ -8,12 +8,17 @@ import adelanttoBg from "../../assets/images/adelantto-gradient-bg.png";
 import exclamation from "../../assets/svgs/exclamation.svg";
 import FileInputItem from "../../components/FileInputItem";
 import { applications } from "../../api";
+import { RouteComponentProps } from "react-router";
 
 type T_form = {
   account_statement?: File;
 };
 
-export const CongratulationsPage: React.FC = ({ match }) => {
+type T_props = RouteComponentProps<{
+  id: string;
+}>;
+
+export const CongratulationsPage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
   const modalRef = useRef<HTMLDialogElement>(null);
   const {
@@ -56,7 +61,12 @@ export const CongratulationsPage: React.FC = ({ match }) => {
               label="Subir estado de cuenta bancario completo (con QR)"
             />
 
-            <button disabled={isSubmitting} className="btn-block mb-8 btn btn-primary">Enviar</button>
+            <button
+              disabled={isSubmitting}
+              className="btn-block mb-8 btn btn-primary"
+            >
+              Enviar
+            </button>
           </form>
 
           {/* <Link
