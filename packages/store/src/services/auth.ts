@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuthHeaders } from "../utils/setHeaders";
 import { BASE_URL } from "../constants";
-import { FieldErrors, FieldValues } from "react-hook-form";
 
 type T_user = {
   id: string;
@@ -28,24 +27,6 @@ export const authApi = createApi({
       invalidatesTags: (_post, _error) => [{ type: "User", id: _post?.id }],
     }),
 
-    loginUser: builder.mutation<T_user, { email: string; password: string }>({
-      query: (body) => ({
-        url: "/login",
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: (_post, _error) => [{ type: "User", id: _post?.id }],
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          console.error("data:", data);
-          // localStorage.setItem("user", JSON.stringify(data));
-        } catch (error) {
-          console.error("Failed to save user to local storage:", error);
-        }
-      },
-    }),
-
     recoverPassword: builder.mutation<T_user, { email: string }>({
       query: (body) => ({
         url: "/recover-password",
@@ -59,6 +40,5 @@ export const authApi = createApi({
 
 export const {
   useRegisterUserMutation,
-  useLoginUserMutation,
   useRecoverPasswordMutation
 } = authApi;
