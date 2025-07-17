@@ -31,7 +31,7 @@ interface T_props
     id: string;
   }> {}
 
-export const DesiredLoan: React.FC<T_props> = ({ match }) => {
+export const PreOfferPage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
   const [trigger, { data: application, isLoading }] =
     useLazyGetApplicationQuery();

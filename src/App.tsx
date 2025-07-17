@@ -4,26 +4,6 @@ import { IonApp, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Provider } from "react-redux";
 
-import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import VerificationCode from "./pages/auth/VerificationCode";
-import AdvanceImmediately from "./pages/home/AdvanceImmediately";
-
-import UploadDocuments from "./pages/applications/UploadDocuments";
-
-import LeaseContract from "./pages/applications/LeaseContract";
-import { DesiredLoan } from "./pages/applications/DesiredLoan";
-import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
-import Dashboard from "./pages/home/Dashboard";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-
-import Summary from "./pages/loan/Summary";
-
-import PrivacyPolicy from "./pages/applications/PrivacyPolicy";
-import ConfirmPrivacyPolicy from "./pages/applications/ConfirmPrivacyPolicy";
-import FailBuroScore from "./pages/applications/FailBuroScore";
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -46,17 +26,36 @@ import "./theme/variables.css";
 /* Tailwind styles */
 import "./theme/tailwind.css";
 
+import { store } from "@adelantto/store";
+
+import Home from "./pages/Home";
+import AdvanceImmediately from "./pages/home/AdvanceImmediately";
+import Dashboard from "./pages/home/Dashboard";
+
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import VerificationCode from "./pages/auth/VerificationCode";
+import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import { useAuth } from "./pages/auth/authContext";
+
+import Summary from "./pages/loan/Summary";
 import { InstallmentDetail } from "./pages/loan/InstallmentDetail";
+import { CongratulationsPage } from "./pages/loan/CongratulationsPage";
+
 import { ProfilePage } from "./pages/profile/ProfilePage";
 import { CreateProfilePage } from "./pages/profile/CreateProfile";
 import { IdentificationPage } from "./pages/profile/IdentificationPage";
 import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
-import { CongratulationsPage } from "./pages/loan/CongratulationsPage";
 import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
 
-import { store } from "@adelantto/store";
+import UploadDocuments from "./pages/applications/UploadDocuments";
+import LeaseContract from "./pages/applications/LeaseContract";
+import { PreOfferPage } from "./pages/applications/PreOfferPage";
+import PrivacyPolicy from "./pages/applications/PrivacyPolicy";
+import ConfirmPrivacyPolicy from "./pages/applications/ConfirmPrivacyPolicy";
+import FailBuroScore from "./pages/applications/FailBuroScore";
 import { AwaitingValidation } from "./pages/applications/AwaitingValidation";
 
 setupIonicReact();
@@ -178,7 +177,7 @@ const App: React.FC = () => {
           />
           <PrivateRoute
             path="/applications/:id/desired-loan"
-            component={DesiredLoan}
+            component={PreOfferPage}
           />
           <PrivateRoute
             path="/applications/:id/property-documents"
