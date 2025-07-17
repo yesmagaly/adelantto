@@ -40,9 +40,9 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
             <span>AdelanttoCash® {loan.id.toString().padStart(4, "0")}</span>
           </h4>
 
-          {/* <a href="" className="btn-outline btn-square btn btn-xs btn-primary">
+          {/* <Link to="" className="btn-outline btn-square btn btn-xs btn-primary">
             <MaterialIcon name="arrow_outward" size="18px" />
-          </a> */}
+          </Link> */}
         </div>
 
         {loan.status === "active" && (

@@ -11,6 +11,7 @@ import {
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import { MaterialIcon } from "@adelantto/core";
+import { Link } from "react-router-dom";
 
 interface ComponentProps
   extends RouteComponentProps<{
@@ -96,9 +97,9 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
       <IonHeader>
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <a href="/register" className="inline-flex items-center">
+            <Link to="/register" className="inline-flex items-center">
               <MaterialIcon name="arrow_back" />
-            </a>
+            </Link>
             Verificar cuenta
           </h1>
         </div>
@@ -167,9 +168,9 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
 
         <div className="gap-2 grid text-center">
           <p>¿No has recibido el código?</p>
-          <a onClick={() => router.push("/register")} className="link">
+          <Link to="/register" className="link">
             Reenviar código
-          </a>
+          </Link>
         </div>
       </IonContent>
 
@@ -194,9 +195,9 @@ const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
 
         <p className="mt-6 text-sm text-center">
           ¿Ya tienes una cuenta?{" "}
-          <a href="/login" className="link">
+          <Link to="/login" className="link">
             Iniciar sesión
-          </a>
+          </Link>
         </p>
       </IonFooter>
     </IonPage>

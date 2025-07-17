@@ -17,6 +17,7 @@ import {
 import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
 import FileInputItem from "../../components/FileInputItem";
+import { Link } from "react-router-dom";
 
 type T_form = {
   back_document?: File;
@@ -75,9 +76,9 @@ export const IdentificationPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <a href="/" className="inline-flex items-center">
+          <Link to="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
-          </a>
+          </Link>
           Completa tu perfil
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
@@ -193,9 +194,9 @@ export const IdentificationPage: React.FC = () => {
             Continuar
           </button>
 
-          <a className="btn-outline btn" href="/profile">
+          <Link className="btn-outline btn" to="/profile">
             Terminar después
-          </a>
+          </Link>
         </div>
       </IonFooter>
     </IonPage>

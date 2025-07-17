@@ -1,6 +1,7 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import adelanttoBgUrl from "../../assets/images/adelantto-blue-bg.png";
 import adelanttoWhiteLogoUrl from "../../assets/svgs/logo-white.svg";
+import { Link } from "react-router-dom";
 
 const AdvanceImmediately: React.FC = () => {
   const router = useIonRouter();
@@ -24,9 +25,9 @@ const AdvanceImmediately: React.FC = () => {
             <h1 className="mb-2 font-bold text-h4">¡Bienvenido!</h1>
             <p className="text-sm">Ahora eres parte de adelantto</p>
           </div>
-          <a className="btn-block btn btn-primary" href="/home">
+          <Link className="btn-block btn btn-primary" to="/home">
             Continuar
-          </a>
+          </Link>
         </div>
       </IonContent>
     </IonPage>

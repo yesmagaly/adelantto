@@ -6,6 +6,7 @@ import InputPassword from "../../components/InputPassword";
 import { useAuth } from "./authContext";
 
 import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
+import { Link } from "react-router-dom";
 
 type T_form = {
   email: string;
@@ -78,12 +79,12 @@ function Login() {
             </div>
 
             <p className="my-4 text-sm text-center">
-              <a
+              <Link
                 className="link"
-                onClick={() => router.push("/forgot-password")}
+                to="/forgot-password"
               >
                 ¿Olvidaste tu contrasena?
-              </a>
+              </Link>
             </p>
 
             <button disabled={isSubmitting} className="btn-block btn btn-primary">
@@ -93,9 +94,9 @@ function Login() {
 
           <p className="text-sm text-center">
             ¿No tienes cuenta?{" "}
-            <a href="/register" className="link">
+            <Link to="/register" className="link">
               Regístrate
-            </a>
+            </Link>
           </p>
         </div>
       </IonContent>

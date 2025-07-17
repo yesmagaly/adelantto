@@ -2,6 +2,7 @@ import { MaterialIcon } from "@adelantto/core";
 import { IonContent, IonFooter, IonPage } from "@ionic/react";
 import { AppNav } from "../../layout/AppNav";
 import { useGetUserQuery, userStepsUrls } from "@adelantto/store";
+import { Link } from "react-router-dom";
 
 export function ProfilePage() {
   const { data: user, isLoading: isUserLoading } = useGetUserQuery();
@@ -59,12 +60,12 @@ export function ProfilePage() {
 
                 {/* <h2 className="text-h6 card-title">Siguiente paso</h2> */}
 
-                <a
-                  href={userStepsUrls[user.next_step]}
+                <Link
+                  to={userStepsUrls[user.next_step]}
                   className="btn btn-primary"
                 >
                   Continuar
-                </a>
+                </Link>
               </div>
             </div>
           )}
@@ -76,8 +77,8 @@ export function ProfilePage() {
 
             <ul className="gap-4 grid">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -85,11 +86,11 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Notificaciones
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -97,7 +98,7 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Mis datos
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -107,8 +108,8 @@ export function ProfilePage() {
 
             <ul className="gap-4 grid">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -116,11 +117,11 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Reportar un problema
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -128,11 +129,11 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Preguntas frecuentes
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -140,7 +141,7 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Términos y condiciones
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -119,12 +119,12 @@ export const InstallmentDetail = ({ match }: ComponentProps) => {
               <p className="text-dark-gray text-sm">
                 Una vez realizado el pago se reflejará en un máximo de 72 hrs
                 hábiles. Si tienes alguna duda puedes escribirnos a:{" "}
-                <a
+                <Link
                   className="text-blue-700"
-                  href="mailto:contacto@adelantto.com"
+                  to="mailto:contacto@adelantto.com"
                 >
                   contacto@adelantto.com
-                </a>
+                </Link>
               </p>
             </>
           )}

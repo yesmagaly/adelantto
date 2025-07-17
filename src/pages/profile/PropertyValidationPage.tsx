@@ -11,6 +11,7 @@ import { checkZipCode } from "../../api";
 import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
 import FileInputItem from "../../components/FileInputItem";
+import { Link } from "react-router-dom";
 
 function removeNumericFormat(value: string) {
   return parseFloat(value.replaceAll(/\,|\$|\s/g, ""));
@@ -108,9 +109,9 @@ export const PropertyValidationPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <a href="/" className="inline-flex items-center">
+          <Link to="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
-          </a>
+          </Link>
           Solicita tu AdelanttoCash®
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
@@ -121,7 +122,7 @@ export const PropertyValidationPage: React.FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <a href="/" className="inline-flex items-center"></a>
+            <Link to="/" className="inline-flex items-center"></Link>
             Validación de propiedad
           </h1>
           <span className="badge badge-primary badge-sm">Paso 2/ 2</span>
