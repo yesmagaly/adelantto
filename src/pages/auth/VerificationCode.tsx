@@ -13,10 +13,9 @@ import { API_SERVER_URL } from "../../config";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
 
-interface ComponentProps
-  extends RouteComponentProps<{
-    id: string;
-  }> {}
+type T_props = RouteComponentProps<{
+  id: string;
+}>;
 
 type T_form = {
   code1: number;
@@ -27,9 +26,7 @@ type T_form = {
   code: string; // This is used to store the concatenated code.
 };
 
-const VerificationCode: React.FC<ComponentProps> = ({ match, ...props }) => {
-  console.log(match, props);
-
+const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
   const id = match.params.id;

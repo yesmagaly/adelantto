@@ -10,7 +10,6 @@ import { useForm, Controller } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
 
 import { PatternFormat } from "react-number-format";
-import Modal from "../../components/modal";
 
 import { PROD_MODE } from "../../config";
 import { handleServerErrors, t } from "@adelantto/utils";

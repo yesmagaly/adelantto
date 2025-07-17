@@ -10,8 +10,13 @@ import { useForm } from "react-hook-form";
 import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 
-const PrivacyPolicy: React.FC = ({ match }) => {
+type T_props = RouteComponentProps<{
+  id: string;
+}>;
+
+const PrivacyPolicy: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
   const [isOpen, setOpen] = useState(false);
 
@@ -86,7 +91,12 @@ const PrivacyPolicy: React.FC = ({ match }) => {
         </form>
       </IonContent>
       <IonFooter className="ion-padding">
-        <button type="submit" form="form" disabled={isSubmitting} className="btn-block btn btn-primary">
+        <button
+          type="submit"
+          form="form"
+          disabled={isSubmitting}
+          className="btn-block btn btn-primary"
+        >
           Aceptar
         </button>
       </IonFooter>

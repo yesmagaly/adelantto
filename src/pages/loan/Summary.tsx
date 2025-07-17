@@ -1,40 +1,18 @@
 import { useEffect, useState } from "react";
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import * as api from "../../api";
 import InstallmentCard from "../../components/InstallmentCard";
-import { InstallmentType, LoanType } from "../../types";
 import LoanCard from "./components/LoanCard";
+import { T_loan } from "@adelantto/store";
 
 const Summary: React.FC<{ match: any }> = ({ match }) => {
-  const router = useIonRouter();
-  const [loan, setLoan] = useState<LoanType>();
-  const [detail, setDetail] = useState<{
-    installment: InstallmentType;
-    residue: number;
-  }>();
+  const [loan, setLoan] = useState<T_loan>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await api.loans.get(match.params.id);
-        const data = (await response.json()) as LoanType;
-        const residue =
-          data.amount +
-          data.moratorium_amount -
-          data.installments
-            .filter((installment) => installment.status === "approved")
-            .reduce((acc, installment) => acc + installment.amount, 0);
-
-        const installment = data.installments.find(
-          (installment) => installment.status !== "approved"
-        );
-
-        if (installment) {
-          setDetail({
-            residue,
-            installment,
-          });
-        }
+        const data = (await response.json()) as T_loan;
 
         setLoan(data);
       } catch (error: any) {}

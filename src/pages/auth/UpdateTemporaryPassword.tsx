@@ -62,15 +62,14 @@ const validate = function (values: FormValues) {
 };
 
 const UpdateTemporaryPassword: React.FC = () => {
-  const { setUserInfo } = useAuth();
+  const { setUserInfo } = useAuth()!;
   const router = useIonRouter();
   const [isOpen, setIsOpen] = useState(false);
   const {
     register,
-    control,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm();
 
   const onSubmit = async function (data: any) {
