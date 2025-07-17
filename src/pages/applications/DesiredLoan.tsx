@@ -11,7 +11,6 @@ import { RouteComponentProps } from "react-router";
 import { atLeastThreeMonths } from "./LeaseContract";
 import { useForm } from "react-hook-form";
 import {
-  T_application,
   useLazyGetApplicationQuery,
   useLazyGetOfferQuery,
   useUpdateApplicationMutation,
@@ -20,7 +19,10 @@ import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
 
-type T_form = T_application & {
+type T_form = {
+  pre_offer_amount?: number;
+  pre_offer_fees?: number;
+  pre_offer_commissions?: number;
   pre_offer_term_frame?: number;
 };
 
@@ -41,7 +43,6 @@ export const DesiredLoan: React.FC<T_props> = ({ match }) => {
     setValue,
     handleSubmit,
     watch,
-    register,
     formState: { isSubmitting },
   } = useForm<T_form>({
     defaultValues: async () => {

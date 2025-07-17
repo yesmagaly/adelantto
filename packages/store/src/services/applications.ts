@@ -14,6 +14,9 @@ export type T_application = {
   lease_end_date: string;
   lease_payment_method: string;
 
+  pre_offer_amount?: number;
+  pre_offer_fees?: number;
+  pre_offer_commissions?: number;
   pre_offer_term_frame?: number;
 
   property_commercial_folio?: string;

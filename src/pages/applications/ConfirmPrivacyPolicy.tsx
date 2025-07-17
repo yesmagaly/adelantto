@@ -26,10 +26,9 @@ type T_form = {
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
   const [displayedSentModal, setSentModal] = useState(false);
   const [displayedErrorModal, setErrorModal] = useState(false);
-  const [displayedCounter, setDisplayedCounter] = useState(true);
+  const [_displayedCounter, setDisplayedCounter] = useState(true);
   const { minutes, seconds, isExpired, stopTimer, resetTimer } =
     useCountDownTimer(3);
-  const router = useIonRouter();
   const applicationId = match.params.id;
 
   const {

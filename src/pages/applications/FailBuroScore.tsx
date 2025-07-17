@@ -6,8 +6,6 @@ import adelanttoBg from "../../assets/images/adelantto-gradient-bg.png";
 import { Link } from "react-router-dom";
 
 const FailBuroScore: React.FC = () => {
-  const router = useIonRouter();
-
   return (
     <IonPage>
       <IonContent className="ion-padding">
