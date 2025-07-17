@@ -8,6 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import { API_SERVER_URL } from "../../config";
+import { Link } from "react-router-dom";
 
 type T_form = {
   name: string;
@@ -54,9 +55,9 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
       <IonHeader>
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <a href="/" className="inline-flex items-center">
+            <Link to="/" className="inline-flex items-center">
               <MaterialIcon name="arrow_back" />
-            </a>
+            </Link>
             Crear tu perfil
           </h1>
           <span className="badge badge-primary badge-sm">Paso 2/ 2</span>
@@ -120,13 +121,13 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con el{" "}
-              <a
-                href="https://adelanttocash.com/aviso-de-privacidad"
+              <Link
+                to="https://adelanttocash.com/aviso-de-privacidad"
                 target="_blank"
                 className="text-emerald-700 link"
               >
                 Aviso de Privacidad
-              </a>
+              </Link>
             </span>
             <p className="-bottom-5 absolute validator-hint">
               {errors.accept_privacy_policy?.message}
@@ -147,13 +148,13 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con los{" "}
-              <a
-                href="https://adelanttocash.com/terminos-y-condiciones"
+              <Link
+                to="https://adelanttocash.com/terminos-y-condiciones"
                 target="_blank"
                 className="text-emerald-700 link"
               >
                 Términos y Condiciones
-              </a>
+              </Link>
             </span>
             <p className="-bottom-5 absolute validator-hint">
               {errors.accept_terms_and_conditions?.message}
@@ -172,9 +173,9 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
 
         <p className="mt-6 text-sm text-center">
           ¿Ya tienes una cuenta?{" "}
-          <a href="/login" className="link">
+          <Link to="/login" className="link">
             Iniciar sesión
-          </a>
+          </Link>
         </p>
       </IonFooter>
     </IonPage>

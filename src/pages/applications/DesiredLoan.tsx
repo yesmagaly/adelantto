@@ -18,6 +18,7 @@ import {
 } from "@adelantto/store";
 import { cn, formatCurrency } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
+import { Link } from "react-router-dom";
 
 type T_form = T_application & {
   pre_offer_term_frame?: number;
@@ -94,9 +95,9 @@ export const DesiredLoan: React.FC<T_props> = ({ match }) => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <a href="/" className="inline-flex items-center">
+          <Link to="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
-          </a>
+          </Link>
           Pre-Oferta AdelanttoCash®
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
@@ -172,13 +173,13 @@ export const DesiredLoan: React.FC<T_props> = ({ match }) => {
 
         <p className="mt-4 text-gray-900 text-xs text-center text-wrap">
           He leído y estoy de acuerdo con el{" "}
-          <a
-            href="https://adelanttocash.com/aviso-de-privacidad"
+          <Link
+            to="https://adelanttocash.com/aviso-de-privacidad"
             target="_blank"
             className="text-emerald-700 no-underline link"
           >
             Aviso de Privacidad
-          </a>
+          </Link>
         </p>
       </IonFooter>
     </IonPage>

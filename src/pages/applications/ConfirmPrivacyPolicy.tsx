@@ -12,6 +12,7 @@ import { t } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
+import { Link } from "react-router-dom";
 
 type T_form = {
   code1?: number;
@@ -97,9 +98,9 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <a href="/" className="inline-flex items-center">
+          <Link to="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
-          </a>
+          </Link>
           Autorización de Buro
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
@@ -184,9 +185,9 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
 
             <div className="mt-8 text-center">
               <p>¿No has recibido el código?</p>
-              <a onClick={() => router.push("/register")} className="link">
+              <Link to="/register" className="link">
                 Reenviar código
-              </a>
+              </Link>
             </div>
           </form>
         </div>
@@ -231,9 +232,9 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
 
         <p className="mt-4 text-gray-800 text-xs text-center">
           Al confirmar el código SMS, acepto las{" "}
-          <a className="text-emerald-700 link" href="#">
+          <Link className="text-emerald-700 link" to="#">
             Políticas de Privacidad
-          </a>{" "}
+          </Link>{" "}
           de la aplicación.
         </p>
       </IonFooter>

@@ -59,12 +59,12 @@ export const CongratulationsPage: React.FC = ({ match }) => {
             <button disabled={isSubmitting} className="btn-block mb-8 btn btn-primary">Enviar</button>
           </form>
 
-          {/* <a
+          {/* <Link
             className="btn-block btn btn-primary"
-            href={`/loans/${match.params.id}/account-statement`}
+            to={`/loans/${match.params.id}/account-statement`}
           >
             Ingresar datos bancarios
-          </a> */}
+          </Link> */}
         </div>
 
         <dialog ref={modalRef} id="my_modal_1" className="modal">

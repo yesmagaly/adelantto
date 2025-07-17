@@ -17,6 +17,7 @@ import {
   useGetUserQuery,
   userStepsUrls,
 } from "@adelantto/store";
+import { Link } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -79,12 +80,12 @@ const Dashboard: React.FC = () => {
                     Adelantto.
                   </div>
                 </div>
-                <a
+                <Link
                   className="btn btn-sm btn-ghost btn-warning"
-                  href={userStepsUrls[user.next_step]}
+                  to={userStepsUrls[user.next_step]}
                 >
                   <MaterialIcon name="arrow_forward" />
-                </a>
+                </Link>
               </div>
             )}
 
@@ -146,12 +147,12 @@ const Dashboard: React.FC = () => {
                   ))}
                 </div>
 
-                <a
+                <Link
                   className="btn-block mt-4 btn btn-primary"
-                  href="/applications/lease-contract"
+                  to="/applications/lease-contract"
                 >
                   Solicitar nuevo AdelanttoCash®
-                </a>
+                </Link>
               </div>
             )}
 

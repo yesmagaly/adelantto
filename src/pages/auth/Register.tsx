@@ -25,6 +25,7 @@ import {
   PasswordStrength,
 } from "@adelantto/core";
 import { useRegisterUserMutation } from "@adelantto/store";
+import { Link } from "react-router-dom";
 
 type T_form = {
   email: string;
@@ -76,9 +77,9 @@ const Register: React.FC = () => {
       <IonHeader>
         <div className="flex justify-between items-center">
           <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h6">
-            <a href="/" className="inline-flex items-center">
+            <Link to="/" className="inline-flex items-center">
               <MaterialIcon name="arrow_back" />
-            </a>
+            </Link>
             Crear cuenta
           </h1>
           <span className="badge badge-primary badge-sm">Paso 1/ 2</span>
@@ -227,9 +228,9 @@ const Register: React.FC = () => {
 
         <p className="mt-6 text-sm text-center">
           ¿Ya tienes una cuenta?{" "}
-          <a href="/login" className="link">
+          <Link to="/login" className="link">
             Iniciar sesión
-          </a>
+          </Link>
         </p>
       </IonFooter>
     </IonPage>

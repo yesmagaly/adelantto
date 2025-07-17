@@ -9,6 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
+import { Link } from "react-router-dom";
 
 const PrivacyPolicy: React.FC = ({ match }) => {
   const router = useIonRouter();
@@ -33,9 +34,9 @@ const PrivacyPolicy: React.FC = ({ match }) => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <a href="/" className="inline-flex items-center">
+          <Link to="/" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
-          </a>
+          </Link>
           Autorización de Buro
         </h1>
         <p className="mt-1 text-dark-gray text-sm">
