@@ -1,9 +1,9 @@
 import { useIonRouter } from "@ionic/react";
-import { InstallmentType } from "../types";
+import { T_installment } from "../types";
 import { DateTime } from "luxon";
 import { t } from "@adelantto/utils";
 
-interface ComponentProps extends InstallmentType {
+interface T_props extends T_installment {
   index: number;
   loanId: number;
 }
@@ -19,10 +19,9 @@ export default function InstallmentCard({
   loanId,
   id,
   index,
-  amount,
   status,
   due_date,
-}: ComponentProps) {
+}: T_props) {
   const router = useIonRouter();
 
   return (

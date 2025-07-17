@@ -23,9 +23,9 @@ const Dashboard: React.FC = () => {
   const { authInfo, logOut } = useAuth()!;
   const router = useIonRouter();
 
-  const { data: user, isLoading: isUserLoading } = useGetUserQuery();
-  const { data: loans = [], isLoading: isLoansLoading } = useGetLoansQuery();
-  const { data: applications = [], isLoading: isApplicationLoading } =
+  const { data: user } = useGetUserQuery();
+  const { data: loans = [] } = useGetLoansQuery();
+  const { data: applications = [] } =
     useGetApplicationsQuery();
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
               </h1>
             )}
 
-            {user && !Boolean(user?.is_completed) && (
+            {user && !user?.is_completed && (
               <div
                 role="alert"
                 className="alert alert-horizontal alert-warning"

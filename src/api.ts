@@ -90,7 +90,7 @@ export const applications = {
           Accept: "application/json",
         },
       });
-    } catch (error: any) {
+    } catch {
       throw new HttpError("HTTP: Something went wrong.");
     }
 

@@ -1,4 +1,3 @@
-import { useIonRouter } from "@ionic/react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -34,7 +33,7 @@ type T_props = {
 export default function LoanCard({ loan, displayActions = false }: T_props) {
   return (
     <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card card-sm">
-      <div className="gap-3 card-body" style={{ '--card-fs': '14px'}}>
+      <div className="gap-3 card-body" style={{ "--card-fs": "14px" }}>
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-lg leading-5">
             <span>AdelanttoCash® {loan.id.toString().padStart(4, "0")}</span>
@@ -91,7 +90,10 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
           )}
 
           {loan.status === "active" && (
-            <Link className="btn-block btn btn-primary" to={`/loans/${loan.id}`}>
+            <Link
+              className="btn-block btn btn-primary"
+              to={`/loans/${loan.id}`}
+            >
               Ver
             </Link>
           )}

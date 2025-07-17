@@ -1,4 +1,4 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import logo from "../assets/svgs/logo.svg";
 
 import adelanttoBgUrl from "../assets/images/adelantto-bg.png";

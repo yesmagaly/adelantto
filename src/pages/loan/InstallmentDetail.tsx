@@ -37,7 +37,7 @@ export const InstallmentDetail = ({ match }: T_props) => {
 
   const {
     control,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
     handleSubmit,
   } = useForm();
 

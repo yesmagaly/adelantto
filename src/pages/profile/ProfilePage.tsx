@@ -5,7 +5,7 @@ import { useGetUserQuery, userStepsUrls } from "@adelantto/store";
 import { Link } from "react-router-dom";
 
 export function ProfilePage() {
-  const { data: user, isLoading: isUserLoading } = useGetUserQuery();
+  const { data: user } = useGetUserQuery();
 
   return (
     <IonPage>

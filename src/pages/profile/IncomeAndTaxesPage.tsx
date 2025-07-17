@@ -31,7 +31,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
     defaultValues: async () => {
       try {
         return await trigger().unwrap();
-      } catch (error) {
+      } catch {
         return {};
       }
     },

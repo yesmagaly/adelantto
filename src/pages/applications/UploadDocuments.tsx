@@ -9,29 +9,30 @@ import { useForm } from "react-hook-form";
 
 import FileInputItem from "../../components/FileInputItem";
 import {
+  T_file,
   useLazyGetApplicationQuery,
   useUpdateApplicationMutation,
 } from "@adelantto/store";
 import { MaterialIcon } from "@adelantto/core";
 import { handleServerErrors } from "@adelantto/utils";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 
-interface File {
-  id: number;
-  name: string;
-}
+
 
 interface T_form {
   property_commercial_folio?: string;
   property_zip_code?: string;
-  property_lease_agreement?: File;
-  property_latest_tax_receipt?: File;
+  property_lease_agreement?: File | T_file;
+  property_latest_tax_receipt?: File | T_file;
 }
 
-const UploadDocuments: React.FC = ({ match }) => {
+type T_props = RouteComponentProps<{
+  id: string;
+}>;
+
+const UploadDocuments: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
-  const [trigger, { data: application, isLoading }] =
-    useLazyGetApplicationQuery();
+  const [trigger] = useLazyGetApplicationQuery();
   const [migration] = useUpdateApplicationMutation();
 
   const {

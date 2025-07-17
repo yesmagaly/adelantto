@@ -1,11 +1,9 @@
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import adelanttoBgUrl from "../../assets/images/adelantto-blue-bg.png";
 import adelanttoWhiteLogoUrl from "../../assets/svgs/logo-white.svg";
 import { Link } from "react-router-dom";
 
 const AdvanceImmediately: React.FC = () => {
-  const router = useIonRouter();
-
   return (
     <IonPage>
       <IonContent

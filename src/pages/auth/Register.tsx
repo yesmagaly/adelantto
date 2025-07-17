@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   IonContent,
   IonFooter,
@@ -8,7 +7,6 @@ import {
 } from "@ionic/react";
 import { useForm, Controller } from "react-hook-form";
 import parsePhoneNumber from "libphonenumber-js";
-
 import { PatternFormat } from "react-number-format";
 
 import { PROD_MODE } from "../../config";
@@ -42,7 +40,6 @@ const cleanUpPhone = (phone = "") =>
   phone.replaceAll(/[-|\(|\)]/g, "").replaceAll(" ", "");
 
 const Register: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
   const [mutation] = useRegisterUserMutation();
 
@@ -56,8 +53,6 @@ const Register: React.FC = () => {
   } = useForm<T_form>();
 
   const onSubmit = async function (form: T_form) {
-    const phone = cleanUpPhone(form.phone);
-
     try {
       const data = await mutation(form).unwrap();
       if (data?.id && data?.phone) {

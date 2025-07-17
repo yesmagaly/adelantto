@@ -5,7 +5,6 @@ import { cn } from "@adelantto/utils";
 
 interface T_props extends UseControllerProps {
   className?: string;
-  multiple?: boolean;
   accept?: string;
   name: string;
   label: string;
@@ -20,7 +19,6 @@ export const IncodeFileInput: React.FC<T_props> = ({
   description,
   helpText,
   helpPicture,
-  multiple = false,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);

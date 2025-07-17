@@ -34,10 +34,8 @@ const FileInputItem: React.FC<T_props> = ({
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
-  //const [error, setError] = useState<ErrorType>();
   const {
     field: { onChange, value },
-    formState,
     fieldState: { error },
   } = useController(props);
 
@@ -48,7 +46,7 @@ const FileInputItem: React.FC<T_props> = ({
     setLoading(true);
 
     if (files.length > 0) {
-      if (props.multiple) {
+      if (multiple) {
         const newFiles = [...files].map(async (file) => {
           const body = new FormData();
           body.append(`file`, file);
@@ -70,9 +68,7 @@ const FileInputItem: React.FC<T_props> = ({
             const data = await response.json();
             onChange(data);
           }
-        } catch (errorFetch: any) {
-          //setError({ message: errorFetch.message });
-        }
+        } catch {}
       }
 
       // Stop loading.
@@ -97,7 +93,7 @@ const FileInputItem: React.FC<T_props> = ({
   return (
     <div
       className={cn(
-        "border border-dark-gray-active bg-white p-4 rounded-[12px]",
+        "bg-white p-4 border border-dark-gray-active rounded-[12px]",
         hasFiles && "border-lime-300",
         error?.message && "border-error",
         className

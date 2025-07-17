@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import {
   IonContent,
@@ -27,7 +27,6 @@ type T_form = {
 };
 
 const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useIonRouter();
   const id = match.params.id;
 
@@ -45,7 +44,7 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
   } = useForm<T_form>();
 
   useEffect(() => {
-    const subscribe = watch((form, { name, type }) => {
+    const subscribe = watch((form, { type }) => {
       if (type === "change") {
         const code = `${form.code1}${form.code2}${form.code3}${form.code4}`;
 

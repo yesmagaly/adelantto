@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { FieldErrors, useForm } from "react-hook-form";
 import InputPassword from "../../components/InputPassword";
@@ -64,7 +63,6 @@ const validate = function (values: FormValues) {
 const UpdateTemporaryPassword: React.FC = () => {
   const { setUserInfo } = useAuth()!;
   const router = useIonRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -79,13 +77,11 @@ const UpdateTemporaryPassword: React.FC = () => {
     // Show phone errors.
     if (errors?.password) {
       setError("password", errors.password);
-      setIsOpen(true);
       return;
     }
 
     if (errors.password_confirmation) {
       setError("password_confirmation", errors.password_confirmation);
-      setIsOpen(true);
       return;
     }
 
@@ -106,7 +102,6 @@ const UpdateTemporaryPassword: React.FC = () => {
     } else {
       // Show server errors.
       setError("password", { message: json.message, type: "server" });
-      setIsOpen(true);
     }
   };
 

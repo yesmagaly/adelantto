@@ -2,6 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuthHeaders } from "../utils/setHeaders";
 import { BASE_URL } from "../constants";
 
+export type T_file = {
+  id: number;
+  name: string;
+};
+
 export type T_application = {
   id: string;
   lease_monthly_income: number;
@@ -11,7 +16,12 @@ export type T_application = {
 
   pre_offer_term_frame?: number;
 
-  next_step: 'pre_offer' | 'property_details';
+  property_commercial_folio?: string;
+  property_zip_code?: string;
+  property_lease_agreement?: File | T_file;
+  property_latest_tax_receipt?: File | T_file;
+
+  next_step: "pre_offer" | "property_details";
 };
 
 const PRE_OFFER_STEP = "pre_offer";

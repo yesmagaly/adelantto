@@ -15,7 +15,7 @@ const Summary: React.FC<{ match: any }> = ({ match }) => {
         const data = (await response.json()) as T_loan;
 
         setLoan(data);
-      } catch (error: any) {}
+      } catch {}
     };
 
     fetchData();

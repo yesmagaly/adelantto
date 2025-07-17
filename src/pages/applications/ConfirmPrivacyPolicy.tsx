@@ -24,7 +24,6 @@ type T_form = {
 };
 
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
-  const modalRef = useRef<HTMLDialogElement>(null);
   const [displayedSentModal, setSentModal] = useState(false);
   const [displayedErrorModal, setErrorModal] = useState(false);
   const [displayedCounter, setDisplayedCounter] = useState(true);
@@ -77,11 +76,11 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
       } else if (response.status === 429) {
         setErrorModal(true);
       }
-    } catch (error) {}
+    } catch {}
   };
 
   useEffect(() => {
-    const subscribe = watch((form, { name, type }) => {
+    const subscribe = watch((form, { type }) => {
       if (type === "change") {
         const code = `${form.code1}${form.code2}${form.code3}${form.code4}`;
 

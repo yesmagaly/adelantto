@@ -14,7 +14,6 @@ import selfie from "../assets/selfie.mp4";
 
 interface T_props extends UseControllerProps {
   className?: string;
-  multiple?: boolean;
   accept?: string;
   name: string;
   label: string;
@@ -27,7 +26,6 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
   label,
   description,
   helpText,
-  multiple = false,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -62,7 +60,7 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
   return (
     <div
       className={cn(
-        "border border-dark-gray-active bg-white p-4 rounded-[12px]",
+        "bg-white p-4 border border-dark-gray-active rounded-[12px]",
         hasFiles && "border-lime-300",
         className
       )}
