@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 type T_props = {
   name: string;
   className?: string;
@@ -5,13 +7,13 @@ type T_props = {
   fill?: boolean;
 };
 
-export function MaterialIcon({
+export const MaterialIcon = memo(({
   name,
   className,
   size = "24px",
   fill = false,
   ...props
-}: T_props) {
+}: T_props) => {
   return (
     <span
       className={`material-symbols-outlined ${className}`}
@@ -24,4 +26,4 @@ export function MaterialIcon({
       {name}
     </span>
   );
-}
+});

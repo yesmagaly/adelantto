@@ -11,6 +11,7 @@ import { MaterialIcon } from "@adelantto/core";
 import { cn } from "@adelantto/utils";
 
 import selfie from "../assets/selfie.mp4";
+import { addFile } from "../../../../src/components/FileInputItem";
 
 interface T_props extends UseControllerProps {
   className?: string;
@@ -19,6 +20,36 @@ interface T_props extends UseControllerProps {
   label: string;
   description?: string;
   helpText?: string;
+}
+
+function base64ToFile(
+  base64String: string,
+  mimeType: string,
+  fileName: string
+) {
+  // Remove the data URL scheme if present (e.g., "data:image/jpeg;base64,")
+  const base64Data = base64String.split(",")[1] || base64String;
+
+  // Decode Base64 string to binary data
+  const byteCharacters = atob(base64Data);
+
+  // Convert binary data to an array of bytes
+  const byteArrays = [];
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteArrays.push(byteCharacters.charCodeAt(i));
+  }
+  const byteArray = new Uint8Array(byteArrays);
+
+  // Create a Blob object from the byte array
+  const blob = new Blob([byteArray], { type: mimeType });
+
+  // Create a File object from the Blob
+  const file = new File([blob], fileName, {
+    type: mimeType,
+    lastModified: Date.now(),
+  });
+
+  return file;
 }
 
 export const IncodeSelfieInput: React.FC<T_props> = ({
@@ -33,6 +64,7 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
     field: { onChange, value },
     fieldState: { error },
   } = useController(props);
+  const [photo, setPhoto] = useState<Photo>();
 
   const takePhoto = async () => {
     setLoading(true);
@@ -44,7 +76,21 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
     })) as Photo;
 
     if (newPhoto?.base64String) {
-      onChange(newPhoto);
+      const body = new FormData();
+      body.append(
+        `file`,
+        base64ToFile(
+          newPhoto?.base64String,
+          `image/${newPhoto.format}`,
+          `selfie.${newPhoto.format}`
+        )
+      );
+
+      const response = await addFile(body);
+      const data = await response.json();
+
+      onChange(data);
+      setPhoto(newPhoto);
     }
 
     setLoading(false);
@@ -99,11 +145,11 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
         </label>
       </div>
 
-      {hasFiles && (
+      {hasFiles && value?.url && (
         <div className="block relative bg-gray-200 mx-auto my-8 rounded-full size-61">
           <img
             className="rounded-full w-full h-full object-contain"
-            src={`data:image/${value.format};base64,${value.base64String}`}
+            src={value.url}
           ></img>
 
           <button
@@ -120,7 +166,9 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
       )}
 
       {error?.message && (
-        <p className="mt-1 text-error text-xs">{error.message}</p>
+        <p className="validator-visible !mt-1 validator-hint">
+          {error.message}
+        </p>
       )}
     </div>
   );

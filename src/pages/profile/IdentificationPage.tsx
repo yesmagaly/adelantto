@@ -18,6 +18,7 @@ import frontIdImageUrl from "./assets/images/front-id.png";
 import backIdImageUrl from "./assets/images/back-id.png";
 import FileInputItem from "../../components/FileInputItem";
 import { Link } from "react-router-dom";
+import { handleServerErrors } from "@adelantto/utils";
 
 type T_form = {
   back_document?: File;
@@ -66,9 +67,26 @@ export const IdentificationPage: React.FC = () => {
 
     try {
       await mutation(form).unwrap();
-      router.push("/profile/income-and-taxes");
+      router.push("/profile/biometric-validation");
     } catch (error) {
-      console.log(error);
+      const errors = error?.data?.errors;
+
+      if (errors) {
+        handleServerErrors<T_form>([
+            "back_document",
+            "front_document",
+            "curp_number",
+            "birthdate",
+            "address",
+            "zip_code",
+        ],
+        errors).forEach(([field, errorOption]) => setError(field, errorOption));
+      } else {
+        setError("root", {
+          message: t("Something went wrong"),
+          type: "server",
+        });
+      }
     }
   };
 
@@ -109,7 +127,7 @@ export const IdentificationPage: React.FC = () => {
             name="front_document"
             control={control}
             rules={{ required: "Imagen requerida" }}
-            accept="image/jpg"
+            accept="image/jpeg"
             label="Frontal INE o Pasaporte"
             description="Cara frontal donde sale la foto"
             helpText="Tipo de archivo permitido JPG (500MB max)"
@@ -119,7 +137,7 @@ export const IdentificationPage: React.FC = () => {
             name="back_document"
             control={control}
             rules={{ required: "Imagen requerida" }}
-            accept="image/jpg"
+            accept="image/jpeg"
             label="Reverso INE o Pasaporte"
             description="Cara trasera donde está el código de barras"
             helpText="Tipo de archivo permitido JPG (500MB max)"
@@ -127,9 +145,7 @@ export const IdentificationPage: React.FC = () => {
           />
 
           <div className="control">
-            <label className="control-label">
-              Fecha de nacimiento
-            </label>
+            <label className="control-label">Fecha de nacimiento</label>
             <input
               type="date"
               className="input validator"
@@ -145,7 +161,7 @@ export const IdentificationPage: React.FC = () => {
               {...register("curp_number")}
               type="text"
               required
-              className="input validator"
+              className="uppercase input validator"
               placeholder="Ingresa tu CURP"
               aria-invalid={errors.curp_number ? "true" : "false"}
             />

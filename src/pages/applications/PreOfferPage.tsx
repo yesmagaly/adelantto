@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactEventHandler } from "react";
 import {
   IonContent,
   IonFooter,
@@ -21,7 +21,6 @@ import {
 } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
-import { MIN_MONTHS_REMAINING } from "./LeaseContract";
 
 type T_form = {
   pre_offer_amount?: number;
@@ -35,6 +34,8 @@ interface T_props
     id: string;
   }> {}
 
+const RANGE_MIN_VALUE = 3;
+
 export const PreOfferPage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
   const [trigger, { data: application, isLoading }] =
@@ -42,7 +43,6 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
   const [mutation] = useUpdateApplicationMutation();
   const [getLazyOffer, { data: offer }] = useLazyGetOfferQuery();
   const [options, setOptions] = useState<Array<number>>([]);
-  const [displayIntput, setDisplayInput] = useState<boolean>(false);
 
   const {
     setValue,
@@ -54,7 +54,10 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
     defaultValues: async () => {
       try {
         const values = await trigger(match.params.id).unwrap();
-        const options = [3, 6, 8, 12].filter((value) =>
+        const options = Array.from(
+          { length: 10 },
+          (_, i) => i + RANGE_MIN_VALUE
+        ).filter((value) =>
           hasAtLeastMonthsRemaining(values.lease_end_date, value)
         );
 
@@ -120,24 +123,60 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <h3 className="text-h6 text-center">Cantidad de meses</h3>
-          <div className="flex justify-center gap-4">
-            {!isLoading &&
-              application &&
-              options.map((value) => (
-                <button
-                  key={`dl-${value}`}
-                  id={`desired-loan-${value}`}
-                  type="button"
-                  className={cn(
-                    "flex-1/4 rounded-xl btn-outline max-w-1/4 h-30 btn",
-                    value === pre_offer_term_frame && "btn-active"
-                  )}
-                  onClick={() => setValue("pre_offer_term_frame", value)}
-                >
-                  <div className="w-full text-2xl">{value}</div>
-                </button>
-              ))}
-          </div>
+
+          {options.length === 1 && (
+            <div className="flex justify-center gap-4">
+              {!isLoading &&
+                application &&
+                options.map((value) => (
+                  <button
+                    key={`dl-${value}`}
+                    id={`desired-loan-${value}`}
+                    type="button"
+                    className={cn(
+                      "flex-1/4 rounded-xl btn-outline max-w-1/4 h-30 btn",
+                      value === pre_offer_term_frame && "btn-active"
+                    )}
+                    onClick={() => setValue("pre_offer_term_frame", value)}
+                  >
+                    <div className="w-full text-2xl">{value}</div>
+                  </button>
+                ))}
+            </div>
+          )}
+
+          {options.length > 1 && pre_offer_term_frame && (
+            <div className="my-6 w-full">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                required
+                className="w-full range"
+                step={100 / (options.length - 1)}
+                value={
+                  (pre_offer_term_frame - RANGE_MIN_VALUE) *
+                  (100 / (options.length - 1))
+                }
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const months =
+                    Number(event.target.value) / Number(event.target.step) +
+                    RANGE_MIN_VALUE;
+                  setValue("pre_offer_term_frame", months);
+                }}
+              />
+              <div className="flex justify-between mt-2 px-2.5 text-xs">
+                {options.map(() => (
+                  <span>|</span>
+                ))}
+              </div>
+              <div className="flex justify-between mt-2 px-2.5 text-xs">
+                {options.map((i) => (
+                  <span>{i}</span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {offer && (
             <div className="bg-linear-to-r from-indigo-600 to-indigo-300 text-white card">

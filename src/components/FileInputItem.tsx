@@ -16,7 +16,7 @@ export interface T_props extends UseControllerProps {
   helpPicture?: string;
 }
 
-const addFile = (body: FormData) => {
+export const addFile = (body: FormData) => {
   return fetch(`${API_SERVER_URL}/api/files`, {
     method: "POST",
     headers: { Accept: "application/json" },
@@ -31,6 +31,7 @@ const FileInputItem: React.FC<T_props> = ({
   helpText,
   helpPicture,
   multiple = false,
+  accept,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -130,10 +131,10 @@ const FileInputItem: React.FC<T_props> = ({
           </div>
 
           <input
-            {...props}
-            className="hidden"
             id={props.name}
+            className="hidden"
             onChange={handleChange}
+            accept={accept}
             type="file"
             placeholder="Buscar"
           />
@@ -153,7 +154,7 @@ const FileInputItem: React.FC<T_props> = ({
                 className="shrink-0"
               />
               <span className="text-xs">
-                {file.name} · {(file.size / 1000000).toFixed(0)}mb
+                {file.name} · {(file.size / 1000000).toFixed(1)} MB
               </span>
 
               <button

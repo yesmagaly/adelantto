@@ -76,7 +76,7 @@ export default function ApplicationCard({
           )}
         </dl>
 
-        {item.status !== "in_validation" && (
+        {item.status !== "in_validation" && item.status !== "rejected" && (
           <button
             className="btn-block mt-2 btn btn-primary"
             onClick={() => router.push(redirectTo)}

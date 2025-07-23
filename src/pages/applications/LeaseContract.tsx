@@ -93,7 +93,7 @@ const LeaseContract: React.FC = () => {
                 <NumericFormat
                   onChange={(value) => {
                     const normalizedValue = parseFloat(
-                      value.target.value.replaceAll(/\,|\$|\s/g, "")
+                      value.target.value.replaceAll(/,|\$|\s/g, "")
                     );
 
                     onChange(normalizedValue);

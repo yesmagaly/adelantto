@@ -84,7 +84,7 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
 
         <div className={cn("card-actions", !displayActions && "hidden")}>
           {loan.status === "awaiting_account_statement_upload" && (
-            <Link className="btn btn-primary" to={`/loans/${loan.id}/success`}>
+            <Link className="btn-block btn btn-primary" to={`/loans/${loan.id}/success`}>
               Continuar
             </Link>
           )}
@@ -99,7 +99,7 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
           )}
 
           {loan.status !== "active" && (
-            <div className="flex gap-1.5">
+            <div className="flex gap-1.5 mt-2">
               <MaterialIcon name="info" size="18px" />
               <p className="leading-4">{trans(loan.status)}</p>
             </div>

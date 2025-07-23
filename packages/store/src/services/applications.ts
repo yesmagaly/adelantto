@@ -27,12 +27,14 @@ export type T_application = {
   next_step: "pre_offer" | "property_details";
 };
 
+const BUREAU_POLICY_STEP = "bureau_policy";
 const PRE_OFFER_STEP = "pre_offer";
 const PROPERTY_DETAILS_STEP = "property_details";
 
 export const applicationStepsUrls = {
   [PRE_OFFER_STEP]: "/desired-loan",
   [PROPERTY_DETAILS_STEP]: "/property-documents",
+  [BUREAU_POLICY_STEP]: "/privacy-policy",
 };
 
 export const applicationsApi = createApi({

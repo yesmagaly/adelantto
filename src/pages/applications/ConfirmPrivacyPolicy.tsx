@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   IonContent,
   IonFooter,
   IonHeader,
   IonPage,
+  useIonRouter,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
-import { t } from "@adelantto/utils";
+import { handleServerErrors, t } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
-import { Link } from "react-router-dom";
+import exclamation from "../../assets/svgs/exclamation.svg";
 
 type T_form = {
   code1?: number;
@@ -23,8 +25,9 @@ type T_form = {
 };
 
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
-  const [displayedSentModal, setSentModal] = useState(false);
-  const [displayedErrorModal, setErrorModal] = useState(false);
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const router = useIonRouter();
+  const [diplayThrottleError, setDiplayThrottleError] = useState(false);
   const [_displayedCounter, setDisplayedCounter] = useState(true);
   const { minutes, seconds, isExpired, stopTimer, resetTimer } =
     useCountDownTimer(3);
@@ -47,34 +50,33 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     );
 
     if (response.status === 200) {
-      stopTimer();
-      // router.push(`/applications/${applicationId}/identity-check`);
+      router.push(`/applications/${applicationId}/final-announcement`);
     } else {
       const error = await response.json();
-      setDisplayedCounter(false);
 
-      if (error.type === "BUREAU_SCORE_TOO_LOW") {
-        // router.push(`/applications/${applicationId}/fail-buro-score`);
-      } else if (error.type === "INVALID_CODE") {
-        setError("code", { message: t(error.message) });
+      if (error.message === "BUREAU_SCORE_IS_TOO_LOW") {
+        return router.push(`/applications/${applicationId}/fail-buro-score`);
       }
+
+      handleServerErrors<T_form>(["code"], error.errors).forEach(
+        ([field, errorOption]) => setError(field, errorOption)
+      );
     }
   };
 
   const handleResendCode = async () => {
     reset();
 
-    try {
-      const response = await resendPrivacyPolicyVerificationCode();
+    const response = await resendPrivacyPolicyVerificationCode();
 
-      if (response.status === 200) {
-        setSentModal(true);
-        setDisplayedCounter(true);
-        resetTimer();
-      } else if (response.status === 429) {
-        setErrorModal(true);
-      }
-    } catch {}
+    if (response.status === 200 && modalRef.current) {
+      setDiplayThrottleError(false);
+      setDisplayedCounter(true);
+      modalRef.current.showModal();
+      resetTimer();
+    } else if (response.status === 429) {
+      setDiplayThrottleError(true);
+    }
   };
 
   useEffect(() => {
@@ -182,41 +184,50 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
 
             <div className="mt-8 text-center">
               <p>¿No has recibido el código?</p>
-              <Link to="/register" className="link">
+              <button onClick={handleResendCode} className="link" type="button">
                 Reenviar código
-              </Link>
+              </button>
             </div>
           </form>
         </div>
 
-        <div data-modal data-isOpen={displayedSentModal}>
-          <div>
-            <p>
-              Se ha vuelto a enviar un SMS con el código de confirmación a su
-              número de teléfono.
+        <dialog ref={modalRef} id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <button
+              className="top-0.5 right-0.5 absolute btn btn-sm btn-circle btn-ghost"
+              onClick={() => modalRef.current?.close()}
+            >
+              <MaterialIcon name="close" className="text-red-500" size="20px" />
+            </button>
+
+            <div className="flex flex-col items-center gap-6">
+              <img src={exclamation} alt="exclamation" className="size-24" />
+
+              <div className="flex flex-col items-center gap-2">
+                <p className="max-w-3/4 text-sm text-center">
+                  Se ha vuelto a enviar un SMS con el código de confirmación a
+                  su número de teléfono.
+                </p>
+              </div>
+            </div>
+
+            <div className="justify-center px-4 modal-action">
+              <form method="dialog" className="w-full">
+                <button className="btn-block btn btn-primary">Continuar</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+
+        {diplayThrottleError && (
+          <div className="my-4">
+            <p className="validator-visible text-center validator-hint">
+              Demasiados intentos, inténtalo de nuevo después de un minuto.
             </p>
           </div>
-          <div>
-            <button className="button" onClick={() => setSentModal(false)}>
-              Continuar
-            </button>
-          </div>
-        </div>
-
-        <div data-modal data-isOpen={displayedErrorModal}>
-          <div>
-            <h4 className="font-semibold">Demasiados intentos.</h4>
-          </div>
-          <div>
-            <p>Inténtalo de nuevo después de un minuto.</p>
-          </div>
-          <div>
-            <button className="button" onClick={() => setErrorModal(false)}>
-              Aceptar
-            </button>
-          </div>
-        </div>
+        )}
       </IonContent>
+
       <IonFooter className="ion-padding">
         <button
           form="form"

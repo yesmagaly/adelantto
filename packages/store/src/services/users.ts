@@ -10,14 +10,16 @@ type T_user = {
   is_completed: boolean;
   birthday: string;
 
-  next_step: 'identification' | 'income_and_taxes';
+  next_step: 'identification' | 'income_and_taxes' | 'biometric_validation';
 };
 
 const IDENTIFICATION_USER_STEP = "identification";
+const BIOMETRIC_VALIDATION_USER_STEP = "biometric_validation";
 const INCOME_AND_TAXES_USER_STEP = "income_and_taxes";
 
 export const userStepsUrls = {
   [IDENTIFICATION_USER_STEP]: "/profile/identification",
+  [BIOMETRIC_VALIDATION_USER_STEP]: "/profile/biometric-validation",
   [INCOME_AND_TAXES_USER_STEP]: "/profile/income-and-taxes",
 };
 

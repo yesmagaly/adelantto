@@ -12,9 +12,11 @@ import { api, useIncode } from "@adelantto/incode";
 import { IncodeSelfieInput } from "@adelantto/incode";
 import { applications } from "../../api";
 import { Link } from "react-router-dom";
+import { useLazyGetUserQuery, useUpdateUserMutation } from "@adelantto/store";
+import { handleServerErrors, t } from "@adelantto/utils";
 
 type T_form = {
-  selfie: {
+  selfie?: {
     format: string;
     base64String: string;
   };
@@ -22,35 +24,55 @@ type T_form = {
 
 export const BiometricValidationPage: React.FC = () => {
   const router = useIonRouter();
-  const { session } = useIncode();
+  const [mutation] = useUpdateUserMutation();
+  const [getUserQuery] = useLazyGetUserQuery();
 
-  const { handleSubmit, control, setError, formState: {isSubmitting} } = useForm<T_form>();
+  const {
+    handleSubmit,
+    control,
+    setError,
+    formState: { isSubmitting },
+  } = useForm<T_form>({
+    defaultValues: async () => {
+      try {
+        return await getUserQuery().unwrap();
+      } catch {
+        return {};
+      }
+    },
+  });
 
   const onSubmit = async (form: T_form) => {
-    if (session) {
-      const selfieData = await api.addFaceSelfie({
-        session,
-        body: { base64Image: form.selfie?.base64String },
-      });
+    // const processData = await api.processFace({ session });
+    // if (processData.confidence === 0) {
+    //   return setError("selfie", {
+    //     message:
+    //       "La foto de su selfie no coincide con la imagen del documento de identidad.",
+    //   });
+    // }
 
-      if (selfieData.confidence === 0) {
-        const processData = await api.processFace({ session });
+    // await api.finishStatus({ session });
 
-        if (processData.confidence === 0) {
-          return setError("selfie", {
-            message:
-              "La foto de su selfie no coincide con la imagen del documento de identidad.",
-          });
-        }
+    // await applications.identityCheck(match.params.id, {
+    //   identity_checked: true,
+    //   interviewId: session.interviewId,
+    // });
 
-        await api.finishStatus({ session });
+    try {
+      await mutation(form).unwrap();
+      router.push("/profile/income-and-taxes");
+    } catch (error: any) {
+      const errors = error?.data?.errors;
 
-        await applications.identityCheck(match.params.id, {
-          identity_checked: true,
-          interviewId: session.interviewId,
+      if (errors) {
+        handleServerErrors<T_form>(["selfie"], errors).forEach(
+          ([field, errorOption]) => setError(field, errorOption)
+        );
+      } else {
+        setError("root", {
+          message: t("Something went wrong"),
+          type: "server",
         });
-
-        router.push("/profile/income-and-taxes");
       }
     }
   };

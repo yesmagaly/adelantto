@@ -17,8 +17,6 @@ import { MaterialIcon } from "@adelantto/core";
 import { handleServerErrors } from "@adelantto/utils";
 import { Link, RouteComponentProps } from "react-router-dom";
 
-
-
 interface T_form {
   property_commercial_folio?: string;
   property_zip_code?: string;
@@ -48,7 +46,7 @@ const UploadDocuments: React.FC<T_props> = ({ match }) => {
   const onSubmit = async (data: T_form) => {
     try {
       await migration(data).unwrap();
-      router.push(`/applications/${match.params.id}/final-announcement`);
+      router.push(`/applications/${match.params.id}/privacy-policy`);
     } catch (error: any) {
       handleServerErrors<T_form>(
         ["property_zip_code", "property_commercial_folio"],
@@ -91,7 +89,9 @@ const UploadDocuments: React.FC<T_props> = ({ match }) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="control">
-            <label className="control-label">Folio Real</label>
+            <label className="control-label">
+              Folio Real (Registro Público de la Propiedad)
+            </label>
             <input
               {...register("property_commercial_folio")}
               className="input validator"
@@ -119,9 +119,9 @@ const UploadDocuments: React.FC<T_props> = ({ match }) => {
               ></path>
             </svg>
             <p className="ml-1 control-label">
-              El número de matrícula inmobiliaria aparece en el certificado de
-              tradición y libertad del predio, así como en la escritura o
-              documento de propiedad del mismo.
+              Es el número con el que se inscribe legalmente tu propiedad. Puede
+              encontrarse al inicio o final de tu escritura, en la hoja de
+              inscripción del Registro Público o en los anexos.
             </p>
           </div>
 
