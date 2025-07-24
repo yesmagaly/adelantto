@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 
 import logo from "../../assets/svgs/logo.svg";
 import InputPassword from "../../components/InputPassword";
-import { useAuth } from "./authContext";
 
 import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
 import { Link } from "react-router-dom";
+import { useLoginMutation } from "@adelantto/store";
+import { setCredentials } from "@adelantto/store/src/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 type T_form = {
   email: string;
@@ -14,8 +16,9 @@ type T_form = {
 };
 
 function Login() {
+  const [login, { isLoading }] = useLoginMutation();
   const router = useIonRouter();
-  const { logIn } = useAuth()!;
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -26,7 +29,9 @@ function Login() {
 
   const onSubmit = async function (form: T_form) {
     try {
-      await logIn(form);
+      const response = await login(form).unwrap();
+      dispatch(setCredentials(response));
+
       router.push("/home");
     } catch (error: any) {
       setError("root", { message: error.message, type: "server" });
@@ -79,15 +84,15 @@ function Login() {
             </div>
 
             <p className="my-4 text-sm text-center">
-              <Link
-                className="link"
-                to="/forgot-password"
-              >
+              <Link className="link" to="/forgot-password">
                 ¿Olvidaste tu contrasena?
               </Link>
             </p>
 
-            <button disabled={isSubmitting} className="btn-block btn btn-primary">
+            <button
+              disabled={isSubmitting}
+              className="btn-block btn btn-primary"
+            >
               Iniciar sesión
             </button>
           </form>

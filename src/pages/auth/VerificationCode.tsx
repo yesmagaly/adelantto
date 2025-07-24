@@ -12,6 +12,9 @@ import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { API_SERVER_URL } from "../../config";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
+import { useResendVerificationCodeMutation } from "@adelantto/store";
+import exclamation from "../../assets/svgs/exclamation.svg";
+import { handleServerErrors } from "@adelantto/utils";
 
 type T_props = RouteComponentProps<{
   id: string;
@@ -27,6 +30,8 @@ type T_form = {
 };
 
 const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const [resendVerificationCode] = useResendVerificationCodeMutation();
   const inputsContainerRef = useRef<HTMLDivElement>(null);
   const router = useIonRouter();
   const id = match.params.id;
@@ -41,6 +46,7 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
     setError,
     watch,
     setValue,
+    reset,
     formState: { isSubmitting, errors },
   } = useForm<T_form>();
 
@@ -94,16 +100,23 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
     if (response.ok && data.id) {
       router.push(`/create-profile/${id}`);
     } else {
-      const errorFields = ["code", "root"];
+      if (data.errors) {
+        handleServerErrors<T_form>(["code"], data.errors).forEach(
+          ([field, errorOption]) => setError(field, errorOption)
+        );
+      }
+    }
+  };
 
-      errorFields.forEach((field) => {
-        if (data?.status === "fail" && data.errors[field]) {
-          setError(field as keyof FieldErrors<T_form>, {
-            message: data.errors[field][0],
-            type: "server",
-          });
-        }
-      });
+  const handleResendCode = async () => {
+    if (id && modalRef.current) {
+      try {
+        reset(); // Reset the form inputs
+        await resendVerificationCode(id).unwrap();
+        modalRef.current.showModal();
+      } catch (error) {
+        console.error("Error resending verification code:", error);
+      }
     }
   };
 
@@ -187,10 +200,38 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
 
         <div className="gap-2 grid text-center">
           <p>¿No has recibido el código?</p>
-          <Link to="/register" className="link">
+          <button onClick={handleResendCode} className="link" type="button">
             Reenviar código
-          </Link>
+          </button>
         </div>
+
+        <dialog ref={modalRef} id="my_modal_1" className="modal">
+          <div className="modal-box">
+            <button
+              className="top-0.5 right-0.5 absolute btn btn-sm btn-circle btn-ghost"
+              onClick={() => modalRef.current?.close()}
+            >
+              <MaterialIcon name="close" className="text-red-500" size="20px" />
+            </button>
+
+            <div className="flex flex-col items-center gap-6">
+              <img src={exclamation} alt="exclamation" className="size-24" />
+
+              <div className="flex flex-col items-center gap-2">
+                <p className="max-w-3/4 text-sm text-center">
+                  Se ha vuelto a enviar un SMS con el código de confirmación a
+                  su número de teléfono.
+                </p>
+              </div>
+            </div>
+
+            <div className="justify-center px-4 modal-action">
+              <form method="dialog" className="w-full">
+                <button className="btn-block btn btn-primary">Cerrar</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </IonContent>
 
       <IonFooter className="ion-padding">

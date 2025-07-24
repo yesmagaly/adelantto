@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -37,7 +37,6 @@ import Register from "./pages/auth/Register";
 import VerificationCode from "./pages/auth/VerificationCode";
 import UpdateTemporaryPassword from "./pages/auth/UpdateTemporaryPassword";
 import ForgotPassword from "./pages/auth/ForgotPassword";
-import { useAuth } from "./pages/auth/authContext";
 
 import Summary from "./pages/loan/Summary";
 import { InstallmentDetail } from "./pages/loan/InstallmentDetail";
@@ -57,6 +56,7 @@ import PrivacyPolicy from "./pages/applications/PrivacyPolicy";
 import ConfirmPrivacyPolicy from "./pages/applications/ConfirmPrivacyPolicy";
 import FailBuroScore from "./pages/applications/FailBuroScore";
 import { AwaitingValidation } from "./pages/applications/AwaitingValidation";
+import { authSlice } from "@adelantto/store";
 
 setupIonicReact();
 
@@ -66,18 +66,16 @@ const PrivateRoute: React.FC<{
   children?: React.ReactNode;
   exact?: boolean;
 }> = ({ children, component: Component, ...rest }) => {
-  const { authInfo } = useAuth()!;
+  const isAuthenticated = useSelector(
+    authSlice.selectors.selectIsAuthenticated
+  );
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (authInfo.loggedIn) {
-          if (Component) {
-            return <Component {...props} />;
-          }
-
-          return children;
+        if (isAuthenticated) {
+          return Component ? <Component {...props} /> : children;
         }
 
         return (
@@ -96,18 +94,16 @@ const PublicRoute: React.FC<{
   children?: React.ReactNode;
   exact?: boolean;
 }> = ({ children, component: Component, ...rest }) => {
-  const { authInfo } = useAuth()!;
+  const isAuthenticated = useSelector(
+    authSlice.selectors.selectIsAuthenticated
+  );
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (!authInfo.loggedIn) {
-          if (Component) {
-            return <Component {...props} />;
-          }
-
-          return children;
+        if (!isAuthenticated) {
+          return Component ? <Component {...props} /> : children;
         }
 
         return (
@@ -121,21 +117,6 @@ const PublicRoute: React.FC<{
 };
 
 const App: React.FC = () => {
-  const { authInfo, initialize } = useAuth()!;
-
-  useEffect(() => {
-    !authInfo?.initialized && (async () => await initialize())();
-  }, [authInfo, initialize]);
-
-  if (!authInfo || !authInfo.initialized) {
-    return (
-      <IonApp>
-        <div className="flex justify-center items-center w-full h-screen">
-          <span className="font-medium text-sm">Cargando ...</span>
-        </div>
-      </IonApp>
-    );
-  }
   return (
     <IonApp>
       <Provider store={store}>

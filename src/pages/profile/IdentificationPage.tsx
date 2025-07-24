@@ -127,20 +127,20 @@ export const IdentificationPage: React.FC = () => {
             name="front_document"
             control={control}
             rules={{ required: "Imagen requerida" }}
-            accept="image/jpeg"
+            accept="image/*"
             label="Frontal INE o Pasaporte"
             description="Cara frontal donde sale la foto"
-            helpText="Tipo de archivo permitido JPG (500MB max)"
+            helpText="Tipo de archivo permitido JPEG (500MB max)"
             helpPicture={frontIdImageUrl}
           />
           <FileInputItem
             name="back_document"
             control={control}
             rules={{ required: "Imagen requerida" }}
-            accept="image/jpeg"
+            accept="image/*"
             label="Reverso INE o Pasaporte"
             description="Cara trasera donde está el código de barras"
-            helpText="Tipo de archivo permitido JPG (500MB max)"
+            helpText="Tipo de archivo permitido JPEG (500MB max)"
             helpPicture={backIdImageUrl}
           />
 

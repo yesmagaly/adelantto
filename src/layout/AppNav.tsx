@@ -9,7 +9,7 @@ export function AppNav() {
       <Nav.Item icon="currency_exchange" to="#">
         Adelanttos
       </Nav.Item>
-      <Nav.Item icon="location_on" to="https://wa.me/5215593314221">
+      <Nav.Item icon="location_on" to="https://wa.me/5215593314221" target="_blank">
         Contacto
       </Nav.Item>
       <Nav.Item icon="person" to="/profile">

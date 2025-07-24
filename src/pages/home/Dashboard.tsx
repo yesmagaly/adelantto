@@ -4,32 +4,32 @@ import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 import { Carousel, CarouselItem, MaterialIcon } from "@adelantto/core";
 import LoanCard from "../loan/components/LoanCard";
 import ApplicationCard from "../applications/components/ApplicationCard";
-import { useAuth } from "../auth/authContext";
 import { AppNav } from "../../layout/AppNav";
 import adelanttoBgTopRightUrl from "../../assets/images/adelantto-bg-top-right.png";
 import exclamation from "../../assets/svgs/exclamation.svg";
-import buildingPictureUrl from "../../assets/images/building-picture.png"
+import buildingPictureUrl from "../../assets/images/building-picture.png";
 
 import {
+  authSlice,
   useGetApplicationsQuery,
   useGetLoansQuery,
-  useGetUserQuery,
   userStepsUrls,
 } from "@adelantto/store";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Dashboard: React.FC = () => {
+  const user = useSelector(authSlice.selectors.selectUser);
+  const isAuthenticated = useSelector(
+    authSlice.selectors.selectIsAuthenticated
+  );
   const modalRef = useRef<HTMLDialogElement>(null);
-  const { authInfo, logOut } = useAuth()!;
   const router = useIonRouter();
-
-  const { data: user } = useGetUserQuery();
   const { data: loans = [] } = useGetLoansQuery();
-  const { data: applications = [] } =
-    useGetApplicationsQuery();
+  const { data: applications = [] } = useGetApplicationsQuery();
 
   useEffect(() => {
-    if (!authInfo.user?.is_verified) {
+    if (!isAuthenticated) {
       router.push("/home");
     }
   }, []);
@@ -142,7 +142,7 @@ const Dashboard: React.FC = () => {
                 <h4 className="mb-4 text-h6">Tus AdelanttoCash®</h4>
                 <div className="flex flex-col gap-2">
                   {loans.map((loan) => (
-                    <LoanCard key={loan.id} loan={loan} displayActions/>
+                    <LoanCard key={loan.id} loan={loan} displayActions />
                   ))}
                 </div>
 
@@ -163,10 +163,7 @@ const Dashboard: React.FC = () => {
               <CarouselItem>
                 <div className="bg-base-100 shadow-md mx-1 mb-2 card">
                   <figure>
-                    <img
-                      src={buildingPictureUrl}
-                      alt="Shoes"
-                    />
+                    <img src={buildingPictureUrl} alt="Shoes" />
                   </figure>
                   <div className="p-4 card-body">
                     <h2 className="card-title">Multi-Adelanttos</h2>
@@ -181,10 +178,7 @@ const Dashboard: React.FC = () => {
               <CarouselItem>
                 <div className="bg-base-100 shadow-md mx-1 mb-2 card">
                   <figure>
-                    <img
-                      src={buildingPictureUrl}
-                      alt="Shoes"
-                    />
+                    <img src={buildingPictureUrl} alt="Shoes" />
                   </figure>
                   <div className="p-4 card-body">
                     <h2 className="card-title">Multi-Adelanttos</h2>
