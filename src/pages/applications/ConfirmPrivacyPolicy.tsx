@@ -26,6 +26,7 @@ type T_form = {
 
 const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
+  const inputsContainerRef = useRef<HTMLDivElement>(null);
   const router = useIonRouter();
   const [diplayThrottleError, setDiplayThrottleError] = useState(false);
   const [_displayedCounter, setDisplayedCounter] = useState(true);
@@ -93,6 +94,24 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
     };
   }, [watch]);
 
+  useEffect(() => {
+    if (inputsContainerRef.current) {
+      inputsContainerRef.current.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", (e) => {
+          const target = e.target as HTMLInputElement;
+
+          if (target.value.length >= target.maxLength) {
+            const nextInput = target.nextElementSibling as HTMLInputElement;
+
+            if (nextInput) {
+              nextInput.focus();
+            }
+          }
+        });
+      });
+    }
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -117,7 +136,7 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
                   Código de confirmación
                 </legend>
 
-                <div className="flex gap-4">
+                <div className="flex gap-4" ref={inputsContainerRef}>
                   <input
                     {...register("code1")}
                     className="h-24 text-center input validator"
@@ -125,7 +144,8 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
                     minLength={1}
                     placeholder="0"
                     required
-                    type="numeric"
+                    type="text"
+                    inputMode="numeric"
                     aria-invalid={errors.code ? "true" : "false"}
                   />
                   <input
@@ -135,7 +155,8 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
                     minLength={1}
                     placeholder="0"
                     required
-                    type="numeric"
+                    type="text"
+                    inputMode="numeric"
                     aria-invalid={errors.code ? "true" : "false"}
                   />
                   <input
@@ -145,7 +166,8 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
                     minLength={1}
                     placeholder="0"
                     required
-                    type="numeric"
+                    type="text"
+                    inputMode="numeric"
                     aria-invalid={errors.code ? "true" : "false"}
                   />
                   <input
@@ -155,7 +177,8 @@ const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
                     minLength={1}
                     placeholder="0"
                     required
-                    type="numeric"
+                    type="text"
+                    inputMode="numeric"
                     aria-invalid={errors.code ? "true" : "false"}
                   />
                 </div>

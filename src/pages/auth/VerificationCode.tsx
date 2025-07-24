@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { RouteComponentProps } from "react-router";
 import {
   IonContent,
@@ -27,6 +27,7 @@ type T_form = {
 };
 
 const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
+  const inputsContainerRef = useRef<HTMLDivElement>(null);
   const router = useIonRouter();
   const id = match.params.id;
 
@@ -42,6 +43,24 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
     setValue,
     formState: { isSubmitting, errors },
   } = useForm<T_form>();
+
+  useEffect(() => {
+    if (inputsContainerRef.current) {
+      inputsContainerRef.current.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", (e) => {
+          const target = e.target as HTMLInputElement;
+
+          if (target.value.length >= target.maxLength) {
+            const nextInput = target.nextElementSibling as HTMLInputElement;
+
+            if (nextInput) {
+              nextInput.focus();
+            }
+          }
+        });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const subscribe = watch((form, { type }) => {
@@ -108,7 +127,7 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
             forma segura.
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4" ref={inputsContainerRef}>
             <input
               {...register("code1")}
               className="h-24 text-center input validator"
@@ -116,7 +135,8 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
               minLength={1}
               placeholder="0"
               required
-              type="numeric"
+              type="text"
+              inputMode="numeric"
               aria-invalid={errors.code ? "true" : "false"}
             />
             <input
@@ -126,7 +146,8 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
               minLength={1}
               placeholder="0"
               required
-              type="numeric"
+              type="text"
+              inputMode="numeric"
               aria-invalid={errors.code ? "true" : "false"}
             />
             <input
@@ -136,7 +157,8 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
               minLength={1}
               placeholder="0"
               required
-              type="numeric"
+              type="text"
+              inputMode="numeric"
               aria-invalid={errors.code ? "true" : "false"}
             />
             <input
@@ -146,7 +168,8 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
               minLength={1}
               placeholder="0"
               required
-              type="numeric"
+              type="text"
+              inputMode="numeric"
               aria-invalid={errors.code ? "true" : "false"}
             />
           </div>
