@@ -18,6 +18,18 @@ export const authApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
+    login: builder.mutation<
+      { token: string; user: T_user },
+      { email: string; password: string }
+    >({
+      query: (body) => ({
+        url: "/login",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: (_response, _error) => [{ type: "User", id: "ITEM" }],
+    }),
+
     registerUser: builder.mutation<T_user, any>({
       query: (body) => ({
         url: "/register",
@@ -35,10 +47,35 @@ export const authApi = createApi({
       }),
     }),
 
+    resendVerificationCode: builder.mutation<T_user, string>({
+      query: (id) => ({
+        url: `/${id}/verification-code`,
+        method: "PUT",
+      }),
+    }),
+
+    verifyPhoneCode: builder.mutation<T_user, { id: string; code: string }>({
+      query: ({ id, code }) => ({
+        url: `/${id}/verify-phone-code`,
+        method: "POST",
+        body: { code },
+      }),
+      invalidatesTags: (_user, _error) => [{ type: "User", id: _user?.id }],
+      // async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+      //   try {
+      //     const { data } = await queryFulfilled;
+      //     dispatch({ type: "authentication/logInUser", payload: data });
+      //   } catch (error) {
+      //     console.error("Error verifying phone code:", error);
+      //   }
+      // },
+    }),
   }),
 });
 
 export const {
+  useLoginMutation,
   useRegisterUserMutation,
-  useRecoverPasswordMutation
+  useRecoverPasswordMutation,
+  useResendVerificationCodeMutation,
 } = authApi;

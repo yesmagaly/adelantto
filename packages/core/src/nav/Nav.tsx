@@ -20,23 +20,34 @@ export function NavItem({
   icon?: string;
   to: string;
   children: React.ReactNode;
-  target?: HTMLAttributeAnchorTarget
+  target?: HTMLAttributeAnchorTarget;
 }) {
   return (
     <li className="w-1/4">
-      <NavLink
-        to={to}
-        target={target}
-        className={(isActive) => {
-          return cn(
-            "flex flex-col justify-center items-center gap-1 py-2 h-full",
-            isActive ? "text-purple-500" : "text-gray-600"
-          );
-        }}
-      >
-        {icon && <MaterialIcon name={icon} fill />}
-        <div className="text-xs">{children}</div>
-      </NavLink>
+      {target !== "_blank" ? (
+        <NavLink
+          to={to}
+          target={target}
+          className={(isActive) => {
+            return cn(
+              "flex flex-col justify-center items-center gap-1 py-2 h-full",
+              isActive ? "text-purple-500" : "text-gray-600"
+            );
+          }}
+        >
+          {icon && <MaterialIcon name={icon} fill />}
+          <div className="text-xs">{children}</div>
+        </NavLink>
+      ) : (
+        <a
+          href={to}
+          target={target}
+          className="flex flex-col justify-center items-center gap-1 py-2 h-full text-gray-600"
+        >
+          {icon && <MaterialIcon name={icon} fill />}
+          <div className="text-xs">{children}</div>
+        </a>
+      )}
     </li>
   );
 }

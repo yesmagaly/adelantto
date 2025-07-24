@@ -8,11 +8,15 @@ import { generalApi } from "./services/general";
 import { loansApi } from "./services/loans";
 import { userApi } from "./services/users";
 
+import { authSlice } from "./slices/authSlice";
+import { setupListeners } from "@reduxjs/toolkit/query";
+
 const { routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
 });
 
 const RTKState = {
+  auth: authSlice.reducer,
   [applicationsApi.reducerPath]: applicationsApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [generalApi.reducerPath]: generalApi.reducer,
@@ -33,21 +37,17 @@ const rootReducer = (state: any, action: any) => {
   return combined(state, action);
 };
 
-const createStore = () =>
-  configureStore({
-    reducer: rootReducer,
-    devTools: true,
-    //@ts-ignore
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: false,
-      })
-        .concat(routerMiddleware)
-        .concat(applicationsApi.middleware)
-        .concat(authApi.middleware)
-        .concat(generalApi.middleware)
-        .concat(loansApi.middleware)
-        .concat(userApi.middleware),
-  });
+export const store = configureStore({
+  reducer: rootReducer,
+  devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false })
+      .concat(routerMiddleware)
+      .concat(applicationsApi.middleware)
+      .concat(authApi.middleware)
+      .concat(generalApi.middleware)
+      .concat(loansApi.middleware)
+      .concat(userApi.middleware),
+});
 
-export const store = createStore();
+setupListeners(store.dispatch);
