@@ -184,13 +184,13 @@ const LeaseContract: React.FC = () => {
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con los{" "}
-              <Link
-                to="https://adelanttocash.com/terminos-y-condiciones"
+              <a
+                href="https://adelanttocash.com/terminos-y-condiciones"
                 target="_blank"
                 className="text-emerald-700 link"
               >
                 Términos y Condiciones
-              </Link>
+              </a>
             </span>
           </label>
         </form>

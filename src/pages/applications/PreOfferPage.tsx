@@ -217,13 +217,13 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
 
         <p className="mt-4 text-gray-900 text-xs text-center text-wrap">
           He leído y estoy de acuerdo con el{" "}
-          <Link
-            to="https://adelanttocash.com/aviso-de-privacidad"
+          <a
+            href="https://adelanttocash.com/aviso-de-privacidad"
             target="_blank"
             className="text-emerald-700 no-underline link"
           >
             Aviso de Privacidad
-          </Link>
+          </a>
         </p>
       </IonFooter>
     </IonPage>

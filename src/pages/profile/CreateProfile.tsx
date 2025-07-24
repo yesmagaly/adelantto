@@ -109,13 +109,13 @@ export const CreateProfilePage: React.FC<T_props> = () => {
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con el{" "}
-              <Link
-                to="https://adelanttocash.com/aviso-de-privacidad"
+              <a
+                href="https://adelanttocash.com/aviso-de-privacidad"
                 target="_blank"
                 className="text-emerald-700 link"
               >
                 Aviso de Privacidad
-              </Link>
+              </a>
             </span>
             <p className="-bottom-5 absolute validator-hint">
               {errors.accept_privacy_policy?.message}
@@ -136,13 +136,13 @@ export const CreateProfilePage: React.FC<T_props> = () => {
             />
             <span className="text-xs text-wrap">
               He leído y estoy de acuerdo con los{" "}
-              <Link
-                to="https://adelanttocash.com/terminos-y-condiciones"
+              <a
+                href="https://adelanttocash.com/terminos-y-condiciones"
                 target="_blank"
                 className="text-emerald-700 link"
               >
                 Términos y Condiciones
-              </Link>
+              </a>
             </span>
             <p className="-bottom-5 absolute validator-hint">
               {errors.accept_terms_and_conditions?.message}
