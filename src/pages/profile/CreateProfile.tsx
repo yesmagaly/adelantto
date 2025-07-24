@@ -7,9 +7,8 @@ import {
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
-import { API_SERVER_URL } from "../../config";
 import { Link } from "react-router-dom";
-import { RouteComponentProps } from "react-router";
+import { useUpdateUserMutation } from "@adelantto/store";
 
 type T_form = {
   name: string;
@@ -18,13 +17,13 @@ type T_form = {
   accept_terms_and_conditions: boolean;
 };
 
-type T_props = RouteComponentProps<{
+type T_props = {
   id: string;
-}>;
+};
 
-export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
+export const CreateProfilePage: React.FC<T_props> = () => {
   const router = useIonRouter();
-  const { id } = match.params;
+  const [updateUser] = useUpdateUserMutation();
 
   const {
     register,
@@ -33,18 +32,10 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
   } = useForm<T_form>();
 
   const onSubmit = async (form: T_form) => {
-    const response = await fetch(`${API_SERVER_URL}/api/auth/${id}/profile`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-
-    if (response.ok) {
-      router.push(`/login`);
-    }
+    try {
+      await updateUser(form).unwrap();
+      router.push(`/welcome`);
+    } catch (error) {}
   };
 
   return (
@@ -167,13 +158,6 @@ export const CreateProfilePage: React.FC<T_props> = ({ match }) => {
         >
           Regístrate
         </button>
-
-        <p className="mt-6 text-sm text-center">
-          ¿Ya tienes una cuenta?{" "}
-          <Link to="/login" className="link">
-            Iniciar sesión
-          </Link>
-        </p>
       </IonFooter>
     </IonPage>
   );

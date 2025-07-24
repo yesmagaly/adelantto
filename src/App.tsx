@@ -128,7 +128,7 @@ const App: React.FC = () => {
             component={UpdateTemporaryPassword}
           />
           <PrivateRoute
-            path="/advance-immediately"
+            path="/welcome"
             component={AdvanceImmediately}
           />
 
@@ -208,7 +208,7 @@ const App: React.FC = () => {
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
           <PublicRoute path="/create-account" component={Register} />
           <PublicRoute path="/register" component={Register} />
-          <PublicRoute
+          <Route
             path="/verification-code/:id"
             component={VerificationCode}
           />

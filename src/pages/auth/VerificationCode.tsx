@@ -93,7 +93,6 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
     try {
       const response = await verifyPhoneCode({ id, code: form.code }).unwrap();
       dispatch(setCredentials(response));
-
       router.push(`/profile/create`);
     } catch (error: any) {
       if (error?.data?.errors) {
