@@ -1,5 +1,5 @@
 import { useIonRouter } from "@ionic/react";
-import { T_installment } from "../types";
+import { T_installment } from "../../../types";
 import { DateTime } from "luxon";
 import { t } from "@adelantto/utils";
 

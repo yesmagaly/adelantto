@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IonContent, IonPage } from "@ionic/react";
 import * as api from "../../api";
-import InstallmentCard from "../../components/InstallmentCard";
+import InstallmentCard from "./components/InstallmentCard";
 import LoanCard from "./components/LoanCard";
 import { T_loan } from "@adelantto/store";
 
