@@ -76,7 +76,7 @@ export function ProfilePage() {
             </h3>
 
             <ul className="gap-4 grid">
-              <li>
+              {/* <li>
                 <Link
                   to="#"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
@@ -87,7 +87,7 @@ export function ProfilePage() {
                   />
                   Notificaciones
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   to="#"
@@ -120,8 +120,9 @@ export function ProfilePage() {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="#"
+                <a
+                  href="https://dev-website.adelanttocash.com/como-funciona#faqs"
+                  target="_blank"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -129,11 +130,12 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Preguntas frecuentes
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
-                  to="#"
+                <a
+                  href="https://dev-website.adelanttocash.com/terminos-y-condiciones"
+                  target="_blank"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon
@@ -141,7 +143,7 @@ export function ProfilePage() {
                     className="inline-block mr-2"
                   />
                   Términos y condiciones
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
