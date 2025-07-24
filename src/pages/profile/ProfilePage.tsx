@@ -90,7 +90,7 @@ export function ProfilePage() {
               </li> */}
               <li>
                 <Link
-                  to="#"
+                  to="/profile/my-data"
                   className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
                 >
                   <MaterialIcon

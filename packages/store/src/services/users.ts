@@ -7,8 +7,17 @@ type T_user = {
   email: string;
   name?: string;
   last_name?: string;
+  document_number: number;
+  rfc_number?: string;
+  curp_number?: string;
+  address?: string;
+  colony?: string;
+  municipality?: string;
+  state?: string;
+  zip_code?: number;
+  phone?: number;
   is_completed: boolean;
-  birthday: string;
+  birthdate: string;
 
   next_step: 'identification' | 'income_and_taxes' | 'biometric_validation';
 };

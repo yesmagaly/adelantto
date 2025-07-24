@@ -48,6 +48,7 @@ import { IdentificationPage } from "./pages/profile/IdentificationPage";
 import { IncomeAndTaxesPage } from "./pages/profile/IncomeAndTaxesPage";
 import { OopsPage } from "./pages/profile/OopsPage";
 import { BiometricValidationPage } from "./pages/profile/BiometricValidationPage";
+import { MyDataPage } from "./pages/profile/MyDataPage";
 
 import UploadDocuments from "./pages/applications/UploadDocuments";
 import LeaseContract from "./pages/applications/LeaseContract";
@@ -132,6 +133,12 @@ const App: React.FC = () => {
           />
 
           <PrivateRoute path="/profile" component={ProfilePage} />
+
+          <PrivateRoute
+            path="/profile/my-data"
+            component={MyDataPage}
+          />
+
           <PrivateRoute
             path="/profile/identification"
             component={IdentificationPage}
