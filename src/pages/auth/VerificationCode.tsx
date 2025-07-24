@@ -8,13 +8,17 @@ import {
   useIonRouter,
 } from "@ionic/react";
 
-import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
-import { API_SERVER_URL } from "../../config";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
-import { useResendVerificationCodeMutation } from "@adelantto/store";
+import {
+  setCredentials,
+  useResendVerificationCodeMutation,
+  useVerifyPhoneCodeMutation,
+} from "@adelantto/store";
 import exclamation from "../../assets/svgs/exclamation.svg";
 import { handleServerErrors } from "@adelantto/utils";
+import { useDispatch } from "react-redux";
 
 type T_props = RouteComponentProps<{
   id: string;
@@ -31,8 +35,11 @@ type T_form = {
 
 const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
-  const [resendVerificationCode] = useResendVerificationCodeMutation();
   const inputsContainerRef = useRef<HTMLDivElement>(null);
+
+  const [resendVerificationCode] = useResendVerificationCodeMutation();
+  const [verifyPhoneCode] = useVerifyPhoneCodeMutation();
+  const dispatch = useDispatch();
   const router = useIonRouter();
   const id = match.params.id;
 
@@ -83,25 +90,14 @@ const VerificationCode: React.FC<T_props> = ({ match, ...props }) => {
   }, [watch]);
 
   const onSubmit: SubmitHandler<T_form> = async function (form: T_form) {
-    const response = await fetch(
-      `${API_SERVER_URL}/api/auth/${id}/verify-phone-code`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ code: form.code }),
-      }
-    );
+    try {
+      const response = await verifyPhoneCode({ id, code: form.code }).unwrap();
+      dispatch(setCredentials(response));
 
-    const data = await response.json();
-
-    if (response.ok && data.id) {
-      router.push(`/create-profile/${id}`);
-    } else {
-      if (data.errors) {
-        handleServerErrors<T_form>(["code"], data.errors).forEach(
+      router.push(`/profile/create`);
+    } catch (error: any) {
+      if (error?.data?.errors) {
+        handleServerErrors<T_form>(["code"], error?.data?.errors).forEach(
           ([field, errorOption]) => setError(field, errorOption)
         );
       }

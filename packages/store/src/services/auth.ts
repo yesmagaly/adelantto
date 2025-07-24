@@ -61,14 +61,6 @@ export const authApi = createApi({
         body: { code },
       }),
       invalidatesTags: (_user, _error) => [{ type: "User", id: _user?.id }],
-      // async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
-      //   try {
-      //     const { data } = await queryFulfilled;
-      //     dispatch({ type: "authentication/logInUser", payload: data });
-      //   } catch (error) {
-      //     console.error("Error verifying phone code:", error);
-      //   }
-      // },
     }),
   }),
 });
@@ -78,4 +70,5 @@ export const {
   useRegisterUserMutation,
   useRecoverPasswordMutation,
   useResendVerificationCodeMutation,
+  useVerifyPhoneCodeMutation,
 } = authApi;

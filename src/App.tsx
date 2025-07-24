@@ -140,6 +140,10 @@ const App: React.FC = () => {
           />
 
           <PrivateRoute
+            path="/profile/create"
+            component={CreateProfilePage}
+          />
+          <PrivateRoute
             path="/profile/identification"
             component={IdentificationPage}
           />
@@ -208,10 +212,7 @@ const App: React.FC = () => {
             path="/verification-code/:id"
             component={VerificationCode}
           />
-          <PublicRoute
-            path="/create-profile/:id"
-            component={CreateProfilePage}
-          />
+
         </IonReactRouter>
       </Provider>
     </IonApp>
