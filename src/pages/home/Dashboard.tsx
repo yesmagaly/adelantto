@@ -72,8 +72,8 @@ const Dashboard: React.FC = () => {
                   className="stroke-info text-amber-400"
                 />
                 <div>
-                  <h3 className="mb-1 font-semibold">Completa tu perfil</h3>
-                  <div className="text-gray-900 text-xs">
+                  <h3 className="mb-1 text-h6">Completa tu perfil</h3>
+                  <div className="text-gray-900 text-sm">
                     Ingresa tus datos básicos para identificarte correctamente.
                     Esta información es necesaria para poder solicitar tu primer
                     Adelantto.

@@ -161,7 +161,7 @@ export const IdentificationPage: React.FC = () => {
               {...register("curp_number")}
               type="text"
               required
-              className="uppercase input validator"
+              className="placeholder:capitalize uppercase input validator"
               placeholder="Ingresa tu CURP"
               aria-invalid={errors.curp_number ? "true" : "false"}
             />

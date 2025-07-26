@@ -47,7 +47,7 @@ export function ProfilePage() {
             <div className="bg-amber-100 shadow-sm card card-sm">
               <div className="gap-3 card-body">
                 <h2 className="text-h6 card-title">Completa tu perfil</h2>
-                <p>
+                <p className="text-sm">
                   Ingresa tus datos básicos para identificarte correctamente.
                   Esta información es necesaria para poder solicitar tu primer
                   Adelantto.

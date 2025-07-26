@@ -96,7 +96,7 @@ export const IncomeAndTaxesPage: React.FC = () => {
             <input
               type="text"
               placeholder="RFC"
-              className="uppercase input validator"
+              className="placeholder:capitalize uppercase input validator"
               minLength={13}
               maxLength={13}
               {...register("rfc_number")}
