@@ -12,7 +12,6 @@ import buildingPictureUrl from "../../assets/images/building-picture.png";
 import {
   authSlice,
   useGetApplicationsQuery,
-  useGetArticlesQuery,
   useGetLoansQuery,
   useGetUserQuery,
   userStepsUrls,
@@ -28,7 +27,6 @@ const Dashboard: React.FC = () => {
   const router = useIonRouter();
   const { data: loans = [] } = useGetLoansQuery();
   const { data: applications = [] } = useGetApplicationsQuery();
-  const { data: articles = [] } = useGetArticlesQuery();
 
   const { data: user } = useGetUserQuery();
 
