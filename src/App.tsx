@@ -58,6 +58,7 @@ import ConfirmPrivacyPolicy from "./pages/applications/ConfirmPrivacyPolicy";
 import FailBuroScore from "./pages/applications/FailBuroScore";
 import { AwaitingValidation } from "./pages/applications/AwaitingValidation";
 import { authSlice } from "@adelantto/store";
+import { LoansListingPage } from "./pages/loan/LoansListingPage";
 
 setupIonicReact();
 
@@ -201,6 +202,12 @@ const App: React.FC = () => {
           <PrivateRoute
             path="/loans/:id/installments/:installment_id"
             component={InstallmentDetail}
+          />
+
+          <PrivateRoute
+            path="/loans"
+            component={LoansListingPage}
+            exact
           />
 
           <PublicRoute path="/" component={Home} exact />

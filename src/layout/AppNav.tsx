@@ -6,7 +6,7 @@ export function AppNav() {
       <Nav.Item icon="home" to="/home">
         Home
       </Nav.Item>
-      <Nav.Item icon="currency_exchange" to="#">
+      <Nav.Item icon="currency_exchange" to="/loans">
         Adelanttos
       </Nav.Item>
       <Nav.Item icon="location_on" to="https://wa.me/5215593314221" target="_blank">

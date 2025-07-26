@@ -4,7 +4,7 @@ export class UnauthorizedError extends Error {}
 export class HttpError extends Error {}
 
 function getToken() {
-  const userString = sessionStorage.getItem("AUTH") ?? "{}";
+  const userString = sessionStorage.getItem("auth") ?? "{}";
   const user = JSON.parse(userString);
 
   return `Bearer ${user.token}`;
