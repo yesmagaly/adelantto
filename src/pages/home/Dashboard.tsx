@@ -13,13 +13,13 @@ import {
   authSlice,
   useGetApplicationsQuery,
   useGetLoansQuery,
+  useGetUserQuery,
   userStepsUrls,
 } from "@adelantto/store";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Dashboard: React.FC = () => {
-  const user = useSelector(authSlice.selectors.selectUser);
   const isAuthenticated = useSelector(
     authSlice.selectors.selectIsAuthenticated
   );
@@ -27,6 +27,7 @@ const Dashboard: React.FC = () => {
   const router = useIonRouter();
   const { data: loans = [] } = useGetLoansQuery();
   const { data: applications = [] } = useGetApplicationsQuery();
+    const { data: user } = useGetUserQuery();
 
   useEffect(() => {
     if (!isAuthenticated) {

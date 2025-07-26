@@ -197,7 +197,7 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
                   <div className="text-h4">
                     {formatCurrency(offer.fees)} MXN
                   </div>
-                  <p className="text-purple-200">Pago de seguro</p>
+                  <p className="text-purple-200">Comisión por apertura</p>
                 </div>
               </div>
             </div>
