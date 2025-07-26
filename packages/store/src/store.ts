@@ -10,6 +10,7 @@ import { userApi } from "./services/users";
 
 import { authSlice } from "./slices/authSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { articlesApi } from "./services/articles";
 
 const { routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -18,6 +19,7 @@ const { routerMiddleware, routerReducer } = createReduxHistoryContext({
 const RTKState = {
   auth: authSlice.reducer,
   [applicationsApi.reducerPath]: applicationsApi.reducer,
+  [articlesApi.reducerPath]: articlesApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [generalApi.reducerPath]: generalApi.reducer,
   [loansApi.reducerPath]: loansApi.reducer,
@@ -44,6 +46,7 @@ export const store = configureStore({
     getDefaultMiddleware({ serializableCheck: false })
       .concat(routerMiddleware)
       .concat(applicationsApi.middleware)
+      .concat(articlesApi.middleware)
       .concat(authApi.middleware)
       .concat(generalApi.middleware)
       .concat(loansApi.middleware)

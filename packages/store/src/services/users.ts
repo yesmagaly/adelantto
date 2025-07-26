@@ -20,6 +20,10 @@ type T_user = {
   birthdate: string;
 
   next_step: 'identification' | 'income_and_taxes' | 'biometric_validation';
+  selfie?: {
+    url: string;
+    id: string;
+  };
 };
 
 const IDENTIFICATION_USER_STEP = "identification";

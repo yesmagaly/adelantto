@@ -12,6 +12,7 @@ import buildingPictureUrl from "../../assets/images/building-picture.png";
 import {
   authSlice,
   useGetApplicationsQuery,
+  useGetArticlesQuery,
   useGetLoansQuery,
   useGetUserQuery,
   userStepsUrls,
@@ -27,7 +28,9 @@ const Dashboard: React.FC = () => {
   const router = useIonRouter();
   const { data: loans = [] } = useGetLoansQuery();
   const { data: applications = [] } = useGetApplicationsQuery();
-    const { data: user } = useGetUserQuery();
+  const { data: articles = [] } = useGetArticlesQuery();
+
+  const { data: user } = useGetUserQuery();
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -160,7 +163,7 @@ const Dashboard: React.FC = () => {
               Temas de interés
             </h2>
 
-            <Carousel slides={SLIDES} options={OPTIONS} displayDots>
+            <Carousel options={OPTIONS} displayDots>
               <CarouselItem>
                 <div className="bg-base-100 shadow-md mx-1 mb-2 card">
                   <figure>

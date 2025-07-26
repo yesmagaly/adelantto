@@ -1,6 +1,7 @@
 export * from "./store";
 export * from "./constants";
 
+export * from "./services/articles";
 export * from "./services/applications";
 export * from "./services/auth";
 export * from "./services/general";

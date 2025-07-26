@@ -13,15 +13,16 @@ export function ProfilePage() {
         <div className="gap-6 grid">
           {user && (
             <div className="">
-              <div className="relative mb-4 avatar">
+              {user?.selfie && <div className="relative mb-4 avatar">
                 <div className="rounded-full ring-1 ring-gray-500 ring-offset-7 ring-offset-base-100 w-24">
                   <img
                     className="size-24"
-                    src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                    // src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                    src={user.selfie.url}
                   />
                 </div>
 
-                <div className="-right-1 -bottom-1 absolute">
+                <div className="!hidden -right-1 -bottom-1 absolute">
                   <button className="inline-flex justify-center items-center bg-white border border-gray-600 rounded-full size-8">
                     <MaterialIcon
                       name="photo_camera"
@@ -30,7 +31,7 @@ export function ProfilePage() {
                     />
                   </button>
                 </div>
-              </div>
+              </div>}
 
               <div>
                 <div className="font-semibold text-lg">
