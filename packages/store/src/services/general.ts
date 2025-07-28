@@ -6,6 +6,7 @@ type T_offer = {
   id: string;
   advance: number;
   fees: number;
+  commission:number;
   iva_commission: number;
   principal: number;
 };

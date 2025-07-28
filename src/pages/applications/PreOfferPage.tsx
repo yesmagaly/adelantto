@@ -89,7 +89,7 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
         }).unwrap();
 
         setValue("pre_offer_amount", data.principal);
-        setValue("pre_offer_fees", data.fees);
+        setValue("pre_offer_fees", data.commission);
         setValue("pre_offer_commissions", data.iva_commission);
       }
     };
@@ -195,7 +195,7 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
                 </div>
                 <div className="text-center">
                   <div className="text-h4">
-                    {formatCurrency(offer.fees)} MXN
+                    {formatCurrency(offer.commission)} MXN
                   </div>
                   <p className="text-purple-200">Comisión por apertura</p>
                 </div>
