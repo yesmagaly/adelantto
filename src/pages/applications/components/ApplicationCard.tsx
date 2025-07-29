@@ -1,7 +1,11 @@
 import { useIonRouter } from "@ionic/react";
 import { formatCurrency } from "@adelantto/utils";
 
-import { applicationStepsUrls, T_application } from "@adelantto/store";
+import {
+  applicationStepsUrls,
+  T_application,
+  useDestroyApplicationMutation,
+} from "@adelantto/store";
 
 export const trans = function (key: string) {
   const mapper: { [key: string]: string } = {
@@ -22,6 +26,7 @@ export default function ApplicationCard({
   item: T_application;
   className: string;
 }) {
+  const [destroyApplication] = useDestroyApplicationMutation();
   const router = useIonRouter();
 
   const redirectTo =
@@ -76,14 +81,26 @@ export default function ApplicationCard({
           )}
         </dl>
 
-        {item.status !== "in_validation" && item.status !== "rejected" && (
-          <button
-            className="btn-block mt-2 btn btn-primary"
-            onClick={() => router.push(redirectTo)}
-          >
-            Continuar
-          </button>
-        )}
+        <div className="flex flex-col gap-2">
+          {item.status !== "in_validation" && item.status !== "rejected" && (
+            <button
+              className="btn-block text-sm btn btn-primary btn-sm"
+              onClick={() => router.push(redirectTo)}
+            >
+              Continuar
+            </button>
+          )}
+
+          {item.status !== "uncomplted" && (
+            <button
+              type="button"
+              className="btn-block btn-outline text-sm btn btn-sm"
+              onClick={async () => await destroyApplication(item.id).unwrap()}
+            >
+              Eliminar solicitud
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

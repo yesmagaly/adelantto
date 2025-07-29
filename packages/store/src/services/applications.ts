@@ -54,6 +54,14 @@ export const applicationsApi = createApi({
       invalidatesTags: ["Applications"],
     }),
 
+    destroyApplication: builder.mutation<T_application, any>({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Applications"],
+    }),
+
     getApplications: builder.query<Array<T_application>, void>({
       query: () => "",
       providesTags: (_loan, _err) => [{ type: "Applications", id: "LIST" }],
@@ -82,4 +90,5 @@ export const {
   useGetApplicationsQuery,
   useLazyGetApplicationQuery,
   useUpdateApplicationMutation,
+  useDestroyApplicationMutation,
 } = applicationsApi;
