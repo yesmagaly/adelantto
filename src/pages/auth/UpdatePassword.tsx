@@ -19,7 +19,6 @@ import {
   PasswordStrength,
 } from "@adelantto/core";
 import {
-  useRegisterUserMutation,
   useUpdatePasswordMutation,
 } from "@adelantto/store";
 import { Link } from "react-router-dom";
