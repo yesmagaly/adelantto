@@ -180,7 +180,7 @@ const Register: React.FC = () => {
               aria-invalid={errors.password ? "true" : "false"}
               required
               className="input validator"
-              placeholder="Asegura tu seguridad"
+              placeholder="Crea una contraseña"
             />
 
             {errors.password && (
@@ -200,7 +200,7 @@ const Register: React.FC = () => {
               })}
               aria-invalid={errors.confirm_password ? "true" : "false"}
               className="input validator"
-              placeholder="Reescribe tu contraseña"
+              placeholder="Escribela de nuevo"
               required
             />
 
