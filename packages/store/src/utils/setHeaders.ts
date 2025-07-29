@@ -10,10 +10,3 @@ export async function setAuthHeaders(headers: any) {
 
   return headers;
 }
-
-export function setBaseHeaders(headers: any) {
-  headers.set("Content-Type", "application/json");
-  headers.set("Accept", "application/json");
-
-  return headers;
-}

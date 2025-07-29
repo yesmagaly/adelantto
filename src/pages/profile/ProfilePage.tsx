@@ -1,11 +1,13 @@
 import { MaterialIcon } from "@adelantto/core";
 import { IonContent, IonFooter, IonPage } from "@ionic/react";
 import { AppNav } from "../../layout/AppNav";
-import { useGetUserQuery, userStepsUrls } from "@adelantto/store";
+import { logout, useGetUserQuery, userStepsUrls } from "@adelantto/store";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export function ProfilePage() {
   const { data: user } = useGetUserQuery();
+  const dispatch = useDispatch();
 
   return (
     <IonPage>
@@ -13,25 +15,27 @@ export function ProfilePage() {
         <div className="gap-6 grid">
           {user && (
             <div className="">
-              {user?.selfie && <div className="relative mb-4 avatar">
-                <div className="rounded-full ring-1 ring-gray-500 ring-offset-7 ring-offset-base-100 w-24">
-                  <img
-                    className="size-24"
-                    // src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-                    src={user.selfie.url}
-                  />
-                </div>
-
-                <div className="!hidden -right-1 -bottom-1 absolute">
-                  <button className="inline-flex justify-center items-center bg-white border border-gray-600 rounded-full size-8">
-                    <MaterialIcon
-                      name="photo_camera"
-                      size="18px"
-                      className="text-gray-700"
+              {user?.selfie && (
+                <div className="relative mb-4 avatar">
+                  <div className="rounded-full ring-1 ring-gray-500 ring-offset-7 ring-offset-base-100 w-24">
+                    <img
+                      className="size-24"
+                      // src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
+                      src={user.selfie.url}
                     />
-                  </button>
+                  </div>
+
+                  <div className="!hidden -right-1 -bottom-1 absolute">
+                    <button className="inline-flex justify-center items-center bg-white border border-gray-600 rounded-full size-8">
+                      <MaterialIcon
+                        name="photo_camera"
+                        size="18px"
+                        className="text-gray-700"
+                      />
+                    </button>
+                  </div>
                 </div>
-              </div>}
+              )}
 
               <div>
                 <div className="font-semibold text-lg">
@@ -100,6 +104,24 @@ export function ProfilePage() {
                   />
                   Mis datos
                 </Link>
+              </li>
+              <li>
+                <Link
+                  to="/profile/update-password"
+                  className="flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
+                >
+                  <MaterialIcon name="password" className="inline-block mr-2" />
+                  Cambiar contraseña
+                </Link>
+              </li>
+              <li>
+                <button
+                  className="btn-block flex items-center bg-gray-200 p-4 rounded-lg font-semibold"
+                  onClick={() => dispatch(logout())}
+                >
+                  <MaterialIcon name="logout" className="inline-block mr-2" />
+                  Cerrar sesión
+                </button>
               </li>
             </ul>
           </div>

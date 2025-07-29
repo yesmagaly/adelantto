@@ -62,6 +62,18 @@ export const authApi = createApi({
       }),
       invalidatesTags: (_user, _error) => [{ type: "User", id: _user?.id }],
     }),
+
+    updatePassword: builder.mutation<
+      T_user,
+      { current_password: string; password: string; confirm_password: string }
+    >({
+      query: (body) => ({
+        url: `/password`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: (_user, _error) => [{ type: "User", id: "Item" }],
+    }),
   }),
 });
 
@@ -71,4 +83,5 @@ export const {
   useRecoverPasswordMutation,
   useResendVerificationCodeMutation,
   useVerifyPhoneCodeMutation,
+  useUpdatePasswordMutation,
 } = authApi;

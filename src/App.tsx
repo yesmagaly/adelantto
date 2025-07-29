@@ -59,6 +59,7 @@ import FailBuroScore from "./pages/applications/FailBuroScore";
 import { AwaitingValidation } from "./pages/applications/AwaitingValidation";
 import { authSlice } from "@adelantto/store";
 import { LoansListingPage } from "./pages/loan/LoansListingPage";
+import { UpdatePassword } from "./pages/auth/UpdatePassword";
 
 setupIonicReact();
 
@@ -128,26 +129,14 @@ const App: React.FC = () => {
             path="/update-temporary-password"
             component={UpdateTemporaryPassword}
           />
-          <PrivateRoute
-            path="/welcome"
-            component={AdvanceImmediately}
-          />
+
+          <PrivateRoute path="/welcome" component={AdvanceImmediately} />
 
           <PrivateRoute path="/profile" component={ProfilePage} />
-
-          <PrivateRoute
-            path="/profile/my-data"
-            component={MyDataPage}
-          />
-
-          <PrivateRoute
-            path="/profile/create"
-            component={CreateProfilePage}
-          />
-          <PrivateRoute
-            path="/profile/identification"
-            component={IdentificationPage}
-          />
+          <PrivateRoute path="/profile/my-data" component={MyDataPage} />
+          <PrivateRoute path="/profile/update-password" component={UpdatePassword} />
+          <PrivateRoute path="/profile/create" component={CreateProfilePage} />
+          <PrivateRoute path="/profile/identification" component={IdentificationPage}/>
           <PrivateRoute
             path="/profile/biometric-validation"
             component={BiometricValidationPage}
@@ -204,22 +193,14 @@ const App: React.FC = () => {
             component={InstallmentDetail}
           />
 
-          <PrivateRoute
-            path="/loans"
-            component={LoansListingPage}
-            exact
-          />
+          <PrivateRoute path="/loans" component={LoansListingPage} exact />
 
           <PublicRoute path="/" component={Home} exact />
           <PublicRoute path="/login" component={Login} />
           <PublicRoute path="/forgot-password" component={ForgotPassword} />
           <PublicRoute path="/create-account" component={Register} />
           <PublicRoute path="/register" component={Register} />
-          <Route
-            path="/verification-code/:id"
-            component={VerificationCode}
-          />
-
+          <Route path="/verification-code/:id" component={VerificationCode} />
         </IonReactRouter>
       </Provider>
     </IonApp>
