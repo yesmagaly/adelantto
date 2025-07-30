@@ -73,7 +73,7 @@ export default function ApplicationCard({
                 MXN
               </dd>
 
-              <dt className="float-left mr-1 mb-1 ml-2">Pago de seguro:</dt>
+              <dt className="float-left mr-1 mb-1 ml-2">Comisión por apertura:</dt>
               <dd className="mb-1 font-bold">
                 {formatCurrency(item.pre_offer_fees)} MXN
               </dd>
