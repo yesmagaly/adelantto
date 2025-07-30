@@ -34,7 +34,9 @@ function Login() {
 
       router.push("/home");
     } catch (error: any) {
-      setError("root", { message: error.message, type: "server" });
+      if (error.data) {
+        setError("root", { message: error.data.message, type: "server" });
+      }
     }
   };
 
