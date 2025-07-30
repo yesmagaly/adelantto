@@ -21,7 +21,6 @@ interface T_form {
   property_commercial_folio?: string;
   property_zip_code?: string;
   property_lease_agreement?: File | T_file;
-  property_latest_tax_receipt?: File | T_file;
 }
 
 type T_props = RouteComponentProps<{
@@ -150,14 +149,6 @@ const UploadDocuments: React.FC<T_props> = ({ match }) => {
             label="Contrato de arrendamiento"
             description="Firmado por ambas partes"
             helpText="Tipo de archivo permitido PDF (500MB max)"
-          />
-
-          <FileInputItem
-            name="property_latest_tax_receipt"
-            control={control}
-            rules={{ required: "Documento obligatorio" }}
-            accept="application/pdf"
-            label="Recibo del último predial"
           />
         </form>
       </IonContent>

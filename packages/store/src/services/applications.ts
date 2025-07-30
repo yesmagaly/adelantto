@@ -22,7 +22,6 @@ export type T_application = {
   property_commercial_folio?: string;
   property_zip_code?: string;
   property_lease_agreement?: File | T_file;
-  property_latest_tax_receipt?: File | T_file;
 
   next_step: "pre_offer" | "property_details";
 };
