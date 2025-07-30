@@ -16,7 +16,7 @@ type T_form = {
 };
 
 function Login() {
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const router = useIonRouter();
   const dispatch = useDispatch();
 

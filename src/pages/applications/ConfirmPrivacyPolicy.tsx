@@ -7,7 +7,7 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 
 import { handleServerErrors } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
@@ -24,7 +24,11 @@ type T_form = {
   code: string;
 };
 
-const ConfirmPrivacyPolicy: React.FC = ({ match }) => {
+type T_props = RouteComponentProps<{
+  id: string;
+}>;
+
+const ConfirmPrivacyPolicy: React.FC<T_props> = ({ match }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const inputsContainerRef = useRef<HTMLDivElement>(null);
   const router = useIonRouter();
