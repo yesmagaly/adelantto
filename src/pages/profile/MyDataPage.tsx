@@ -1,7 +1,6 @@
 import {
   IonContent,
   IonPage,
-  useIonRouter,
   IonHeader,
   IonFooter,
 } from "@ionic/react";
@@ -14,7 +13,6 @@ import { Link } from "react-router-dom";
 import { AppNav } from "../../layout/AppNav";
 
 export const MyDataPage: React.FC = () => {
-  const router = useIonRouter();
   const { data: user, isLoading } = useGetUserQuery();
 
   if (isLoading) {
@@ -25,7 +23,7 @@ export const MyDataPage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <h1 className="inline-flex items-center gap-2 text-dark-blue-700 text-h5">
-          <Link to="/" className="inline-flex items-center">
+          <Link to="/profile" className="inline-flex items-center">
             <MaterialIcon name="arrow_back" />
           </Link>
           Mis datos
