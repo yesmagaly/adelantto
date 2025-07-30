@@ -89,24 +89,3 @@ export const resendPrivacyPolicyVerificationCode = async () => {
     }
   );
 };
-
-export const uploadInstallmentFile = async (id: string, body = {}) =>
-  await fetch(`${API_SERVER_URL}/api/installments/${id}/upload-file`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: getToken(),
-      Accept: "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-export const getInstallment = async (id: string) =>
-  await fetch(`${API_SERVER_URL}/api/installments/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: getToken(),
-      Accept: "application/json",
-    },
-  });

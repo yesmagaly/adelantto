@@ -7,6 +7,7 @@ import { authApi } from "./services/auth";
 import { generalApi } from "./services/general";
 import { loansApi } from "./services/loans";
 import { userApi } from "./services/users";
+import { installmentsApi } from "./services/installments"
 
 import { authSlice } from "./slices/authSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
@@ -24,6 +25,7 @@ const RTKState = {
   [generalApi.reducerPath]: generalApi.reducer,
   [loansApi.reducerPath]: loansApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
+  [installmentsApi.reducerPath]: installmentsApi.reducer,
 };
 
 const combined = combineReducers({
@@ -50,7 +52,8 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(generalApi.middleware)
       .concat(loansApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(installmentsApi.middleware)
 });
 
 setupListeners(store.dispatch);

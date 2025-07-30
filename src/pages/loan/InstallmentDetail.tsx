@@ -6,13 +6,14 @@ import { formatCurrency } from "@adelantto/utils";
 import { DateTime } from "luxon";
 import { t } from "@adelantto/utils";
 
-import { T_installment } from "../../types";
 import Tag from "../../components/Tag";
 
-import { uploadInstallmentFile } from "../../api";
-import { useGetInstallmentQuery } from "../../queries";
 import FileInputItem from "../../components/FileInputItem";
 import exclamation from "../../assets/svgs/exclamation.svg";
+import {
+  useGetInstallmentQuery,
+  useUploadInstallmentFileMutation,
+} from "@adelantto/store";
 
 type T_props = {
   index: number;
@@ -32,8 +33,9 @@ function capitalizeFirstLetter(string: string) {
 export const InstallmentDetail = ({ match }: T_props) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const installementId = match.params.installment_id;
-  const { data }: { data: T_installment } =
-    useGetInstallmentQuery(installementId);
+  const { data } = useGetInstallmentQuery(installementId);
+  const [uploadInstallmentFile, { isLoading }] =
+    useUploadInstallmentFileMutation();
 
   const {
     control,
@@ -42,11 +44,16 @@ export const InstallmentDetail = ({ match }: T_props) => {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const response = await uploadInstallmentFile(installementId, data);
+    try {
+      await uploadInstallmentFile({
+        id: installementId,
+        ...data,
+      }).unwrap();
 
-    if (modalRef.current && response.status === 200) {
-      modalRef.current.showModal();
-    }
+      if (modalRef.current) {
+        modalRef.current.showModal();
+      }
+    } catch (error) {}
   };
 
   return (
