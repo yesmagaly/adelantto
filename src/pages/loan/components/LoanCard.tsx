@@ -38,10 +38,6 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
           <h4 className="font-semibold text-lg leading-5">
             <span>AdelanttoCash® {loan.id.toString().padStart(4, "0")}</span>
           </h4>
-
-          {/* <Link to="" className="btn-outline btn-square btn btn-xs btn-primary">
-            <MaterialIcon name="arrow_outward" size="18px" />
-          </Link> */}
         </div>
 
         {loan.status === "active" && (
@@ -84,14 +80,14 @@ export default function LoanCard({ loan, displayActions = false }: T_props) {
 
         <div className={cn("card-actions", !displayActions && "hidden")}>
           {loan.status === "awaiting_account_statement_upload" && (
-            <Link className="btn-block btn btn-primary" to={`/loans/${loan.id}/success`}>
+            <Link className="btn-block text-sm btn btn-primary btn-sm" to={`/loans/${loan.id}/success`}>
               Continuar
             </Link>
           )}
 
           {loan.status === "active" && (
             <Link
-              className="btn-block btn btn-primary"
+              className="btn-block text-sm btn btn-primary btn-sm"
               to={`/loans/${loan.id}`}
             >
               Ver

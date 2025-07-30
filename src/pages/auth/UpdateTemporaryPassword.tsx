@@ -1,7 +1,6 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { FieldErrors, useForm } from "react-hook-form";
 import InputPassword from "../../components/InputPassword";
-import { useAuth } from "./authContext";
 
 import logo from "../../assets/svgs/logo.svg";
 import { authentication } from "../../api";
@@ -61,7 +60,6 @@ const validate = function (values: FormValues) {
 };
 
 const UpdateTemporaryPassword: React.FC = () => {
-  const { setUserInfo } = useAuth()!;
   const router = useIonRouter();
   const {
     register,
@@ -97,7 +95,6 @@ const UpdateTemporaryPassword: React.FC = () => {
     const json = await response.json();
 
     if (response.status === 200) {
-      setUserInfo('is_verified', json.is_verified);
       router.push(`/documents-required`);
     } else {
       // Show server errors.

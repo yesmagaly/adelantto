@@ -157,7 +157,7 @@ const Dashboard: React.FC = () => {
               Temas de interés
             </h2>
 
-            <Carousel options={OPTIONS} displayDots>
+            <Carousel displayDots>
               <CarouselItem>
                 <div className="bg-base-100 shadow-md mx-1 mb-2 card">
                   <figure>
