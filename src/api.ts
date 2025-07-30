@@ -77,29 +77,6 @@ export const applications = {
     }),
 };
 
-export const loans = {
-  list: async () => {
-    return fetch(`${API_SERVER_URL}/api/loans`, {
-      headers: {
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-    });
-  },
-
-  create: async ({ body }: { body: object }) => {
-    return fetch(`${API_SERVER_URL}/api/loans`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-  },
-};
-
 export const resendPrivacyPolicyVerificationCode = async () => {
   return fetch(
     `${API_SERVER_URL}/api/verification-code/privacy-policy/resend`,
