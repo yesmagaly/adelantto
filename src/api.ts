@@ -17,15 +17,6 @@ export type UserProfile = {
 };
 
 export const authentication = {
-  logout: async () =>
-    await fetch(`${API_SERVER_URL}/api/logout`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: getToken(),
-      },
-    }),
-
   updateTempPassword: async ({
     password,
     password_confirmation,

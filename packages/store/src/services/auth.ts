@@ -30,6 +30,14 @@ export const authApi = createApi({
       invalidatesTags: (_response, _error) => [{ type: "User", id: "ITEM" }],
     }),
 
+    logout: builder.mutation<{ success: boolean }, any>({
+      query: () => ({
+        url: "/logout",
+        method: "POST",
+      }),
+      invalidatesTags: (_response, _error) => [{ type: "User", id: "ITEM" }],
+    }),
+
     registerUser: builder.mutation<T_user, any>({
       query: (body) => ({
         url: "/register",
