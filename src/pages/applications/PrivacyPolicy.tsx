@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   IonContent,
   IonFooter,
@@ -18,7 +17,6 @@ type T_props = RouteComponentProps<{
 
 const PrivacyPolicy: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
-  const [isOpen, setOpen] = useState(false);
 
   const {
     handleSubmit,
