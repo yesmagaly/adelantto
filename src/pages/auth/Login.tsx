@@ -1,14 +1,14 @@
 import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
-import logo from "../../assets/svgs/logo.svg";
-import InputPassword from "../../components/InputPassword";
-
-import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
 import { Link } from "react-router-dom";
 import { useLoginMutation } from "@adelantto/store";
 import { setCredentials } from "@adelantto/store/src/slices/authSlice";
-import { useDispatch } from "react-redux";
+
+import InputPassword from "../../components/InputPassword";
+import adelanttoBgUrl from "../../assets/images/adelantto-bg.png";
+import logo from "../../assets/svgs/logo.svg";
 
 type T_form = {
   email: string;

@@ -158,7 +158,7 @@ export const UpdatePassword: React.FC = () => {
           className="btn-block btn btn-primary"
           onClick={() => handleSubmit(onSubmit)()}
         >
-          Continuar
+          Actualizar
         </button>
       </IonFooter>
     </IonPage>

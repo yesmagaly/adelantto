@@ -36,10 +36,6 @@ const Dashboard: React.FC = () => {
     }
   }, []);
 
-  const OPTIONS = {};
-  const SLIDE_COUNT = 5;
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
-
   return (
     <IonPage>
       <IonContent
