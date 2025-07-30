@@ -33,7 +33,16 @@ export const loansApi = createApi({
       query: () => "",
       providesTags: (_loan, _err) => [{ type: "Loans", id: "LIST" }],
     }),
-  }),
+
+    getLoan: builder.query<T_loan, string> ({
+      query: (id) => `${id}`,
+      providesTags: (loan, _err) => [{ type: "Loans", id: loan?.id }],
+    })
+  }
+),
+
 });
 
-export const { useGetLoansQuery } = loansApi;
+
+
+export const { useGetLoansQuery, useGetLoanQuery } = loansApi;

@@ -87,15 +87,6 @@ export const loans = {
     });
   },
 
-  get: async (id: number) =>
-    await fetch(`${API_SERVER_URL}/api/loans/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-    }),
-
   create: async ({ body }: { body: object }) => {
     return fetch(`${API_SERVER_URL}/api/loans`, {
       method: "POST",

@@ -1,25 +1,10 @@
-import { useEffect, useState } from "react";
 import { IonContent, IonPage } from "@ionic/react";
-import * as api from "../../api";
 import InstallmentCard from "./components/InstallmentCard";
 import LoanCard from "./components/LoanCard";
-import { T_loan } from "@adelantto/store";
+import { useGetLoanQuery } from "@adelantto/store";
 
 const Summary: React.FC<{ match: any }> = ({ match }) => {
-  const [loan, setLoan] = useState<T_loan>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.loans.get(match.params.id);
-        const data = (await response.json()) as T_loan;
-
-        setLoan(data);
-      } catch {}
-    };
-
-    fetchData();
-  }, []);
+  const { data: loan } = useGetLoanQuery(match.params.id);
 
   if (!loan) {
     return (
