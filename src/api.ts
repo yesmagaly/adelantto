@@ -26,27 +26,6 @@ export const authentication = {
       },
     }),
 
-  login: async ({ email, password }: { email: string; password: string }) =>
-    await fetch(`${API_SERVER_URL}/api/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    }),
-
-  updateProfile: async (data: UserProfile) =>
-    await fetch(`${API_SERVER_URL}/api/user/update-profile`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    }),
-
   updateTempPassword: async ({
     password,
     password_confirmation,
@@ -66,55 +45,9 @@ export const authentication = {
         password_confirmation,
       }),
     }),
-
-  forgotPassword: async ({ email }: { email: string }) =>
-    await fetch(`${API_SERVER_URL}/api/forgot-password`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ email }),
-    }),
 };
 
 export const applications = {
-  list: async () => {
-    let response;
-
-    try {
-      response = await fetch(`${API_SERVER_URL}/api/applications`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: getToken(),
-          Accept: "application/json",
-        },
-      });
-    } catch {
-      throw new HttpError("HTTP: Something went wrong.");
-    }
-
-    if (response.status == 200) {
-      const data = await response.json();
-
-      return data;
-    } else if (response.status == 401) {
-      throw new UnauthorizedError("Your are unauthorized.");
-    } else {
-      throw new Error("STATUS: Something went wrong.");
-    }
-  },
-
-  get: async (id: string) =>
-    await fetch(`${API_SERVER_URL}/api/applications/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-    }),
-
-
   privacyPolicy: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/applications/${id}/privacy-policy`, {
       method: "PUT",
@@ -140,16 +73,6 @@ export const applications = {
       }
     );
   },
-  finalAnnouncement: async (id: string, body = {}) =>
-    await fetch(`${API_SERVER_URL}/api/applications/${id}/final-announcement`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-      body: JSON.stringify(body),
-    }),
 
   accountStatement: async (id: string, body = {}) =>
     await fetch(`${API_SERVER_URL}/api/loans/${id}/account-statement`, {
@@ -161,17 +84,6 @@ export const applications = {
       },
       body: JSON.stringify(body),
     }),
-};
-
-export const loanContracts = {
-  load: async ({ id }: { id: string }) => {
-    return fetch(`${API_SERVER_URL}/api/leasing-contracts/${id}`, {
-      headers: {
-        Authorization: getToken(),
-        Accept: "application/json",
-      },
-    });
-  },
 };
 
 export const loans = {
@@ -206,40 +118,6 @@ export const loans = {
   },
 };
 
-export const properties = {
-  update: ({ id, body }: { id: string; body: string }) => {
-    return fetch(`${API_SERVER_URL}/api/properties/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: getToken(),
-      },
-      body: JSON.stringify(body),
-    });
-  },
-};
-
-export const calculator = {
-  calc: async ({
-    principal,
-    months,
-  }: {
-    principal: number;
-    months: number;
-  }) => {
-    return fetch(
-      `${API_SERVER_URL}/api/calc?principal=${principal}&months=${months}`,
-      {
-        headers: {
-          Authorization: getToken(),
-          Accept: "application/json",
-        },
-      }
-    );
-  },
-};
-
 export const resendPrivacyPolicyVerificationCode = async () => {
   return fetch(
     `${API_SERVER_URL}/api/verification-code/privacy-policy/resend`,
@@ -251,15 +129,6 @@ export const resendPrivacyPolicyVerificationCode = async () => {
       },
     }
   );
-};
-
-export const checkZipCode = async (zipCode: string) => {
-  return fetch(`${API_SERVER_URL}/api/zip-codes/${zipCode}`, {
-    headers: {
-      Authorization: getToken(),
-      Accept: "application/json",
-    },
-  });
 };
 
 export const uploadInstallmentFile = async (id: string, body = {}) =>

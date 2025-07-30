@@ -48,7 +48,6 @@ export const PreOfferPage: React.FC<T_props> = ({ match }) => {
     setValue,
     handleSubmit,
     watch,
-    register,
     formState: { isSubmitting },
   } = useForm<T_form>({
     defaultValues: async () => {
