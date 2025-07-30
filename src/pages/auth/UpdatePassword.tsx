@@ -43,7 +43,7 @@ export const UpdatePassword: React.FC = () => {
 
   const onSubmit = async function (form: T_form) {
     try {
-      const data = await mutation(form).unwrap();
+      await mutation(form).unwrap();
       router.push(`/profile`);
     } catch (error: any) {
       handleServerErrors<T_form>(

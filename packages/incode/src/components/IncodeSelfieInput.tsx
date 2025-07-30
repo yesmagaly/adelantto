@@ -64,7 +64,6 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
     field: { onChange, value },
     fieldState: { error },
   } = useController(props);
-  const [photo, setPhoto] = useState<Photo>();
 
   const takePhoto = async () => {
     setLoading(true);
@@ -90,7 +89,6 @@ export const IncodeSelfieInput: React.FC<T_props> = ({
       const data = await response.json();
 
       onChange(data);
-      setPhoto(newPhoto);
     }
 
     setLoading(false);

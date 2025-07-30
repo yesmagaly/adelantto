@@ -9,7 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-import { handleServerErrors, t } from "@adelantto/utils";
+import { handleServerErrors } from "@adelantto/utils";
 import { MaterialIcon } from "@adelantto/core";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
