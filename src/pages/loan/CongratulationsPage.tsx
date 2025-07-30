@@ -68,13 +68,6 @@ export const CongratulationsPage: React.FC<T_props> = ({ match }) => {
               Enviar
             </button>
           </form>
-
-          {/* <Link
-            className="btn-block btn btn-primary"
-            to={`/loans/${match.params.id}/account-statement`}
-          >
-            Ingresar datos bancarios
-          </Link> */}
         </div>
 
         <dialog ref={modalRef} id="my_modal_1" className="modal">

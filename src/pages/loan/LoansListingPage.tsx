@@ -1,17 +1,14 @@
 import { useEffect, useRef } from "react";
 import { IonContent, IonFooter, IonPage, useIonRouter } from "@ionic/react";
 
-import { Carousel, CarouselItem, MaterialIcon } from "@adelantto/core";
+import { MaterialIcon } from "@adelantto/core";
 import LoanCard from "../loan/components/LoanCard";
-import ApplicationCard from "../applications/components/ApplicationCard";
 import { AppNav } from "../../layout/AppNav";
 import adelanttoBgTopRightUrl from "../../assets/images/adelantto-bg-top-right.png";
 import exclamation from "../../assets/svgs/exclamation.svg";
-import buildingPictureUrl from "../../assets/images/building-picture.png";
 
 import {
   authSlice,
-  useGetApplicationsQuery,
   useGetLoansQuery,
   useGetUserQuery,
   userStepsUrls,
@@ -26,7 +23,6 @@ export const LoansListingPage: React.FC = () => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const router = useIonRouter();
   const { data: loans = [] } = useGetLoansQuery();
-  const { data: applications = [] } = useGetApplicationsQuery();
   const { data: user } = useGetUserQuery();
 
   useEffect(() => {

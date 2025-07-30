@@ -9,7 +9,6 @@ import {
 import { useForm } from "react-hook-form";
 import { MaterialIcon } from "@adelantto/core";
 import { IncodeSelfieInput } from "@adelantto/incode";
-import { applications } from "../../api";
 import { Link } from "react-router-dom";
 import { useLazyGetUserQuery, useUpdateUserMutation } from "@adelantto/store";
 import { handleServerErrors, t } from "@adelantto/utils";
@@ -42,21 +41,6 @@ export const BiometricValidationPage: React.FC = () => {
   });
 
   const onSubmit = async (form: T_form) => {
-    // const processData = await api.processFace({ session });
-    // if (processData.confidence === 0) {
-    //   return setError("selfie", {
-    //     message:
-    //       "La foto de su selfie no coincide con la imagen del documento de identidad.",
-    //   });
-    // }
-
-    // await api.finishStatus({ session });
-
-    // await applications.identityCheck(match.params.id, {
-    //   identity_checked: true,
-    //   interviewId: session.interviewId,
-    // });
-
     try {
       await mutation(form).unwrap();
       router.push("/profile/income-and-taxes");
