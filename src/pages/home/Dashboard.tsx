@@ -12,6 +12,7 @@ import buildingPictureUrl from "../../assets/images/building-picture.png";
 import {
   authSlice,
   useGetApplicationsQuery,
+  useGetArticlesQuery,
   useGetLoansQuery,
   useGetUserQuery,
   userStepsUrls,
@@ -27,6 +28,7 @@ const Dashboard: React.FC = () => {
   const router = useIonRouter();
   const { data: loans = [] } = useGetLoansQuery();
   const { data: applications = [] } = useGetApplicationsQuery();
+  const { data: articles = [] } = useGetArticlesQuery();
 
   const { data: user } = useGetUserQuery();
 
@@ -45,7 +47,7 @@ const Dashboard: React.FC = () => {
         }}
       >
         <div id="home-page">
-          <div className="gap-6 grid">
+          <div className="flex flex-col gap-6">
             {user && (
               <h1 className="text-h5">
                 {user?.name ? (
@@ -158,35 +160,32 @@ const Dashboard: React.FC = () => {
             </h2>
 
             <Carousel displayDots>
-              <CarouselItem>
-                <div className="bg-base-100 shadow-md mx-1 mb-2 card">
-                  <figure>
-                    <img src={buildingPictureUrl} alt="Shoes" />
-                  </figure>
-                  <div className="p-4 card-body">
-                    <h2 className="card-title">Multi-Adelanttos</h2>
-                    <p>
-                      Transformamos tus rentas futuras en capital disponible
-                      hoy.
-                    </p>
+              {articles.map((article) => (
+                <CarouselItem key={article.id}>
+                  <div className="bg-base-100 shadow-md mx-1 mb-2 card">
+                    <figure>
+                      <img
+                        className="w-full h-48 object-cover"
+                        src={`http://adelanttocash.com/${article.image}`}
+                        alt={article.title}
+                      />
+                    </figure>
+                    <div className="p-4 card-body">
+                      <h2 className="text-base line-clamp-2 leading-tight card-title">{article.title}</h2>
+                      <div
+                        className="overflow-hidden text-gray-700 text-sm line-clamp-2"
+                        dangerouslySetInnerHTML={{ __html: article.summary }}
+                      />
+                      <a
+                        target="_blank"
+                        href={article.url}
+                        className="after:absolute after:inset-0"
+                      >
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </CarouselItem>
-
-              <CarouselItem>
-                <div className="bg-base-100 shadow-md mx-1 mb-2 card">
-                  <figure>
-                    <img src={buildingPictureUrl} alt="Shoes" />
-                  </figure>
-                  <div className="p-4 card-body">
-                    <h2 className="card-title">Multi-Adelanttos</h2>
-                    <p>
-                      Transformamos tus rentas futuras en capital disponible
-                      hoy.
-                    </p>
-                  </div>
-                </div>
-              </CarouselItem>
+                </CarouselItem>
+              ))}
             </Carousel>
           </div>
         </div>
