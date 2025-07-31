@@ -9,6 +9,7 @@ import exclamation from "../../assets/svgs/exclamation.svg";
 import FileInputItem from "../../components/FileInputItem";
 import { applications } from "../../api";
 import { RouteComponentProps } from "react-router";
+import { useUpdateLoanAccountStatementMutation } from "@adelantto/store";
 
 type T_form = {
   account_statement?: File;
@@ -20,6 +21,8 @@ type T_props = RouteComponentProps<{
 
 export const CongratulationsPage: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
+  const [mutation] = useUpdateLoanAccountStatementMutation();
+
   const modalRef = useRef<HTMLDialogElement>(null);
   const {
     control,
@@ -28,11 +31,13 @@ export const CongratulationsPage: React.FC<T_props> = ({ match }) => {
   } = useForm<T_form>();
 
   const onSubmit = async (data: T_form) => {
-    const response = await applications.accountStatement(match.params.id, data);
+    try {
+      await mutation({ id: match.params.id, ...data }).unwrap();
 
-    if (modalRef.current && response.status === 200) {
-      modalRef.current.showModal();
-    }
+      if (modalRef.current) {
+        modalRef.current.showModal();
+      }
+    } catch (error) {}
   };
 
   return (

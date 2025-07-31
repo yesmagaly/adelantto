@@ -14,6 +14,7 @@ import { MaterialIcon } from "@adelantto/core";
 import useCountDownTimer from "../../hooks/useCountDownTimer";
 import { applications, resendPrivacyPolicyVerificationCode } from "../../api";
 import exclamation from "../../assets/svgs/exclamation.svg";
+import { useConfirmPrivacyPolicyMutation } from "@adelantto/store";
 
 type T_form = {
   code1?: number;
@@ -36,7 +37,6 @@ const ConfirmPrivacyPolicy: React.FC<T_props> = ({ match }) => {
   const [_displayedCounter, setDisplayedCounter] = useState(true);
   const { minutes, seconds, isExpired, stopTimer, resetTimer } =
     useCountDownTimer(3);
-  const applicationId = match.params.id;
 
   const {
     handleSubmit,
@@ -48,22 +48,24 @@ const ConfirmPrivacyPolicy: React.FC<T_props> = ({ match }) => {
     formState: { isSubmitting, errors },
   } = useForm<T_form>();
 
+  const [mutation] = useConfirmPrivacyPolicyMutation();
+
   const onSubmit = async (data: T_form) => {
-    const response = await applications.confirmPrivacyPolicy(
-      applicationId,
-      data
-    );
+    const id = match.params.id;
+    try {
+      await mutation({
+        id: match.params.id,
+        ...data,
+      }).unwrap();
 
-    if (response.status === 200) {
-      router.push(`/applications/${applicationId}/final-announcement`);
-    } else {
-      const error = await response.json();
+      router.push(`/applications/${id}/final-announcement`);
+    } catch (error: any) {
 
-      if (error.message === "BUREAU_SCORE_IS_TOO_LOW") {
-        return router.push(`/applications/${applicationId}/fail-buro-score`);
+      if (error.data.message === "BUREAU_SCORE_IS_TOO_LOW") {
+        return router.push(`/applications/${id}/fail-buro-score`);
       }
 
-      handleServerErrors<T_form>(["code"], error.errors).forEach(
+      handleServerErrors<T_form>(["code"], error.data.errors).forEach(
         ([field, errorOption]) => setError(field, errorOption)
       );
     }

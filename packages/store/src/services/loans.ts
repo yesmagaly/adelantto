@@ -38,7 +38,15 @@ export const loansApi = createApi({
       query: (id) => `${id}`,
       providesTags: (loan, _err) => [{ type: "Loans", id: loan?.id }],
     }),
+
+    updateLoanAccountStatement: builder.mutation<T_loan, any>({
+      query: ({id, ...body}) => ({
+        url: `/${id}/account-statement`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetLoansQuery, useGetLoanQuery } = loansApi;
+export const { useGetLoansQuery, useGetLoanQuery, useUpdateLoanAccountStatementMutation } = loansApi;

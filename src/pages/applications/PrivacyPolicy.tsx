@@ -6,10 +6,10 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { useForm } from "react-hook-form";
-import { applications } from "../../api";
 import { MaterialIcon } from "@adelantto/core";
 import { Link } from "react-router-dom";
 import { RouteComponentProps } from "react-router";
+import { usePrivacyPolicyMutation } from "@adelantto/store";
 
 type T_props = RouteComponentProps<{
   id: string;
@@ -17,20 +17,17 @@ type T_props = RouteComponentProps<{
 
 const PrivacyPolicy: React.FC<T_props> = ({ match }) => {
   const router = useIonRouter();
-
+  const [mutation] = usePrivacyPolicyMutation();
   const {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm();
 
   const onSubmit = async () => {
-    const response = await applications.privacyPolicy(match.params.id, {
-      step: "confirm_privacy_policy",
-    });
-
-    if (response.ok) {
+    try {
+      await mutation({ id: match.params.id }).unwrap();
       router.push(`/applications/${match.params.id}/confirm-privacy-policy`);
-    }
+    } catch (error) {}
   };
 
   return (

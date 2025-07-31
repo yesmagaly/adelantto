@@ -81,6 +81,22 @@ export const applicationsApi = createApi({
         { type: "Applications", id: _application?.id },
       ],
     }),
+
+    privacyPolicy: builder.mutation<T_application, any>({
+      query: (id, ...body) => ({
+        url: `/${id}/privacy-policy`,
+        method: "PUT",
+        body,
+      }),
+    }),
+
+    confirmPrivacyPolicy: builder.mutation<T_application, any>({
+      query: ({ id, ...body }) => ({
+        url: `/${id}/upload-file/confirm-privacy-policy?time=${Date.now()}`,
+        method: "PUT",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -90,4 +106,6 @@ export const {
   useLazyGetApplicationQuery,
   useUpdateApplicationMutation,
   useDestroyApplicationMutation,
+  usePrivacyPolicyMutation,
+  useConfirmPrivacyPolicyMutation
 } = applicationsApi;
