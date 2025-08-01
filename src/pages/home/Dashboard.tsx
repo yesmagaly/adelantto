@@ -7,7 +7,6 @@ import ApplicationCard from "../applications/components/ApplicationCard";
 import { AppNav } from "../../layout/AppNav";
 import adelanttoBgTopRightUrl from "../../assets/images/adelantto-bg-top-right.png";
 import exclamation from "../../assets/svgs/exclamation.svg";
-import buildingPictureUrl from "../../assets/images/building-picture.png";
 
 import {
   authSlice,
