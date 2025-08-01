@@ -19,7 +19,7 @@ export const installmentsApi = createApi({
     uploadInstallmentFile: builder.mutation<T_installment, any>({
       query: ({id, ...body}) => ({
         url: `${id}/upload-file`,
-        method: "POST",
+        method: "PUT",
         body,
       }),
     }),
