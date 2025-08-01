@@ -91,7 +91,7 @@ export default function ApplicationCard({
             </button>
           )}
 
-          {item.status !== "uncomplted" && (
+          {item.status === "uncompleted" && (
             <button
               type="button"
               className="btn-block btn-outline text-sm btn btn-sm"

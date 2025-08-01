@@ -83,7 +83,7 @@ export const applicationsApi = createApi({
     }),
 
     privacyPolicy: builder.mutation<T_application, any>({
-      query: (id, ...body) => ({
+      query: ({ id, ...body }) => ({
         url: `/${id}/privacy-policy`,
         method: "PUT",
         body,
@@ -92,7 +92,7 @@ export const applicationsApi = createApi({
 
     confirmPrivacyPolicy: builder.mutation<T_application, any>({
       query: ({ id, ...body }) => ({
-        url: `/${id}/upload-file/confirm-privacy-policy?time=${Date.now()}`,
+        url: `/${id}/confirm-privacy-policy?time=${Date.now()}`,
         method: "PUT",
         body,
       }),
@@ -107,5 +107,5 @@ export const {
   useUpdateApplicationMutation,
   useDestroyApplicationMutation,
   usePrivacyPolicyMutation,
-  useConfirmPrivacyPolicyMutation
+  useConfirmPrivacyPolicyMutation,
 } = applicationsApi;
